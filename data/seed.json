@@ -7,7 +7,8 @@
       "subtitle": "Cinco piezas. Un look. Un lugar.",
       "lede": "Armé mi parte del look. Está en Curadario, no en cinco tiendas.",
       "coverCta": "Ver las cinco piezas",
-      "coverImage": "/images/tapa-sastreria.jpg",
+      "coverImage": "/images/tapado-coppola.jpg",
+      "homeChip": "Sastrería",
       "onTapa": true
     },
     {
@@ -16,8 +17,9 @@
       "title": "Lo que lleva el look",
       "subtitle": "Tote y baguette. El resto, en las manos.",
       "lede": "Dos carteras. Ninguna mezclada con la sastrería.",
-      "coverCta": "Ver las carteras",
+      "coverCta": "Ver la colección",
       "coverImage": "/images/tote-lona.jpg",
+      "homeChip": "Carteras",
       "onTapa": false
     },
     {
@@ -26,8 +28,9 @@
       "title": "Un solo traje",
       "subtitle": "Bikini y enteriza. El verano, resuelto.",
       "lede": "Dos piezas de agua. Fuera de la tapa, en su propia colección.",
-      "coverCta": "Ver el traje de baño",
+      "coverCta": "Ver la colección",
       "coverImage": "/images/bikini-triangulo.jpg",
+      "homeChip": "Trajes",
       "onTapa": false
     }
   ],

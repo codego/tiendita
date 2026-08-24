@@ -6,6 +6,7 @@ export type Collection = {
   lede: string;
   coverCta: string;
   coverImage: string;
+  homeChip: string;
   onTapa: boolean;
 };
 

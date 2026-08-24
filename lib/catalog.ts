@@ -39,6 +39,13 @@ export function getTapaSkus(): Sku[] {
   return getSkusByCollection(getTapaCollection().id);
 }
 
+export function getHomeChips() {
+  return catalog.collections.map((collection) => ({
+    id: collection.id,
+    label: collection.homeChip,
+  }));
+}
+
 export function getCollectionFilters(collectionId: string) {
   const seen = new Map<string, string>();
   for (const sku of getSkusByCollection(collectionId)) {

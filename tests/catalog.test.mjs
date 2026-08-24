@@ -13,7 +13,7 @@ function formatARS(amount) {
   return `$ ${grouped}`;
 }
 
-test("three collections and tapa never mixes them", () => {
+test("three collections and Banner 01 is only sastreria", () => {
   assert.equal(seed.collections.length, 3);
   const ids = seed.collections.map((c) => c.id).sort();
   assert.deepEqual(ids, [
@@ -24,6 +24,21 @@ test("three collections and tapa never mixes them", () => {
   const onTapa = seed.collections.filter((c) => c.onTapa);
   assert.equal(onTapa.length, 1);
   assert.equal(onTapa[0].id, "sastreria-de-agosto");
+  assert.deepEqual(
+    seed.collections.map((c) => c.homeChip),
+    ["Sastrería", "Carteras", "Trajes"],
+  );
+});
+
+test("catalog is only the nine seed SKUs", () => {
+  assert.equal(seed.skus.length, 9);
+  const names = seed.skus.map((s) => s.name);
+  assert.ok(names.every((name) => typeof name === "string" && name.length > 0));
+  assert.ok(seed.skus.every((s) => s.brand && s.brand !== "PLACEHOLDER"));
+  const blob = JSON.stringify(seed);
+  assert.equal(blob.includes("Traje Roma"), false);
+  assert.equal(blob.includes("Sobretodo Livorno"), false);
+  assert.equal(blob.includes("Blazer Firenze"), false);
 });
 
 test("sastreria-de-agosto has the five launch pieces", () => {
