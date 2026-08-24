@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { CategoryChips } from "@/components/CategoryChips";
 import { CollectionBanner } from "@/components/CollectionBanner";
 import { ProductCard } from "@/components/ProductCard";
+import { routes } from "@/lib/routes";
 import type { Collection, Sku } from "@/lib/types";
 
 export function HomeFeed({
@@ -33,7 +34,7 @@ export function HomeFeed({
     <div className="pb-10">
       <CollectionBanner
         collection={banner01}
-        href="/coleccion"
+        href={routes.coleccion}
         variant="hero"
       />
       <section className="px-5 pt-6">
@@ -54,7 +55,7 @@ export function HomeFeed({
           <CollectionBanner
             key={collection.id}
             collection={collection}
-            href={`/coleccion/${collection.id}`}
+            href={routes.coleccionId(collection.id)}
             variant="split"
           />
         ))}

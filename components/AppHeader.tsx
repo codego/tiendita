@@ -2,6 +2,7 @@ import Link from "next/link";
 import { HeartButton } from "@/components/HeartButton";
 import { BackIcon, HeartIcon, SearchIcon } from "@/components/Icons";
 import { Wordmark } from "@/components/Wordmark";
+import { routes } from "@/lib/routes";
 
 type AppHeaderProps = {
   variant?: "default" | "overlay" | "ficha";
@@ -20,7 +21,7 @@ export function AppHeader({ variant = "default", skuId }: AppHeaderProps) {
     >
       {ficha ? (
         <Link
-          href="/coleccion"
+          href={routes.coleccion}
           aria-label="Volver a la colección"
           className="flex h-10 w-10 items-center justify-start"
         >
@@ -28,21 +29,21 @@ export function AppHeader({ variant = "default", skuId }: AppHeaderProps) {
         </Link>
       ) : (
         <Link
-          href="/buscar"
+          href={routes.buscar}
           aria-label="Buscar"
           className="flex h-10 w-10 items-center justify-start"
         >
           <SearchIcon />
         </Link>
       )}
-      <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+      <Link href={routes.app} className="absolute left-1/2 -translate-x-1/2">
         <Wordmark />
       </Link>
       {ficha && skuId ? (
         <HeartButton skuId={skuId} variant="plain" className="justify-end" />
       ) : (
         <Link
-          href="/guardados"
+          href={routes.guardados}
           aria-label="Guardados"
           className="flex h-10 w-10 items-center justify-end"
         >

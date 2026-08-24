@@ -14,7 +14,7 @@ export function generateStaticParams() {
 
 export default async function CollectionByIdPage({
   params,
-}: PageProps<"/coleccion/[id]">) {
+}: PageProps<"/app/coleccion/[id]">) {
   const { id } = await params;
   const collection = getCollection(id);
   if (!collection) notFound();

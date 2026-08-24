@@ -16,18 +16,27 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000) — that is the **public desktop landing**.
+
+| Route | What you see |
+| --- | --- |
+| `/` | Public landing: hero Sastrería de agosto, El look, Cómo funciona |
+| `/app` | Shopper Inicio (banners, chips, grid) |
+| `/app/coleccion` | Five-piece Sastrería grid |
+| `/app/pieza/tapado-coppola` | Ficha Tapado Coppola |
+
+CTA on the landing: **Ver Sastrería de agosto** → `/app/coleccion`. **Ir al look** → `/app`.
 
 ## Local cut 1 flow
 
-1. **Inicio** — scroll: Banner 01 Sastrería de agosto, categorías (Sastrería · Carteras · Trajes), grid of the selected collection’s seed SKUs, Banner 02 Lo que lleva el look, Banner 03 Un solo traje.
-2. **Ver las cinco piezas →** — two-column grid for Sastrería de agosto.
+1. **Landing** (`/`) — Markos copy, five sastrería thumbs only.
+2. **Ver Sastrería de agosto** — shopper colección.
 3. **Tapado Coppola** — ficha with talle, tela, corte and `$ 890.000`.
 4. **Ir a la tienda →** — fires `cta_to_store` and opens `store_url` with UTM (`utm_source=curadario`).
 
-Nav: Inicio · Colección · Buscar · Guardados.
+Shopper nav: Inicio · Colección · Buscar · Guardados.
 
-The tapa of Sastrería is Banner 01, not the whole home. Carteras and trajes stay in their own `collection_id`s. The catalog is only the nine seed SKUs.
+The catalog is only the nine seed SKUs. Carteras and trajes stay in their own `collection_id`s and do not appear on the landing.
 
 ## Scripts
 
@@ -36,5 +45,5 @@ The tapa of Sastrería is Banner 01, not the whole home. Carteras and trajes sta
 | `npm run dev` | Next.js dev server |
 | `npm run build` | Production build |
 | `npm start` | Serve the production build |
-| `npm test` | Catalog seed checks |
+| `npm test` | Catalog and landing copy checks |
 | `npm run lint` | ESLint |

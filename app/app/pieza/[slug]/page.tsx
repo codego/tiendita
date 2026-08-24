@@ -13,7 +13,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: PageProps<"/pieza/[slug]">): Promise<Metadata> {
+}: PageProps<"/app/pieza/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const sku = getSku(slug);
   if (!sku) return { title: "Curadario" };
@@ -25,7 +25,7 @@ export async function generateMetadata({
 
 export default async function FichaPage({
   params,
-}: PageProps<"/pieza/[slug]">) {
+}: PageProps<"/app/pieza/[slug]">) {
   const { slug } = await params;
   const sku = getSku(slug);
   if (!sku) notFound();

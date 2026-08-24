@@ -21,7 +21,7 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Curadario",
   description:
-    "Cinco piezas. Un look. Un lugar. Curadario te lleva a la tienda; ellos venden.",
+    "Marcas de indumentaria, juntas. Vos descubrís. Ellas venden en su tienda.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

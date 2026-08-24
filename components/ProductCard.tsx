@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HeartButton } from "@/components/HeartButton";
 import { formatARS } from "@/lib/money";
+import { routes } from "@/lib/routes";
 import type { Sku } from "@/lib/types";
 
 export function ProductCard({
@@ -17,7 +18,7 @@ export function ProductCard({
 
   return (
     <article>
-      <Link href={`/pieza/${sku.id}`} className="block">
+      <Link href={routes.pieza(sku.id)} className="block">
         <div className="relative aspect-[3/4] overflow-hidden rounded-none bg-cream">
           <Image
             src={sku.image}
