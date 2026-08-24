@@ -4,7 +4,13 @@ import { HeartButton } from "@/components/HeartButton";
 import { formatARS } from "@/lib/money";
 import type { Sku } from "@/lib/types";
 
-export function ProductCard({ sku }: { sku: Sku }) {
+export function ProductCard({
+  sku,
+  showMeta = true,
+}: {
+  sku: Sku;
+  showMeta?: boolean;
+}) {
   const attributes = [sku.talle, sku.tela, sku.corte]
     .map((value) => value.toUpperCase())
     .join(" · ");
@@ -36,9 +42,11 @@ export function ProductCard({ sku }: { sku: Sku }) {
           <p className="mt-1 font-mono text-[12px] tracking-tight text-ink">
             {formatARS(sku.price_ars)}
           </p>
-          <p className="mt-1 font-mono text-[9px] tracking-[0.08em] text-ink/45 uppercase">
-            {attributes}
-          </p>
+          {showMeta ? (
+            <p className="mt-1 font-mono text-[9px] tracking-[0.08em] text-ink/45 uppercase">
+              {attributes}
+            </p>
+          ) : null}
         </div>
       </Link>
     </article>
