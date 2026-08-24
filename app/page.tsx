@@ -10,12 +10,6 @@ export const metadata = {
   description: markos.line2,
 };
 
-const steps = [
-  { label: "Descubrí", text: markos.steps[0] },
-  { label: "Elegí", text: markos.steps[1] },
-  { label: "Vas a la tienda", text: markos.steps[2] },
-] as const;
-
 export default function LandingPage() {
   const pieces = getTapaSkus();
 
@@ -72,20 +66,12 @@ export default function LandingPage() {
             <p className="mt-4 max-w-[38ch] font-sans text-[16px] leading-6 text-paper/90">
               {markos.line2}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href={routes.coleccion}
-                className="inline-flex h-12 items-center rounded-full bg-ink px-6 font-sans text-[15px] font-medium text-paper"
-              >
-                {markos.cta} →
-              </Link>
-              <a
-                href="#como-funciona"
-                className="inline-flex h-12 items-center rounded-full border border-paper px-6 font-sans text-[15px] text-paper"
-              >
-                Cómo funciona
-              </a>
-            </div>
+            <Link
+              href={routes.coleccion}
+              className="mt-8 inline-flex h-12 items-center rounded-full bg-ink px-6 font-sans text-[15px] font-medium text-paper"
+            >
+              {markos.cta}
+            </Link>
           </div>
         </div>
       </section>
@@ -134,18 +120,10 @@ export default function LandingPage() {
               {markos.noVende}
             </p>
           </div>
-          <ol className="mt-12 grid gap-10 md:grid-cols-3">
-            {steps.map((step, index) => (
-              <li key={step.label}>
-                <div className="flex items-center gap-3">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink font-mono text-[13px] text-paper">
-                    {index + 1}
-                  </span>
-                  <h3 className="font-serif text-[22px] text-ink">{step.label}</h3>
-                </div>
-                <p className="mt-4 font-sans text-[16px] leading-6 text-ink/80">
-                  {step.text}
-                </p>
+          <ol className="mt-12 space-y-5">
+            {markos.steps.map((step, index) => (
+              <li key={step} className="font-serif text-[24px] leading-snug text-ink md:text-[28px]">
+                {index + 1}. {step}
               </li>
             ))}
           </ol>
