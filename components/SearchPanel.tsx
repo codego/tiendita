@@ -19,7 +19,7 @@ export function SearchPanel() {
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Tapado, lana, Recoleta…"
+          placeholder="Buscar marcas, prendas y más"
           className="h-12 w-full rounded-none border-b border-ink/20 bg-transparent font-sans text-[16px] text-ink outline-none placeholder:text-ink/35 focus:border-ink"
           autoCapitalize="off"
           autoCorrect="off"

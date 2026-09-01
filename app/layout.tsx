@@ -20,8 +20,7 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Curadario",
-  description:
-    "Marcas de indumentaria, juntas. Vos descubrís. Ellas venden en su tienda.",
+  description: "Marcas de TiendaNube. Tocás, vas a su tienda.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

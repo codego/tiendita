@@ -1,4 +1,5 @@
 import seed from "@/data/seed.json";
+import { HOME_CHIPS } from "@/lib/home";
 import type { Catalog, Collection, Sku } from "@/lib/types";
 
 const catalog = seed as Catalog;
@@ -40,10 +41,28 @@ export function getTapaSkus(): Sku[] {
 }
 
 export function getHomeChips() {
-  return catalog.collections.map((collection) => ({
-    id: collection.id,
-    label: collection.homeChip,
-  }));
+  return HOME_CHIPS.map((chip) => ({ id: chip.id, label: chip.label }));
+}
+
+export function getSkusByChip(chip: string): Sku[] {
+  if (chip === "todas") return getSkus();
+  return catalog.skus.filter((sku) => sku.chip === chip);
+}
+
+function skuHaystack(sku: Sku): string {
+  const chipLabel =
+    HOME_CHIPS.find((chip) => chip.id === sku.chip)?.label ?? sku.chip;
+  return [
+    sku.name,
+    sku.brand,
+    sku.tela,
+    sku.corte,
+    sku.categoryLabel,
+    sku.description,
+    chipLabel,
+  ]
+    .join(" ")
+    .toLowerCase();
 }
 
 export function getCollectionFilters(collectionId: string) {
@@ -59,17 +78,5 @@ export function getCollectionFilters(collectionId: string) {
 export function searchSkus(query: string): Sku[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
-  return catalog.skus.filter((sku) => {
-    const haystack = [
-      sku.name,
-      sku.brand,
-      sku.tela,
-      sku.corte,
-      sku.categoryLabel,
-      sku.description,
-    ]
-      .join(" ")
-      .toLowerCase();
-    return haystack.includes(q);
-  });
+  return catalog.skus.filter((sku) => skuHaystack(sku).includes(q));
 }

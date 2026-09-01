@@ -21,6 +21,7 @@ export type Sku = {
   corte: string;
   category: string;
   categoryLabel: string;
+  chip: string;
   description: string;
   disclaimer: string;
   store_url: string;

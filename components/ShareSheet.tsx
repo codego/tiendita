@@ -13,23 +13,20 @@ import {
 } from "@/components/Icons";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { shareCopy } from "@/lib/brand";
+import { formatARS } from "@/lib/money";
 import { routes } from "@/lib/routes";
-import { lookShareText, lookUrl, whatsappShareHref } from "@/lib/shareLook";
-import type { Collection, Sku } from "@/lib/types";
+import {
+  findingShareText,
+  findingUrl,
+  whatsappShareHref,
+} from "@/lib/shareFinding";
+import type { Sku } from "@/lib/types";
 
-export function ShareSheet({
-  look,
-  pieces,
-  hero,
-}: {
-  look: Collection;
-  pieces: Sku[];
-  hero: string;
-}) {
+export function ShareSheet({ sku }: { sku: Sku }) {
   const [status, setStatus] = useState("");
 
   function currentUrl() {
-    return lookUrl(window.location.origin);
+    return findingUrl(window.location.origin, sku.id);
   }
 
   async function copyLink(
@@ -48,11 +45,11 @@ export function ShareSheet({
 
   async function shareNative() {
     const url = currentUrl();
-    const text = lookShareText(url);
+    const text = findingShareText(url, sku);
     if (navigator.share) {
       try {
         await navigator.share({
-          title: shareCopy.lookTitle,
+          title: sku.name,
           text,
           url,
         });
@@ -65,7 +62,7 @@ export function ShareSheet({
   }
 
   function openWhatsApp() {
-    window.open(whatsappShareHref(currentUrl()), "_blank", "noopener,noreferrer");
+    window.open(whatsappShareHref(currentUrl(), sku), "_blank", "noopener,noreferrer");
   }
 
   const actions = [
@@ -82,7 +79,7 @@ export function ShareSheet({
       label: shareCopy.stories,
       icon: InstagramIcon,
       onClick: () => {
-        void copyLink(shareCopy.storiesHint, lookShareText(currentUrl()));
+        void copyLink(shareCopy.storiesHint, findingShareText(currentUrl(), sku));
       },
     },
     {
@@ -105,8 +102,8 @@ export function ShareSheet({
     <PhoneFrame className="overflow-hidden bg-ink">
       <div className="absolute inset-0">
         <Image
-          src={hero}
-          alt={look.title}
+          src={sku.image}
+          alt={`${sku.brand} — ${sku.name}`}
           fill
           priority
           sizes="430px"
@@ -116,8 +113,8 @@ export function ShareSheet({
       </div>
 
       <Link
-        href={routes.coleccion}
-        aria-label="Volver al look"
+        href={routes.pieza(sku.id)}
+        aria-label="Volver a la pieza"
         className="absolute top-4 left-4 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-paper/95 text-ink shadow-[0_1px_8px_rgba(22,21,19,0.12)]"
       >
         <BackIcon />
@@ -133,34 +130,27 @@ export function ShareSheet({
         </p>
 
         <Link
-          href={routes.coleccion}
+          href={routes.pieza(sku.id)}
           className="mt-5 flex items-center gap-3 rounded-2xl border border-ink/10 bg-paper px-3 py-3"
         >
-          <div className="grid w-[56px] shrink-0 grid-cols-2 gap-0.5">
-            {pieces.slice(0, 6).map((sku) => (
-              <div
-                key={sku.id}
-                className="relative aspect-square overflow-hidden rounded-[3px] bg-cream"
-              >
-                <Image
-                  src={sku.image}
-                  alt=""
-                  fill
-                  sizes="28px"
-                  className="object-cover"
-                />
-              </div>
-            ))}
+          <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[2px] bg-cream">
+            <Image
+              src={sku.image}
+              alt=""
+              fill
+              sizes="64px"
+              className="object-cover"
+            />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="font-sans text-[15px] font-semibold text-ink">
-              {shareCopy.lookTitle}
+            <p className="font-mono text-[10px] font-medium tracking-[0.14em] text-terracotta uppercase">
+              {sku.brand}
             </p>
-            <p className="mt-0.5 font-sans text-[12px] text-ink/55">
-              {shareCopy.meta}
+            <p className="mt-0.5 font-sans text-[15px] font-semibold text-ink">
+              {sku.name}
             </p>
-            <p className="mt-0.5 font-sans text-[12px] text-ink/45">
-              {shareCopy.byline}
+            <p className="mt-0.5 font-sans text-[13px] text-ink/70">
+              {formatARS(sku.price_ars)}
             </p>
           </div>
           <ChevronRightIcon className="h-5 w-5 shrink-0 text-ink/35" />

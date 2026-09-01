@@ -8,9 +8,11 @@ import type { Sku } from "@/lib/types";
 export function ProductCard({
   sku,
   showMeta = true,
+  dense = false,
 }: {
   sku: Sku;
   showMeta?: boolean;
+  dense?: boolean;
 }) {
   const attributes = [sku.talle, sku.tela, sku.corte]
     .map((value) => value.toUpperCase())
@@ -19,7 +21,7 @@ export function ProductCard({
   return (
     <article>
       <Link href={routes.pieza(sku.id)} className="block">
-        <div className="relative aspect-[3/4] overflow-hidden rounded-none bg-cream">
+        <div className="relative aspect-[3/4] overflow-hidden rounded-[2px] bg-cream">
           <Image
             src={sku.image}
             alt={`${sku.brand} — ${sku.name}`}
@@ -30,17 +32,33 @@ export function ProductCard({
           <HeartButton
             skuId={sku.id}
             variant="overlay"
-            className="absolute top-2.5 right-2.5"
+            className="absolute top-2 right-2"
           />
         </div>
-        <div className="pt-2.5">
-          <p className="font-mono text-[10px] font-medium tracking-[0.14em] text-terracotta uppercase">
+        <div className={dense ? "pt-1.5" : "pt-2.5"}>
+          <p
+            className={`font-mono font-medium tracking-[0.14em] text-terracotta uppercase ${
+              dense ? "text-[9px]" : "text-[10px]"
+            }`}
+          >
             {sku.brand}
           </p>
-          <h3 className="mt-0.5 font-serif text-[17px] leading-tight text-ink">
+          <h3
+            className={
+              dense
+                ? "mt-0.5 font-sans text-[13px] leading-snug text-ink"
+                : "mt-0.5 font-serif text-[17px] leading-tight text-ink"
+            }
+          >
             {sku.name}
           </h3>
-          <p className="mt-1 font-mono text-[12px] tracking-tight text-ink">
+          <p
+            className={
+              dense
+                ? "mt-0.5 font-sans text-[13px] font-medium tracking-tight text-ink"
+                : "mt-1 font-mono text-[12px] tracking-tight text-ink"
+            }
+          >
             {formatARS(sku.price_ars)}
           </p>
           {showMeta ? (

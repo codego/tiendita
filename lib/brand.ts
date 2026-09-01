@@ -31,17 +31,14 @@ export function syncBanner(count: number): string {
 }
 
 export const shareCopy = {
-  kit: "Este look está en Curadario. Cinco piezas, un lugar.",
-  headline: "Este look está en Curadario.",
-  sub: "Cinco piezas, un lugar.",
-  lookTitle: "Sastrería de agosto",
-  meta: "Look completo • 5 productos",
-  byline: "por Sofía • 2 min",
+  kit: "Mirá lo que encontré en Curadario.",
+  headline: "Mirá lo que encontré en Curadario.",
+  sub: "Una pieza. La tienda de la marca.",
   copyLink: "Copiar enlace",
   stories: "Instagram Stories",
   whatsapp: "WhatsApp",
   more: "Más",
-  cta: "Compartir el look →",
+  cta: "Compartir hallazgo →",
   copied: "Enlace copiado.",
   storiesHint: "Enlace copiado. Pegalo en Stories.",
 } as const;

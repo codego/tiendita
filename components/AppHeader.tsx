@@ -36,7 +36,7 @@ export function AppHeader({ variant = "default", skuId }: AppHeaderProps) {
           <SearchIcon />
         </Link>
       )}
-      <Link href={routes.app} className="absolute left-1/2 -translate-x-1/2">
+      <Link href={routes.landing} className="absolute left-1/2 -translate-x-1/2">
         <Wordmark />
       </Link>
       {ficha && skuId ? (

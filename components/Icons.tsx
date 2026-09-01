@@ -57,6 +57,15 @@ export function GridIcon({ className = "h-6 w-6" }: IconProps) {
   );
 }
 
+export function HangerIcon({ className = "h-6 w-6" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <path d="M12 4.8c.9 0 1.5.6 1.5 1.4 0 .6-.3 1-.9 1.3L12 8.2 4.8 18.4h14.4" />
+      <path d="M4.2 18.4h15.6" />
+    </svg>
+  );
+}
+
 export function BackIcon({ className = "h-6 w-6" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>

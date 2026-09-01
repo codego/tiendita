@@ -1,10 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { HeartButton } from "@/components/HeartButton";
 import { StoreCta } from "@/components/StoreCta";
+import { shareCopy } from "@/lib/brand";
 import { getSku, getSkus } from "@/lib/catalog";
 import { formatARS } from "@/lib/money";
+import { routes } from "@/lib/routes";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -77,6 +80,12 @@ export default async function FichaPage({
         <p className="mt-4 font-sans text-[14px] leading-6 text-ink/60">
           {sku.disclaimer}
         </p>
+        <Link
+          href={routes.compartirSku(sku.id)}
+          className="mt-4 inline-flex font-sans text-[14px] text-ink underline underline-offset-2"
+        >
+          {shareCopy.cta}
+        </Link>
       </div>
       <div className="mt-auto flex items-center gap-3 bg-surface px-5 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
         <StoreCta sku={sku} />

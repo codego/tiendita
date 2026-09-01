@@ -7,6 +7,7 @@ export const routes = {
   buscar: "/app/buscar",
   guardados: "/app/guardados",
   compartir: "/app/coleccion/compartir",
+  compartirSku: (id: string) => `/app/coleccion/compartir?sku=${id}`,
   marcas: "/marcas",
   marcasElegir: "/marcas/elegir",
   marcasDashboard: "/marcas/dashboard",

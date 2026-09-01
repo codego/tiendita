@@ -1,11 +1,6 @@
-import { AppShell } from "@/components/AppShell";
-import { HomeFeed } from "@/components/HomeFeed";
-import { getCollections, getSkus } from "@/lib/catalog";
+import { redirect } from "next/navigation";
+import { routes } from "@/lib/routes";
 
-export default function HomePage() {
-  return (
-    <AppShell>
-      <HomeFeed collections={getCollections()} skus={getSkus()} />
-    </AppShell>
-  );
+export default function AppAliasPage() {
+  redirect(routes.landing);
 }

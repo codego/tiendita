@@ -5,44 +5,71 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const markosSource = readFileSync(join(root, "lib/markos.ts"), "utf8");
-const landingSource = readFileSync(join(root, "app/page.tsx"), "utf8");
-const seed = JSON.parse(readFileSync(join(root, "data/seed.json"), "utf8"));
+const home = readFileSync(join(root, "lib/home.ts"), "utf8");
+const landing = readFileSync(join(root, "app/page.tsx"), "utf8");
+const catalogHome = readFileSync(join(root, "components/CatalogHome.tsx"), "utf8");
+const productCard = readFileSync(join(root, "components/ProductCard.tsx"), "utf8");
+const bottomNav = readFileSync(join(root, "components/BottomNav.tsx"), "utf8");
+const storeCta = readFileSync(join(root, "components/StoreCta.tsx"), "utf8");
+const appAlias = readFileSync(join(root, "app/app/page.tsx"), "utf8");
+const globals = readFileSync(join(root, "app/globals.css"), "utf8");
 
-test("Markos landing copy is exact", () => {
-  assert.match(markosSource, /COLECCIÓN · 01/);
-  assert.match(markosSource, /Sastrería de agosto/);
-  assert.match(markosSource, /Cinco piezas\. Un look\. Un lugar\./);
-  assert.match(
-    markosSource,
-    /Marcas de indumentaria, juntas\. Vos descubrís\. Ellas venden en su tienda\./,
+test("first screen says Vicky hero copy", () => {
+  assert.match(home, /Marcas de TiendaNube\. Tocás, vas a su tienda\./);
+  assert.match(home, /Todas las marcas\. Un solo lugar\./);
+  assert.match(home, /Ir a las marcas →/);
+  assert.match(home, /Buscar marcas, prendas y más/);
+  assert.match(catalogHome, /homeCopy\.hero/);
+  assert.match(catalogHome, /homeCopy\.search/);
+  assert.match(catalogHome, /homeCopy\.bannerCta/);
+  assert.match(catalogHome, /HOME_CHIPS/);
+  assert.match(landing, /CatalogHome/);
+  assert.match(landing, /homeCopy\.hero/);
+});
+
+test("home is a dense catalog grid without bag or checkout chrome", () => {
+  assert.match(catalogHome, /grid-cols-2/);
+  assert.match(catalogHome, /ProductCard/);
+  assert.match(catalogHome, /dense/);
+  assert.match(productCard, /HeartButton/);
+  assert.match(productCard, /formatARS/);
+  assert.match(productCard, /sku\.brand/);
+  assert.match(productCard, /sku\.name/);
+  const shopper = [landing, catalogHome, productCard, bottomNav].join("\n");
+  assert.equal(
+    /\b(bag|cart|carrito|checkout|pagar|ruleta|roulette)\b|-\d+%/i.test(shopper),
+    false,
   );
-  assert.match(markosSource, /Ver Sastrería de agosto/);
-  assert.match(markosSource, /Entrá a un look, no a un mall\./);
-  assert.match(markosSource, /Elegí la pieza, con la marca a la vista\./);
-  assert.match(markosSource, /Tocá y vas a su tienda\./);
-  assert.match(markosSource, /Curadario no vende\./);
-  assert.equal([...markosSource.matchAll(/Entrá a un look/g)].length, 1);
+  assert.equal(storeCta.includes("Ir a la tienda →"), true);
+  assert.equal(storeCta.includes("Pagar"), false);
+  assert.equal(storeCta.includes("checkout"), false);
 });
 
-test("landing uses /app routes and only sastrería helpers", () => {
-  assert.match(landingSource, /routes\.coleccion/);
-  assert.match(landingSource, /routes\.app/);
-  assert.match(landingSource, /routes\.marcas/);
-  assert.match(landingSource, /brandCopy\.landingCta/);
-  assert.match(landingSource, /getTapaSkus/);
-  assert.equal(landingSource.includes("lo-que-lleva-el-look"), false);
-  assert.equal(landingSource.includes("un-solo-traje"), false);
-  assert.equal(landingSource.includes("Tote"), false);
-  assert.equal(landingSource.includes("Bikini"), false);
-  assert.equal(landingSource.includes("Enteriza"), false);
-  assert.equal(landingSource.includes("Leonardo"), false);
-  assert.equal(landingSource.includes("Portsaid"), false);
-  assert.equal(landingSource.includes("Lorenzo"), false);
+test("bottom nav is Inicio Colección Buscar Guardados with hanger, no cart", () => {
+  assert.match(bottomNav, /Inicio/);
+  assert.match(bottomNav, /Colección/);
+  assert.match(bottomNav, /Buscar/);
+  assert.match(bottomNav, /Guardados/);
+  assert.match(bottomNav, /HangerIcon/);
+  assert.match(bottomNav, /routes\.landing/);
+  assert.match(bottomNav, /routes\.coleccion/);
+  assert.equal(bottomNav.includes("Carrito"), false);
+  assert.equal(bottomNav.includes("Bolsa"), false);
+  assert.equal(bottomNav.includes("Bag"), false);
 });
 
-test("landing thumbs come from the five sastrería SKUs", () => {
-  const tapa = seed.skus.filter((s) => s.collection_id === "sastreria-de-agosto");
-  assert.equal(tapa.length, 5);
-  assert.ok(tapa.every((s) => s.brand && s.name));
+test("app alias redirects to the new home", () => {
+  assert.match(appAlias, /redirect/);
+  assert.match(appAlias, /routes\.landing/);
+});
+
+test("tokens stay Curadario, not Temu orange", () => {
+  assert.match(globals, /#161513/);
+  assert.match(globals, /#c8553d/i);
+  assert.match(globals, /#efe9dd/i);
+  assert.match(globals, /#fbfaf6/i);
+  assert.equal(globals.toLowerCase().includes("#ff6a00"), false);
+  assert.equal(globals.toLowerCase().includes("#ff6900"), false);
+  assert.equal(catalogHome.includes("#ff"), false);
+  assert.match(catalogHome, /bg-terracotta/);
 });

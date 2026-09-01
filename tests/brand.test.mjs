@@ -14,7 +14,7 @@ const sharePage = readFileSync(
   "utf8",
 );
 const shareSheet = readFileSync(join(root, "components/ShareSheet.tsx"), "utf8");
-const shareLook = readFileSync(join(root, "lib/shareLook.ts"), "utf8");
+const shareFinding = readFileSync(join(root, "lib/shareFinding.ts"), "utf8");
 const storeCta = readFileSync(join(root, "components/StoreCta.tsx"), "utf8");
 const tiendanube = JSON.parse(
   readFileSync(join(root, "data/tiendanube.json"), "utf8"),
@@ -94,22 +94,26 @@ test("picker copy, apparel seed, and mock sync banner", () => {
   assert.equal(blob.includes("bowl"), false);
 });
 
-test("share sheet is the look, not the home", () => {
-  assert.match(brand, /Este look está en Curadario\. Cinco piezas, un lugar\./);
-  assert.match(brand, /Sastrería de agosto/);
-  assert.match(brand, /Look completo • 5 productos/);
-  assert.match(brand, /por Sofía • 2 min/);
+test("share sheet is a finding, not the look", () => {
+  assert.match(brand, /Mirá lo que encontré en Curadario\./);
+  assert.match(brand, /Una pieza\. La tienda de la marca\./);
   assert.match(brand, /Copiar enlace/);
   assert.match(brand, /Instagram Stories/);
   assert.match(brand, /WhatsApp/);
-  assert.match(brand, /Compartir el look →/);
-  assert.match(sharePage, /getTapaCollection/);
-  assert.match(sharePage, /getTapaSkus/);
-  assert.match(shareSheet, /routes\.coleccion/);
-  assert.match(shareLook, /shareCopy\.kit/);
-  assert.match(shareLook, /lookPath/);
+  assert.match(brand, /Compartir hallazgo →/);
+  assert.equal(brand.includes("Este look está en Curadario"), false);
+  assert.equal(brand.includes("Compartir el look"), false);
+  assert.match(sharePage, /ShareSheet/);
+  assert.match(sharePage, /getSku/);
+  assert.match(shareSheet, /routes\.pieza/);
+  assert.match(shareSheet, /sku\.name/);
+  assert.match(shareSheet, /sku\.brand/);
+  assert.match(shareFinding, /shareCopy\.kit/);
+  assert.match(shareFinding, /findingPath/);
+  assert.match(shareFinding, /routes\.pieza/);
   assert.equal(shareSheet.includes("routes.app"), false);
-  assert.equal(shareSheet.includes('href={routes.app}'), false);
+  assert.equal(shareSheet.includes("getTapaSkus"), false);
+  assert.equal(shareFinding.includes("lookPath"), false);
 });
 
 test("shopper still has no bag or own checkout", () => {

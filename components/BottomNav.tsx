@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GridIcon, HeartIcon, HomeIcon, SearchIcon } from "@/components/Icons";
+import { HangerIcon, HeartIcon, HomeIcon, SearchIcon } from "@/components/Icons";
 import { routes } from "@/lib/routes";
 
 const items = [
-  { href: routes.app, label: "Inicio", icon: HomeIcon },
-  { href: routes.coleccion, label: "Colección", icon: GridIcon },
+  { href: routes.landing, label: "Inicio", icon: HomeIcon },
+  { href: routes.coleccion, label: "Colección", icon: HangerIcon },
   { href: routes.buscar, label: "Buscar", icon: SearchIcon },
   { href: routes.guardados, label: "Guardados", icon: HeartIcon },
 ] as const;
@@ -22,8 +22,8 @@ export function BottomNav() {
     >
       {items.map((item) => {
         const active =
-          item.href === routes.app
-            ? pathname === routes.app
+          item.href === routes.landing
+            ? pathname === routes.landing
             : pathname === item.href || pathname.startsWith(`${item.href}/`);
         const Icon = item.icon;
         return (

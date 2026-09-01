@@ -36,10 +36,10 @@ export function CollectionGrid({
       </p>
       {collection.onTapa ? (
         <Link
-          href={routes.compartir}
+          href={routes.compartirSku(skus[0]?.id ?? "tapado-coppola")}
           className="mt-3 inline-flex font-sans text-[14px] text-ink underline underline-offset-2"
         >
-          Compartir el look →
+          Compartir hallazgo →
         </Link>
       ) : null}
       <div className="mt-5">

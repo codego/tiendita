@@ -6,6 +6,32 @@ import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const seed = JSON.parse(readFileSync(join(root, "data/seed.json"), "utf8"));
+const home = readFileSync(join(root, "lib/home.ts"), "utf8");
+
+const CHIPS = [
+  "ropa",
+  "deportiva",
+  "carteras",
+  "accesorios",
+  "trajes-de-bano",
+  "sastreria",
+  "calzado",
+];
+
+const FORBIDDEN_BRANDS = [
+  "nike",
+  "zara",
+  "adidas",
+  "puma",
+  "gucci",
+  "prada",
+  "michael kors",
+  "kors",
+  "temu",
+  "shein",
+  "uniqlo",
+  "h&m",
+];
 
 function formatARS(amount) {
   const digits = Math.round(amount).toString();
@@ -13,35 +39,36 @@ function formatARS(amount) {
   return `$ ${grouped}`;
 }
 
-test("three collections and Banner 01 is only sastreria", () => {
-  assert.equal(seed.collections.length, 3);
-  const ids = seed.collections.map((c) => c.id).sort();
-  assert.deepEqual(ids, [
-    "lo-que-lleva-el-look",
-    "sastreria-de-agosto",
-    "un-solo-traje",
-  ]);
-  const onTapa = seed.collections.filter((c) => c.onTapa);
-  assert.equal(onTapa.length, 1);
-  assert.equal(onTapa[0].id, "sastreria-de-agosto");
-  assert.deepEqual(
-    seed.collections.map((c) => c.homeChip),
-    ["Sastrería", "Carteras", "Trajes"],
-  );
+test("home chips are the catalog categories", () => {
+  assert.match(home, /Todas/);
+  assert.match(home, /Ropa/);
+  assert.match(home, /Deportiva/);
+  assert.match(home, /Carteras/);
+  assert.match(home, /Accesorios/);
+  assert.match(home, /Trajes de baño/);
+  assert.match(home, /Sastrería/);
+  assert.match(home, /Calzado/);
 });
 
-test("catalog is only the nine seed SKUs", () => {
-  assert.equal(seed.skus.length, 9);
-  const names = seed.skus.map((s) => s.name);
-  assert.ok(names.every((name) => typeof name === "string" && name.length > 0));
-  assert.ok(seed.skus.every((s) => s.brand && s.brand !== "PLACEHOLDER"));
-  const blob = JSON.stringify(seed);
-  assert.equal(blob.includes("Traje Roma"), false);
-  assert.equal(blob.includes("Sobretodo Livorno"), false);
-  assert.equal(blob.includes("Blazer Firenze"), false);
+test("fat seed covers every home chip with dozens of SKUs", () => {
+  assert.ok(seed.skus.length >= 36, `expected dozens, got ${seed.skus.length}`);
+  const counts = Object.fromEntries(CHIPS.map((chip) => [chip, 0]));
+  for (const sku of seed.skus) {
+    assert.ok(CHIPS.includes(sku.chip), `unknown chip ${sku.chip}`);
+    counts[sku.chip] += 1;
+    assert.ok(sku.brand && sku.name && sku.store_url && sku.image);
+    assert.equal(typeof sku.price_ars, "number");
+    assert.ok(sku.price_ars > 0);
+  }
+  for (const chip of CHIPS) {
+    assert.ok(counts[chip] >= 4, `${chip} is too thin: ${counts[chip]}`);
+  }
 });
 
-test("sastreria-de-agosto has the five launch pieces", () => {
+test("sastreria-de-agosto stays the five-piece collection", () => {
+  const tapa = seed.collections.filter((c) => c.onTapa);
+  assert.equal(tapa.length, 1);
+  assert.equal(tapa[0].id, "sastreria-de-agosto");
   const skus = seed.skus.filter((s) => s.collection_id === "sastreria-de-agosto");
   assert.equal(skus.length, 5);
   assert.deepEqual(
@@ -56,22 +83,6 @@ test("sastreria-de-agosto has the five launch pieces", () => {
   );
 });
 
-test("carteras and swim live only in their own collections", () => {
-  const toteBag = seed.skus.filter((s) =>
-    ["tote", "baguette"].includes(s.category),
-  );
-  const swim = seed.skus.filter((s) =>
-    ["bikini", "enteriza"].includes(s.category),
-  );
-  assert.equal(toteBag.length, 2);
-  assert.ok(toteBag.every((s) => s.collection_id === "lo-que-lleva-el-look"));
-  assert.equal(swim.length, 2);
-  assert.ok(swim.every((s) => s.collection_id === "un-solo-traje"));
-  assert.ok(
-    seed.skus.every((s) => s.collection_id !== "sastreria-de-agosto" || !["tote", "baguette", "bikini", "enteriza"].includes(s.category)),
-  );
-});
-
 test("featured tapado-coppola matches the ficha spec", () => {
   const sku = seed.skus.find((s) => s.id === "tapado-coppola");
   assert.equal(sku.brand, "Taller Recoleta");
@@ -82,10 +93,16 @@ test("featured tapado-coppola matches the ficha spec", () => {
   assert.equal(formatARS(sku.price_ars), "$ 890.000");
 });
 
-test("seed never prints PLACEHOLDER or hogar/deco", () => {
+test("seed uses invented AR brands, not dummy mall names", () => {
   const blob = JSON.stringify(seed).toLowerCase();
   assert.equal(blob.includes("placeholder"), false);
   assert.equal(blob.includes("mesa de domingo"), false);
   assert.equal(blob.includes("hogar"), false);
   assert.equal(blob.includes("deco"), false);
+  assert.equal(blob.includes("traje roma"), false);
+  assert.equal(blob.includes("sobretodo livorno"), false);
+  assert.equal(blob.includes("blazer firenze"), false);
+  for (const brand of FORBIDDEN_BRANDS) {
+    assert.equal(blob.includes(brand), false, brand);
+  }
 });
