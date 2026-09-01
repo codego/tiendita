@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { REMIND_CTA, REMIND_DONE } from "@/lib/las21";
+import { PING_HOUR, PING_MINUTE, REMIND_CTA, REMIND_DONE } from "@/lib/las21";
 
-const STORAGE_KEY = "curadario:avisame-2055";
+const STORAGE_KEY = `curadario:avisame-${PING_HOUR}${PING_MINUTE}`;
 
 export function RemindButton() {
   const [saved, setSaved] = useState(false);

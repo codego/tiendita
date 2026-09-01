@@ -30,6 +30,9 @@ export default function MarcasPage() {
         <p className="mt-5 max-w-[28ch] font-sans text-[16px] leading-6 text-ink/70">
           {brandCopy.sub}
         </p>
+        <p className="mt-4 font-serif text-[20px] italic text-ink">
+          {brandCopy.tease}
+        </p>
 
         <div className="mt-10 flex flex-col gap-3">
           <Link

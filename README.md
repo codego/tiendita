@@ -24,6 +24,12 @@ npm run dev
 
 Live share copy, exact: **Está pasando en Curadario. 20 minutos.**
 
+Day shares the countdown (`Faltan X h Y min para Las 21.`), not a feed. The 20:55 ping is the **Avisame a las 20:55** CTA.
+
+Brands tease by day: **hoy a las 21, esta.**
+
+**Floor:** Las 21 does not light up with three garments — three at 21 feels dead. Need at least **four** stores/pieces. Below the floor, stay on the day screen (countdown + anoche), even at 21:00 or with `?drop=1`.
+
 Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: Ink `#161513`, Terracotta `#C8553D`, Cream `#EFE9DD`, Surface `#FBFAF6`. Playfair + DM Sans.
 
 ## Routes that stay

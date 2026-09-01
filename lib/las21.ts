@@ -3,19 +3,25 @@ import type { Sku } from "@/lib/types";
 
 export {
   ANOCHE_LABEL,
+  BRAND_TEASE,
   DAY_LINE,
   ESTA_LABEL,
+  LAS21_DEAD_COUNT,
   LAS21_DURATION_MINUTES,
+  LAS21_FLOOR,
   LAS21_HOUR,
   LAS21_LABEL,
   LAS21_TIMEZONE,
   LIVE_LABEL,
   LIVE_SHARE_COPY,
+  PING_HOUR,
+  PING_MINUTE,
   RAIL_LABEL,
   RECIEN_STAMP,
   REMIND_CTA,
   REMIND_DONE,
   VER_TODO,
+  dayShareText,
   formatDayCountdown,
   formatLiveCountdown,
   isForceDropParam,
@@ -23,6 +29,7 @@ export {
   isJustDropped,
   isLas21Live,
   liveRemainingMs,
+  meetsLas21Floor,
   msUntilNextLas21,
   nextLas21StartMs,
   stageIndex,
@@ -83,6 +90,10 @@ export function getAnocheForwarded(): Sku[] {
   const skus = skusFromIds(ANOCHE_IDS);
   assertOnePerStore(skus, "Anoche");
   return skus;
+}
+
+export function tonightStoreCount(skus: Sku[] = getTonightDrop()): number {
+  return new Set(skus.map((sku) => sku.brand)).size;
 }
 
 export function splitStageAndRail(skus: Sku[]): {

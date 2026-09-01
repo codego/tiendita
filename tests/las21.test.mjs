@@ -4,16 +4,24 @@ import { dirname, join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import {
+  BRAND_TEASE,
+  LAS21_DEAD_COUNT,
   LAS21_DURATION_MINUTES,
+  LAS21_FLOOR,
   LAS21_HOUR,
   LAS21_TIMEZONE,
   LIVE_SHARE_COPY,
+  PING_HOUR,
+  PING_MINUTE,
+  REMIND_CTA,
+  dayShareText,
   formatDayCountdown,
   formatLiveCountdown,
   isForceDropParam,
   isInLas21Window,
   isLas21Live,
   liveRemainingMs,
+  meetsLas21Floor,
   zonedParts,
 } from "../lib/las21-time.mjs";
 
@@ -70,7 +78,25 @@ test("live countdown starts at 20:00 and day copy is exact", () => {
   assert.equal(formatLiveCountdown(liveRemainingMs(open)), "20:00");
   assert.equal(formatLiveCountdown(liveRemainingMs(ten)), "10:00");
   assert.match(formatDayCountdown(after), /Faltan \d+ h \d+ min para Las 21\./);
+  assert.equal(dayShareText(after), formatDayCountdown(after));
   assert.equal(LIVE_SHARE_COPY, "Está pasando en Curadario. 20 minutos.");
+  assert.equal(BRAND_TEASE, "hoy a las 21, esta.");
+  assert.equal(REMIND_CTA, "Avisame a las 20:55");
+  assert.equal(PING_HOUR, 20);
+  assert.equal(PING_MINUTE, 55);
+});
+
+test("three garments stay on day — Las 21 needs more than three stores", () => {
+  const inside = art(2026, 9, 1, 21, 5, 0);
+  assert.equal(LAS21_DEAD_COUNT, 3);
+  assert.equal(LAS21_FLOOR, 4);
+  assert.equal(meetsLas21Floor(2), false);
+  assert.equal(meetsLas21Floor(3), false);
+  assert.equal(meetsLas21Floor(4), true);
+  assert.equal(isLas21Live(inside, false, 3), false);
+  assert.equal(isLas21Live(inside, true, 3), false);
+  assert.equal(isLas21Live(inside, false, 4), true);
+  assert.equal(isLas21Live(inside, true, 4), true);
 });
 
 test("tonight is one invented AR store each, never luxury or euros", () => {

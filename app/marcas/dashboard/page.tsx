@@ -90,6 +90,9 @@ export default function MarcasDashboardPage() {
                 <p className="truncate font-serif text-[16px] leading-tight text-ink">
                   {row.sku.name}
                 </p>
+                <p className="mt-0.5 font-sans text-[12px] italic text-ink/55">
+                  {brandCopy.tease}
+                </p>
               </div>
               <p className="shrink-0 font-sans text-[13px] text-ink">
                 {`${row.clicks} clics`}

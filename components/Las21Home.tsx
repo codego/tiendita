@@ -8,6 +8,7 @@ import {
   formatLiveCountdown,
   isLas21Live,
   liveRemainingMs,
+  tonightStoreCount,
 } from "@/lib/las21";
 import type { Sku } from "@/lib/types";
 
@@ -31,7 +32,7 @@ export function Las21Home({
     return () => window.clearInterval(id);
   }, []);
 
-  const live = isLas21Live(now, forceDrop);
+  const live = isLas21Live(now, forceDrop, tonightStoreCount(drop));
 
   if (live) {
     const remainingMs = liveRemainingMs(now, forceDrop);

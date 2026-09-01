@@ -1,5 +1,5 @@
 import { shareCopy } from "@/lib/brand";
-import { LIVE_SHARE_COPY } from "@/lib/las21";
+import { LIVE_SHARE_COPY, dayShareText as countdownShare } from "@/lib/las21";
 import { routes } from "@/lib/routes";
 import type { Sku } from "@/lib/types";
 
@@ -17,6 +17,10 @@ export function findingShareText(url: string, sku: Sku): string {
 
 export function liveShareText(): string {
   return LIVE_SHARE_COPY;
+}
+
+export function dayShareText(now: number): string {
+  return countdownShare(now);
 }
 
 export function whatsappShareHref(url: string, sku: Sku): string {

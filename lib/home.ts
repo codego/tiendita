@@ -5,6 +5,7 @@ export const homeCopy = {
   las21: "LAS 21",
   live: "LIVE",
   shareLive: "Está pasando en Curadario. 20 minutos.",
+  brandTease: "hoy a las 21, esta.",
   rail: "Más drops llegando",
   dayLine: "Veinte minutos. Una pieza por tienda. Se acaba.",
   remind: "Avisame a las 20:55",

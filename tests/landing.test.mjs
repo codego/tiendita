@@ -11,7 +11,11 @@ const live = readFileSync(join(root, "components/LiveStage.tsx"), "utf8");
 const day = readFileSync(join(root, "components/DaySchedule.tsx"), "utf8");
 const lasHome = readFileSync(join(root, "components/Las21Home.tsx"), "utf8");
 const shareBtn = readFileSync(join(root, "components/LiveShareButton.tsx"), "utf8");
+const dayShare = readFileSync(join(root, "components/DayShareButton.tsx"), "utf8");
 const remind = readFileSync(join(root, "components/RemindButton.tsx"), "utf8");
+const shareFinding = readFileSync(join(root, "lib/shareFinding.ts"), "utf8");
+const brand = readFileSync(join(root, "lib/brand.ts"), "utf8");
+const marcas = readFileSync(join(root, "app/marcas/page.tsx"), "utf8");
 const storeCta = readFileSync(join(root, "components/StoreCta.tsx"), "utf8");
 const globals = readFileSync(join(root, "app/globals.css"), "utf8");
 const readme = readFileSync(join(root, "README.md"), "utf8");
@@ -29,6 +33,7 @@ test("home is Las 21, not a catalog feed", () => {
   assert.equal(day.includes("CategoryChips"), false);
   assert.match(lasHome, /isLas21Live/);
   assert.match(lasHome, /forceDrop/);
+  assert.match(lasHome, /tonightStoreCount/);
 });
 
 test("live window copy and one piece on stage", () => {
@@ -45,6 +50,8 @@ test("live window copy and one piece on stage", () => {
   assert.match(live, /RECIEN_STAMP/);
   assert.match(live, /splitStageAndRail/);
   assert.match(shareBtn, /LIVE_SHARE_COPY|liveShareText/);
+  assert.match(shareFinding, /return LIVE_SHARE_COPY/);
+  assert.match(shareFinding, /dayShareText/);
   assert.equal(live.includes("€"), false);
   assert.equal(live.includes("EUR"), false);
   assert.equal(live.toLowerCase().includes("euro"), false);
@@ -58,11 +65,20 @@ test("day state is a countdown, not a mall", () => {
   assert.match(home, /Ver todo/);
   assert.match(day, /DAY_LINE/);
   assert.match(day, /RemindButton/);
+  assert.match(day, /DayShareButton/);
+  assert.match(day, /BRAND_TEASE/);
   assert.match(day, /ESTA_LABEL/);
   assert.match(day, /ANOCHE_LABEL/);
   assert.match(day, /VER_TODO/);
   assert.match(day, /routes\.anoche/);
+  assert.match(dayShare, /countdown/);
+  assert.equal(dayShare.includes("Mirá lo que encontré"), false);
+  assert.equal(dayShare.includes("liveShareText"), false);
   assert.match(remind, /Avisame a las 20:55|REMIND_CTA/);
+  assert.match(remind, /PING_HOUR|PING_MINUTE|20:55/);
+  assert.match(home, /hoy a las 21, esta\./);
+  assert.match(brand, /hoy a las 21, esta\./);
+  assert.match(marcas, /brandCopy\.tease/);
   assert.equal(day.includes("ProductCard"), false);
   assert.equal(day.includes("CategoryChips"), false);
 });
@@ -98,6 +114,10 @@ test("readme is local Las 21 preview", () => {
   assert.match(readme, /21:00/);
   assert.match(readme, /21:20/);
   assert.match(readme, /Está pasando en Curadario\. 20 minutos\./);
+  assert.match(readme, /hoy a las 21, esta\./);
+  assert.match(readme, /Avisame a las 20:55/);
   assert.match(las21Time, /America\/Buenos_Aires/);
+  assert.match(las21Time, /LAS21_FLOOR/);
   assert.match(las21, /tapado-coppola/);
+  assert.match(las21, /tonightStoreCount/);
 });

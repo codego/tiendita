@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { DayShareButton } from "@/components/DayShareButton";
 import { RemindButton } from "@/components/RemindButton";
 import { SchedulePiece } from "@/components/SchedulePiece";
 import { Wordmark } from "@/components/Wordmark";
 import {
   ANOCHE_LABEL,
+  BRAND_TEASE,
   DAY_LINE,
   ESTA_LABEL,
   VER_TODO,
@@ -31,9 +33,12 @@ export function DaySchedule({
         </header>
 
         <main className="flex-1 px-6 pt-10 pb-10">
-          <h1 className="font-serif text-[38px] leading-[1.04] text-ink">
-            {countdown}
-          </h1>
+          <div className="flex items-start gap-3">
+            <h1 className="min-w-0 flex-1 font-serif text-[38px] leading-[1.04] text-ink">
+              {countdown}
+            </h1>
+            <DayShareButton countdown={countdown} className="mt-1" />
+          </div>
           <p className="mt-5 max-w-[28ch] font-sans text-[16px] leading-6 text-ink/70">
             {DAY_LINE}
           </p>
@@ -43,7 +48,7 @@ export function DaySchedule({
             <h2 className="font-serif text-[26px] text-ink">{ESTA_LABEL}</h2>
             <div className="mt-4 grid grid-cols-2 gap-3">
               {esta.map((sku) => (
-                <SchedulePiece key={sku.id} sku={sku} />
+                <SchedulePiece key={sku.id} sku={sku} tease={BRAND_TEASE} />
               ))}
             </div>
           </section>

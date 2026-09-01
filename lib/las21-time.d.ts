@@ -1,10 +1,15 @@
 export const LAS21_TIMEZONE: "America/Buenos_Aires";
 export const LAS21_HOUR: 21;
 export const LAS21_DURATION_MINUTES: 20;
+export const LAS21_FLOOR: 4;
+export const LAS21_DEAD_COUNT: 3;
 export const LIVE_SHARE_COPY: "Está pasando en Curadario. 20 minutos.";
 export const DAY_LINE: "Veinte minutos. Una pieza por tienda. Se acaba.";
 export const REMIND_CTA: "Avisame a las 20:55";
 export const REMIND_DONE: "Te avisamos a las 20:55.";
+export const PING_HOUR: 20;
+export const PING_MINUTE: 55;
+export const BRAND_TEASE: "hoy a las 21, esta.";
 export const RAIL_LABEL: "Más drops llegando";
 export const ESTA_LABEL: "¿Esta o esta?";
 export const ANOCHE_LABEL: "Lo más reenviado anoche";
@@ -33,7 +38,13 @@ export function zonedDateToUtcMs(
   timeZone?: string,
 ): number;
 export function isInLas21Window(now: number): boolean;
-export function isLas21Live(now: number, forceDrop?: boolean): boolean;
+export function meetsLas21Floor(storeCount: number): boolean;
+export function isLas21Live(
+  now: number,
+  forceDrop?: boolean,
+  storeCount?: number,
+): boolean;
+export function dayShareText(now: number): string;
 export function todayWindowStartMs(now: number): number;
 export function nextLas21StartMs(now: number): number;
 export function msUntilNextLas21(now: number): number;

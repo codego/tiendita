@@ -7,10 +7,12 @@ import type { Sku } from "@/lib/types";
 export function SchedulePiece({
   sku,
   tone = "day",
+  tease,
   onSelect,
 }: {
   sku: Sku;
   tone?: "day" | "live";
+  tease?: string;
   onSelect?: (sku: Sku) => void;
 }) {
   const ink = tone === "day";
@@ -46,6 +48,15 @@ export function SchedulePiece({
       >
         {formatARS(sku.price_ars)}
       </p>
+      {tease ? (
+        <p
+          className={`mt-1 font-sans text-[12px] italic ${
+            ink ? "text-ink/60" : "text-cream/70"
+          }`}
+        >
+          {tease}
+        </p>
+      ) : null}
     </>
   );
 

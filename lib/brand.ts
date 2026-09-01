@@ -11,6 +11,7 @@ export const brandCopy = {
   privacy: "Privacidad",
   landingCta: "¿Tenés TiendaNube? Publicá tu tienda.",
   landingLine: "Entrás, elegís qué sale, y tu marca entra en el look.",
+  tease: "hoy a las 21, esta.",
 } as const;
 
 export const elegirCopy = {
