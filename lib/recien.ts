@@ -3,6 +3,12 @@ import type { Sku } from "@/lib/types";
 
 const STORAGE_KEY = "curadario:recien";
 
+export type RecienBump = { id: string; at: number };
+export type RecienEntry = { sku: Sku; at: number };
+
+const EMPTY_IDS: string[] = [];
+const EMPTY_ENTRIES: RecienEntry[] = [];
+
 export const TN_TO_SKU: Record<string, string> = {
   "tn-tapado-coppola": "tapado-coppola",
   "tn-saco-frances": "saco-frances",
@@ -22,13 +28,15 @@ export const TN_TO_SKU: Record<string, string> = {
   "tn-cardigan-lana": "jumper-lana",
 };
 
-export type RecienBump = { id: string; at: number };
-
 type Listener = () => void;
 
 const listeners = new Set<Listener>();
 let cachedRaw = "";
 let cachedBumps: RecienBump[] = [];
+let cachedIds: string[] = EMPTY_IDS;
+let cachedEntries: RecienEntry[] = EMPTY_ENTRIES;
+let cachedIdsRaw = "";
+let cachedEntriesRaw = "";
 
 function emit() {
   listeners.forEach((listener) => listener());
@@ -68,7 +76,7 @@ export function catalogIdsFromTn(tnIds: string[]): string[] {
 }
 
 export function seedRecienIds(): string[] {
-  return [];
+  return EMPTY_IDS;
 }
 
 export function mergeRecienOrder(
@@ -82,7 +90,7 @@ export function mergeRecienOrder(
     seen.add(bump.id);
     out.push(bump.id);
   }
-  return out;
+  return out.length === 0 ? EMPTY_IDS : out;
 }
 
 export function getRecienBumps(): RecienBump[] {
@@ -95,11 +103,16 @@ export function getRecienBumps(): RecienBump[] {
 }
 
 export function getServerRecienIds(): string[] {
-  return seedRecienIds();
+  return EMPTY_IDS;
 }
 
 export function getRecienIds(): string[] {
-  return mergeRecienOrder(seedRecienIds(), getRecienBumps());
+  const raw = readRaw();
+  if (raw !== cachedIdsRaw) {
+    cachedIdsRaw = raw;
+    cachedIds = mergeRecienOrder(EMPTY_IDS, getRecienBumps());
+  }
+  return cachedIds;
 }
 
 export function getRecienSkus(limit = 16): Sku[] {
@@ -109,20 +122,24 @@ export function getRecienSkus(limit = 16): Sku[] {
     .slice(0, limit);
 }
 
-export type RecienEntry = { sku: Sku; at: number };
-
 export function getRecienEntries(): RecienEntry[] {
-  return getRecienBumps()
-    .slice()
-    .sort((a, b) => b.at - a.at)
-    .flatMap((bump) => {
-      const sku = getSku(bump.id);
-      return sku ? [{ sku, at: bump.at }] : [];
-    });
+  const raw = readRaw();
+  if (raw !== cachedEntriesRaw) {
+    cachedEntriesRaw = raw;
+    const entries = getRecienBumps()
+      .slice()
+      .sort((a, b) => b.at - a.at)
+      .flatMap((bump) => {
+        const sku = getSku(bump.id);
+        return sku ? [{ sku, at: bump.at }] : [];
+      });
+    cachedEntries = entries.length === 0 ? EMPTY_ENTRIES : entries;
+  }
+  return cachedEntries;
 }
 
 export function getServerRecienEntries(): RecienEntry[] {
-  return [];
+  return EMPTY_ENTRIES;
 }
 
 export function subscribeRecien(listener: Listener): () => void {
@@ -155,6 +172,17 @@ export function bumpRecien(skuIds: string[], at = Date.now()): string[] {
   }
   cachedRaw = raw;
   cachedBumps = next;
+  cachedIdsRaw = raw;
+  cachedEntriesRaw = raw;
+  cachedIds = mergeRecienOrder(EMPTY_IDS, next);
+  cachedEntries = getRecienBumps()
+    .slice()
+    .sort((a, b) => b.at - a.at)
+    .flatMap((bump) => {
+      const sku = getSku(bump.id);
+      return sku ? [{ sku, at: bump.at }] : [];
+    });
+  if (cachedEntries.length === 0) cachedEntries = EMPTY_ENTRIES;
   emit();
-  return mergeRecienOrder(seedRecienIds(), next);
+  return cachedIds;
 }
