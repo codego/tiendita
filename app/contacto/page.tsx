@@ -22,13 +22,7 @@ export default function ContactoPage() {
         <SiteMenu />
       </header>
       <main className="flex-1 px-5 pt-8 pb-8">
-        <h1 className="font-serif text-[34px] leading-tight text-ink">
-          {contactoCopy.title}
-        </h1>
-        <p className="mt-2 font-sans text-[15px] text-ink/65">{contactoCopy.sub}</p>
-        <div className="mt-8">
-          <ContactForm />
-        </div>
+        <ContactForm />
       </main>
       <SiteLinks className="px-5 pb-8 text-center font-sans text-[13px] text-ink/45" />
     </PhoneFrame>

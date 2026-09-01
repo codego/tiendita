@@ -8,6 +8,11 @@ export const emptyLooks = {
   line: "Todavía no hay looks. Volvé más tarde.",
 } as const;
 
+export const emptySearch = {
+  title: "No encontramos eso.",
+  cta: "Ir al feed →",
+} as const;
+
 export const emptyRecien = {
   title: "Nadie publicó todavía.",
   body: "Cuando una tienda publique, aparece acá.",

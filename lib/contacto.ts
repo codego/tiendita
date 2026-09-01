@@ -8,7 +8,8 @@ export const contactoCopy = {
   shopper: "Shopper",
   message: "Mensaje",
   submit: "Enviar",
-  done: "Listo. Quedó anotado.",
+  done: "Mensaje enviado.",
+  doneCta: "Ir al feed →",
 } as const;
 
 export const CONTACT_STORAGE_KEY = "curadario:contacto";

@@ -1,8 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ProductCard } from "@/components/ProductCard";
 import { searchSkus } from "@/lib/catalog";
+import { emptySearch } from "@/lib/edges";
+import { routes } from "@/lib/routes";
 
 export function SearchPanel({ initialQuery = "" }: { initialQuery?: string }) {
   const [query, setQuery] = useState(initialQuery);
@@ -28,9 +31,21 @@ export function SearchPanel({ initialQuery = "" }: { initialQuery?: string }) {
         />
       </label>
       {empty ? (
-        <p className="mt-8 font-serif text-[28px] leading-snug text-ink">
-          No encontramos eso.
-        </p>
+        <div
+          role="status"
+          aria-live="polite"
+          className="mt-16 flex flex-col items-center text-center"
+        >
+          <p className="max-w-[16ch] font-serif text-[34px] leading-[1.1] text-ink">
+            {emptySearch.title}
+          </p>
+          <Link
+            href={routes.landing}
+            className="mt-8 inline-flex h-12 items-center justify-center rounded-full border border-ink/12 bg-cream px-8 font-sans text-[16px] text-terracotta"
+          >
+            {emptySearch.cta}
+          </Link>
+        </div>
       ) : (
         <div className="mt-6 grid grid-cols-2 gap-x-3 gap-y-8">
           {results.map((sku) => (

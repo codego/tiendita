@@ -65,10 +65,15 @@ test("contacto is a form with Soy pills, not a fake inbox", () => {
   assert.match(contacto, /Shopper/);
   assert.match(contacto, /Mensaje/);
   assert.match(contacto, /Enviar/);
+  assert.match(contacto, /Mensaje enviado\./);
   assert.match(form, /saveContactMessage/);
+  assert.match(form, /contactoCopy\.done/);
+  assert.match(form, /contactoCopy\.doneCta/);
+  assert.match(form, /aria-live="polite"/);
   assert.match(form, /contactoCopy\.marca/);
   assert.match(form, /contactoCopy\.shopper/);
   assert.match(form, /bg-ink/);
+  assert.match(form, /routes\.landing/);
   assert.match(contactoPage, /ContactForm/);
   assert.match(helpFaq, /routes\.contacto/);
   assert.equal(contacto.includes("marcas@curadario.la"), false);
@@ -83,7 +88,10 @@ test("Buscar filters the seed by brand, name, and category", () => {
   assert.match(catalog, /sku\.name/);
   assert.match(catalog, /sku\.category/);
   assert.match(searchPanel, /searchSkus/);
-  assert.match(searchPanel, /No encontramos eso\./);
+  assert.match(searchPanel, /No encontramos eso\.|emptySearch/);
+  assert.match(searchPanel, /aria-live="polite"/);
+  assert.match(searchPanel, /Ir al feed|emptySearch\.cta/);
+  assert.match(searchPanel, /routes\.landing/);
   const byBrand = searchSeed(seed.skus, "Taller Recoleta");
   assert.ok(byBrand.some((sku) => sku.id === "tapado-coppola"));
   const byName = searchSeed(seed.skus, "Tapado");

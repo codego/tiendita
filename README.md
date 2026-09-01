@@ -83,11 +83,11 @@ Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño �
 5. **`/terminos`** and **`/privacidad`** — Curadario is a **vitrina**. No payments.
 6. **`/que-es`** — Qué es Curadario. **01 Descubrí** / **02 Tocá** / **03 Compartí**. CTAs **Ir al feed** and **Publicá tu tienda** → `/marcas`.
 7. **`/faq`** — FAQ. Cómo publicar: Entrás con TiendaNube → elegís qué sale → a las 21 puede ir al drop. Las 21 is a daily drop 21:00–21:20, one piece per store. It does not turn off the feed. Más preguntas → `/contacto`. `/ayuda` redirects here.
-8. **`/contacto`** — **Marcas y el resto, acá.** Nombre, Email, Soy (Marca / Shopper), Mensaje, **Enviar**. Local stub. Form is the channel.
+8. **`/contacto`** — **Marcas y el resto, acá.** Nombre, Email, Soy (Marca / Shopper), Mensaje, **Enviar**. After send: **Mensaje enviado.** + **Ir al feed →**. Local persist.
 
 404: **Esto no está en Curadario.** **Volvé al feed.** CTA **Ir al feed →** to `/`.
 
-Buscar queries the catalog by brand, name, and category. Empty: **No encontramos eso.**
+Buscar queries the catalog by brand, name, and category. Empty: **No encontramos eso.** + **Ir al feed →**.
 
 Guardados stays: hearts persist locally. Empty: **Todavía no guardaste nada.**
 
