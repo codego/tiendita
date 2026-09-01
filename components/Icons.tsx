@@ -175,6 +175,37 @@ export function CloseIcon({ className = "h-6 w-6" }: IconProps) {
   );
 }
 
+export function SeedlingIcon({ className = "h-6 w-6" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <path d="M12 20V10.5" />
+      <path d="M12 14.5c-2.6-.2-4.8-2.2-5.2-4.8-.2-1.4.4-2.8 1.8-3.4 2.2-.9 5 1.1 5.4 3.7" />
+      <path d="M12 13.2c2.4-.4 4.4-2.2 4.8-4.6.3-1.5-.4-3-1.8-3.6-2.1-1-5 1-5.5 3.6" />
+    </svg>
+  );
+}
+
+export function TouchIcon({ className = "h-6 w-6" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <path d="M12 3.8v8.2" />
+      <path d="M9.2 8.2c.4-1.6 1.6-2.6 2.8-2.6s2.4 1 2.8 2.6" />
+      <path d="M8.2 13.4v-1.6c0-.8.6-1.4 1.4-1.4s1.4.6 1.4 1.4v2.2" />
+      <path d="M11 12.8v-1.2c0-.7.6-1.3 1.3-1.3.8 0 1.4.6 1.4 1.3v1.6" />
+      <path d="M13.7 13v-.6c0-.7.6-1.3 1.3-1.3s1.3.6 1.3 1.3v3.2c0 2.4-1.6 4.4-4 4.8-2.2.4-4.2-.8-5.1-2.6L7 15.2" />
+    </svg>
+  );
+}
+
+export function PlaneIcon({ className = "h-6 w-6" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <path d="m4.6 11.2 14.6-6.4-6.2 14.8-2.2-6.2z" />
+      <path d="m10.8 13.4 3.6-3.8" />
+    </svg>
+  );
+}
+
 export function ShareIcon({ className = "h-5 w-5" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>

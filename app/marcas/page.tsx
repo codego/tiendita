@@ -67,10 +67,17 @@ export default function MarcasPage() {
         </Link>
         {" · "}
         <Link
-          href={routes.ayuda}
+          href={routes.queEs}
           className="underline underline-offset-2 text-ink/70"
         >
-          Ayuda
+          Qué es
+        </Link>
+        {" · "}
+        <Link
+          href={routes.faq}
+          className="underline underline-offset-2 text-ink/70"
+        >
+          FAQ
         </Link>
         .
       </p>

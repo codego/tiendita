@@ -50,7 +50,9 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `/marcas/dashboard` | Esta semana — visitas, clics a la tienda, piezas publicadas, ranking |
 | `/terminos` | Términos — vitrina, no payments |
 | `/privacidad` | Privacidad — no checkout data |
-| `/ayuda` | FAQ — vitrina, how to buy, brands, Las 21 |
+| `/que-es` | Qué es Curadario — Descubrí, Tocá, Compartí |
+| `/faq` | FAQ — vitrina, how to buy, how to publish, Las 21 |
+| `/ayuda` | Redirects to `/faq` |
 | `/app/coleccion` | Looks — index of curated collections |
 | `/app/coleccion/compartir` | Finding share: “Mirá lo que encontré en Curadario.” |
 | `/app/pieza/tapado-coppola` | Ficha Tapado Coppola |
@@ -76,7 +78,8 @@ Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño �
 3. **`/marcas/dashboard`** — “Esta semana.” **visitas**, **clics a la tienda**, **piezas publicadas**, ranking. **Editar selección** → `/marcas/elegir`. **Ver mi vitrina →** the feed `/`. Footer: “Curadario no vende. El clic es el resultado.”
 4. **Share a finding** — `/app/coleccion/compartir`. “Mirá lo que encontré en Curadario.”
 5. **`/terminos`** and **`/privacidad`** — Curadario is a **vitrina**. No payments.
-6. **`/ayuda`** — FAQ. Las 21 is a daily drop 21:00–21:20, one piece per store. It does not turn off the feed. Contact **marcas@curadario.la**.
+6. **`/que-es`** — Qué es Curadario. **01 Descubrí** / **02 Tocá** / **03 Compartí**. CTAs **Ir al feed** and **Publicá tu tienda** → `/marcas`.
+7. **`/faq`** — FAQ. Cómo publicar: Entrás con TiendaNube → elegís qué sale → a las 21 puede ir al drop. Las 21 is a daily drop 21:00–21:20, one piece per store. It does not turn off the feed. Contact **marcas@curadario.la**. `/ayuda` redirects here.
 
 ## Scripts
 

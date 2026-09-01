@@ -17,4 +17,6 @@ export const routes = {
   terminos: "/terminos",
   privacidad: "/privacidad",
   ayuda: "/ayuda",
+  faq: "/faq",
+  queEs: "/que-es",
 } as const;

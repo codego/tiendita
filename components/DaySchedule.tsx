@@ -2,6 +2,7 @@ import Link from "next/link";
 import { DayShareButton } from "@/components/DayShareButton";
 import { RemindButton } from "@/components/RemindButton";
 import { SchedulePiece } from "@/components/SchedulePiece";
+import { SiteLinks } from "@/components/SiteLinks";
 import { Wordmark } from "@/components/Wordmark";
 import {
   ANOCHE_LABEL,
@@ -78,22 +79,8 @@ export function DaySchedule({
             <Link href={routes.marcas} className="underline underline-offset-2">
               {brandCopy.landingCta}
             </Link>
-            <span className="mx-2">·</span>
-            <Link href={routes.terminos} className="underline underline-offset-2">
-              Términos
-            </Link>
-            <span className="mx-2">·</span>
-            <Link
-              href={routes.privacidad}
-              className="underline underline-offset-2"
-            >
-              Privacidad
-            </Link>
-            <span className="mx-2">·</span>
-            <Link href={routes.ayuda} className="underline underline-offset-2">
-              Ayuda
-            </Link>
           </p>
+          <SiteLinks className="mt-3 pb-2 text-center font-sans text-[13px] text-ink/50" />
         </main>
       </div>
     </div>

@@ -31,7 +31,8 @@ const onboarding = read("components/ShopperOnboarding.tsx");
 const onboardingLib = read("lib/onboarding.ts");
 const helpFaq = read("components/HelpFaq.tsx");
 const ayudaPage = read("app/ayuda/page.tsx");
-const ayudaCopy = read("app/ayuda/copy.ts");
+const faqCopy = read("app/faq/copy.ts");
+const faqPage = read("app/faq/page.tsx");
 const picker = read("components/BrandPicker.tsx");
 const brand = read("lib/brand.ts");
 const routes = read("lib/routes.ts");
@@ -77,35 +78,36 @@ test("error and offline reuse the same load screen", () => {
   assert.match(storeCta, /reportNetworkFail|isBrowserOffline/);
 });
 
-test("Ayuda FAQ copy is locked and never says 21 productos destacados", () => {
+test("Ayuda FAQ copy is locked and never says 21 productos", () => {
   assert.match(routes, /ayuda: "\/ayuda"/);
-  assert.match(ayudaPage, /HelpFaq/);
-  assert.match(ayudaPage, /AYUDA_FAQ/);
-  assert.match(ayudaCopy, /¿Qué es Curadario\?/);
+  assert.match(ayudaPage, /redirect\(routes\.faq\)/);
+  assert.match(faqPage, /HelpFaq/);
+  assert.match(faqCopy, /¿Qué es Curadario\?/);
   assert.match(
-    ayudaCopy,
+    faqCopy,
     /Vitrina de marcas de TiendaNube\. Tocás, vas a su tienda\./,
   );
-  assert.match(ayudaCopy, /¿Cómo compro\?/);
+  assert.match(faqCopy, /¿Cómo compro\?/);
   assert.match(
-    ayudaCopy,
+    faqCopy,
     /En la ficha, Ir a la tienda\. El checkout es de la marca\./,
   );
-  assert.match(ayudaCopy, /¿Soy una marca\?/);
+  assert.match(faqCopy, /¿Soy una marca\?/);
   assert.match(
-    ayudaCopy,
+    faqCopy,
     /Continuar con TiendaNube, elegís qué publicás\./,
   );
-  assert.match(ayudaCopy, /¿Las 21\?/);
+  assert.match(faqCopy, /¿Las 21\?/);
   assert.match(
-    ayudaCopy,
+    faqCopy,
     /Drop diario 21:00–21:20\. Una pieza por tienda\. No apaga el feed\./,
   );
-  assert.match(ayudaCopy, /marcas@curadario\.la/);
+  assert.match(faqCopy, /marcas@curadario\.la/);
   assert.match(helpFaq, /mailto:/);
   assert.match(helpFaq, /¿Tenés más preguntas\?|contactPrompt/);
   const scanned = [
-    ayudaCopy,
+    faqCopy,
+    faqPage,
     ayudaPage,
     helpFaq,
     edges,
@@ -116,7 +118,7 @@ test("Ayuda FAQ copy is locked and never says 21 productos destacados", () => {
     ),
     ...walk(join(root, "lib"), ".ts").map((path) => readFileSync(path, "utf8")),
   ].join("\n");
-  assert.equal(scanned.includes("21 productos destacados"), false);
+  assert.equal(scanned.includes("21 productos"), false);
 });
 
 test("shopper onboarding is three first-visit slides", () => {

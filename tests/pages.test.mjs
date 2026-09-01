@@ -1,0 +1,104 @@
+import assert from "node:assert/strict";
+import { readdirSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import test from "node:test";
+import { fileURLToPath } from "node:url";
+
+const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+
+function read(rel) {
+  return readFileSync(join(root, rel), "utf8");
+}
+
+function walk(dir, suffix) {
+  const out = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...walk(path, suffix));
+    else if (entry.name.endsWith(suffix)) out.push(path);
+  }
+  return out;
+}
+
+const queEs = read("lib/que-es.ts");
+const queEsPage = read("components/QueEsPage.tsx");
+const queEsRoute = read("app/que-es/page.tsx");
+const faqCopy = read("app/faq/copy.ts");
+const faqPage = read("app/faq/page.tsx");
+const ayuda = read("app/ayuda/page.tsx");
+const routes = read("lib/routes.ts");
+const home = read("components/CatalogHome.tsx");
+const siteLinks = read("components/SiteLinks.tsx");
+const readme = read("README.md");
+
+test("qué es uses Elena's locked lines and the mock layout", () => {
+  assert.match(routes, /queEs: "\/que-es"/);
+  assert.match(queEsRoute, /QueEsPage/);
+  assert.match(queEs, /Qué es/);
+  assert.match(queEs, /Curadario/);
+  assert.match(queEs, /Marcas de /);
+  assert.match(queEs, /TiendaNube/);
+  assert.match(queEs, /Tocás, vas a su tienda\./);
+  assert.match(queEs, /01/);
+  assert.match(queEs, /Descubrí/);
+  assert.match(queEs, /feed de marcas reales/);
+  assert.match(queEs, /02/);
+  assert.match(queEs, /Tocá/);
+  assert.match(queEs, /Ir a la tienda, ellas venden/);
+  assert.match(queEs, /03/);
+  assert.match(queEs, /Compartí/);
+  assert.match(queEs, /el hallazgo, no el mall/);
+  assert.match(queEs, /Ir al feed/);
+  assert.match(queEs, /¿Tenés TiendaNube\? Publicá tu tienda/);
+  assert.match(queEsPage, /tone="terracotta"/);
+  assert.match(queEsPage, /routes\.landing/);
+  assert.match(queEsPage, /routes\.marcas/);
+  assert.match(home, /SiteLinks/);
+  assert.match(siteLinks, /routes\.queEs/);
+  assert.match(siteLinks, /routes\.faq/);
+});
+
+test("FAQ locks Las 21 and Markos publish, and /ayuda redirects", () => {
+  assert.match(routes, /faq: "\/faq"/);
+  assert.match(faqPage, /HelpFaq/);
+  assert.match(faqPage, /FAQ_ITEMS/);
+  assert.match(faqCopy, /¿Qué es Curadario\?/);
+  assert.match(
+    faqCopy,
+    /Vitrina de marcas de TiendaNube\. Tocás, vas a su tienda\./,
+  );
+  assert.match(faqCopy, /¿Cómo compro\?/);
+  assert.match(
+    faqCopy,
+    /En la ficha, Ir a la tienda\. El checkout es de la marca\./,
+  );
+  assert.match(faqCopy, /¿Soy una marca\?/);
+  assert.match(faqCopy, /Continuar con TiendaNube, elegís qué publicás\./);
+  assert.match(faqCopy, /¿Cómo publico\?/);
+  assert.match(
+    faqCopy,
+    /Entrás con TiendaNube → elegís qué sale → a las 21 puede ir al drop\./,
+  );
+  assert.match(faqCopy, /¿Las 21\?/);
+  assert.match(
+    faqCopy,
+    /Drop diario 21:00–21:20\. Una pieza por tienda\. No apaga el feed\./,
+  );
+  assert.match(faqCopy, /marcas@curadario\.la/);
+  assert.match(ayuda, /redirect\(routes\.faq\)/);
+  assert.match(readme, /\/que-es/);
+  assert.match(readme, /\/faq/);
+  const scanned = [
+    faqCopy,
+    faqPage,
+    queEs,
+    queEsPage,
+    readme,
+    ...walk(join(root, "app"), ".tsx").map((path) => readFileSync(path, "utf8")),
+    ...walk(join(root, "components"), ".tsx").map((path) =>
+      readFileSync(path, "utf8"),
+    ),
+    ...walk(join(root, "lib"), ".ts").map((path) => readFileSync(path, "utf8")),
+  ].join("\n");
+  assert.equal(scanned.includes("21 productos"), false);
+});

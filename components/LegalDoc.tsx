@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PhoneFrame } from "@/components/PhoneFrame";
+import { SiteLinks } from "@/components/SiteLinks";
 import { Wordmark } from "@/components/Wordmark";
 import { routes } from "@/lib/routes";
 
@@ -22,23 +23,7 @@ export function LegalDoc({
         <div className="mt-6 space-y-4 font-sans text-[15px] leading-6 text-ink/80">
           {children}
         </div>
-        <p className="mt-10 font-sans text-[13px] text-ink/45">
-          <Link href={routes.terminos} className="underline underline-offset-2">
-            Términos
-          </Link>
-          {" · "}
-          <Link href={routes.privacidad} className="underline underline-offset-2">
-            Privacidad
-          </Link>
-          {" · "}
-          <Link href={routes.marcas} className="underline underline-offset-2">
-            Marcas
-          </Link>
-          {" · "}
-          <Link href={routes.ayuda} className="underline underline-offset-2">
-            Ayuda
-          </Link>
-        </p>
+        <SiteLinks className="mt-10 font-sans text-[13px] text-ink/45" />
       </article>
     </PhoneFrame>
   );
