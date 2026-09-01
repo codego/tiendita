@@ -4,11 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { EmptyState } from "@/components/EmptyState";
 import { ChevronUpIcon, CloseIcon } from "@/components/Icons";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { ShareFindingButton } from "@/components/ShareFindingButton";
 import { StoreCta } from "@/components/StoreCta";
 import { Wordmark } from "@/components/Wordmark";
+import { emptyRecien } from "@/lib/edges";
 import { homeCopy } from "@/lib/home";
 import { formatARSCode } from "@/lib/money";
 import { routes } from "@/lib/routes";
@@ -36,12 +38,6 @@ export function RecienStories({ startId }: { startId?: string }) {
   }
 
   const current = entries[index];
-
-  useEffect(() => {
-    if (entries.length === 0) {
-      router.replace(routes.landing);
-    }
-  }, [entries.length, router]);
 
   useEffect(() => {
     if (entries.length === 0) return;
@@ -77,12 +73,14 @@ export function RecienStories({ startId }: { startId?: string }) {
 
   if (!current) {
     return (
-      <PhoneFrame className="bg-ink">
-        <div className="flex flex-1 items-center justify-center px-6">
-          <p className="font-sans text-[15px] text-paper/70">
-            Todavía no hay piezas recién publicadas.
-          </p>
-        </div>
+      <PhoneFrame>
+        <EmptyState
+          title={emptyRecien.title}
+          body={emptyRecien.body}
+          cta={emptyRecien.cta}
+          href={routes.landing}
+          wordmark
+        />
       </PhoneFrame>
     );
   }

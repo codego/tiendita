@@ -32,4 +32,5 @@ test("Looks cards have a line under the title so they are not a brand", () => {
   assert.match(looksIndex, /Trajes de baño de distintas tiendas/);
   assert.match(looksIndex, /collection\.title/);
   assert.match(looksIndex, /LOOK_LINES/);
+  assert.match(looksIndex, /Todavía no hay looks|emptyLooks/);
 });

@@ -1,5 +1,6 @@
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
+import { ShopperOnboarding } from "@/components/ShopperOnboarding";
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -30,6 +31,7 @@ export function AppShell({
           {children}
         </main>
         {nav ? <BottomNav /> : null}
+        <ShopperOnboarding />
       </div>
     </div>
   );

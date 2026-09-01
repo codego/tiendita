@@ -16,4 +16,5 @@ export const routes = {
   marcasDashboard: "/marcas/dashboard",
   terminos: "/terminos",
   privacidad: "/privacidad",
+  ayuda: "/ayuda",
 } as const;

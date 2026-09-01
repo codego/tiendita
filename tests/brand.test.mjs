@@ -75,6 +75,8 @@ test("picker copy, apparel seed, and mock sync banner", () => {
   assert.match(brand, /Buscar productos/);
   assert.match(brand, /Lo no elegido no aparece en Curadario\./);
   assert.match(brand, /El checkout sigue en tu tienda\./);
+  assert.match(brand, /Elegí al menos una pieza para aparecer en el feed\./);
+  assert.match(picker, /emptyFeed/);
   assert.match(brand, /Sincronizado • \$\{count\} productos de tu TiendaNube/);
   assert.match(picker, /publishCta/);
   assert.match(elegir, /getTiendaNubeProducts/);

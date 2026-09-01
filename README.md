@@ -50,6 +50,7 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `/marcas/dashboard` | Esta semana — visitas, clics, ranking |
 | `/terminos` | Términos — vitrina, no payments |
 | `/privacidad` | Privacidad — no checkout data |
+| `/ayuda` | FAQ — vitrina, how to buy, brands, Las 21 |
 | `/app/coleccion` | Looks — index of curated collections |
 | `/app/coleccion/compartir` | Finding share: “Mirá lo que encontré en Curadario.” |
 | `/app/pieza/tapado-coppola` | Ficha Tapado Coppola |
@@ -57,6 +58,14 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 Home first screen: **Marcas de TiendaNube. Tocás, vas a su tienda.** Recién rail opens `/recien` stories. Share starts on **every card**: “Mirá lo que encontré en Curadario.”
 
 Shopper nav: Inicio · **Looks** · Buscar · Guardados. Looks is an index (Sastrería de agosto, Lo que lleva el look / carteras, Un solo traje / trajes). Sastrería is one card in that index — the first-cut mock, not the brand. It does not open as the Looks home.
+
+First visit: a 3-slide sheet — **Marcas de TiendaNube** · **Tocás, vas a su tienda** · **Guardá y compartí el hallazgo.**
+
+Empty Guardados: **Todavía no guardaste nada.** / **Tocá el corazón en una pieza. Cuando quieras, volvés acá.** CTA **Ir al feed →**. Empty Looks: **Todavía no hay looks. Volvé más tarde.** Empty Recién: **Nadie publicó todavía. Cuando una tienda publique, aparece acá.**
+
+Failed fetch / offline: **No pudimos cargar.** / **Probá de nuevo. Si sigue, la tienda puede estar caída.** **Reintentar** · **Ir al inicio.**
+
+Brand picker with 0 published: **Elegí al menos una pieza para aparecer en el feed.**
 
 Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño · Sastrería · Calzado.
 
@@ -67,6 +76,7 @@ Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño �
 3. **`/marcas/dashboard`** — “Esta semana.” Footer: “Curadario no vende. El clic es el resultado.”
 4. **Share a finding** — `/app/coleccion/compartir`. “Mirá lo que encontré en Curadario.”
 5. **`/terminos`** and **`/privacidad`** — Curadario is a **vitrina**. No payments.
+6. **`/ayuda`** — FAQ. Las 21 is a daily drop 21:00–21:20, one piece per store. It does not turn off the feed. Contact **marcas@curadario.la**.
 
 ## Scripts
 
@@ -75,5 +85,5 @@ Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño �
 | `npm run dev` | Next.js dev server |
 | `npm run build` | Production build |
 | `npm start` | Serve the production build |
-| `npm test` | Catalog, Las 21 module, brand, share, and legal checks |
+| `npm test` | Catalog, Las 21 module, brand, share, legal, and edge checks |
 | `npm run lint` | ESLint |

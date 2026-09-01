@@ -150,6 +150,11 @@ export function BrandPicker({
         </ul>
 
         <div className="sticky bottom-0 bg-surface px-5 pt-3 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+          {count === 0 ? (
+            <p className="mb-3 text-center font-sans text-[13px] leading-5 text-terracotta">
+              {elegirCopy.emptyFeed}
+            </p>
+          ) : null}
           <button
             type="button"
             onClick={publish}

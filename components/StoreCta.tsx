@@ -2,6 +2,7 @@
 
 import type { Sku } from "@/lib/types";
 import { trackCtaToStore } from "@/lib/analytics";
+import { isBrowserOffline, reportNetworkFail } from "@/lib/network";
 import { storeUrlWithUtm } from "@/lib/storeUrl";
 
 export function StoreCta({
@@ -23,13 +24,18 @@ export function StoreCta({
     <a
       href={href}
       className={`inline-flex h-12 flex-1 items-center justify-center rounded-full px-6 font-sans text-[15px] font-medium tracking-tight ${look} ${className}`}
-      onClick={() =>
+      onClick={(event) => {
+        if (isBrowserOffline()) {
+          event.preventDefault();
+          reportNetworkFail();
+          return;
+        }
         trackCtaToStore({
           sku_id: sku.id,
           collection_id: sku.collection_id,
           store_url: sku.store_url,
-        })
-      }
+        });
+      }}
     >
       Ir a la tienda →
     </a>

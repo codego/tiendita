@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, JetBrains_Mono, Playfair_Display } from "next/font/google";
+import { OfflineGate } from "@/components/OfflineGate";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -29,7 +30,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es-AR"
       className={`${playfair.variable} ${dmSans.variable} ${jetbrains.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-cream font-sans text-ink">{children}</body>
+      <body className="min-h-full bg-cream font-sans text-ink">
+        <OfflineGate>{children}</OfflineGate>
+      </body>
     </html>
   );
 }

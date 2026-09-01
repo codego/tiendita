@@ -1,7 +1,10 @@
 "use client";
 
+import { EmptyState } from "@/components/EmptyState";
+import { HeartIcon } from "@/components/Icons";
 import { ProductCard } from "@/components/ProductCard";
 import { getSku } from "@/lib/catalog";
+import { emptyGuardados } from "@/lib/edges";
 import { useSavedIds } from "@/lib/useSaved";
 
 export function SavedGrid() {
@@ -10,17 +13,29 @@ export function SavedGrid() {
 
   if (skus.length === 0) {
     return (
-      <p className="mt-8 font-sans text-[15px] text-ink/60">
-        Todavía no guardaste piezas. El corazón en cada ficha las deja acá.
-      </p>
+      <EmptyState
+        title={emptyGuardados.title}
+        body={emptyGuardados.body}
+        cta={emptyGuardados.cta}
+        wordmark="terracotta"
+        icon={<HeartIcon className="h-12 w-12" />}
+      />
     );
   }
 
   return (
-    <div className="mt-6 grid grid-cols-2 gap-x-3 gap-y-8">
-      {skus.map((sku) => (
-        <ProductCard key={sku.id} sku={sku} />
-      ))}
+    <div className="px-5 pb-10 pt-2">
+      <h1 className="font-serif text-[32px] leading-tight text-ink">
+        Guardados
+      </h1>
+      <p className="mt-1 font-serif text-[16px] italic text-ink/70">
+        Lo que te quedaste mirando.
+      </p>
+      <div className="mt-6 grid grid-cols-2 gap-x-3 gap-y-8">
+        {skus.map((sku) => (
+          <ProductCard key={sku.id} sku={sku} />
+        ))}
+      </div>
     </div>
   );
 }

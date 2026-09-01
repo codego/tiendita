@@ -198,6 +198,19 @@ export function CatalogHome({
         ))}
       </div>
       <div ref={sentinel} className="h-4" aria-hidden="true" />
+      <p className="px-5 pt-8 pb-6 text-center font-sans text-[13px] text-ink/45">
+        <Link href={routes.ayuda} className="underline underline-offset-2">
+          Ayuda
+        </Link>
+        <span className="mx-2">·</span>
+        <Link href={routes.terminos} className="underline underline-offset-2">
+          Términos
+        </Link>
+        <span className="mx-2">·</span>
+        <Link href={routes.privacidad} className="underline underline-offset-2">
+          Privacidad
+        </Link>
+      </p>
     </div>
   );
 }

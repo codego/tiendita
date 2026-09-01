@@ -59,6 +59,8 @@ test("Recién rail opens full-screen stories of new publishes only", () => {
   assert.match(storeCta, /Ir a la tienda →/);
   assert.equal(/sale|countdown|ruleta|roulette/i.test(stories), false);
   assert.equal(stories.includes("getTapaSkus"), false);
+  assert.match(stories, /Nadie publicó todavía|emptyRecien/);
+  assert.equal(stories.includes("router.replace"), false);
 });
 
 test("every card starts the finding share kit", () => {

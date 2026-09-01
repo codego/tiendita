@@ -89,6 +89,10 @@ export function DaySchedule({
             >
               Privacidad
             </Link>
+            <span className="mx-2">·</span>
+            <Link href={routes.ayuda} className="underline underline-offset-2">
+              Ayuda
+            </Link>
           </p>
         </main>
       </div>

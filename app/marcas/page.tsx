@@ -65,6 +65,13 @@ export default function MarcasPage() {
         >
           {brandCopy.privacy}
         </Link>
+        {" · "}
+        <Link
+          href={routes.ayuda}
+          className="underline underline-offset-2 text-ink/70"
+        >
+          Ayuda
+        </Link>
         .
       </p>
     </PhoneFrame>

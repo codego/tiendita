@@ -82,6 +82,25 @@ export function CloudIcon({ className = "h-5 w-5" }: IconProps) {
   );
 }
 
+export function CloudOffIcon({ className = "h-16 w-16" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <path d="M6.8 17.6h8.6c2.1 0 3.7-1.6 3.7-3.5 0-1.8-1.4-3.3-3.2-3.5.1-2.4-1.8-4.4-4.2-4.4-2 0-3.7 1.3-4.2 3.2-1.7.2-3 1.6-3 3.3 0 1.9 1.5 4.9 2.3 4.9z" />
+      <path d="M16.2 16.8 19.4 20" />
+      <path d="M19.4 16.8 16.2 20" />
+    </svg>
+  );
+}
+
+export function EnvelopeIcon({ className = "h-5 w-5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <rect x="3.5" y="6.5" width="17" height="11" rx="1.2" />
+      <path d="M4.2 7.4 12 13.2 19.8 7.4" />
+    </svg>
+  );
+}
+
 export function LinkIcon({ className = "h-5 w-5" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>

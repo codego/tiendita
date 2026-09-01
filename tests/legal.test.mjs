@@ -31,4 +31,6 @@ test("readme documents brand, share, and legal routes", () => {
   assert.match(readme, /vitrina/);
   assert.match(readme, /Mirá lo que encontré en Curadario/);
   assert.match(readme, /Publicá tu tienda/);
+  assert.match(readme, /\/ayuda/);
+  assert.match(readme, /marcas@curadario\.la/);
 });

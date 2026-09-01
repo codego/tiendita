@@ -20,6 +20,7 @@ export const elegirCopy = {
   noteHidden: "Lo no elegido no aparece en Curadario.",
   noteCheckout: "El checkout sigue en tu tienda.",
   empty: "No hay prendas con eso.",
+  emptyFeed: "Elegí al menos una pieza para aparecer en el feed.",
 } as const;
 
 export function publishCta(count: number): string {

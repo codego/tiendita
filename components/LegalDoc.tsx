@@ -34,6 +34,10 @@ export function LegalDoc({
           <Link href={routes.marcas} className="underline underline-offset-2">
             Marcas
           </Link>
+          {" · "}
+          <Link href={routes.ayuda} className="underline underline-offset-2">
+            Ayuda
+          </Link>
         </p>
       </article>
     </PhoneFrame>
