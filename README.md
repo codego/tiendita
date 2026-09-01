@@ -47,7 +47,7 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `/anoche` | Lo más reenviado |
 | `/marcas` | Brand gate: PARA MARCAS |
 | `/marcas/elegir` | Mock TiendaNube picker — apparel only |
-| `/marcas/dashboard` | Esta semana — visitas, clics, ranking |
+| `/marcas/dashboard` | Esta semana — visitas, clics a la tienda, piezas publicadas, ranking |
 | `/terminos` | Términos — vitrina, no payments |
 | `/privacidad` | Privacidad — no checkout data |
 | `/ayuda` | FAQ — vitrina, how to buy, brands, Las 21 |
@@ -73,7 +73,7 @@ Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño �
 
 1. **`/marcas`** — “Publicá tu selección. No tu tienda entera.” Primary **Continuar con TiendaNube →**. **¿Tenés TiendaNube? Publicá tu tienda.**
 2. **`/marcas/elegir`** — “Elegí qué publicar.” Checkout stays in the brand store.
-3. **`/marcas/dashboard`** — “Esta semana.” Footer: “Curadario no vende. El clic es el resultado.”
+3. **`/marcas/dashboard`** — “Esta semana.” **visitas**, **clics a la tienda**, **piezas publicadas**, ranking. **Editar selección** → `/marcas/elegir`. **Ver mi vitrina →** the feed `/`. Footer: “Curadario no vende. El clic es el resultado.”
 4. **Share a finding** — `/app/coleccion/compartir`. “Mirá lo que encontré en Curadario.”
 5. **`/terminos`** and **`/privacidad`** — Curadario is a **vitrina**. No payments.
 6. **`/ayuda`** — FAQ. Las 21 is a daily drop 21:00–21:20, one piece per store. It does not turn off the feed. Contact **marcas@curadario.la**.

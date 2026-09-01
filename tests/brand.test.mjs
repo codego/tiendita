@@ -20,10 +20,15 @@ const tiendanube = JSON.parse(
   readFileSync(join(root, "data/tiendanube.json"), "utf8"),
 );
 const seed = JSON.parse(readFileSync(join(root, "data/seed.json"), "utf8"));
-const dashboard = readFileSync(
+const dashboardPage = readFileSync(
   join(root, "app/marcas/dashboard/page.tsx"),
   "utf8",
 );
+const dashboard = readFileSync(
+  join(root, "components/BrandDashboard.tsx"),
+  "utf8",
+);
+const brandMenu = readFileSync(join(root, "components/BrandMenu.tsx"), "utf8");
 
 test("brand landing copy is exact", () => {
   assert.match(brand, /PARA MARCAS/);
@@ -53,8 +58,17 @@ test("brand dashboard uses seed sastrería pieces and exact footer", () => {
   assert.match(brand, /visitas/);
   assert.match(brand, /clics a la tienda/);
   assert.match(brand, /piezas publicadas/);
+  assert.match(dashboardPage, /BrandDashboard/);
+  assert.match(dashboard, /dashboardCopy\.visitsLabel|visitas/);
+  assert.match(dashboard, /dashboardCopy\.clicksLabel|clics a la tienda/);
+  assert.match(dashboard, /dashboardCopy\.publishedLabel|piezas publicadas/);
+  assert.match(dashboard, /dashboardCopy\.ranking/);
+  assert.match(dashboard, /dashboardCopy\.footer/);
   assert.match(dashboard, /routes\.marcasElegir/);
-  assert.match(dashboard, /routes\.coleccion/);
+  assert.match(dashboard, /routes\.landing/);
+  assert.equal(dashboard.includes("routes.coleccion"), false);
+  assert.match(brandMenu, /routes\.landing/);
+  assert.equal(brandMenu.includes("routes.coleccion"), false);
   assert.match(brand, /tapado-coppola/);
   assert.match(brand, /saco-frances/);
   assert.match(brand, /pantalon-pinza/);

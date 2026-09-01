@@ -40,7 +40,7 @@ export function BrandMenu() {
             {dashboardCopy.edit}
           </Link>
           <Link
-            href={routes.coleccion}
+            href={routes.landing}
             className="block px-4 py-2.5 font-sans text-[14px] text-ink"
             onClick={() => setOpen(false)}
           >
