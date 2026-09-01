@@ -41,6 +41,10 @@ const heart = read("components/HeartButton.tsx");
 const productCard = read("components/ProductCard.tsx");
 const nav = read("components/BottomNav.tsx");
 const helpFaq = read("components/HelpFaq.tsx");
+const envExample = read(".env.example");
+const env = read("lib/env.ts");
+const send = read("lib/send-contact.ts");
+const readme = read("README.md");
 const seed = JSON.parse(read("data/seed.json"));
 
 test("404 uses Elena's terracotta feed line", () => {
@@ -81,6 +85,18 @@ test("contacto is a form with Soy pills, not a fake inbox", () => {
   assert.equal(form.includes("marcas@curadario.la"), false);
   assert.equal(contactoPage.includes("marcas@curadario.la"), false);
   assert.equal(helpFaq.includes("mailto:"), false);
+});
+
+test("contacto recipient is joacoditoma@gmail.com, not a @curadario domain", () => {
+  assert.match(env, /DEFAULT_CONTACT_TO = "joacoditoma@gmail.com"/);
+  assert.match(env, /read\("CONTACT_TO"\) \|\| DEFAULT_CONTACT_TO/);
+  assert.match(send, /getContactTo/);
+  assert.match(envExample, /^CONTACT_TO=joacoditoma@gmail.com$/m);
+  assert.match(readme, /joacoditoma@gmail.com/);
+  assert.match(readme, /CONTACT_TO/);
+  for (const source of [contacto, form, contactoPage, env, envExample, readme]) {
+    assert.equal(/@curadario\.(com|la)/i.test(source), false);
+  }
 });
 
 test("Buscar filters the seed by brand, name, and category", () => {

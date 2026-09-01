@@ -84,22 +84,22 @@ Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño �
 5. **`/terminos`** and **`/privacidad`** — Curadario is a **vitrina**. No payments.
 6. **`/que-es`** — Qué es Curadario. **01 Descubrí** / **02 Tocá** / **03 Compartí**. CTAs **Ir al feed** and **Publicá tu tienda** → `/marcas`.
 7. **`/faq`** — FAQ. Cómo publicar: Entrás con TiendaNube → elegís qué sale → a las 21 puede ir al drop. Las 21 is a daily drop 21:00–21:20, one piece per store. It does not turn off the feed. Más preguntas → `/contacto`. `/ayuda` redirects here.
-8. **`/contacto`** — **Marcas y el resto, acá.** Nombre, Email, Soy (Marca / Shopper), Mensaje, **Enviar**. Persists locally and, if `CONTACT_TO` + transport are set, sends to Pola. After send: **Mensaje enviado.** Missing `CONTACT_TO` still shows that screen. No invented Curadario mailbox.
+8. **`/contacto`** — **Marcas y el resto, acá.** Nombre, Email, Soy (Marca / Shopper), Mensaje, **Enviar**. Persists locally and sends to **joacoditoma@gmail.com** (`CONTACT_TO`, default until Curadario has its own inbox) when a transport is set. After send: **Mensaje enviado.** + **Ir al feed →**. No invented Curadario mailbox.
 
 ## Env
 
-Local `.env` — do not invent a Curadario inbox.
+Local `.env` — do not invent a Curadario inbox. See `.env.example`.
 
 | Variable | What it does |
 | --- | --- |
-| `CONTACT_TO` | Pola’s real email. Contact form delivers here when a transport is set. |
+| `CONTACT_TO` | Destination inbox. Defaults to `joacoditoma@gmail.com` if unset. |
 | `CONTACT_FROM` | Verified sender for Resend. A real mailbox you control — never an invented Curadario inbox. |
 | `RESEND_API_KEY` | Optional. Needed to actually send `CONTACT_TO`. |
 | `TIENDANUBE_CLIENT_ID` | TiendaNube app id |
 | `TIENDANUBE_CLIENT_SECRET` | TiendaNube client secret |
 | `TIENDANUBE_REDIRECT_URI` | Callback, e.g. `http://localhost:3000/marcas/oauth/callback` |
 
-Without the TiendaNube trio, `/marcas` stays the labeled mock. Without `CONTACT_TO`, the form still persists in localStorage and shows **Mensaje enviado.**
+Without the TiendaNube trio, `/marcas` stays the labeled mock. The form always persists in localStorage and shows **Mensaje enviado.**
 
 404: **Esto no está en Curadario.** **Volvé al feed.** CTA **Ir al feed →** to `/`.
 

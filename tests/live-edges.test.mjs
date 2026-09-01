@@ -41,10 +41,12 @@ test("contact persists locally and can send to CONTACT_TO, never a fake inbox", 
   assert.match(send, /CONTACT_TO|getContactTo/);
   assert.match(send, /RESEND_API_KEY|getResendApiKey/);
   assert.match(send, /no_contact_to/);
+  assert.match(env, /DEFAULT_CONTACT_TO = "joacoditoma@gmail.com"/);
   assert.match(helpFaq, /routes\.contacto/);
   assert.equal(send.includes("marcas@curadario.la"), true);
   assert.match(send, /isForbiddenInbox/);
   assert.match(readme, /CONTACT_TO/);
+  assert.match(readme, /joacoditoma@gmail.com/);
   assert.equal(readme.includes("marcas@curadario.la"), false);
 });
 
