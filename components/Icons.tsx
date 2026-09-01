@@ -131,10 +131,27 @@ export function MenuIcon({ className = "h-6 w-6" }: IconProps) {
   );
 }
 
+export function ChevronUpIcon({ className = "h-5 w-5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <path d="M6 14.5 12 8.5l6 6" />
+    </svg>
+  );
+}
+
 export function ChevronRightIcon({ className = "h-5 w-5" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
       <path d="M9 5.5 15.5 12 9 18.5" />
+    </svg>
+  );
+}
+
+export function CloseIcon({ className = "h-6 w-6" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <path d="M6.5 6.5 17.5 17.5" />
+      <path d="M17.5 6.5 6.5 17.5" />
     </svg>
   );
 }

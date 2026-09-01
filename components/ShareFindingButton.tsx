@@ -3,18 +3,63 @@
 import Link from "next/link";
 import { ShareIcon } from "@/components/Icons";
 import { shareCopy } from "@/lib/brand";
+import { getSku } from "@/lib/catalog";
 import { routes } from "@/lib/routes";
+import { findingShareText, findingUrl } from "@/lib/shareFinding";
+import type { Sku } from "@/lib/types";
 
 export function ShareFindingButton({
   skuId,
+  sku,
   variant = "icon",
   className = "",
 }: {
   skuId: string;
-  variant?: "icon" | "onImage" | "link";
+  sku?: Sku;
+  variant?: "icon" | "onImage" | "link" | "native";
   className?: string;
 }) {
   const href = routes.compartirSku(skuId);
+
+  async function shareHere() {
+    const piece = sku ?? getSku(skuId);
+    if (!piece) return;
+    const url = findingUrl(window.location.origin, piece.id);
+    const text = findingShareText(url, piece);
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: piece.name,
+          text,
+          url,
+        });
+        return;
+      } catch {
+        // Cancelled or unsupported — copy instead.
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      // Ignore clipboard failures; the finding still lives on this screen.
+    }
+  }
+
+  if (variant === "native") {
+    return (
+      <button
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation();
+          void shareHere();
+        }}
+        aria-label={shareCopy.headline}
+        className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-paper text-ink ${className}`}
+      >
+        <ShareIcon className="h-5 w-5" />
+      </button>
+    );
+  }
 
   if (variant === "link") {
     return (

@@ -109,6 +109,22 @@ export function getRecienSkus(limit = 16): Sku[] {
     .slice(0, limit);
 }
 
+export type RecienEntry = { sku: Sku; at: number };
+
+export function getRecienEntries(): RecienEntry[] {
+  return getRecienBumps()
+    .slice()
+    .sort((a, b) => b.at - a.at)
+    .flatMap((bump) => {
+      const sku = getSku(bump.id);
+      return sku ? [{ sku, at: bump.at }] : [];
+    });
+}
+
+export function getServerRecienEntries(): RecienEntry[] {
+  return [];
+}
+
 export function subscribeRecien(listener: Listener): () => void {
   listeners.add(listener);
   const onStorage = (event: StorageEvent) => {

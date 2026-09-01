@@ -15,6 +15,9 @@ const shareButton = readFileSync(
   join(root, "components/ShareFindingButton.tsx"),
   "utf8",
 );
+const stories = readFileSync(join(root, "components/RecienStories.tsx"), "utf8");
+const recientPage = readFileSync(join(root, "app/recien/page.tsx"), "utf8");
+const storeCta = readFileSync(join(root, "components/StoreCta.tsx"), "utf8");
 
 function recientFromBumps(bumps) {
   return [...bumps]
@@ -39,9 +42,30 @@ test("Recién is only newly published bumps, not the catalog", () => {
   assert.equal(productCard.includes("RECIéN"), false);
 });
 
+test("Recién rail opens full-screen stories of new publishes only", () => {
+  assert.match(recientPage, /RecienStories/);
+  assert.match(stories, /homeCopy\.recientBadge/);
+  assert.match(stories, /relativeHace/);
+  assert.match(stories, /formatARSCode/);
+  assert.match(stories, /Ir a la tienda|StoreCta/);
+  assert.match(stories, /variant="cream"/);
+  assert.match(stories, /variant="native"/);
+  assert.match(stories, /homeCopy\.hero/);
+  assert.match(stories, /routes\.landing/);
+  assert.match(stories, /Anterior/);
+  assert.match(stories, /Siguiente/);
+  assert.match(railCard, /routes\.recientSku/);
+  assert.match(catalogHome, /routes\.recient/);
+  assert.match(storeCta, /Ir a la tienda →/);
+  assert.equal(/sale|countdown|ruleta|roulette/i.test(stories), false);
+  assert.equal(stories.includes("getTapaSkus"), false);
+});
+
 test("every card starts the finding share kit", () => {
   assert.match(shareButton, /Mirá lo que encontré en Curadario\.|shareCopy/);
   assert.match(shareButton, /compartirSku/);
+  assert.match(shareButton, /findingShareText/);
+  assert.match(shareButton, /native/);
   assert.match(productCard, /ShareFindingButton/);
   assert.match(railCard, /ShareFindingButton/);
   assert.match(shareSheet, /routes\.landing/);

@@ -134,9 +134,11 @@ export function CatalogHome({ skus }: { skus: Sku[] }) {
       {recient.length > 0 ? (
         <section className="pt-4" aria-label={homeCopy.recient}>
           <div className="px-4">
-            <h2 className="font-sans text-[15px] font-semibold text-ink">
-              {homeCopy.recient}
-            </h2>
+            <Link href={routes.recient}>
+              <h2 className="font-sans text-[15px] font-semibold text-ink">
+                {homeCopy.recient}
+              </h2>
+            </Link>
           </div>
           <div className="mt-2 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {recient.map((sku) => (

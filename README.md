@@ -2,7 +2,7 @@
 
 Dense polimarca catalog. Many TiendaNube brands, one place. Curadario is a **vitrina** — it takes you to the store; the store sells.
 
-The hook is **Recién publicadas**: the rail and the **RECIéN** badge only show pieces just published (`bumpRecien`). The rest of the catalog has no badge.
+The hook is **Recién publicadas**: the rail and the **RECIéN** badge only show pieces just published (`bumpRecien`). Tap the rail for full-screen stories at `/recien`. The rest of the catalog has no badge.
 
 Share starts on **every card**: “Mirá lo que encontré en Curadario.” The viral unit is the finding. After share, back to the feed.
 
@@ -25,6 +25,7 @@ Open [http://localhost:3000](http://localhost:3000) — that is the **shopper ho
 | Route | What you see |
 | --- | --- |
 | `/` | Dense polimarca home: search, chips, banner, Recién rail, fat 2-col grid |
+| `/recien` | Recién stories — new publishes only, finding share on the same screen |
 | `/app` | Alias — redirects to `/` |
 | `/app/coleccion` | Five-piece Sastrería de agosto collection |
 | `/app/coleccion/compartir` | Share a finding from a card, then back to the feed |
@@ -57,7 +58,7 @@ No bag. No own checkout.
 
 ## Shopper flow
 
-1. **Home** (`/`) — Vicky line, Recién rail (the hook), masonry chrome, fat invented-brand catalog.
+1. **Home** (`/`) — Vicky line, Recién rail (the hook), fat invented-brand catalog. Tap Recién → `/recien` stories.
 2. **Colección** — Sastrería de agosto stays five pieces.
 3. **Tapado Coppola** — ficha with talle, tela, corte and `$ 890.000`.
 4. **Ir a la tienda →** — fires `cta_to_store` and opens `store_url` with UTM (`utm_source=curadario`).

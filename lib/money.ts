@@ -5,3 +5,7 @@ export function formatGrouped(amount: number): string {
 export function formatARS(amount: number): string {
   return `$ ${formatGrouped(amount)}`;
 }
+
+export function formatARSCode(amount: number): string {
+  return `ARS ${formatGrouped(amount)}`;
+}
