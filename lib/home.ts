@@ -1,18 +1,21 @@
 export const homeCopy = {
   hero: "Marcas de TiendaNube. Tocás, vas a su tienda.",
-  marcasRow: "Marcas de TiendaNube",
+  banner: "Todas las marcas. Un solo lugar.",
+  bannerCta: "Ir a las marcas →",
+  search: "Buscar marcas, prendas y más",
   recient: "Recién publicadas",
   recientBadge: "RECIéN",
-  search: "Buscar",
 } as const;
 
 export const HOME_CHIPS = [
   { id: "todas", label: "Todas" },
-  { id: "mujer", label: "Mujer" },
-  { id: "hombre", label: "Hombre" },
+  { id: "ropa", label: "Ropa" },
+  { id: "deportiva", label: "Deportiva" },
+  { id: "carteras", label: "Carteras" },
   { id: "accesorios", label: "Accesorios" },
-  { id: "deporte", label: "Deporte" },
-  { id: "joyas", label: "Joyas" },
+  { id: "trajes-de-bano", label: "Trajes de baño" },
+  { id: "sastreria", label: "Sastrería" },
+  { id: "calzado", label: "Calzado" },
 ] as const;
 
 export type HomeChipId = (typeof HOME_CHIPS)[number]["id"];

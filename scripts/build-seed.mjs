@@ -953,25 +953,62 @@ const more = [
   }),
 ];
 
-const HOMBRE = new Set([
+const SASTRERIA = new Set([
+  "tapado-coppola",
   "saco-frances",
   "pantalon-pinza",
-  "mocasin-goma",
+  "camisa-oxford",
   "saco-cruzado",
   "chaleco-sastre",
   "pantalon-vestir",
-  "bota-cana",
-  "zapatilla-lona",
-  "alpargata-yute",
+  "tapado-corto",
   "blazer-navy",
-  "jean-recto",
-  "camisa-oxford-h",
+]);
+
+const CALZADO = new Set([
+  "mocasin-goma",
+  "bota-media",
+  "zapatilla-lona",
+  "sandalia-tira",
+  "bota-cana",
+  "taco-bloque",
+  "alpargata-yute",
   "zapato-vestir",
 ]);
 
-const JOYAS = new Set([
+const CARTERAS = new Set([
+  "tote-lona",
+  "baguette-napa",
+  "bandolera-suela",
+  "clutch-noche",
+  "shopper-lona",
+  "mini-bag",
+]);
+
+const TRAJES = new Set([
+  "bikini-triangulo",
+  "enteriza-canale",
+  "bikini-aro",
+  "slip-costa",
+  "enteriza-nudo",
+  "pareo-ola",
+]);
+
+const DEPORTIVA = new Set([
+  "buzo-entrenamiento",
+  "calza-pista",
+  "top-salto",
+  "short-cancha",
+  "campera-rompeviento",
+  "remera-tecnica",
+]);
+
+const ACCESORIOS = new Set([
+  "cinto-cuero",
   "aros-aro",
+  "panuelo-seda",
   "hebilla-plateada",
+  "anteojos-sol",
   "reloj-pulsera",
   "anillo-sello",
   "collar-cadena",
@@ -981,17 +1018,13 @@ const JOYAS = new Set([
 ]);
 
 function remapChip(item) {
-  if (HOMBRE.has(item.id) || item.chip === "hombre") return "hombre";
-  if (JOYAS.has(item.id) || item.chip === "joyas") return "joyas";
-  if (item.chip === "deportiva" || item.chip === "deporte") return "deporte";
-  if (
-    item.chip === "carteras" ||
-    item.chip === "accesorios" ||
-    item.chip === "calzado"
-  ) {
-    return JOYAS.has(item.id) ? "joyas" : "accesorios";
-  }
-  return "mujer";
+  if (SASTRERIA.has(item.id) || item.chip === "sastreria") return "sastreria";
+  if (CALZADO.has(item.id) || item.chip === "calzado") return "calzado";
+  if (CARTERAS.has(item.id) || item.chip === "carteras") return "carteras";
+  if (TRAJES.has(item.id) || item.chip === "trajes-de-bano") return "trajes-de-bano";
+  if (DEPORTIVA.has(item.id) || item.chip === "deportiva") return "deportiva";
+  if (ACCESORIOS.has(item.id) || item.chip === "accesorios") return "accesorios";
+  return "ropa";
 }
 
 const skus = [...existing, ...extras, ...more].map((item, index) => ({

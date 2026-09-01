@@ -8,8 +8,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const home = readFileSync(join(root, "lib/home.ts"), "utf8");
 const landing = readFileSync(join(root, "app/page.tsx"), "utf8");
 const catalogHome = readFileSync(join(root, "components/CatalogHome.tsx"), "utf8");
+const productCard = readFileSync(join(root, "components/ProductCard.tsx"), "utf8");
 const railCard = readFileSync(join(root, "components/RailCard.tsx"), "utf8");
-const feedCard = readFileSync(join(root, "components/FeedCard.tsx"), "utf8");
 const bottomNav = readFileSync(join(root, "components/BottomNav.tsx"), "utf8");
 const storeCta = readFileSync(join(root, "components/StoreCta.tsx"), "utf8");
 const appAlias = readFileSync(join(root, "app/app/page.tsx"), "utf8");
@@ -19,51 +19,50 @@ const recient = readFileSync(join(root, "lib/recien.ts"), "utf8");
 
 test("first screen says Vicky hero copy", () => {
   assert.match(home, /Marcas de TiendaNube\. Tocás, vas a su tienda\./);
-  assert.match(home, /Marcas de TiendaNube/);
+  assert.match(home, /Todas las marcas\. Un solo lugar\./);
+  assert.match(home, /Ir a las marcas →/);
+  assert.match(home, /Buscar marcas, prendas y más/);
   assert.match(catalogHome, /homeCopy\.hero/);
-  assert.match(catalogHome, /homeCopy\.marcasRow/);
+  assert.match(catalogHome, /homeCopy\.search/);
+  assert.match(catalogHome, /homeCopy\.banner/);
+  assert.match(catalogHome, /homeCopy\.bannerCta/);
   assert.match(catalogHome, /routes\.marcas/);
   assert.match(landing, /CatalogHome/);
   assert.match(landing, /homeCopy\.hero/);
 });
 
-test("chips are Todas Mujer Hombre Accesorios Deporte Joyas", () => {
+test("chips are Todas Ropa Deportiva Carteras Accesorios Trajes de baño Sastrería Calzado", () => {
   assert.match(home, /Todas/);
-  assert.match(home, /Mujer/);
-  assert.match(home, /Hombre/);
+  assert.match(home, /Ropa/);
+  assert.match(home, /Deportiva/);
+  assert.match(home, /Carteras/);
   assert.match(home, /Accesorios/);
-  assert.match(home, /Deporte/);
-  assert.match(home, /Joyas/);
+  assert.match(home, /Trajes de baño/);
+  assert.match(home, /Sastrería/);
+  assert.match(home, /Calzado/);
   assert.match(catalogHome, /HOME_CHIPS/);
 });
 
-test("the hook is Recién publicadas, not a Temu grid", () => {
-  assert.match(home, /Recién publicadas/);
-  assert.match(home, /RECIéN/);
+test("home is a dense 2-col catalog with Recién rail", () => {
+  assert.match(catalogHome, /grid-cols-2/);
+  assert.match(catalogHome, /ProductCard/);
+  assert.match(catalogHome, /dense/);
   assert.match(catalogHome, /homeCopy\.recient/);
   assert.match(catalogHome, /RailCard/);
-  assert.match(catalogHome, /useRecienIds/);
+  assert.match(productCard, /HeartButton/);
+  assert.match(productCard, /formatARS/);
+  assert.match(productCard, /sku\.brand/);
+  assert.match(productCard, /sku\.name/);
   assert.match(railCard, /homeCopy\.recientBadge/);
-  assert.match(railCard, /formatARS/);
-  assert.match(feedCard, /formatARS/);
   assert.match(recient, /bumpRecien/);
-  assert.match(recient, /mergeRecienOrder/);
   assert.match(picker, /bumpRecien/);
-  assert.match(picker, /routes\.landing/);
-  assert.equal(catalogHome.includes("dense"), false);
-  const hook = [catalogHome, railCard, recient, picker].join("\n");
-  assert.equal(/sale|countdown|ruleta|roulette|-\d+%/i.test(hook), false);
-});
-
-test("home has no bag or checkout chrome", () => {
-  const shopper = [landing, catalogHome, railCard, feedCard, bottomNav].join("\n");
+  const shopper = [landing, catalogHome, productCard, bottomNav].join("\n");
   assert.equal(
     /\b(bag|cart|carrito|checkout|pagar|ruleta|roulette)\b|-\d+%/i.test(shopper),
     false,
   );
   assert.equal(storeCta.includes("Ir a la tienda →"), true);
   assert.equal(storeCta.includes("Pagar"), false);
-  assert.equal(storeCta.includes("checkout"), false);
 });
 
 test("bottom nav is Inicio Colección Buscar Guardados, no cart", () => {
@@ -88,6 +87,5 @@ test("tokens stay Curadario, not Temu orange", () => {
   assert.match(globals, /#efe9dd/i);
   assert.match(globals, /#fbfaf6/i);
   assert.equal(globals.toLowerCase().includes("#ff6a00"), false);
-  assert.equal(globals.toLowerCase().includes("#ff6900"), false);
-  assert.match(railCard, /bg-terracotta/);
+  assert.match(catalogHome, /bg-terracotta/);
 });

@@ -8,7 +8,15 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const seed = JSON.parse(readFileSync(join(root, "data/seed.json"), "utf8"));
 const home = readFileSync(join(root, "lib/home.ts"), "utf8");
 
-const CHIPS = ["mujer", "hombre", "accesorios", "deporte", "joyas"];
+const CHIPS = [
+  "ropa",
+  "deportiva",
+  "carteras",
+  "accesorios",
+  "trajes-de-bano",
+  "sastreria",
+  "calzado",
+];
 
 const FORBIDDEN_BRANDS = [
   "nike",
@@ -33,11 +41,13 @@ function formatARS(amount) {
 
 test("home chips are the catalog categories", () => {
   assert.match(home, /Todas/);
-  assert.match(home, /Mujer/);
-  assert.match(home, /Hombre/);
+  assert.match(home, /Ropa/);
+  assert.match(home, /Deportiva/);
+  assert.match(home, /Carteras/);
   assert.match(home, /Accesorios/);
-  assert.match(home, /Deporte/);
-  assert.match(home, /Joyas/);
+  assert.match(home, /Trajes de baño/);
+  assert.match(home, /Sastrería/);
+  assert.match(home, /Calzado/);
 });
 
 test("fat seed covers every home chip with dozens of SKUs", () => {

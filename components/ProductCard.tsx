@@ -37,9 +37,11 @@ export function ProductCard({
         </div>
         <div className={dense ? "pt-1.5" : "pt-2.5"}>
           <p
-            className={`font-mono font-medium tracking-[0.14em] text-terracotta uppercase ${
-              dense ? "text-[9px]" : "text-[10px]"
-            }`}
+            className={
+              dense
+                ? "font-sans text-[11px] font-bold tracking-wide text-ink uppercase"
+                : "font-mono text-[10px] font-medium tracking-[0.14em] text-terracotta uppercase"
+            }
           >
             {sku.brand}
           </p>
@@ -55,7 +57,7 @@ export function ProductCard({
           <p
             className={
               dense
-                ? "mt-0.5 font-sans text-[13px] font-medium tracking-tight text-ink"
+                ? "mt-0.5 font-sans text-[13px] font-bold tracking-tight text-terracotta"
                 : "mt-1 font-mono text-[12px] tracking-tight text-ink"
             }
           >

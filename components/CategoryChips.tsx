@@ -22,8 +22,8 @@ export function CategoryChips({
             onClick={() => onChange(chip.id)}
             className={`shrink-0 rounded-full px-4 py-1.5 font-sans text-[13px] tracking-wide ${
               selected
-                ? "bg-ink text-paper"
-                : "bg-cream text-ink"
+                ? "bg-terracotta text-paper"
+                : "border border-ink/15 bg-paper text-ink"
             }`}
           >
             {chip.label}

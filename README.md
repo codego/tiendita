@@ -22,7 +22,7 @@ Open [http://localhost:3000](http://localhost:3000) — that is the **shopper ho
 
 | Route | What you see |
 | --- | --- |
-| `/` | Feed: locked line, chips, Recién rail, masonry chrome |
+| `/` | Dense polimarca home: search, chips, banner, Recién rail, fat 2-col grid |
 | `/app` | Alias — redirects to `/` |
 | `/app/coleccion` | Five-piece Sastrería de agosto collection |
 | `/app/coleccion/compartir` | Share a finding, then back to the feed |
@@ -35,7 +35,7 @@ Open [http://localhost:3000](http://localhost:3000) — that is the **shopper ho
 
 Home first screen: **Marcas de TiendaNube. Tocás, vas a su tienda.** Row **Marcas de TiendaNube →** `/marcas`. Brand gate still **¿Tenés TiendaNube? Publicá tu tienda.**
 
-Chips: Todas · Mujer · Hombre · Accesorios · Deporte · Joyas.
+Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño · Sastrería · Calzado.
 
 No bag. No own checkout.
 
