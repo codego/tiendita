@@ -45,8 +45,9 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `/?drop=1` | Local test — force the drop module, not the product |
 | `/recien` | Recién stories — new publishes only |
 | `/anoche` | Lo más reenviado |
-| `/marcas` | Brand gate: PARA MARCAS |
-| `/marcas/elegir` | Mock TiendaNube picker — apparel only |
+| `/marcas` | Brand gate: PARA MARCAS. Real OAuth if TN env is set; otherwise labeled mock |
+| `/marcas/oauth` | TiendaNube authorize (env required) |
+| `/marcas/elegir` | Picker — live store products after OAuth, or labeled mock seed |
 | `/marcas/dashboard` | Esta semana — visitas, clics a la tienda, piezas publicadas, ranking |
 | `/terminos` | Términos — vitrina, no payments |
 | `/privacidad` | Privacidad — no checkout data |
@@ -76,14 +77,29 @@ Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño �
 
 ## Brand + legal
 
-1. **`/marcas`** — “Publicá tu selección. No tu tienda entera.” Primary **Continuar con TiendaNube →**. **¿Tenés TiendaNube? Publicá tu tienda.**
-2. **`/marcas/elegir`** — “Elegí qué publicar.” Checkout stays in the brand store.
+1. **`/marcas`** — “Publicá tu selección. No tu tienda entera.” Primary **Continuar con TiendaNube →**. Real OAuth when `TIENDANUBE_CLIENT_ID` + `TIENDANUBE_CLIENT_SECRET` + `TIENDANUBE_REDIRECT_URI` are set. Without them, the path is labeled **Mock**. Still no checkout. Las 21 stays one piece per store.
+2. **`/marcas/elegir`** — “Elegí qué publicar.” Live products after OAuth; otherwise the labeled mock seed. Checkout stays in the brand store.
 3. **`/marcas/dashboard`** — “Esta semana.” **visitas**, **clics a la tienda**, **piezas publicadas**, ranking. **Editar selección** → `/marcas/elegir`. **Ver mi vitrina →** the feed `/`. Footer: “Curadario no vende. El clic es el resultado.”
 4. **Share a finding** — `/app/coleccion/compartir`. “Mirá lo que encontré en Curadario.”
 5. **`/terminos`** and **`/privacidad`** — Curadario is a **vitrina**. No payments.
 6. **`/que-es`** — Qué es Curadario. **01 Descubrí** / **02 Tocá** / **03 Compartí**. CTAs **Ir al feed** and **Publicá tu tienda** → `/marcas`.
 7. **`/faq`** — FAQ. Cómo publicar: Entrás con TiendaNube → elegís qué sale → a las 21 puede ir al drop. Las 21 is a daily drop 21:00–21:20, one piece per store. It does not turn off the feed. Más preguntas → `/contacto`. `/ayuda` redirects here.
-8. **`/contacto`** — **Marcas y el resto, acá.** Nombre, Email, Soy (Marca / Shopper), Mensaje, **Enviar**. After send: **Mensaje enviado.** + **Ir al feed →**. Local persist.
+8. **`/contacto`** — **Marcas y el resto, acá.** Nombre, Email, Soy (Marca / Shopper), Mensaje, **Enviar**. Persists locally and, if `CONTACT_TO` + transport are set, sends to Pola. After send: **Mensaje enviado.** Missing `CONTACT_TO` still shows that screen. No invented Curadario mailbox.
+
+## Env
+
+Local `.env` — do not invent a Curadario inbox.
+
+| Variable | What it does |
+| --- | --- |
+| `CONTACT_TO` | Pola’s real email. Contact form delivers here when a transport is set. |
+| `CONTACT_FROM` | Verified sender for Resend. A real mailbox you control — never an invented Curadario inbox. |
+| `RESEND_API_KEY` | Optional. Needed to actually send `CONTACT_TO`. |
+| `TIENDANUBE_CLIENT_ID` | TiendaNube app id |
+| `TIENDANUBE_CLIENT_SECRET` | TiendaNube client secret |
+| `TIENDANUBE_REDIRECT_URI` | Callback, e.g. `http://localhost:3000/marcas/oauth/callback` |
+
+Without the TiendaNube trio, `/marcas` stays the labeled mock. Without `CONTACT_TO`, the form still persists in localStorage and shows **Mensaje enviado.**
 
 404: **Esto no está en Curadario.** **Volvé al feed.** CTA **Ir al feed →** to `/`.
 

@@ -24,6 +24,18 @@ export type ContactMessage = {
   ts: number;
 };
 
+export async function postContactMessage(entry: ContactMessage): Promise<void> {
+  try {
+    await fetch("/api/contacto", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(entry),
+    });
+  } catch {
+    // Local persist already saved the payload.
+  }
+}
+
 export function saveContactMessage(input: {
   name: string;
   email: string;

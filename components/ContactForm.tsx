@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import {
   contactoCopy,
+  postContactMessage,
   saveContactMessage,
   type ContactRole,
 } from "@/lib/contacto";
@@ -19,7 +20,8 @@ export function ContactForm() {
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!name.trim() || !email.trim() || !message.trim()) return;
-    saveContactMessage({ name, email, role, message });
+    const entry = saveContactMessage({ name, email, role, message });
+    void postContactMessage(entry);
     setDone(true);
     setName("");
     setEmail("");

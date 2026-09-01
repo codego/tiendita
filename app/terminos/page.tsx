@@ -18,8 +18,10 @@ export default function TerminosPage() {
         pago de esa tienda.
       </p>
       <p>
-        Continuar con TiendaNube, en este corte, es un OAuth simulado: no
-        conecta una tienda real ni mueve stock, pedidos ni dinero.
+        Continuar con TiendaNube, sin las claves de entorno, es un OAuth
+        simulado (mock). Con TIENDANUBE_CLIENT_ID, TIENDANUBE_CLIENT_SECRET y
+        TIENDANUBE_REDIRECT_URI conecta una tienda real. No mueve stock,
+        pedidos ni dinero. El checkout sigue en la marca.
       </p>
       <p>
         Al usar Curadario aceptás que el vínculo comercial es entre vos y la

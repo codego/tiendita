@@ -67,6 +67,7 @@ test("contacto is a form with Soy pills, not a fake inbox", () => {
   assert.match(contacto, /Enviar/);
   assert.match(contacto, /Mensaje enviado\./);
   assert.match(form, /saveContactMessage/);
+  assert.match(form, /postContactMessage/);
   assert.match(form, /contactoCopy\.done/);
   assert.match(form, /contactoCopy\.doneCta/);
   assert.match(form, /aria-live="polite"/);

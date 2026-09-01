@@ -13,6 +13,7 @@ export const routes = {
   anoche: "/anoche",
   marcas: "/marcas",
   marcasElegir: "/marcas/elegir",
+  marcasOauth: "/marcas/oauth",
   marcasDashboard: "/marcas/dashboard",
   terminos: "/terminos",
   privacidad: "/privacidad",

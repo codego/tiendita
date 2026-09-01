@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { BackIcon, CloudIcon, SearchIcon } from "@/components/Icons";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { Wordmark } from "@/components/Wordmark";
-import { elegirCopy, publishCta, syncBanner } from "@/lib/brand";
+import { brandCopy, elegirCopy, publishCta, syncBanner } from "@/lib/brand";
 import { formatARS } from "@/lib/money";
 import { setPublishedIds } from "@/lib/published";
 import { bumpRecien, catalogIdsFromTn } from "@/lib/recien";
@@ -18,14 +18,16 @@ import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
 export function BrandPicker({
   store,
   products,
+  source = "mock",
 }: {
   store: TiendaNubeStore;
   products: TiendaNubeProduct[];
+  source?: "mock" | "live";
 }) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Set<string>>(
-    () => new Set(defaultSelectedIds()),
+    () => new Set(source === "live" ? [] : defaultSelectedIds()),
   );
 
   const visible = useMemo(() => {
@@ -76,7 +78,9 @@ export function BrandPicker({
           <div className="mt-4 flex items-center gap-2.5 rounded-full bg-cream px-3.5 py-2.5">
             <CloudIcon className="h-4 w-4 text-ink/55" />
             <p className="font-sans text-[13px] leading-tight text-ink/70">
-              {syncBanner(store.syncedCount)}
+              {source === "mock"
+                ? brandCopy.mockPicker
+                : syncBanner(store.syncedCount)}
             </p>
           </div>
           <label className="mt-5 flex items-center gap-2 border-b border-ink/15">
@@ -112,6 +116,7 @@ export function BrandPicker({
                       alt={product.name}
                       fill
                       sizes="56px"
+                      unoptimized={product.image.startsWith("http")}
                       className="object-cover"
                     />
                   </div>

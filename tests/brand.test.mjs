@@ -44,6 +44,8 @@ test("brand landing copy is exact", () => {
   assert.match(brand, /hoy a las 21, esta\./);
   assert.match(marcas, /brandCopy\.tease/);
   assert.match(marcas, /routes\.marcasElegir/);
+  assert.match(marcas, /routes\.marcasOauth|isTnOAuthConfigured/);
+  assert.match(marcas, /brandCopy\.mockLabel|Mock/);
   assert.match(marcas, /routes\.marcasDashboard/);
   assert.match(marcas, /routes\.terminos/);
   assert.match(marcas, /routes\.privacidad/);

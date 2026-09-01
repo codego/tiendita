@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { Wordmark } from "@/components/Wordmark";
 import { brandCopy } from "@/lib/brand";
+import { isTnOAuthConfigured } from "@/lib/env";
 import { routes } from "@/lib/routes";
 
 export const metadata = {
@@ -9,7 +10,15 @@ export const metadata = {
   description: brandCopy.headline,
 };
 
-export default function MarcasPage() {
+export default async function MarcasPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const live = isTnOAuthConfigured();
+  const startHref = live ? routes.marcasOauth : routes.marcasElegir;
+  const { error } = await searchParams;
+
   return (
     <PhoneFrame>
       <header className="px-6 pt-7">
@@ -33,10 +42,21 @@ export default function MarcasPage() {
         <p className="mt-4 font-serif text-[20px] italic text-ink">
           {brandCopy.tease}
         </p>
+        {live ? null : (
+          <p className="mt-4 rounded-full bg-cream px-3 py-2 font-sans text-[12px] text-ink/65">
+            {brandCopy.mockLabel}
+          </p>
+        )}
+
+        {error === "oauth" ? (
+          <p className="mt-4 font-sans text-[13px] text-terracotta">
+            No pudimos conectar TiendaNube. Probá de nuevo.
+          </p>
+        ) : null}
 
         <div className="mt-10 flex flex-col gap-3">
           <Link
-            href={routes.marcasElegir}
+            href={startHref}
             className="flex h-12 items-center justify-center rounded-full bg-ink font-sans text-[15px] font-medium text-paper"
           >
             {brandCopy.primary}

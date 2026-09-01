@@ -12,6 +12,8 @@ export const brandCopy = {
   landingCta: "¿Tenés TiendaNube? Publicá tu tienda.",
   landingLine: "Entrás, elegís qué sale, y tu marca entra en el look.",
   tease: "hoy a las 21, esta.",
+  mockLabel: "Mock · TiendaNube OAuth no está configurado.",
+  mockPicker: "Mock · seed local. No es OAuth vivo.",
 } as const;
 
 export const elegirCopy = {
