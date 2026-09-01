@@ -9,6 +9,7 @@ export const routes = {
   compartir: "/app/coleccion/compartir",
   marcas: "/marcas",
   marcasElegir: "/marcas/elegir",
+  marcasDashboard: "/marcas/dashboard",
   terminos: "/terminos",
   privacidad: "/privacidad",
 } as const;

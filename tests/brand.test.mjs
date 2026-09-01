@@ -19,6 +19,10 @@ const tiendanube = JSON.parse(
   readFileSync(join(root, "data/tiendanube.json"), "utf8"),
 );
 const seed = JSON.parse(readFileSync(join(root, "data/seed.json"), "utf8"));
+const dashboard = readFileSync(
+  join(root, "app/marcas/dashboard/page.tsx"),
+  "utf8",
+);
 
 test("brand landing copy is exact", () => {
   assert.match(brand, /PARA MARCAS/);
@@ -30,8 +34,35 @@ test("brand landing copy is exact", () => {
   assert.match(brand, /Continuar con TiendaNube →/);
   assert.match(brand, /Ya tengo cuenta/);
   assert.match(marcas, /routes\.marcasElegir/);
+  assert.match(marcas, /routes\.marcasDashboard/);
   assert.match(marcas, /routes\.terminos/);
   assert.match(marcas, /routes\.privacidad/);
+});
+
+test("brand dashboard uses seed sastrería pieces and exact footer", () => {
+  assert.match(brand, /Esta semana/);
+  assert.match(brand, /Piezas que más mandan a tu TiendaNube/);
+  assert.match(brand, /Editar selección/);
+  assert.match(brand, /Ver mi vitrina →/);
+  assert.match(brand, /Curadario no vende\. El clic es el resultado\./);
+  assert.match(brand, /visitas/);
+  assert.match(brand, /clics a la tienda/);
+  assert.match(brand, /piezas publicadas/);
+  assert.match(dashboard, /routes\.marcasElegir/);
+  assert.match(dashboard, /routes\.coleccion/);
+  assert.match(brand, /tapado-coppola/);
+  assert.match(brand, /saco-frances/);
+  assert.match(brand, /pantalon-pinza/);
+  assert.equal(brand.includes("Top Crudo"), false);
+  assert.equal(brand.includes("Campera Nómade"), false);
+  assert.equal(dashboard.includes("Top Crudo"), false);
+  assert.equal(dashboard.includes("Campera Nómade"), false);
+  assert.equal(dashboard.includes("Acromática"), false);
+  const ids = ["tapado-coppola", "saco-frances", "pantalon-pinza"];
+  for (const id of ids) {
+    const sku = seed.skus.find((s) => s.id === id);
+    assert.equal(sku.collection_id, "sastreria-de-agosto");
+  }
 });
 
 test("picker copy, apparel seed, and mock sync banner", () => {

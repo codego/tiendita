@@ -39,7 +39,7 @@ export default function MarcasPage() {
             {brandCopy.primary}
           </Link>
           <Link
-            href={routes.marcasElegir}
+            href={routes.marcasDashboard}
             className="flex h-12 items-center justify-center rounded-full border border-ink bg-transparent font-sans text-[15px] font-medium text-ink"
           >
             {brandCopy.secondary}

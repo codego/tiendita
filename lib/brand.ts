@@ -43,6 +43,29 @@ export const shareCopy = {
   storiesHint: "Enlace copiado. Pegalo en Stories.",
 } as const;
 
+export const dashboardCopy = {
+  title: "Esta semana",
+  ranking: "Piezas que más mandan a tu TiendaNube",
+  edit: "Editar selección",
+  vitrina: "Ver mi vitrina →",
+  footer: "Curadario no vende. El clic es el resultado.",
+  visitsLabel: "visitas",
+  clicksLabel: "clics a la tienda",
+  publishedLabel: "piezas publicadas",
+} as const;
+
+export const dashboardMetrics = {
+  visits: 1284,
+  storeClicks: 312,
+  published: 12,
+} as const;
+
+export const dashboardRanking = [
+  { skuId: "tapado-coppola", clicks: 48 },
+  { skuId: "saco-frances", clicks: 32 },
+  { skuId: "pantalon-pinza", clicks: 27 },
+] as const;
+
 export const legalCopy = {
   vitrina:
     "Curadario es una vitrina. No es una tienda, no cobra y no procesa pagos.",

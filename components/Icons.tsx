@@ -112,6 +112,16 @@ export function MoreIcon({ className = "h-5 w-5" }: IconProps) {
   );
 }
 
+export function MenuIcon({ className = "h-6 w-6" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <path d="M5 7.5h14" />
+      <path d="M5 12h14" />
+      <path d="M5 16.5h14" />
+    </svg>
+  );
+}
+
 export function ChevronRightIcon({ className = "h-5 w-5" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>

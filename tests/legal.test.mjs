@@ -23,6 +23,7 @@ test("legal pages say Curadario is a vitrina without payments", () => {
 test("readme documents brand, share, and legal routes", () => {
   assert.match(readme, /\/marcas/);
   assert.match(readme, /\/marcas\/elegir/);
+  assert.match(readme, /\/marcas\/dashboard/);
   assert.match(readme, /\/app\/coleccion\/compartir/);
   assert.match(readme, /\/terminos/);
   assert.match(readme, /\/privacidad/);
