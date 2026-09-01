@@ -9,6 +9,8 @@ export const brandCopy = {
   accept: "Al continuar aceptás",
   terms: "Términos",
   privacy: "Privacidad",
+  landingCta: "¿Tenés TiendaNube? Publicá tu tienda.",
+  landingLine: "Entrás, elegís qué sale, y tu marca entra en el look.",
 } as const;
 
 export const elegirCopy = {
@@ -29,8 +31,9 @@ export function syncBanner(count: number): string {
 }
 
 export const shareCopy = {
-  headline: "Armé mi parte del look.",
-  sub: "Está en Curadario, no en cinco tiendas.",
+  kit: "Este look está en Curadario. Cinco piezas, un lugar.",
+  headline: "Este look está en Curadario.",
+  sub: "Cinco piezas, un lugar.",
   lookTitle: "Sastrería de agosto",
   meta: "Look completo • 5 productos",
   byline: "por Sofía • 2 min",

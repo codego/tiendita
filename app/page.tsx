@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Wordmark } from "@/components/Wordmark";
 import { getTapaSkus } from "@/lib/catalog";
+import { brandCopy } from "@/lib/brand";
 import { markos } from "@/lib/markos";
 import { routes } from "@/lib/routes";
 
@@ -72,6 +73,15 @@ export default function LandingPage() {
             >
               {markos.cta}
             </Link>
+            <Link
+              href={routes.marcas}
+              className="mt-3 inline-flex h-12 items-center rounded-full border border-paper/80 px-6 font-sans text-[15px] font-medium text-paper"
+            >
+              {brandCopy.landingCta}
+            </Link>
+            <p className="mt-3 max-w-[36ch] font-sans text-[14px] leading-5 text-paper/80">
+              {brandCopy.landingLine}
+            </p>
           </div>
         </div>
       </section>

@@ -32,13 +32,17 @@ export function ShareSheet({
     return lookUrl(window.location.origin);
   }
 
-  async function copyLink(message: string = shareCopy.copied) {
+  async function copyLink(
+    message: string = shareCopy.copied,
+    payload?: string,
+  ) {
     const url = currentUrl();
+    const text = payload ?? url;
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(text);
       setStatus(message);
     } catch {
-      setStatus(url);
+      setStatus(text);
     }
   }
 
@@ -78,7 +82,7 @@ export function ShareSheet({
       label: shareCopy.stories,
       icon: InstagramIcon,
       onClick: () => {
-        void copyLink(shareCopy.storiesHint);
+        void copyLink(shareCopy.storiesHint, lookShareText(currentUrl()));
       },
     },
     {

@@ -4,7 +4,7 @@ import { getTapaCollection, getTapaSkus } from "@/lib/catalog";
 
 export const metadata = {
   title: "Compartir el look — Curadario",
-  description: `${shareCopy.headline} ${shareCopy.sub}`,
+  description: shareCopy.kit,
 };
 
 export default function CompartirLookPage() {

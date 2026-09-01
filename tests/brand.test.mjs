@@ -14,6 +14,7 @@ const sharePage = readFileSync(
   "utf8",
 );
 const shareSheet = readFileSync(join(root, "components/ShareSheet.tsx"), "utf8");
+const shareLook = readFileSync(join(root, "lib/shareLook.ts"), "utf8");
 const storeCta = readFileSync(join(root, "components/StoreCta.tsx"), "utf8");
 const tiendanube = JSON.parse(
   readFileSync(join(root, "data/tiendanube.json"), "utf8"),
@@ -33,6 +34,8 @@ test("brand landing copy is exact", () => {
   );
   assert.match(brand, /Continuar con TiendaNube →/);
   assert.match(brand, /Ya tengo cuenta/);
+  assert.match(brand, /¿Tenés TiendaNube\? Publicá tu tienda\./);
+  assert.match(brand, /Entrás, elegís qué sale, y tu marca entra en el look\./);
   assert.match(marcas, /routes\.marcasElegir/);
   assert.match(marcas, /routes\.marcasDashboard/);
   assert.match(marcas, /routes\.terminos/);
@@ -92,8 +95,7 @@ test("picker copy, apparel seed, and mock sync banner", () => {
 });
 
 test("share sheet is the look, not the home", () => {
-  assert.match(brand, /Armé mi parte del look\./);
-  assert.match(brand, /Está en Curadario, no en cinco tiendas\./);
+  assert.match(brand, /Este look está en Curadario\. Cinco piezas, un lugar\./);
   assert.match(brand, /Sastrería de agosto/);
   assert.match(brand, /Look completo • 5 productos/);
   assert.match(brand, /por Sofía • 2 min/);
@@ -104,6 +106,8 @@ test("share sheet is the look, not the home", () => {
   assert.match(sharePage, /getTapaCollection/);
   assert.match(sharePage, /getTapaSkus/);
   assert.match(shareSheet, /routes\.coleccion/);
+  assert.match(shareLook, /shareCopy\.kit/);
+  assert.match(shareLook, /lookPath/);
   assert.equal(shareSheet.includes("routes.app"), false);
   assert.equal(shareSheet.includes('href={routes.app}'), false);
 });

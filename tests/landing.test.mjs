@@ -28,6 +28,8 @@ test("Markos landing copy is exact", () => {
 test("landing uses /app routes and only sastrería helpers", () => {
   assert.match(landingSource, /routes\.coleccion/);
   assert.match(landingSource, /routes\.app/);
+  assert.match(landingSource, /routes\.marcas/);
+  assert.match(landingSource, /brandCopy\.landingCta/);
   assert.match(landingSource, /getTapaSkus/);
   assert.equal(landingSource.includes("lo-que-lleva-el-look"), false);
   assert.equal(landingSource.includes("un-solo-traje"), false);

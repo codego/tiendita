@@ -10,14 +10,7 @@ export function lookUrl(origin: string): string {
 }
 
 export function lookShareText(url: string): string {
-  return [
-    shareCopy.headline,
-    shareCopy.sub,
-    "",
-    shareCopy.lookTitle,
-    shareCopy.meta,
-    url,
-  ].join("\n");
+  return [shareCopy.kit, shareCopy.lookTitle, url].join("\n");
 }
 
 export function whatsappShareHref(url: string): string {
