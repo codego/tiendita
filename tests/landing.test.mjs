@@ -93,6 +93,9 @@ test("shopper still has no bag or own checkout", () => {
   assert.equal(storeCta.includes("Pagar"), false);
   assert.match(shareBtn, /LIVE_SHARE_COPY|liveShareText/);
   assert.match(remind, /Avisame a las 20:55|REMIND_CTA/);
+  assert.match(home, /Está pasando\. 20 minutos\./);
+  assert.equal(home.includes("Está pasando en Curadario. 20 minutos."), false);
+  assert.match(home, /Mirá lo que encontré en Curadario\./);
 });
 
 test("readme is feed plus Las 21 module, local only", () => {
@@ -101,7 +104,9 @@ test("readme is feed plus Las 21 module, local only", () => {
   assert.match(readme, /localhost:3000/);
   assert.match(readme, /drop=1/);
   assert.match(readme, /Marcas de TiendaNube/);
-  assert.match(readme, /Está pasando en Curadario\. 20 minutos\./);
+  assert.match(readme, /Está pasando\. 20 minutos\./);
+  assert.equal(readme.includes("Está pasando en Curadario. 20 minutos."), false);
+  assert.match(readme, /Mirá lo que encontré en Curadario\./);
   assert.match(readme, /Avisame a las 20:55/);
   assert.match(readme, /con 3 se prende/);
   assert.match(las21Time, /America\/Buenos_Aires/);

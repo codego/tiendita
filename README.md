@@ -23,11 +23,15 @@ npm run dev
 | --- | --- |
 | Always | Wordmark, search, locked line, chips, Recién rail, Lo más reenviado, dense 2-col grid |
 | Day, or fewer than 3 stores | Las 21 module: **Faltan X h Y min para Las 21.** + **Avisame a las 20:55** |
-| 21:00–21:20 with ≥ 3 stores, or `?drop=1` with ≥ 3 | Drop module **in the home with the scroll**: one piece per store, timer, **Ir a la tienda →**, share **Está pasando en Curadario. 20 minutos.** |
+| 21:00–21:20 with ≥ 3 stores, or `?drop=1` with ≥ 3 | Drop module **in the home with the scroll**: one piece per store, timer, **Ir a la tienda →**, share **Está pasando. 20 minutos.** |
 
 **Floor:** con 3 se prende; con menos no. Three stores light the drop module. 0–2 keep the countdown module. The catalog never goes away. At 21:21 the drop module closes; the grid stays.
 
-Live share copy, exact: **Está pasando en Curadario. 20 minutos.**
+Two shares, locked:
+1. Day / every card: **Mirá lo que encontré en Curadario.**
+2. Las 21 drop module: **Está pasando. 20 minutos.**
+
+**Avisame a las 20:55** stays on the module. It is not the only reason to open the app — the feed is always there.
 
 Brands tease by day: **hoy a las 21, esta.**
 

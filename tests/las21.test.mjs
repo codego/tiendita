@@ -27,6 +27,8 @@ import {
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const seed = JSON.parse(readFileSync(join(root, "data/seed.json"), "utf8"));
 const las21 = readFileSync(join(root, "lib/las21.ts"), "utf8");
+const brand = readFileSync(join(root, "lib/brand.ts"), "utf8");
+const home = readFileSync(join(root, "lib/home.ts"), "utf8");
 
 const FORBIDDEN = [
   "arc'teryx",
@@ -78,7 +80,12 @@ test("live countdown starts at 20:00 and day copy is exact", () => {
   assert.equal(formatLiveCountdown(liveRemainingMs(ten)), "10:00");
   assert.match(formatDayCountdown(after), /Faltan \d+ h \d+ min para Las 21\./);
   assert.equal(dayShareText(after), formatDayCountdown(after));
-  assert.equal(LIVE_SHARE_COPY, "Está pasando en Curadario. 20 minutos.");
+  assert.equal(LIVE_SHARE_COPY, "Está pasando. 20 minutos.");
+  assert.equal(LIVE_SHARE_COPY.includes("en Curadario"), false);
+  assert.match(home, /Mirá lo que encontré en Curadario\./);
+  assert.match(brand, /Mirá lo que encontré en Curadario\./);
+  assert.match(home, /Está pasando\. 20 minutos\./);
+  assert.equal(home.includes("Está pasando en Curadario. 20 minutos."), false);
   assert.equal(BRAND_TEASE, "hoy a las 21, esta.");
   assert.equal(REMIND_CTA, "Avisame a las 20:55");
   assert.equal(PING_HOUR, 20);
