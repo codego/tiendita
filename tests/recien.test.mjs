@@ -8,38 +8,42 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const recient = readFileSync(join(root, "lib/recien.ts"), "utf8");
 const picker = readFileSync(join(root, "components/BrandPicker.tsx"), "utf8");
 const shareSheet = readFileSync(join(root, "components/ShareSheet.tsx"), "utf8");
+const productCard = readFileSync(join(root, "components/ProductCard.tsx"), "utf8");
+const railCard = readFileSync(join(root, "components/RailCard.tsx"), "utf8");
+const catalogHome = readFileSync(join(root, "components/CatalogHome.tsx"), "utf8");
+const shareButton = readFileSync(
+  join(root, "components/ShareFindingButton.tsx"),
+  "utf8",
+);
 
-function mergeRecienOrder(seedIds, bumps) {
-  const seen = new Set();
-  const out = [];
-  for (const bump of [...bumps].sort((a, b) => b.at - a.at)) {
-    if (seen.has(bump.id)) continue;
-    seen.add(bump.id);
-    out.push(bump.id);
-  }
-  for (const id of seedIds) {
-    if (seen.has(id)) continue;
-    seen.add(id);
-    out.push(id);
-  }
-  return out;
+function recientFromBumps(bumps) {
+  return [...bumps]
+    .sort((a, b) => b.at - a.at)
+    .map((bump) => bump.id);
 }
 
-test("a new publish moves that card to the front of Recién", () => {
-  const seedIds = ["tapado-coppola", "saco-frances", "blazer-crudo"];
-  const after = mergeRecienOrder(seedIds, [
-    { id: "blazer-crudo", at: 10 },
-  ]);
-  assert.equal(after[0], "blazer-crudo");
-  assert.deepEqual(after.slice(1), ["tapado-coppola", "saco-frances"]);
+test("Recién is only newly published bumps, not the catalog", () => {
+  assert.deepEqual(
+    recientFromBumps([{ id: "blazer-crudo", at: 10 }]),
+    ["blazer-crudo"],
+  );
   assert.match(recient, /bumpRecien/);
   assert.match(recient, /unshift/);
+  assert.match(recient, /return \[\];/);
+  assert.equal(recient.includes("for (const id of seedIds)"), false);
   assert.match(picker, /bumpRecien\(catalogIdsFromTn/);
   assert.match(picker, /routes\.landing/);
+  assert.match(catalogHome, /recient\.length > 0/);
+  assert.match(railCard, /homeCopy\.recientBadge/);
+  assert.equal(productCard.includes("recientBadge"), false);
+  assert.equal(productCard.includes("RECIéN"), false);
 });
 
-test("after share the shopper returns to the feed", () => {
-  assert.match(shareSheet, /Mirá lo que encontré en Curadario\.|shareCopy\.headline/);
+test("every card starts the finding share kit", () => {
+  assert.match(shareButton, /Mirá lo que encontré en Curadario\.|shareCopy/);
+  assert.match(shareButton, /compartirSku/);
+  assert.match(productCard, /ShareFindingButton/);
+  assert.match(railCard, /ShareFindingButton/);
   assert.match(shareSheet, /routes\.landing/);
   assert.match(shareSheet, /Volver al feed/);
   assert.match(shareSheet, /router\.push\(routes\.landing\)/);

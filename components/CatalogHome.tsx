@@ -131,18 +131,20 @@ export function CatalogHome({ skus }: { skus: Sku[] }) {
         </Link>
       </section>
 
-      <section className="pt-4" aria-label={homeCopy.recient}>
-        <div className="px-4">
-          <h2 className="font-sans text-[15px] font-semibold text-ink">
-            {homeCopy.recient}
-          </h2>
-        </div>
-        <div className="mt-2 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {recient.map((sku) => (
-            <RailCard key={sku.id} sku={sku} />
-          ))}
-        </div>
-      </section>
+      {recient.length > 0 ? (
+        <section className="pt-4" aria-label={homeCopy.recient}>
+          <div className="px-4">
+            <h2 className="font-sans text-[15px] font-semibold text-ink">
+              {homeCopy.recient}
+            </h2>
+          </div>
+          <div className="mt-2 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {recient.map((sku) => (
+              <RailCard key={sku.id} sku={sku} />
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <div className="mt-3 grid grid-cols-2 gap-x-2 gap-y-4 px-3">
         {feed.map((item) => (

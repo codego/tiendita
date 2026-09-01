@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HeartButton } from "@/components/HeartButton";
+import { ShareFindingButton } from "@/components/ShareFindingButton";
 import { formatARS } from "@/lib/money";
 import { routes } from "@/lib/routes";
 import type { Sku } from "@/lib/types";
@@ -20,8 +21,8 @@ export function ProductCard({
 
   return (
     <article>
-      <Link href={routes.pieza(sku.id)} className="block">
-        <div className="relative aspect-[3/4] overflow-hidden rounded-[2px] bg-cream">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-[2px] bg-cream">
+        <Link href={routes.pieza(sku.id)} className="absolute inset-0">
           <Image
             src={sku.image}
             alt={`${sku.brand} — ${sku.name}`}
@@ -29,13 +30,20 @@ export function ProductCard({
             sizes="(max-width: 430px) 50vw, 215px"
             className="object-cover"
           />
-          <HeartButton
-            skuId={sku.id}
-            variant="overlay"
-            className="absolute top-2 right-2"
-          />
-        </div>
-        <div className={dense ? "pt-1.5" : "pt-2.5"}>
+        </Link>
+        <ShareFindingButton
+          skuId={sku.id}
+          variant="icon"
+          className="absolute top-2 left-2 z-10"
+        />
+        <HeartButton
+          skuId={sku.id}
+          variant="overlay"
+          className="absolute top-2 right-2 z-10"
+        />
+      </div>
+      <div className={dense ? "pt-1.5" : "pt-2.5"}>
+        <Link href={routes.pieza(sku.id)} className="block">
           <p
             className={
               dense
@@ -68,8 +76,9 @@ export function ProductCard({
               {attributes}
             </p>
           ) : null}
-        </div>
-      </Link>
+        </Link>
+        <ShareFindingButton skuId={sku.id} variant="link" />
+      </div>
     </article>
   );
 }

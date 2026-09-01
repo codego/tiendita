@@ -49,11 +49,15 @@ test("home is a dense 2-col catalog with Recién rail", () => {
   assert.match(catalogHome, /dense/);
   assert.match(catalogHome, /homeCopy\.recient/);
   assert.match(catalogHome, /RailCard/);
+  assert.match(catalogHome, /recient\.length > 0/);
   assert.match(productCard, /HeartButton/);
+  assert.match(productCard, /ShareFindingButton/);
   assert.match(productCard, /formatARS/);
   assert.match(productCard, /sku\.brand/);
   assert.match(productCard, /sku\.name/);
   assert.match(railCard, /homeCopy\.recientBadge/);
+  assert.match(railCard, /ShareFindingButton/);
+  assert.equal(productCard.includes("recientBadge"), false);
   assert.match(recient, /bumpRecien/);
   assert.match(picker, /bumpRecien/);
   const shopper = [landing, catalogHome, productCard, bottomNav].join("\n");

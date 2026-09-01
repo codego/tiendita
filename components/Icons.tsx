@@ -138,3 +138,13 @@ export function ChevronRightIcon({ className = "h-5 w-5" }: IconProps) {
     </svg>
   );
 }
+
+export function ShareIcon({ className = "h-5 w-5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <path d="M12 4.8v9.4" />
+      <path d="M8.4 8 12 4.8 15.6 8" />
+      <path d="M6.2 13.2V18.6h11.6v-5.4" />
+    </svg>
+  );
+}

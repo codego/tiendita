@@ -2,7 +2,9 @@
 
 Dense polimarca catalog. Many TiendaNube brands, one place. Curadario is a **vitrina** — it takes you to the store; the store sells.
 
-The hook is **Recién publicadas**: a rail that moves when a brand publishes. New publish → that card goes to the front. Badge is **RECIéN** (a tag, not a sale).
+The hook is **Recién publicadas**: the rail and the **RECIéN** badge only show pieces just published (`bumpRecien`). The rest of the catalog has no badge.
+
+Share starts on **every card**: “Mirá lo que encontré en Curadario.” The viral unit is the finding. After share, back to the feed.
 
 No bag. No own checkout. Shopper CTA stays **Ir a la tienda →**.
 
@@ -25,7 +27,7 @@ Open [http://localhost:3000](http://localhost:3000) — that is the **shopper ho
 | `/` | Dense polimarca home: search, chips, banner, Recién rail, fat 2-col grid |
 | `/app` | Alias — redirects to `/` |
 | `/app/coleccion` | Five-piece Sastrería de agosto collection |
-| `/app/coleccion/compartir` | Share a finding, then back to the feed |
+| `/app/coleccion/compartir` | Share a finding from a card, then back to the feed |
 | `/app/pieza/tapado-coppola` | Ficha Tapado Coppola |
 | `/marcas` | Brand gate: PARA MARCAS |
 | `/marcas/elegir` | Mock TiendaNube picker — apparel only. Publish moves Recién |

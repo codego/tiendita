@@ -1,4 +1,4 @@
-import { getSku, getSkus } from "@/lib/catalog";
+import { getSku } from "@/lib/catalog";
 import type { Sku } from "@/lib/types";
 
 const STORAGE_KEY = "curadario:recien";
@@ -67,27 +67,20 @@ export function catalogIdsFromTn(tnIds: string[]): string[] {
   return ids;
 }
 
-export function seedRecienIds(skus: Sku[] = getSkus()): string[] {
-  return [...skus]
-    .sort((a, b) => (b.published_at ?? 0) - (a.published_at ?? 0))
-    .map((sku) => sku.id);
+export function seedRecienIds(): string[] {
+  return [];
 }
 
 export function mergeRecienOrder(
-  seedIds: string[],
+  _seedIds: string[],
   bumps: RecienBump[],
 ): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
   for (const bump of [...bumps].sort((a, b) => b.at - a.at)) {
-    if (seen.has(bump.id)) continue;
+    if (seen.has(bump.id) || !getSku(bump.id)) continue;
     seen.add(bump.id);
     out.push(bump.id);
-  }
-  for (const id of seedIds) {
-    if (seen.has(id)) continue;
-    seen.add(id);
-    out.push(id);
   }
   return out;
 }
