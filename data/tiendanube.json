@@ -1,0 +1,138 @@
+{
+  "store": {
+    "name": "Taller Recoleta",
+    "platform": "TiendaNube",
+    "status": "Sincronizado",
+    "syncedCount": 247
+  },
+  "products": [
+    {
+      "id": "tn-tapado-coppola",
+      "name": "Tapado Coppola",
+      "price_ars": 890000,
+      "image": "/images/tapado-coppola.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-saco-frances",
+      "name": "Saco Francés",
+      "price_ars": 440000,
+      "image": "/images/saco-frances.jpg",
+      "kind": "apparel",
+      "selected": false
+    },
+    {
+      "id": "tn-pantalon-pinza",
+      "name": "Pantalón Pinza",
+      "price_ars": 320000,
+      "image": "/images/pantalon-pinza.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-camisa-oxford",
+      "name": "Camisa Oxford",
+      "price_ars": 185000,
+      "image": "/images/camisa-oxford.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-mocasin-goma",
+      "name": "Mocasín Goma",
+      "price_ars": 240000,
+      "image": "/images/mocasin-goma.jpg",
+      "kind": "apparel",
+      "selected": false
+    },
+    {
+      "id": "tn-blazer-lino",
+      "name": "Blazer de Lino",
+      "price_ars": 310000,
+      "image": "/images/saco-frances.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-pollera-midi",
+      "name": "Pollera Midi",
+      "price_ars": 198000,
+      "image": "/images/pantalon-pinza.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-sweater-canale",
+      "name": "Sweater Canalé",
+      "price_ars": 165000,
+      "image": "/images/camisa-oxford.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-vestido-camisero",
+      "name": "Vestido Camisero",
+      "price_ars": 275000,
+      "image": "/images/tapa-sastreria.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-campera-pano",
+      "name": "Campera de Paño",
+      "price_ars": 520000,
+      "image": "/images/tapado-coppola.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-chaleco-sastre",
+      "name": "Chaleco Sastre",
+      "price_ars": 210000,
+      "image": "/images/saco-frances.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-jean-recto",
+      "name": "Jean Recto",
+      "price_ars": 145000,
+      "image": "/images/pantalon-pinza.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-remera-oversize",
+      "name": "Remera Oversized",
+      "price_ars": 68000,
+      "image": "/images/camisa-oxford.jpg",
+      "kind": "apparel",
+      "selected": false
+    },
+    {
+      "id": "tn-short-sastre",
+      "name": "Short Sastre",
+      "price_ars": 112000,
+      "image": "/images/pantalon-pinza.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-trench-beige",
+      "name": "Trench Beige",
+      "price_ars": 640000,
+      "image": "/images/tapado-coppola.jpg",
+      "kind": "apparel",
+      "selected": true
+    },
+    {
+      "id": "tn-cardigan-lana",
+      "name": "Cárdigan de Lana",
+      "price_ars": 188000,
+      "image": "/images/camisa-oxford.jpg",
+      "kind": "apparel",
+      "selected": false
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { FilterChips } from "@/components/FilterChips";
 import { ProductCard } from "@/components/ProductCard";
+import { routes } from "@/lib/routes";
 import type { Collection, Sku } from "@/lib/types";
 
 export function CollectionGrid({
@@ -32,6 +34,14 @@ export function CollectionGrid({
       <p className="mt-2 font-serif text-[17px] italic text-ink/80">
         {collection.subtitle}
       </p>
+      {collection.onTapa ? (
+        <Link
+          href={routes.compartir}
+          className="mt-3 inline-flex font-sans text-[14px] text-ink underline underline-offset-2"
+        >
+          Compartir el look →
+        </Link>
+      ) : null}
       <div className="mt-5">
         <FilterChips filters={filters} active={active} onChange={setActive} />
       </div>

@@ -24,12 +24,12 @@ export default function LandingPage() {
             <a href="#el-look" className="font-sans text-[14px] text-ink">
               Colecciones
             </a>
-            <a href="#el-look" className="font-sans text-[14px] text-ink">
+            <Link href={routes.marcas} className="font-sans text-[14px] text-ink">
               Marcas
-            </a>
-            <a href="#vende" className="font-sans text-[14px] text-ink">
+            </Link>
+            <Link href={routes.marcas} className="font-sans text-[14px] text-ink">
               Vendé
-            </a>
+            </Link>
           </nav>
           <div className="flex justify-end">
             <Link
@@ -131,9 +131,17 @@ export default function LandingPage() {
       </section>
 
       <footer className="border-t border-ink/8 bg-surface">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-6">
           <Wordmark size="sm" />
-          <p className="font-mono text-[12px] text-ink/50">© 2026</p>
+          <nav className="flex items-center gap-4 font-sans text-[13px] text-ink/55">
+            <Link href={routes.terminos} className="underline underline-offset-2">
+              Términos
+            </Link>
+            <Link href={routes.privacidad} className="underline underline-offset-2">
+              Privacidad
+            </Link>
+            <p className="font-mono text-[12px] text-ink/50">© 2026</p>
+          </nav>
         </div>
       </footer>
     </div>

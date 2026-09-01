@@ -1,8 +1,8 @@
 # Curadario
 
-Editorial fashion curation. Local cut 1 is **Sastrería de agosto**: five pieces, one look, one place. Curadario takes you to the store; the store sells.
+Editorial fashion curation. Local cut 1 is **Sastrería de agosto**: five pieces, one look, one place. Curadario is a **vitrina** — it takes you to the store; the store sells.
 
-No bag. No checkout. No OAuth. No TiendaNube.
+No bag. No own checkout. Shopper CTA stays **Ir a la tienda →**.
 
 ## Install
 
@@ -23,11 +23,23 @@ Open [http://localhost:3000](http://localhost:3000) — that is the **public des
 | `/` | Public landing: hero Sastrería de agosto, El look, Cómo funciona |
 | `/app` | Shopper Inicio (banners, chips, grid) |
 | `/app/coleccion` | Five-piece Sastrería grid |
+| `/app/coleccion/compartir` | Share sheet for the look (not the home) |
 | `/app/pieza/tapado-coppola` | Ficha Tapado Coppola |
+| `/marcas` | Brand gate: PARA MARCAS |
+| `/marcas/elegir` | Mock TiendaNube picker — apparel only |
+| `/terminos` | Términos — vitrina, no payments |
+| `/privacidad` | Privacidad — no checkout data |
 
-CTA on the landing: **Ver Sastrería de agosto** → `/app/coleccion`. **Ir al look** → `/app`.
+Landing CTA: **Ver Sastrería de agosto** → `/app/coleccion`. **Ir al look** → `/app`. **Marcas** / **Vendé** → `/marcas`.
 
-## Local cut 1 flow
+## Brand + viral + legal
+
+1. **`/marcas`** — “Publicá tu selección. No tu tienda entera.” Primary **Continuar con TiendaNube →** is mock OAuth and goes to `/marcas/elegir`. Secondary **Ya tengo cuenta**. Footer: Términos + Privacidad.
+2. **`/marcas/elegir`** — “Elegí qué publicar.” Sync banner (247 productos, mocked). Search. Apparel list with toggles. Sticky **Publicar X piezas →**. Notes: “Lo no elegido no aparece en Curadario.” “El checkout sigue en tu tienda.” TiendaNube is `data/tiendanube.json` — no live API.
+3. **Share the look** — `/app/coleccion/compartir` (also from Colección). Copy: “Armé mi parte del look. Está en Curadario, no en cinco tiendas.” Card **Sastrería de agosto**. Copiar enlace, Instagram Stories, WhatsApp, Más. Primary **Compartir el look →**. The viral unit is the look, not Inicio.
+4. **`/terminos`** and **`/privacidad`** — Curadario does not process payments.
+
+## Local cut 1 shopper flow
 
 1. **Landing** (`/`) — Markos copy, five sastrería thumbs only.
 2. **Ver Sastrería de agosto** — shopper colección.
@@ -36,7 +48,7 @@ CTA on the landing: **Ver Sastrería de agosto** → `/app/coleccion`. **Ir al l
 
 Shopper nav: Inicio · Colección · Buscar · Guardados.
 
-The catalog is only the nine seed SKUs. Carteras and trajes stay in their own `collection_id`s and do not appear on the landing.
+The shopper catalog is only the nine seed SKUs. Carteras and trajes stay in their own `collection_id`s and do not appear on the landing.
 
 ## Scripts
 
@@ -45,5 +57,5 @@ The catalog is only the nine seed SKUs. Carteras and trajes stay in their own `c
 | `npm run dev` | Next.js dev server |
 | `npm run build` | Production build |
 | `npm start` | Serve the production build |
-| `npm test` | Catalog and landing copy checks |
+| `npm test` | Catalog, landing, brand, share, and legal checks |
 | `npm run lint` | ESLint |

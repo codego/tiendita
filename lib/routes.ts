@@ -6,4 +6,9 @@ export const routes = {
   pieza: (id: string) => `/app/pieza/${id}`,
   buscar: "/app/buscar",
   guardados: "/app/guardados",
+  compartir: "/app/coleccion/compartir",
+  marcas: "/marcas",
+  marcasElegir: "/marcas/elegir",
+  terminos: "/terminos",
+  privacidad: "/privacidad",
 } as const;

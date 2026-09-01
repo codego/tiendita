@@ -31,3 +31,24 @@ export type Catalog = {
   collections: Collection[];
   skus: Sku[];
 };
+
+export type TiendaNubeProduct = {
+  id: string;
+  name: string;
+  price_ars: number;
+  image: string;
+  kind: "apparel";
+  selected: boolean;
+};
+
+export type TiendaNubeStore = {
+  name: string;
+  platform: "TiendaNube";
+  status: "Sincronizado";
+  syncedCount: number;
+};
+
+export type TiendaNubeCatalog = {
+  store: TiendaNubeStore;
+  products: TiendaNubeProduct[];
+};
