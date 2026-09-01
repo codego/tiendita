@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
 
 const items = [
   { href: routes.landing, label: "Inicio", icon: HomeIcon },
-  { href: routes.coleccion, label: "Colección", icon: HangerIcon },
+  { href: routes.coleccion, label: "Looks", icon: HangerIcon },
   { href: routes.buscar, label: "Buscar", icon: SearchIcon },
   { href: routes.guardados, label: "Guardados", icon: HeartIcon },
 ] as const;

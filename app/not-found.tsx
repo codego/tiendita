@@ -11,7 +11,7 @@ export default function NotFound() {
           Esa pieza no está.
         </h1>
         <p className="mt-2 font-sans text-[15px] text-ink/60">
-          Volvé a la tapa o a la colección de agosto.
+          Volvé al inicio o a Looks.
         </p>
         <div className="mt-6 flex justify-center gap-3">
           <Link
@@ -24,7 +24,7 @@ export default function NotFound() {
             href={routes.coleccion}
             className="inline-flex h-12 items-center justify-center rounded-full border border-ink px-6 font-sans text-[15px] text-ink"
           >
-            Ver Sastrería de agosto
+            Ver Looks
           </Link>
         </div>
       </div>

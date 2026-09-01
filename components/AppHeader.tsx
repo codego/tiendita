@@ -22,7 +22,7 @@ export function AppHeader({ variant = "default", skuId }: AppHeaderProps) {
       {ficha ? (
         <Link
           href={routes.coleccion}
-          aria-label="Volver a la colección"
+          aria-label="Volver a Looks"
           className="flex h-10 w-10 items-center justify-start"
         >
           <BackIcon />

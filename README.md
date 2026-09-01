@@ -50,11 +50,13 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `/marcas/dashboard` | Esta semana — visitas, clics, ranking |
 | `/terminos` | Términos — vitrina, no payments |
 | `/privacidad` | Privacidad — no checkout data |
-| `/app/coleccion` | Five-piece Sastrería de agosto collection |
+| `/app/coleccion` | Looks — index of curated collections |
 | `/app/coleccion/compartir` | Finding share: “Mirá lo que encontré en Curadario.” |
 | `/app/pieza/tapado-coppola` | Ficha Tapado Coppola |
 
 Home first screen: **Marcas de TiendaNube. Tocás, vas a su tienda.** Recién rail opens `/recien` stories. Share starts on **every card**: “Mirá lo que encontré en Curadario.”
+
+Shopper nav: Inicio · **Looks** · Buscar · Guardados. Looks is an index (Sastrería de agosto, Lo que lleva el look / carteras, Un solo traje / trajes). Sastrería is one card in that index — the first-cut mock, not the brand. It does not open as the Looks home.
 
 Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño · Sastrería · Calzado.
 

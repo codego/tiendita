@@ -12,6 +12,10 @@ export function getCollections(): Collection[] {
   return catalog.collections;
 }
 
+export function getLooksCollections(): Collection[] {
+  return catalog.collections.filter((collection) => collection.id !== "vitrina");
+}
+
 export function getTapaCollection(): Collection {
   const tapa = catalog.collections.find((collection) => collection.onTapa);
   if (!tapa) {

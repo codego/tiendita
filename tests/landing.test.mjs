@@ -18,6 +18,9 @@ const globals = readFileSync(join(root, "app/globals.css"), "utf8");
 const readme = readFileSync(join(root, "README.md"), "utf8");
 const las21Time = readFileSync(join(root, "lib/las21-time.mjs"), "utf8");
 const recient = readFileSync(join(root, "lib/recien.ts"), "utf8");
+const bottomNav = readFileSync(join(root, "components/BottomNav.tsx"), "utf8");
+const looksPage = readFileSync(join(root, "app/app/coleccion/page.tsx"), "utf8");
+const looksIndex = readFileSync(join(root, "components/LooksIndex.tsx"), "utf8");
 
 test("home is the packed catalog plus a Las 21 module", () => {
   assert.match(home, /Marcas de TiendaNube\. Tocás, vas a su tienda\./);
@@ -62,6 +65,21 @@ test("chips are Todas Ropa Deportiva Carteras Accesorios Trajes de baño Sastrer
   assert.match(home, /Trajes de baño/);
   assert.match(home, /Sastrería/);
   assert.match(home, /Calzado/);
+});
+
+test("bottom nav is Inicio Looks Buscar Guardados, not Colección", () => {
+  assert.match(bottomNav, /Inicio/);
+  assert.match(bottomNav, /Looks/);
+  assert.match(bottomNav, /Buscar/);
+  assert.match(bottomNav, /Guardados/);
+  assert.equal(bottomNav.includes("Colección"), false);
+  assert.equal(bottomNav.includes("Carrito"), false);
+  assert.match(looksPage, /LooksIndex/);
+  assert.match(looksPage, /getLooksCollections/);
+  assert.equal(looksPage.includes("getTapaCollection"), false);
+  assert.equal(looksPage.includes("CollectionGrid"), false);
+  assert.match(looksIndex, /sastreria-de-agosto|collection\.title|coleccionId/);
+  assert.match(readme, /Looks/);
 });
 
 test("Recién rail and cards stay on the vitrine", () => {

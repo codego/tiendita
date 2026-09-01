@@ -1,29 +1,17 @@
 import { AppShell } from "@/components/AppShell";
-import { CollectionGrid } from "@/components/CollectionGrid";
-import {
-  getCollectionFilters,
-  getTapaCollection,
-  getTapaSkus,
-} from "@/lib/catalog";
+import { LooksIndex } from "@/components/LooksIndex";
+import { getLooksCollections } from "@/lib/catalog";
 
 export const metadata = {
-  title: "Colección · Sastrería de agosto — Curadario",
-  description: "Cinco piezas. Un look. Un lugar.",
+  title: "Looks — Curadario",
+  description: "Colecciones curadas. Sastrería de agosto es una.",
 };
 
-export default function ColeccionPage() {
-  const collection = getTapaCollection();
-  const skus = getTapaSkus();
-  const filters = getCollectionFilters(collection.id);
-
+export default function LooksPage() {
   return (
     <AppShell>
       <div className="pt-2">
-        <CollectionGrid
-          collection={collection}
-          skus={skus}
-          filters={filters}
-        />
+        <LooksIndex collections={getLooksCollections()} />
       </div>
     </AppShell>
   );
