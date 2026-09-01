@@ -24,5 +24,5 @@ export const FAQ_ITEMS = [
 
 export const FAQ_CONTACT = {
   prompt: "¿Tenés más preguntas?",
-  email: "marcas@curadario.la",
+  cta: "Escribinos",
 } as const;

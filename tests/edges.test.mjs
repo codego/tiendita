@@ -102,9 +102,10 @@ test("Ayuda FAQ copy is locked and never says 21 productos", () => {
     faqCopy,
     /Drop diario 21:00–21:20\. Una pieza por tienda\. No apaga el feed\./,
   );
-  assert.match(faqCopy, /marcas@curadario\.la/);
-  assert.match(helpFaq, /mailto:/);
+  assert.equal(faqCopy.includes("marcas@curadario.la"), false);
+  assert.equal(helpFaq.includes("mailto:"), false);
   assert.match(helpFaq, /¿Tenés más preguntas\?|contactPrompt/);
+  assert.match(helpFaq, /routes\.contacto/);
   const scanned = [
     faqCopy,
     faqPage,

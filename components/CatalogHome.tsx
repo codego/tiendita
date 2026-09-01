@@ -10,29 +10,15 @@ import { SchedulePiece } from "@/components/SchedulePiece";
 import { SearchIcon } from "@/components/Icons";
 import { SiteLinks } from "@/components/SiteLinks";
 import { Wordmark } from "@/components/Wordmark";
-import { getSku } from "@/lib/catalog";
+import { getSku, searchSkus } from "@/lib/catalog";
 import { HOME_CHIPS, homeCopy } from "@/lib/home";
 import { ANOCHE_LABEL, VER_TODO } from "@/lib/las21";
 import { routes } from "@/lib/routes";
 import { useRecienIds } from "@/lib/useRecien";
+import { useRouter } from "next/navigation";
 import type { Sku } from "@/lib/types";
 
 const PAGE = 16;
-
-function matchesQuery(sku: Sku, query: string): boolean {
-  const haystack = [
-    sku.name,
-    sku.brand,
-    sku.tela,
-    sku.corte,
-    sku.categoryLabel,
-    sku.description,
-    HOME_CHIPS.find((chip) => chip.id === sku.chip)?.label ?? "",
-  ]
-    .join(" ")
-    .toLowerCase();
-  return haystack.includes(query);
-}
 
 export function CatalogHome({
   skus,
@@ -47,6 +33,7 @@ export function CatalogHome({
   anoche?: Sku[];
   initialNow?: number;
 }) {
+  const router = useRouter();
   const [chip, setChip] = useState("todas");
   const [query, setQuery] = useState("");
   const [pages, setPages] = useState(2);
@@ -54,12 +41,14 @@ export function CatalogHome({
   const sentinel = useRef<HTMLDivElement>(null);
 
   const visible = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return skus.filter((sku) => {
-      if (chip !== "todas" && sku.chip !== chip) return false;
-      if (!q) return true;
-      return matchesQuery(sku, q);
-    });
+    const q = query.trim();
+    const pool = q
+      ? (() => {
+          const found = new Set(searchSkus(q).map((sku) => sku.id));
+          return skus.filter((sku) => found.has(sku.id));
+        })()
+      : skus;
+    return pool.filter((sku) => chip === "todas" || sku.chip === chip);
   }, [chip, query, skus]);
 
   const recient = useMemo(
@@ -116,6 +105,13 @@ export function CatalogHome({
               autoCapitalize="off"
               autoCorrect="off"
               autoComplete="off"
+              onKeyDown={(event) => {
+                if (event.key !== "Enter") return;
+                const q = query.trim();
+                if (!q) return;
+                event.preventDefault();
+                router.push(`${routes.buscar}?q=${encodeURIComponent(q)}`);
+              }}
             />
           </label>
         </div>

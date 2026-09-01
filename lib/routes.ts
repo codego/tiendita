@@ -19,4 +19,5 @@ export const routes = {
   ayuda: "/ayuda",
   faq: "/faq",
   queEs: "/que-es",
+  contacto: "/contacto",
 } as const;

@@ -79,6 +79,13 @@ export default function MarcasPage() {
         >
           FAQ
         </Link>
+        {" · "}
+        <Link
+          href={routes.contacto}
+          className="underline underline-offset-2 text-ink/70"
+        >
+          Contacto
+        </Link>
         .
       </p>
     </PhoneFrame>

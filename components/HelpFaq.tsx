@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { ChevronUpIcon, EnvelopeIcon } from "@/components/Icons";
+import { routes } from "@/lib/routes";
 
 export type FaqItem = {
   question: string;
@@ -11,11 +13,11 @@ export type FaqItem = {
 export function HelpFaq({
   items,
   contactPrompt,
-  contactEmail,
+  contactCta,
 }: {
   items: readonly FaqItem[];
   contactPrompt: string;
-  contactEmail: string;
+  contactCta: string;
 }) {
   const [open, setOpen] = useState<Set<number>>(
     () => new Set(items.map((_, index) => index)),
@@ -68,12 +70,12 @@ export function HelpFaq({
       <div className="mt-8 border-t border-ink/10 pt-8 text-center">
         <EnvelopeIcon className="mx-auto h-5 w-5 text-ink/55" />
         <p className="mt-3 font-sans text-[14px] text-ink">{contactPrompt}</p>
-        <a
-          href={`mailto:${contactEmail}`}
+        <Link
+          href={routes.contacto}
           className="mt-1 inline-block font-sans text-[14px] text-terracotta underline underline-offset-2"
         >
-          {contactEmail}
-        </a>
+          {contactCta}
+        </Link>
       </div>
     </div>
   );

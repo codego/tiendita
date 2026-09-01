@@ -53,20 +53,29 @@ export function getSkusByChip(chip: string): Sku[] {
   return catalog.skus.filter((sku) => sku.chip === chip);
 }
 
+export function foldQuery(value: string): string {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "");
+}
+
 function skuHaystack(sku: Sku): string {
   const chipLabel =
     HOME_CHIPS.find((chip) => chip.id === sku.chip)?.label ?? sku.chip;
-  return [
-    sku.name,
-    sku.brand,
-    sku.tela,
-    sku.corte,
-    sku.categoryLabel,
-    sku.description,
-    chipLabel,
-  ]
-    .join(" ")
-    .toLowerCase();
+  return foldQuery(
+    [
+      sku.name,
+      sku.brand,
+      sku.category,
+      sku.categoryLabel,
+      sku.chip,
+      chipLabel,
+      sku.tela,
+      sku.corte,
+      sku.description,
+    ].join(" "),
+  );
 }
 
 export function getCollectionFilters(collectionId: string) {
@@ -80,7 +89,10 @@ export function getCollectionFilters(collectionId: string) {
 }
 
 export function searchSkus(query: string): Sku[] {
-  const q = query.trim().toLowerCase();
-  if (!q) return [];
-  return catalog.skus.filter((sku) => skuHaystack(sku).includes(q));
+  const tokens = foldQuery(query).split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return getSkus();
+  return catalog.skus.filter((sku) => {
+    const haystack = skuHaystack(sku);
+    return tokens.every((token) => haystack.includes(token));
+  });
 }

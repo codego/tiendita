@@ -34,5 +34,6 @@ test("readme documents brand, share, and legal routes", () => {
   assert.match(readme, /\/ayuda/);
   assert.match(readme, /\/faq/);
   assert.match(readme, /\/que-es/);
-  assert.match(readme, /marcas@curadario\.la/);
+  assert.match(readme, /\/contacto/);
+  assert.equal(readme.includes("marcas@curadario.la"), false);
 });

@@ -84,7 +84,8 @@ test("FAQ locks Las 21 and Markos publish, and /ayuda redirects", () => {
     faqCopy,
     /Drop diario 21:00–21:20\. Una pieza por tienda\. No apaga el feed\./,
   );
-  assert.match(faqCopy, /marcas@curadario\.la/);
+  assert.equal(faqCopy.includes("marcas@curadario.la"), false);
+  assert.match(faqPage, /contactCta|Escribinos|FAQ_CONTACT/);
   assert.match(ayuda, /redirect\(routes\.faq\)/);
   assert.match(readme, /\/que-es/);
   assert.match(readme, /\/faq/);

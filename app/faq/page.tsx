@@ -28,7 +28,7 @@ export default function FaqPage() {
         <HelpFaq
           items={FAQ_ITEMS}
           contactPrompt={FAQ_CONTACT.prompt}
-          contactEmail={FAQ_CONTACT.email}
+          contactCta={FAQ_CONTACT.cta}
         />
       </div>
       <SiteLinks className="px-5 pb-8 text-center font-sans text-[13px] text-ink/45" />

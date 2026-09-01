@@ -12,6 +12,10 @@ export function SiteLinks({ className = "" }: { className?: string }) {
         FAQ
       </Link>
       <span className="mx-2">·</span>
+      <Link href={routes.contacto} className="underline underline-offset-2">
+        Contacto
+      </Link>
+      <span className="mx-2">·</span>
       <Link href={routes.terminos} className="underline underline-offset-2">
         Términos
       </Link>

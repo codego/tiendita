@@ -9,6 +9,7 @@ const items = [
   { href: routes.landing, label: "Feed" },
   { href: routes.queEs, label: "Qué es" },
   { href: routes.faq, label: "FAQ" },
+  { href: routes.contacto, label: "Contacto" },
   { href: routes.marcas, label: "Marcas" },
 ] as const;
 
