@@ -3,12 +3,15 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CategoryChips } from "@/components/CategoryChips";
+import { Las21Module } from "@/components/Las21Module";
 import { ProductCard } from "@/components/ProductCard";
 import { RailCard } from "@/components/RailCard";
+import { SchedulePiece } from "@/components/SchedulePiece";
 import { SearchIcon } from "@/components/Icons";
 import { Wordmark } from "@/components/Wordmark";
 import { getSku } from "@/lib/catalog";
 import { HOME_CHIPS, homeCopy } from "@/lib/home";
+import { ANOCHE_LABEL, VER_TODO } from "@/lib/las21";
 import { routes } from "@/lib/routes";
 import { useRecienIds } from "@/lib/useRecien";
 import type { Sku } from "@/lib/types";
@@ -30,7 +33,19 @@ function matchesQuery(sku: Sku, query: string): boolean {
   return haystack.includes(query);
 }
 
-export function CatalogHome({ skus }: { skus: Sku[] }) {
+export function CatalogHome({
+  skus,
+  forceDrop = false,
+  drop = [],
+  anoche = [],
+  initialNow,
+}: {
+  skus: Sku[];
+  forceDrop?: boolean;
+  drop?: Sku[];
+  anoche?: Sku[];
+  initialNow?: number;
+}) {
   const [chip, setChip] = useState("todas");
   const [query, setQuery] = useState("");
   const [pages, setPages] = useState(2);
@@ -108,6 +123,12 @@ export function CatalogHome({ skus }: { skus: Sku[] }) {
         </h1>
       </header>
 
+      <Las21Module
+        forceDrop={forceDrop}
+        drop={drop}
+        initialNow={initialNow ?? Date.now()}
+      />
+
       <div className="mt-3 px-4">
         <CategoryChips
           chips={HOME_CHIPS.map((item) => ({ id: item.id, label: item.label }))}
@@ -143,6 +164,29 @@ export function CatalogHome({ skus }: { skus: Sku[] }) {
           <div className="mt-2 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {recient.map((sku) => (
               <RailCard key={sku.id} sku={sku} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {anoche.length > 0 ? (
+        <section className="px-4 pt-4" aria-label={ANOCHE_LABEL}>
+          <div className="flex items-end justify-between gap-3">
+            <h2 className="font-sans text-[15px] font-semibold text-ink">
+              {homeCopy.anoche}
+            </h2>
+            <Link
+              href={routes.anoche}
+              className="font-sans text-[13px] text-ink underline underline-offset-2"
+            >
+              {VER_TODO}
+            </Link>
+          </div>
+          <div className="mt-3 flex gap-3 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {anoche.map((sku) => (
+              <div key={sku.id} className="w-[128px] shrink-0">
+                <SchedulePiece sku={sku} />
+              </div>
             ))}
           </div>
         </section>

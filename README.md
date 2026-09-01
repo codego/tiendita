@@ -1,10 +1,12 @@
-# Curadario — Las 21
+# Curadario
 
-The product is the **schedule**, not a feed. Twenty minutes. One piece per store. Then it ends.
+Dense polimarca catalog. Many TiendaNube brands, one place. Curadario is a **vitrina** — it takes you to the store; the store sells.
 
-Timezone: **America/Buenos_Aires**. Live window **21:00–21:20**. Outside that window, `/` is the day countdown. At 21:21 there is no mall and no catalog scroll.
+`/` is always the **packed catalog feed**. Las 21 is a **feature block** on that home. It does not turn off the vitrine.
 
-No Vercel. Local only. No bag. No own checkout. Shopper CTA stays **Ir a la tienda →**.
+Locked home line: **Marcas de TiendaNube. Tocás, vas a su tienda.**
+
+No bag. No own checkout. Shopper CTA stays **Ir a la tienda →**. No Vercel. Local only.
 
 ## Preview
 
@@ -14,31 +16,31 @@ npm install
 npm run dev
 ```
 
-- [http://localhost:3000](http://localhost:3000) — day or live from the real Buenos Aires clock
-- [http://localhost:3000?drop=1](http://localhost:3000?drop=1) — force the live window (Pola tests at random hours)
+- [http://localhost:3000](http://localhost:3000) — feed + Las 21 module from the real America/Buenos_Aires clock
+- [http://localhost:3000?drop=1](http://localhost:3000?drop=1) — local test only: force the drop module (feed still scrolls)
 
-| Clock | What you see |
+| On `/` | What you see |
 | --- | --- |
-| Before 21:00 or after 21:20 | Cream day: **Faltan X h Y min para Las 21.** · *Veinte minutos. Una pieza por tienda. Se acaba.* · **Avisame a las 20:55** · ¿Esta o esta? · Lo más reenviado anoche |
-| 21:00–21:20, or `?drop=1` | Dark live: wordmark + **LAS 21** · **LIVE** + remaining minutes (`20:00` total) · one piece on stage (brand, name, ARS) · **Ir a la tienda →** + share · rail **Más drops llegando** |
+| Always | Wordmark, search, locked line, chips, Recién rail, Lo más reenviado, dense 2-col grid |
+| Day, or fewer than 3 stores | Las 21 module: **Faltan X h Y min para Las 21.** + **Avisame a las 20:55** |
+| 21:00–21:20 with ≥ 3 stores, or `?drop=1` with ≥ 3 | Drop module **in the home with the scroll**: one piece per store, timer, **Ir a la tienda →**, share **Está pasando en Curadario. 20 minutos.** |
+
+**Floor:** con 3 se prende; con menos no. Three stores light the drop module. 0–2 keep the countdown module. The catalog never goes away. At 21:21 the drop module closes; the grid stays.
 
 Live share copy, exact: **Está pasando en Curadario. 20 minutos.**
 
-Day shares the countdown (`Faltan X h Y min para Las 21.`), not a feed. The 20:55 ping is the **Avisame a las 20:55** CTA.
-
 Brands tease by day: **hoy a las 21, esta.**
-
-**Floor:** con 3 se prende; con menos no. `LAS21_FLOOR` is **3**. Three stores/pieces at 21 lights live. 0, 1, or 2 stay on the day screen (countdown + anoche), even at 21:00 or with `?drop=1`.
 
 Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: Ink `#161513`, Terracotta `#C8553D`, Cream `#EFE9DD`, Surface `#FBFAF6`. Playfair + DM Sans.
 
-## Routes that stay
+## Routes
 
 | Route | What you see |
 | --- | --- |
-| `/` | Las 21 — day or live |
-| `/?drop=1` | Force live |
-| `/anoche` | Lo más reenviado anoche |
+| `/` | Shopper home: feed + Las 21 module |
+| `/?drop=1` | Local test — force the drop module, not the product |
+| `/recien` | Recién stories — new publishes only |
+| `/anoche` | Lo más reenviado |
 | `/marcas` | Brand gate: PARA MARCAS |
 | `/marcas/elegir` | Mock TiendaNube picker — apparel only |
 | `/marcas/dashboard` | Esta semana — visitas, clics, ranking |
@@ -47,6 +49,10 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `/app/coleccion` | Five-piece Sastrería de agosto collection |
 | `/app/coleccion/compartir` | Finding share: “Mirá lo que encontré en Curadario.” |
 | `/app/pieza/tapado-coppola` | Ficha Tapado Coppola |
+
+Home first screen: **Marcas de TiendaNube. Tocás, vas a su tienda.** Recién rail opens `/recien` stories. Share starts on **every card**: “Mirá lo que encontré en Curadario.”
+
+Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño · Sastrería · Calzado.
 
 ## Brand + legal
 
@@ -63,5 +69,5 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `npm run dev` | Next.js dev server |
 | `npm run build` | Production build |
 | `npm start` | Serve the production build |
-| `npm test` | Schedule, catalog, brand, share, and legal checks |
+| `npm test` | Catalog, Las 21 module, brand, share, and legal checks |
 | `npm run lint` | ESLint |

@@ -1,7 +1,10 @@
 export const homeCopy = {
-  hero: "Veinte minutos. Una pieza por tienda. Se acaba.",
-  banner: "Veinte minutos. Una pieza por tienda.",
-  bannerCta: "Ir a Las 21 →",
+  hero: "Marcas de TiendaNube. Tocás, vas a su tienda.",
+  banner: "Todas las marcas. Un solo lugar.",
+  bannerCta: "Ir a las marcas →",
+  search: "Buscar marcas, prendas y más",
+  recient: "Recién publicadas",
+  recientBadge: "RECIéN",
   las21: "LAS 21",
   live: "LIVE",
   shareLive: "Está pasando en Curadario. 20 minutos.",
@@ -11,11 +14,8 @@ export const homeCopy = {
   remind: "Avisame a las 20:55",
   reminded: "Te avisamos a las 20:55.",
   esta: "¿Esta o esta?",
-  anoche: "Lo más reenviado anoche",
+  anoche: "Lo más reenviado",
   verTodo: "Ver todo",
-  recient: "Recién publicadas",
-  recientBadge: "RECIéN",
-  search: "Buscar marcas, prendas y más",
 } as const;
 
 export const HOME_CHIPS = [

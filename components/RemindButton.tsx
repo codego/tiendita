@@ -5,7 +5,7 @@ import { PING_HOUR, PING_MINUTE, REMIND_CTA, REMIND_DONE } from "@/lib/las21";
 
 const STORAGE_KEY = `curadario:avisame-${PING_HOUR}${PING_MINUTE}`;
 
-export function RemindButton() {
+export function RemindButton({ compact = false }: { compact?: boolean }) {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export function RemindButton() {
   if (saved) {
     return (
       <p
-        className="mt-8 text-center font-sans text-[14px] text-ink/60"
+        className={`${compact ? "mt-2" : "mt-8"} text-center font-sans text-[14px] text-ink/60`}
         aria-live="polite"
       >
         {REMIND_DONE}
@@ -40,7 +40,9 @@ export function RemindButton() {
     <button
       type="button"
       onClick={remind}
-      className="mt-8 flex h-12 w-full items-center justify-center rounded-full border border-ink bg-transparent font-sans text-[15px] font-medium text-ink"
+      className={`${
+        compact ? "mt-3 h-10 text-[13px]" : "mt-8 h-12 text-[15px]"
+      } flex w-full items-center justify-center rounded-full border border-ink bg-transparent font-sans font-medium text-ink`}
     >
       {REMIND_CTA}
     </button>

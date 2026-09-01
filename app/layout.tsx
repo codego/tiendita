@@ -19,8 +19,8 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Curadario — Las 21",
-  description: "Veinte minutos. Una pieza por tienda. Se acaba.",
+  title: "Curadario — Marcas de TiendaNube",
+  description: "Marcas de TiendaNube. Tocás, vas a su tienda.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
