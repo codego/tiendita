@@ -7,82 +7,64 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const home = readFileSync(join(root, "lib/home.ts"), "utf8");
 const landing = readFileSync(join(root, "app/page.tsx"), "utf8");
-const catalogHome = readFileSync(join(root, "components/CatalogHome.tsx"), "utf8");
-const productCard = readFileSync(join(root, "components/ProductCard.tsx"), "utf8");
-const railCard = readFileSync(join(root, "components/RailCard.tsx"), "utf8");
-const bottomNav = readFileSync(join(root, "components/BottomNav.tsx"), "utf8");
+const live = readFileSync(join(root, "components/LiveStage.tsx"), "utf8");
+const day = readFileSync(join(root, "components/DaySchedule.tsx"), "utf8");
+const lasHome = readFileSync(join(root, "components/Las21Home.tsx"), "utf8");
+const shareBtn = readFileSync(join(root, "components/LiveShareButton.tsx"), "utf8");
+const remind = readFileSync(join(root, "components/RemindButton.tsx"), "utf8");
 const storeCta = readFileSync(join(root, "components/StoreCta.tsx"), "utf8");
-const appAlias = readFileSync(join(root, "app/app/page.tsx"), "utf8");
 const globals = readFileSync(join(root, "app/globals.css"), "utf8");
-const picker = readFileSync(join(root, "components/BrandPicker.tsx"), "utf8");
-const recient = readFileSync(join(root, "lib/recien.ts"), "utf8");
+const readme = readFileSync(join(root, "README.md"), "utf8");
+const las21 = readFileSync(join(root, "lib/las21.ts"), "utf8");
+const las21Time = readFileSync(join(root, "lib/las21-time.mjs"), "utf8");
 
-test("first screen says Vicky hero copy", () => {
-  assert.match(home, /Marcas de TiendaNube\. Tocás, vas a su tienda\./);
-  assert.match(home, /Todas las marcas\. Un solo lugar\./);
-  assert.match(home, /Ir a las marcas →/);
-  assert.match(home, /Buscar marcas, prendas y más/);
-  assert.match(catalogHome, /homeCopy\.hero/);
-  assert.match(catalogHome, /homeCopy\.search/);
-  assert.match(catalogHome, /homeCopy\.banner/);
-  assert.match(catalogHome, /homeCopy\.bannerCta/);
-  assert.match(catalogHome, /routes\.marcas/);
-  assert.match(landing, /CatalogHome/);
-  assert.match(landing, /homeCopy\.hero/);
+test("home is Las 21, not a catalog feed", () => {
+  assert.match(landing, /Las21Home/);
+  assert.match(landing, /isForceDropParam/);
+  assert.match(landing, /getTonightDrop/);
+  assert.equal(landing.includes("CatalogHome"), false);
+  assert.equal(lasHome.includes("grid-cols-2"), false);
+  assert.equal(lasHome.includes("ProductCard"), false);
+  assert.equal(live.includes("ProductCard"), false);
+  assert.equal(day.includes("CategoryChips"), false);
+  assert.match(lasHome, /isLas21Live/);
+  assert.match(lasHome, /forceDrop/);
 });
 
-test("chips are Todas Ropa Deportiva Carteras Accesorios Trajes de baño Sastrería Calzado", () => {
-  assert.match(home, /Todas/);
-  assert.match(home, /Ropa/);
-  assert.match(home, /Deportiva/);
-  assert.match(home, /Carteras/);
-  assert.match(home, /Accesorios/);
-  assert.match(home, /Trajes de baño/);
-  assert.match(home, /Sastrería/);
-  assert.match(home, /Calzado/);
-  assert.match(catalogHome, /HOME_CHIPS/);
+test("live window copy and one piece on stage", () => {
+  assert.match(home, /Está pasando en Curadario\. 20 minutos\./);
+  assert.match(home, /Más drops llegando/);
+  assert.match(home, /LAS 21/);
+  assert.match(home, /LIVE/);
+  assert.match(live, /LAS21_LABEL/);
+  assert.match(live, /LIVE_LABEL/);
+  assert.match(live, /RAIL_LABEL/);
+  assert.match(live, /formatARS/);
+  assert.match(live, /StoreCta/);
+  assert.match(live, /LiveShareButton/);
+  assert.match(live, /RECIEN_STAMP/);
+  assert.match(live, /splitStageAndRail/);
+  assert.match(shareBtn, /LIVE_SHARE_COPY|liveShareText/);
+  assert.equal(live.includes("€"), false);
+  assert.equal(live.includes("EUR"), false);
+  assert.equal(live.toLowerCase().includes("euro"), false);
 });
 
-test("home is a dense 2-col catalog with Recién rail", () => {
-  assert.match(catalogHome, /grid-cols-2/);
-  assert.match(catalogHome, /ProductCard/);
-  assert.match(catalogHome, /dense/);
-  assert.match(catalogHome, /homeCopy\.recient/);
-  assert.match(catalogHome, /RailCard/);
-  assert.match(catalogHome, /recient\.length > 0/);
-  assert.match(productCard, /HeartButton/);
-  assert.match(productCard, /ShareFindingButton/);
-  assert.match(productCard, /formatARS/);
-  assert.match(productCard, /sku\.brand/);
-  assert.match(productCard, /sku\.name/);
-  assert.match(railCard, /homeCopy\.recientBadge/);
-  assert.match(railCard, /ShareFindingButton/);
-  assert.equal(productCard.includes("recientBadge"), false);
-  assert.match(recient, /bumpRecien/);
-  assert.match(picker, /bumpRecien/);
-  const shopper = [landing, catalogHome, productCard, bottomNav].join("\n");
-  assert.equal(
-    /\b(bag|cart|carrito|checkout|pagar|ruleta|roulette)\b|-\d+%/i.test(shopper),
-    false,
-  );
-  assert.equal(storeCta.includes("Ir a la tienda →"), true);
-  assert.equal(storeCta.includes("Pagar"), false);
-});
-
-test("bottom nav is Inicio Colección Buscar Guardados, no cart", () => {
-  assert.match(bottomNav, /Inicio/);
-  assert.match(bottomNav, /Colección/);
-  assert.match(bottomNav, /Buscar/);
-  assert.match(bottomNav, /Guardados/);
-  assert.match(bottomNav, /routes\.landing/);
-  assert.match(bottomNav, /routes\.coleccion/);
-  assert.equal(bottomNav.includes("Carrito"), false);
-  assert.equal(bottomNav.includes("Bolsa"), false);
-});
-
-test("app alias redirects to the new home", () => {
-  assert.match(appAlias, /redirect/);
-  assert.match(appAlias, /routes\.landing/);
+test("day state is a countdown, not a mall", () => {
+  assert.match(home, /Veinte minutos\. Una pieza por tienda\. Se acaba\./);
+  assert.match(home, /Avisame a las 20:55/);
+  assert.match(home, /¿Esta o esta\?/);
+  assert.match(home, /Lo más reenviado anoche/);
+  assert.match(home, /Ver todo/);
+  assert.match(day, /DAY_LINE/);
+  assert.match(day, /RemindButton/);
+  assert.match(day, /ESTA_LABEL/);
+  assert.match(day, /ANOCHE_LABEL/);
+  assert.match(day, /VER_TODO/);
+  assert.match(day, /routes\.anoche/);
+  assert.match(remind, /Avisame a las 20:55|REMIND_CTA/);
+  assert.equal(day.includes("ProductCard"), false);
+  assert.equal(day.includes("CategoryChips"), false);
 });
 
 test("tokens stay Curadario, not Temu orange", () => {
@@ -91,5 +73,31 @@ test("tokens stay Curadario, not Temu orange", () => {
   assert.match(globals, /#efe9dd/i);
   assert.match(globals, /#fbfaf6/i);
   assert.equal(globals.toLowerCase().includes("#ff6a00"), false);
-  assert.match(catalogHome, /bg-terracotta/);
+  assert.equal(live.toLowerCase().includes("orange"), false);
+  assert.equal(day.toLowerCase().includes("orange"), false);
+  assert.match(live, /bg-ink/);
+  assert.match(day, /bg-cream|bg-surface/);
+});
+
+test("shopper still has no bag or own checkout", () => {
+  const shopper = [landing, live, day, lasHome, storeCta].join("\n");
+  assert.equal(
+    /\b(bag|cart|carrito|checkout|pagar|ruleta|roulette)\b|-\d+%/i.test(shopper),
+    false,
+  );
+  assert.equal(storeCta.includes("Ir a la tienda →"), true);
+  assert.equal(storeCta.includes("Pagar"), false);
+});
+
+test("readme is local Las 21 preview", () => {
+  assert.match(readme, /git pull/);
+  assert.match(readme, /npm run dev/);
+  assert.match(readme, /localhost:3000/);
+  assert.match(readme, /drop=1/);
+  assert.match(readme, /America\/Buenos_Aires/);
+  assert.match(readme, /21:00/);
+  assert.match(readme, /21:20/);
+  assert.match(readme, /Está pasando en Curadario\. 20 minutos\./);
+  assert.match(las21Time, /America\/Buenos_Aires/);
+  assert.match(las21, /tapado-coppola/);
 });

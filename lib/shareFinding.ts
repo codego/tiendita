@@ -1,4 +1,5 @@
 import { shareCopy } from "@/lib/brand";
+import { LIVE_SHARE_COPY } from "@/lib/las21";
 import { routes } from "@/lib/routes";
 import type { Sku } from "@/lib/types";
 
@@ -12,6 +13,10 @@ export function findingUrl(origin: string, skuId: string): string {
 
 export function findingShareText(url: string, sku: Sku): string {
   return [shareCopy.kit, `${sku.brand} — ${sku.name}`, url].join("\n");
+}
+
+export function liveShareText(): string {
+  return LIVE_SHARE_COPY;
 }
 
 export function whatsappShareHref(url: string, sku: Sku): string {

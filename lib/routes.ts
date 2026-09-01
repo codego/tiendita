@@ -10,6 +10,7 @@ export const routes = {
   compartirSku: (id: string) => `/app/coleccion/compartir?sku=${id}`,
   recient: "/recien",
   recientSku: (id: string) => `/recien?sku=${id}`,
+  anoche: "/anoche",
   marcas: "/marcas",
   marcasElegir: "/marcas/elegir",
   marcasDashboard: "/marcas/dashboard",

@@ -31,6 +31,11 @@ const FORBIDDEN_BRANDS = [
   "shein",
   "uniqlo",
   "h&m",
+  "arc'teryx",
+  "arcteryx",
+  "the row",
+  "celine",
+  "lemaire",
 ];
 
 function formatARS(amount) {
@@ -104,6 +109,8 @@ test("seed uses invented AR brands, not dummy mall names", () => {
   assert.equal(blob.includes("traje roma"), false);
   assert.equal(blob.includes("sobretodo livorno"), false);
   assert.equal(blob.includes("blazer firenze"), false);
+  assert.equal(blob.includes("€"), false);
+  assert.equal(blob.includes("eur "), false);
   for (const brand of FORBIDDEN_BRANDS) {
     assert.equal(blob.includes(brand), false, brand);
   }

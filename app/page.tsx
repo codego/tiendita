@@ -1,17 +1,30 @@
-import { AppShell } from "@/components/AppShell";
-import { CatalogHome } from "@/components/CatalogHome";
-import { getSkus } from "@/lib/catalog";
+import { Las21Home } from "@/components/Las21Home";
 import { homeCopy } from "@/lib/home";
+import {
+  getAnocheForwarded,
+  getEstaOEsta,
+  getTonightDrop,
+  isForceDropParam,
+} from "@/lib/las21";
 
 export const metadata = {
-  title: "Curadario — Marcas de TiendaNube",
+  title: "Curadario — Las 21",
   description: homeCopy.hero,
 };
 
-export default function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ drop?: string }>;
+}) {
+  const { drop } = await searchParams;
   return (
-    <AppShell header="none">
-      <CatalogHome skus={getSkus()} />
-    </AppShell>
+    <Las21Home
+      forceDrop={isForceDropParam(drop)}
+      initialNow={Date.now()}
+      drop={getTonightDrop()}
+      esta={getEstaOEsta()}
+      anoche={getAnocheForwarded()}
+    />
   );
 }
