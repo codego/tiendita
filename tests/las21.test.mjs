@@ -5,7 +5,6 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import {
   BRAND_TEASE,
-  LAS21_DEAD_COUNT,
   LAS21_DURATION_MINUTES,
   LAS21_FLOOR,
   LAS21_HOUR,
@@ -86,17 +85,17 @@ test("live countdown starts at 20:00 and day copy is exact", () => {
   assert.equal(PING_MINUTE, 55);
 });
 
-test("three garments stay on day — Las 21 needs more than three stores", () => {
+test("con 3 se prende; con menos no", () => {
   const inside = art(2026, 9, 1, 21, 5, 0);
-  assert.equal(LAS21_DEAD_COUNT, 3);
-  assert.equal(LAS21_FLOOR, 4);
+  assert.equal(LAS21_FLOOR, 3);
+  assert.equal(meetsLas21Floor(0), false);
+  assert.equal(meetsLas21Floor(1), false);
   assert.equal(meetsLas21Floor(2), false);
-  assert.equal(meetsLas21Floor(3), false);
-  assert.equal(meetsLas21Floor(4), true);
-  assert.equal(isLas21Live(inside, false, 3), false);
-  assert.equal(isLas21Live(inside, true, 3), false);
-  assert.equal(isLas21Live(inside, false, 4), true);
-  assert.equal(isLas21Live(inside, true, 4), true);
+  assert.equal(meetsLas21Floor(3), true);
+  assert.equal(isLas21Live(inside, false, 2), false);
+  assert.equal(isLas21Live(inside, true, 2), false);
+  assert.equal(isLas21Live(inside, false, 3), true);
+  assert.equal(isLas21Live(inside, true, 3), true);
 });
 
 test("tonight is one invented AR store each, never luxury or euros", () => {
