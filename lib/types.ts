@@ -22,6 +22,7 @@ export type Sku = {
   category: string;
   categoryLabel: string;
   chip: string;
+  published_at: number;
   description: string;
   disclaimer: string;
   store_url: string;

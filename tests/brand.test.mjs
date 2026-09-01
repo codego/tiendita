@@ -106,6 +106,7 @@ test("share sheet is a finding, not the look", () => {
   assert.match(sharePage, /ShareSheet/);
   assert.match(sharePage, /getSku/);
   assert.match(shareSheet, /routes\.pieza/);
+  assert.match(shareSheet, /routes\.landing/);
   assert.match(shareSheet, /sku\.name/);
   assert.match(shareSheet, /sku\.brand/);
   assert.match(shareFinding, /shareCopy\.kit/);

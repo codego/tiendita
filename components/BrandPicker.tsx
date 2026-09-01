@@ -10,6 +10,7 @@ import { Wordmark } from "@/components/Wordmark";
 import { elegirCopy, publishCta, syncBanner } from "@/lib/brand";
 import { formatARS } from "@/lib/money";
 import { setPublishedIds } from "@/lib/published";
+import { bumpRecien, catalogIdsFromTn } from "@/lib/recien";
 import { routes } from "@/lib/routes";
 import { defaultSelectedIds } from "@/lib/tiendanube";
 import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
@@ -45,8 +46,10 @@ export function BrandPicker({
   }
 
   function publish() {
-    setPublishedIds([...selected]);
-    router.push(routes.compartir);
+    const ids = [...selected];
+    setPublishedIds(ids);
+    bumpRecien(catalogIdsFromTn(ids));
+    router.push(routes.landing);
   }
 
   return (

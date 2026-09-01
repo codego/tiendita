@@ -815,9 +815,194 @@ const extras = [
   }),
 ];
 
+const more = [
+  sku({
+    id: "blazer-navy",
+    collection_id: "vitrina",
+    brand: "Corte Libertad",
+    name: "Blazer Navy",
+    price_ars: 310000,
+    talle: "50",
+    tela: "Lana fría",
+    corte: "Recto",
+    category: "blazer",
+    categoryLabel: "Blazer",
+    chip: "hombre",
+    description: "Navy cerrado, solapa clásica. Sastrería de otra casa.",
+    image: img.saco,
+  }),
+  sku({
+    id: "jean-recto",
+    collection_id: "vitrina",
+    brand: "Tela Norte",
+    name: "Jean Recto",
+    price_ars: 145000,
+    talle: "32",
+    tela: "Denim",
+    corte: "Recto",
+    category: "jean",
+    categoryLabel: "Jean",
+    chip: "hombre",
+    description: "Denim índigo, basta cruda. Un jean de otra vidriera.",
+    image: img.pantalon,
+  }),
+  sku({
+    id: "camisa-oxford-h",
+    collection_id: "vitrina",
+    brand: "Lino de Agosto",
+    name: "Camisa Clara",
+    price_ars: 129000,
+    talle: "L",
+    tela: "Oxford",
+    corte: "Regular",
+    category: "camisa",
+    categoryLabel: "Camisa",
+    chip: "hombre",
+    description: "Oxford claro, cuello button-down. Camisa de barrio.",
+    image: img.camisa,
+  }),
+  sku({
+    id: "zapato-vestir",
+    collection_id: "vitrina",
+    brand: "Horma Palermo",
+    name: "Zapato Vestir",
+    price_ars: 220000,
+    talle: "42",
+    tela: "Cuero",
+    corte: "Clásico",
+    category: "zapato",
+    categoryLabel: "Zapato",
+    chip: "hombre",
+    description: "Capellada lisa, suela de cuero. El piso de otra marca.",
+    image: img.mocasin,
+  }),
+  sku({
+    id: "anillo-sello",
+    collection_id: "vitrina",
+    brand: "Bijou Palermo",
+    name: "Anillo Sello",
+    price_ars: 52000,
+    talle: "Único",
+    tela: "Plata",
+    corte: "Sello",
+    category: "anillo",
+    categoryLabel: "Anillo",
+    chip: "joyas",
+    description: "Plata mate, cara lisa. Un sello de otra casa.",
+    image: img.baguette,
+  }),
+  sku({
+    id: "collar-cadena",
+    collection_id: "vitrina",
+    brand: "Hebilla Once",
+    name: "Collar Cadena",
+    price_ars: 48000,
+    talle: "Único",
+    tela: "Acero",
+    corte: "Fino",
+    category: "collar",
+    categoryLabel: "Collar",
+    chip: "joyas",
+    description: "Cadena fina, cierre langosta. Un collar, otra marca.",
+    image: img.tote,
+  }),
+  sku({
+    id: "pulsera-eslabon",
+    collection_id: "vitrina",
+    brand: "Reloj de Barrio",
+    name: "Pulsera Eslabón",
+    price_ars: 41000,
+    talle: "Único",
+    tela: "Acero",
+    corte: "Eslabón",
+    category: "pulsera",
+    categoryLabel: "Pulsera",
+    chip: "joyas",
+    description: "Eslabón chato, cierre oculto. Pulsera de barrio.",
+    image: img.mocasin,
+  }),
+  sku({
+    id: "aros-perla",
+    collection_id: "vitrina",
+    brand: "Pañuelo Lino",
+    name: "Aros Perla",
+    price_ars: 36000,
+    talle: "Único",
+    tela: "Perla",
+    corte: "Gota",
+    category: "aros",
+    categoryLabel: "Aros",
+    chip: "joyas",
+    description: "Perla chica, gancho fino. Aros de otra vidriera.",
+    image: img.baguette,
+  }),
+  sku({
+    id: "dije-plata",
+    collection_id: "vitrina",
+    brand: "Anteojos del Bajo",
+    name: "Dije Plata",
+    price_ars: 33000,
+    talle: "Único",
+    tela: "Plata",
+    corte: "Chico",
+    category: "dije",
+    categoryLabel: "Dije",
+    chip: "joyas",
+    description: "Dije quieto, cadena aparte. Una joya, no un mall.",
+    image: img.tote,
+  }),
+];
+
+const HOMBRE = new Set([
+  "saco-frances",
+  "pantalon-pinza",
+  "mocasin-goma",
+  "saco-cruzado",
+  "chaleco-sastre",
+  "pantalon-vestir",
+  "bota-cana",
+  "zapatilla-lona",
+  "alpargata-yute",
+  "blazer-navy",
+  "jean-recto",
+  "camisa-oxford-h",
+  "zapato-vestir",
+]);
+
+const JOYAS = new Set([
+  "aros-aro",
+  "hebilla-plateada",
+  "reloj-pulsera",
+  "anillo-sello",
+  "collar-cadena",
+  "pulsera-eslabon",
+  "aros-perla",
+  "dije-plata",
+]);
+
+function remapChip(item) {
+  if (HOMBRE.has(item.id) || item.chip === "hombre") return "hombre";
+  if (JOYAS.has(item.id) || item.chip === "joyas") return "joyas";
+  if (item.chip === "deportiva" || item.chip === "deporte") return "deporte";
+  if (
+    item.chip === "carteras" ||
+    item.chip === "accesorios" ||
+    item.chip === "calzado"
+  ) {
+    return JOYAS.has(item.id) ? "joyas" : "accesorios";
+  }
+  return "mujer";
+}
+
+const skus = [...existing, ...extras, ...more].map((item, index) => ({
+  ...item,
+  chip: remapChip(item),
+  published_at: 1_722_470_400_000 + index * 3_600_000,
+}));
+
 const catalog = {
   collections,
-  skus: [...existing, ...extras],
+  skus,
 };
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");

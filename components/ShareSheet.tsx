@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   BackIcon,
@@ -23,6 +24,7 @@ import {
 import type { Sku } from "@/lib/types";
 
 export function ShareSheet({ sku }: { sku: Sku }) {
+  const router = useRouter();
   const [status, setStatus] = useState("");
 
   function currentUrl() {
@@ -53,12 +55,14 @@ export function ShareSheet({ sku }: { sku: Sku }) {
           text,
           url,
         });
+        router.push(routes.landing);
         return;
       } catch {
         // Cancelled or unsupported — copy instead.
       }
     }
     await copyLink();
+    router.push(routes.landing);
   }
 
   function openWhatsApp() {
@@ -113,8 +117,8 @@ export function ShareSheet({ sku }: { sku: Sku }) {
       </div>
 
       <Link
-        href={routes.pieza(sku.id)}
-        aria-label="Volver a la pieza"
+        href={routes.landing}
+        aria-label="Volver al feed"
         className="absolute top-4 left-4 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-paper/95 text-ink shadow-[0_1px_8px_rgba(22,21,19,0.12)]"
       >
         <BackIcon />

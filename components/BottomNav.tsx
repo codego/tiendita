@@ -31,7 +31,7 @@ export function BottomNav() {
             key={item.href}
             href={item.href}
             className={`flex flex-col items-center gap-1 py-2.5 ${
-              active ? "text-ink" : "text-ink/40"
+              active ? "text-terracotta" : "text-ink/40"
             }`}
           >
             <Icon className="h-5 w-5" />
