@@ -3,6 +3,12 @@ import Link from "next/link";
 import { routes } from "@/lib/routes";
 import type { Collection } from "@/lib/types";
 
+export const LOOK_LINES: Record<string, string> = {
+  "sastreria-de-agosto": "Look de sastrería, varias marcas",
+  "lo-que-lleva-el-look": "Carteras de distintas tiendas",
+  "un-solo-traje": "Trajes de baño de distintas tiendas",
+};
+
 export function LooksIndex({ collections }: { collections: Collection[] }) {
   return (
     <div className="px-5 pb-10">
@@ -38,9 +44,11 @@ export function LooksIndex({ collections }: { collections: Collection[] }) {
                 <h2 className="mt-1 font-serif text-[22px] leading-tight text-ink">
                   {collection.title}
                 </h2>
-                <p className="mt-1 font-serif text-[14px] italic text-ink/65">
-                  {collection.subtitle}
-                </p>
+                {LOOK_LINES[collection.id] ? (
+                  <p className="mt-1 font-sans text-[14px] text-ink/65">
+                    {LOOK_LINES[collection.id]}
+                  </p>
+                ) : null}
               </div>
             </Link>
           </li>

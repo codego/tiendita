@@ -25,3 +25,11 @@ test("Looks index lists curated collections, not only Sastrería", () => {
   );
   assert.ok(looks.length >= 3);
 });
+
+test("Looks cards have a line under the title so they are not a brand", () => {
+  assert.match(looksIndex, /Look de sastrería, varias marcas/);
+  assert.match(looksIndex, /Carteras de distintas tiendas/);
+  assert.match(looksIndex, /Trajes de baño de distintas tiendas/);
+  assert.match(looksIndex, /collection\.title/);
+  assert.match(looksIndex, /LOOK_LINES/);
+});
