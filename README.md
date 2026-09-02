@@ -75,7 +75,7 @@ Failed fetch / offline: **No pudimos cargar.** / **Probá de nuevo. Si sigue, la
 
 Brand picker with 0 published: **Elegí al menos una pieza para aparecer en el feed.** After publish: **Listo.** / **Ya está en Curadario.** / **Ver el feed**.
 
-Cookie on the feed: **Usamos lo mínimo para que funcione.** + **Privacidad →** + **Entendido** (localStorage). PWA: **Abrí Curadario desde el home** / **Agregar** / **Ahora no**.
+Cookie on the feed: **Usamos lo mínimo para que funcione.** + **Privacidad →** + **Entendido** (localStorage). PWA on Android/desktop (`beforeinstallprompt`): **Abrí Curadario desde el home** / **Agregar** / **Ahora no**. iOS Safari (not standalone, not Chrome iOS): how-to sheet **Abrí Curadario desde el home.** / **En iPhone, Safari no instala solo.** / **Tocá Compartir** · **Agregar a inicio** · **Agregar** / **Ahora no** (`curadario:pwa-ios-dismissed`). No fake install CTA. Cookie first, then the sheet.
 
 Home-screen icon is Elena’s italic serif **C** — terracotta `#C8553D` on cream `#EFE9DD`. No wordmark on the icon. Files in `public/`: `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` (same C, already padded), `apple-touch-icon.png` (180), `favicon-32.png`, `favicon.ico`. `public/splash-cream.png` is the iOS splash wordmark (**Curadario.** with the period). Android splash uses manifest `background_color` `#EFE9DD`.
 

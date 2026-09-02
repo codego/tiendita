@@ -43,6 +43,17 @@ export const pwaCopy = {
 
 export const PWA_KEY = "curadario:pwa-later";
 
+export const pwaIosCopy = {
+  title: "Abrí Curadario desde el home.",
+  sub: "En iPhone, Safari no instala solo.",
+  share: "Tocá Compartir",
+  home: "Agregar a inicio",
+  add: "Agregar",
+  later: "Ahora no",
+} as const;
+
+export const PWA_IOS_KEY = "curadario:pwa-ios-dismissed";
+
 export function marcaCountLine(count: number): string {
   const noun = count === 1 ? "pieza" : "piezas";
   return `TiendaNube · ${count} ${noun} en Curadario`;

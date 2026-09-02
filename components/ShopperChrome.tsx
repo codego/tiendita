@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { CookieBanner } from "@/components/CookieBanner";
+import { PwaIosSheet } from "@/components/PwaIosSheet";
 import { PwaPrompt } from "@/components/PwaPrompt";
 import {
   getCookieAccepted,
@@ -14,9 +15,12 @@ import {
   subscribeOnboarding,
 } from "@/lib/onboarding";
 import {
-  getPwaDismissed,
+  getPwaAndroidHidden,
+  getPwaIosDismissed,
   getServerPwaDismissed,
+  getServerPwaIosDismissed,
   subscribePwa,
+  subscribePwaIos,
 } from "@/lib/pwa";
 
 export function ShopperChrome() {
@@ -30,14 +34,20 @@ export function ShopperChrome() {
     getCookieAccepted,
     getServerCookieAccepted,
   );
-  const pwaLater = useSyncExternalStore(
+  const iosDismissed = useSyncExternalStore(
+    subscribePwaIos,
+    getPwaIosDismissed,
+    getServerPwaIosDismissed,
+  );
+  const androidHidden = useSyncExternalStore(
     subscribePwa,
-    getPwaDismissed,
+    getPwaAndroidHidden,
     getServerPwaDismissed,
   );
 
   if (!onboardingSeen) return null;
   if (!cookieOk) return <CookieBanner />;
-  if (!pwaLater) return <PwaPrompt />;
+  if (!iosDismissed) return <PwaIosSheet />;
+  if (!androidHidden) return <PwaPrompt />;
   return null;
 }
