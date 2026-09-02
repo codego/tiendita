@@ -82,6 +82,17 @@ export function trackCtaToStore(payload: CtaToStorePayload): void {
     // Analytics must never block the store CTA.
   }
 
+  try {
+    void fetch("/api/mail-click", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    });
+  } catch {
+    // Mail is best-effort. Local click + dashboard notice already saved.
+  }
+
   window.dispatchEvent(new CustomEvent("curadario:event", { detail: entry }));
 }
 

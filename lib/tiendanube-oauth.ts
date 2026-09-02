@@ -120,6 +120,15 @@ type TnApiProduct = {
   variants?: { price?: string }[];
 };
 
+export async function fetchTnStoreEmail(session: TnSession): Promise<string> {
+  try {
+    const store = await tnGet<{ email?: string }>(session, "/store");
+    return typeof store.email === "string" ? store.email.trim() : "";
+  } catch {
+    return "";
+  }
+}
+
 export async function fetchTnStore(session: TnSession): Promise<TiendaNubeStore> {
   try {
     const store = await tnGet<{ name?: TnName }>(session, "/store");

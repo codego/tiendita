@@ -1,0 +1,5 @@
+Alguien salió de Curadario a tu ficha.
+
+Ver en Curadario: {{dashboard_url}}
+
+No es un newsletter. Te avisamos cuando alguien toca Ir a la tienda.

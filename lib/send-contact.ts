@@ -1,5 +1,17 @@
 import type { ContactMessage } from "@/lib/contacto";
-import { getContactFrom, getContactTo, getResendApiKey } from "@/lib/env";
+import {
+  getContactFrom,
+  getContactTo,
+  getResendApiKey,
+  getSiteUrl,
+  isTnOAuthConfigured,
+} from "@/lib/env";
+import {
+  isCuradarioDomainInbox,
+  merchantDashboardUrl,
+  resolveMailClickRecipient,
+  sendMailClickResend,
+} from "./mail-click.mjs";
 
 export type ContactDelivery = {
   sent: boolean;
@@ -56,6 +68,41 @@ export async function deliverContact(
       }),
     });
     if (!response.ok) {
+      return { sent: false, reason: "send_failed" };
+    }
+    return { sent: true, reason: "delivered" };
+  } catch {
+    return { sent: false, reason: "send_failed" };
+  }
+}
+
+export async function deliverMailClick(
+  storeEmail?: string | null,
+): Promise<ContactDelivery> {
+  const to = resolveMailClickRecipient({
+    storeEmail,
+    oauthConfigured: isTnOAuthConfigured(),
+    contactTo: getContactTo(),
+    mockMerchantCount: 1,
+  });
+  if (!to) {
+    return { sent: false, reason: "no_contact_to" };
+  }
+
+  const key = getResendApiKey();
+  const from = getContactFrom();
+  if (!key || !from || isForbiddenInbox(from) || isCuradarioDomainInbox(from)) {
+    return { sent: false, reason: "no_transport" };
+  }
+
+  try {
+    const { ok } = await sendMailClickResend({
+      apiKey: key,
+      from,
+      to,
+      dashboardUrl: merchantDashboardUrl(getSiteUrl()),
+    });
+    if (!ok) {
       return { sent: false, reason: "send_failed" };
     }
     return { sent: true, reason: "delivered" };
