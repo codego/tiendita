@@ -1,9 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import { OfflineGate } from "@/components/OfflineGate";
 import { getSiteUrl } from "@/lib/env";
 import { homeMetadata } from "@/lib/seo";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  themeColor: "#EFE9DD",
+};
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -24,10 +28,18 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   ...homeMetadata(),
+  icons: {
+    icon: [{ url: "/favicon-32.png", sizes: "32x32", type: "image/png" }],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   appleWebApp: {
     capable: true,
     title: "Curadario",
     statusBarStyle: "default",
+    // iOS splash wordmark. Android uses manifest background_color #EFE9DD.
+    startupImage: ["/splash-cream.png"],
   },
 };
 

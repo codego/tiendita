@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { pwaCopy } from "@/lib/edges";
 import { markPwaDismissed } from "@/lib/pwa";
@@ -47,14 +48,15 @@ export function PwaPrompt() {
         >
           {pwaCopy.title}
         </h2>
-        <div
-          className="mx-auto mt-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-cream"
-          aria-hidden="true"
-        >
-          <span className="font-serif text-[36px] leading-none text-terracotta">
-            C
-          </span>
-        </div>
+        <Image
+          src="/icon-192.png"
+          alt=""
+          width={64}
+          height={64}
+          className="mx-auto mt-5 h-16 w-16 rounded-2xl"
+          aria-hidden
+          priority
+        />
         <p className="mt-5 font-sans text-[15px] leading-6 text-ink/70">
           {pwaCopy.body}
         </p>
