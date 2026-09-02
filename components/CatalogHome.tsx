@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CategoryChips } from "@/components/CategoryChips";
 import { HomeBannerRail } from "@/components/HomeBannerRail";
-import { Las21Module } from "@/components/Las21Module";
 import { ProductCard } from "@/components/ProductCard";
 import { RailCard } from "@/components/RailCard";
 import { RecienRailSkeleton } from "@/components/Skeleton";
@@ -15,12 +14,7 @@ import { Wordmark } from "@/components/Wordmark";
 import { getSku, searchSkus } from "@/lib/catalog";
 import { filterFeedSkus } from "@/lib/published";
 import { HOME_CHIPS, homeCopy } from "@/lib/home";
-import {
-  ANOCHE_LABEL,
-  VER_TODO,
-  isLas21Live,
-  tonightStoreCount,
-} from "@/lib/las21";
+import { ANOCHE_LABEL, VER_TODO } from "@/lib/las21";
 import { routes } from "@/lib/routes";
 import { useHydrated } from "@/lib/useHydrated";
 import { usePublishedIds, usePublishedOverride } from "@/lib/usePublished";
@@ -32,16 +26,10 @@ const PAGE = 16;
 
 export function CatalogHome({
   skus,
-  forceDrop = false,
-  drop = [],
   anoche = [],
-  initialNow,
 }: {
   skus: Sku[];
-  forceDrop?: boolean;
-  drop?: Sku[];
   anoche?: Sku[];
-  initialNow?: number;
 }) {
   const router = useRouter();
   const [chip, setChip] = useState("todas");
@@ -53,7 +41,6 @@ export function CatalogHome({
   const publishedOverride = usePublishedOverride();
   const sentinel = useRef<HTMLDivElement>(null);
   const feedAnchor = useRef<HTMLDivElement>(null);
-  const [now, setNow] = useState(initialNow ?? Date.now());
 
   const catalog = useMemo(
     () => (hydrated ? filterFeedSkus(skus, publishedIds, publishedOverride) : skus),
@@ -91,13 +78,6 @@ export function CatalogHome({
       return { key: `${sku.id}-${index}`, sku };
     });
   }, [pages, visible]);
-
-  useEffect(() => {
-    const id = window.setInterval(() => setNow(Date.now()), 1000);
-    return () => window.clearInterval(id);
-  }, []);
-
-  const dropLive = isLas21Live(now, forceDrop, tonightStoreCount(drop));
 
   useEffect(() => {
     const node = sentinel.current;
@@ -151,25 +131,18 @@ export function CatalogHome({
       </header>
 
       <HomeBannerRail
-        dropLive={dropLive}
-        onChip={(id) => {
-          setChip(id);
-          setPages(2);
-        }}
         onScrollFeed={() => {
           feedAnchor.current?.scrollIntoView({ behavior: "smooth", block: "start" });
         }}
       />
 
-      <Las21Module
-        forceDrop={forceDrop}
-        drop={drop}
-        initialNow={initialNow ?? Date.now()}
-      />
-
       <div className="mt-3 px-4">
         <CategoryChips
-          chips={HOME_CHIPS.map((item) => ({ id: item.id, label: item.label }))}
+          chips={HOME_CHIPS.map((item) => ({
+            id: item.id,
+            label: item.label,
+            ...("color" in item ? { color: item.color } : {}),
+          }))}
           active={chip}
           onChange={(id) => {
             setChip(id);
@@ -178,13 +151,13 @@ export function CatalogHome({
         />
       </div>
 
-      <section className="mx-4 mt-3 flex items-center justify-between gap-3 rounded-md bg-terracotta px-3 py-3">
-        <p className="min-w-0 font-sans text-[14px] font-medium leading-snug text-paper">
+      <section className="mx-4 mt-3 flex items-center justify-between gap-3 rounded-md border border-ink/10 bg-paper px-3 py-3">
+        <p className="min-w-0 font-sans text-[14px] font-medium leading-snug text-ink">
           {homeCopy.banner}
         </p>
         <Link
           href={routes.marcas}
-          className="shrink-0 rounded-full bg-paper px-3 py-1.5 font-sans text-[12px] font-medium text-terracotta"
+          className="shrink-0 rounded-full bg-terracotta px-3 py-1.5 font-sans text-[12px] font-medium text-paper"
         >
           {homeCopy.bannerCta}
         </Link>
@@ -194,7 +167,7 @@ export function CatalogHome({
         <section className="pt-4" aria-label={homeCopy.recient}>
           <div className="px-4">
             <Link href={routes.recient}>
-              <h2 className="font-sans text-[15px] font-semibold text-terracotta">
+              <h2 className="font-sans text-[15px] font-semibold text-mustard">
                 {homeCopy.recient}
               </h2>
             </Link>

@@ -9,54 +9,54 @@ const home = readFileSync(join(root, "lib/home.ts"), "utf8");
 const rail = readFileSync(join(root, "components/HomeBannerRail.tsx"), "utf8");
 const catalogHome = readFileSync(join(root, "components/CatalogHome.tsx"), "utf8");
 const skeleton = readFileSync(join(root, "components/Skeleton.tsx"), "utf8");
+const page = readFileSync(join(root, "app/page.tsx"), "utf8");
 
 const BANNERS = [
   "banner-llego.png",
   "banner-esta-semana.png",
-  "banner-look.png",
   "banner-las21.png",
 ];
 
-test("home rail is Elena's four 1:1 squares in locked order", () => {
+test("home rail is Elena's three typographic 1:1 squares", () => {
   assert.match(home, /HOME_RAIL/);
   assert.match(home, /banner-llego\.png/);
   assert.match(home, /Llegó\./);
   assert.match(home, /banner-esta-semana\.png/);
   assert.match(home, /De esta semana\./);
-  assert.match(home, /banner-look\.png/);
-  assert.match(home, /Lo que lleva el look\./);
   assert.match(home, /banner-las21\.png/);
   assert.match(home, /Hoy a las 21\./);
-  assert.match(home, /chip: "carteras"/);
   assert.match(home, /href: "\/las21"/);
-  assert.match(home, /daytimeOnly: true/);
-  assert.match(home, /visibleHomeRail/);
+  assert.equal(home.includes("banner-look.png"), false);
+  assert.equal(home.includes("Lo que lleva el look"), false);
+  assert.equal(home.includes("daytimeOnly"), false);
+  assert.equal(home.includes("visibleHomeRail"), false);
+  assert.match(home, /Carteras/);
+  assert.match(home, /#C8553D/);
   assert.match(rail, /aspect-square/);
-  assert.match(rail, /banner-llego\.png|item\.src/);
-  assert.match(rail, /visibleHomeRail/);
+  assert.match(rail, /HOME_RAIL/);
+  assert.match(rail, /item\.src/);
+  assert.equal(rail.includes("visibleHomeRail"), false);
+  assert.equal(rail.includes("banner-look.png"), false);
   assert.match(catalogHome, /HomeBannerRail/);
-  assert.match(catalogHome, /isLas21Live/);
+  assert.equal(catalogHome.includes("Las21Module"), false);
+  assert.equal(catalogHome.includes("isLas21Live"), false);
+  assert.equal(catalogHome.includes("forceDrop"), false);
   assert.match(catalogHome, /grid-cols-2/);
-  assert.match(catalogHome, /Las21Module/);
-  const afterHeader = catalogHome.indexOf("</header>");
-  assert.ok(
-    catalogHome.indexOf("<HomeBannerRail", afterHeader) <
-      catalogHome.indexOf("<Las21Module", afterHeader),
-  );
+  assert.equal(page.includes("searchParams"), false);
+  assert.equal(page.includes("drop"), false);
   assert.match(skeleton, /banner-llego\.png/);
   assert.match(skeleton, /banner-esta-semana\.png/);
-  assert.match(skeleton, /banner-look\.png/);
   assert.match(skeleton, /banner-las21\.png/);
+  assert.equal(skeleton.includes("banner-look.png"), false);
   assert.match(skeleton, /HomeBannerRailSkeleton/);
 
   const llego = home.indexOf("banner-llego.png");
   const semana = home.indexOf("banner-esta-semana.png");
-  const look = home.indexOf("banner-look.png");
   const las21 = home.indexOf("banner-las21.png");
-  assert.ok(llego < semana && semana < look && look < las21);
+  assert.ok(llego < semana && semana < las21);
 });
 
-test("rail PNGs are in public/ and ofertas/SALE stay out", () => {
+test("rail PNGs are in public/ and ofertas/SALE/look stay off the rail", () => {
   for (const file of BANNERS) {
     const path = join(root, "public", file);
     assert.equal(existsSync(path), true, path);
@@ -70,5 +70,6 @@ test("rail PNGs are in public/ and ofertas/SALE stay out", () => {
 
   const blob = [home, rail, catalogHome].join("\n");
   assert.equal(/ofertas|SALE|banner-ofertas/i.test(blob), false);
+  assert.equal(/banner-look/i.test(blob), false);
   assert.equal(/fal[_-]?key|FAL_KEY|fal\.ai/i.test(blob), false);
 });

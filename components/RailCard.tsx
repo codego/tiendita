@@ -20,7 +20,7 @@ export function RailCard({ sku }: { sku: Sku }) {
           />
           <div className="absolute inset-0 bg-linear-to-t from-ink/60 via-transparent to-transparent" />
         </Link>
-        <span className="absolute top-2 left-2 z-10 rounded-full bg-terracotta px-1.5 py-0.5 font-sans text-[9px] font-semibold tracking-[0.12em] text-paper uppercase">
+        <span className="absolute top-2 left-2 z-10 rounded-full bg-mustard px-1.5 py-0.5 font-sans text-[9px] font-semibold tracking-[0.12em] text-paper uppercase">
           {homeCopy.recientBadge}
         </span>
         <HeartButton

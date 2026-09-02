@@ -23,7 +23,7 @@ const bottomNav = readFileSync(join(root, "components/BottomNav.tsx"), "utf8");
 const looksPage = readFileSync(join(root, "app/app/coleccion/page.tsx"), "utf8");
 const looksIndex = readFileSync(join(root, "components/LooksIndex.tsx"), "utf8");
 
-test("home is the packed catalog plus a Las 21 module", () => {
+test("home is the packed catalog plus Elena's three-tile rail", () => {
   assert.match(home, /Marcas de TiendaNube\. Tocás, vas a su tienda\./);
   assert.match(home, /Todas las marcas\. Un solo lugar\./);
   assert.match(home, /Ir a las marcas →/);
@@ -31,7 +31,7 @@ test("home is the packed catalog plus a Las 21 module", () => {
   assert.match(catalogHome, /homeCopy\.hero/);
   assert.match(catalogHome, /homeCopy\.search/);
   assert.match(catalogHome, /homeCopy\.banner/);
-  assert.match(catalogHome, /Las21Module/);
+  assert.equal(catalogHome.includes("Las21Module"), false);
   assert.match(catalogHome, /HOME_CHIPS/);
   assert.match(catalogHome, /HomeBannerRail/);
   assert.match(catalogHome, /grid-cols-2/);
@@ -47,7 +47,7 @@ test("home is the packed catalog plus a Las 21 module", () => {
   assert.equal(landing.includes("Las21Home"), false);
 });
 
-test("Las 21 is a module on the feed, not a replacement", () => {
+test("Las 21 countdown stays on /las21, not on home", () => {
   assert.match(module21, /formatDayCountdown/);
   assert.match(module21, /RemindButton/);
   assert.match(module21, /isLas21Live/);
@@ -55,7 +55,7 @@ test("Las 21 is a module on the feed, not a replacement", () => {
   assert.match(module21, /LIVE_SHARE_COPY|LiveShareButton|StoreCta/);
   assert.match(module21, /formatLiveCountdown/);
   assert.equal(module21.includes("min-h-dvh"), false);
-  assert.match(catalogHome, /Las21Module/);
+  assert.equal(catalogHome.includes("Las21Module"), false);
   assert.match(catalogHome, /grid-cols-2/);
 });
 
@@ -120,11 +120,11 @@ test("shopper still has no bag or own checkout", () => {
   assert.match(home, /Mirá lo que encontré en Curadario\./);
 });
 
-test("readme is feed plus Las 21 module, local only", () => {
+test("readme is packed catalog plus typographic rail, local only", () => {
   assert.match(readme, /git pull/);
   assert.match(readme, /npm run dev/);
   assert.match(readme, /localhost:3000/);
-  assert.match(readme, /drop=1/);
+  assert.match(readme, /Hoy a las 21\./);
   assert.match(readme, /Marcas de TiendaNube/);
   assert.match(readme, /Está pasando\. 20 minutos\./);
   assert.equal(readme.includes("Está pasando en Curadario. 20 minutos."), false);

@@ -1,33 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { visibleHomeRail } from "@/lib/home";
+import { HOME_RAIL } from "@/lib/home";
 
 export function HomeBannerRail({
-  dropLive,
-  onChip,
   onScrollFeed,
 }: {
-  dropLive: boolean;
-  onChip: (chip: string) => void;
   onScrollFeed: () => void;
 }) {
-  const items = visibleHomeRail(dropLive);
-
   return (
     <section
       className="pt-3"
-      aria-label={items.map((item) => item.alt).join(" ")}
+      aria-label="Llegó. De esta semana. Hoy a las 21."
     >
       <div className="flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {items.map((item) => {
+        {HOME_RAIL.map((item) => {
           const tile = (
             <img
               src={item.src}
               alt={item.alt}
               width={1024}
               height={1024}
-              className="aspect-square h-[168px] w-[168px] rounded-md bg-terracotta object-cover"
+              className="aspect-square h-[168px] w-[168px] rounded-md object-cover"
             />
           );
 
@@ -43,10 +37,7 @@ export function HomeBannerRail({
             <button
               key={item.id}
               type="button"
-              onClick={() => {
-                if ("chip" in item && item.chip) onChip(item.chip);
-                onScrollFeed();
-              }}
+              onClick={onScrollFeed}
               className="shrink-0 text-left"
             >
               {tile}

@@ -3,6 +3,9 @@
 :root {
   --ink: #161513;
   --terracotta: #c8553d;
+  --forest: #2f6b4f;
+  --cobalt: #2b4c7e;
+  --mustard: #c4a35a;
   --cream: #efe9dd;
   --paper: #ffffff;
   --surface: #fbfaf6;
@@ -11,6 +14,9 @@
 @theme inline {
   --color-ink: var(--ink);
   --color-terracotta: var(--terracotta);
+  --color-forest: var(--forest);
+  --color-cobalt: var(--cobalt);
+  --color-mustard: var(--mustard);
   --color-cream: var(--cream);
   --color-paper: var(--paper);
   --color-surface: var(--surface);

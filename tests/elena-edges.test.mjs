@@ -146,7 +146,8 @@ test("home grid skeleton is terracotta shimmer, not a spinner", () => {
   assert.match(skeleton, /aspect-\[3\/4\]/);
   assert.match(globals, /curadario-shimmer/);
   assert.match(catalogHome, /RecienRailSkeleton/);
-  assert.match(catalogHome, /Las21Module/);
+  assert.match(catalogHome, /HomeBannerRail/);
+  assert.equal(catalogHome.includes("Las21Module"), false);
   assert.match(catalogHome, /ProductCard/);
   assert.match(catalogHome, /recient\.length > 0/);
   assert.equal(skeleton.toLowerCase().includes("spinner"), false);

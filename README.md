@@ -2,7 +2,7 @@
 
 Dense polimarca catalog. Many TiendaNube brands, one place. Curadario is a **vitrina** — it takes you to the store; the store sells.
 
-`/` is always the **packed catalog feed**. Las 21 is a **feature block** on that home. It does not turn off the vitrine.
+`/` is always the **packed catalog feed**. The home rail is three typographic 1:1 tiles: **Llegó.** / **De esta semana.** / **Hoy a las 21.** Las 21 is the terracotta tile → `/las21`. There is no countdown clock on home. Lo que lleva el look is the **Carteras** chip, not a banner.
 
 Locked home line: **Marcas de TiendaNube. Tocás, vas a su tienda.**
 
@@ -16,16 +16,14 @@ npm install
 npm run dev
 ```
 
-- [http://localhost:3000](http://localhost:3000) — feed + Las 21 module from the real America/Buenos_Aires clock
-- [http://localhost:3000?drop=1](http://localhost:3000?drop=1) — local test only: force the drop module (feed still scrolls)
+- [http://localhost:3000](http://localhost:3000) — packed catalog + Elena's three-tile rail
 
 | On `/` | What you see |
 | --- | --- |
-| Always | Wordmark, search, locked line, chips, 1:1 rail (Llegó. / De esta semana. / Lo que lleva el look. / Hoy a las 21. daytime), Recién rail, Lo más reenviado, dense 2-col grid |
-| Day, or fewer than 3 stores | Las 21 module: **Faltan X h Y min para Las 21.** + **Avisame a las 20:55** |
-| 21:00–21:20 with ≥ 3 stores, or `?drop=1` with ≥ 3 | Drop module **in the home with the scroll**: one piece per store, timer, **Ir a la tienda →**, share **Está pasando. 20 minutos.** |
+| Always | Wordmark, search, locked line, 1:1 typographic rail (Llegó. green / De esta semana. cobalt / Hoy a las 21. terracotta), chips, Recién rail, Lo más reenviado, dense 2-col grid |
+| Las 21 | Home rail tile **Hoy a las 21.** opens `/las21`. No countdown clock on home. |
 
-**Floor:** con 3 se prende; con menos no. Three stores light the drop module. 0–2 keep the countdown module. The catalog never goes away. At 21:21 the drop module closes; the grid stays.
+**Floor:** con 3 se prende; con menos no. Three stores light the `/las21` drop. The catalog never goes away.
 
 Two shares, locked:
 1. Day / every card: **Mirá lo que encontré en Curadario.**
@@ -41,8 +39,7 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 
 | Route | What you see |
 | --- | --- |
-| `/` | Shopper home: feed + Las 21 module |
-| `/?drop=1` | Local test — force the drop module, not the product |
+| `/` | Shopper home: packed catalog + three typographic banners |
 | `/recien` | Recién stories — new publishes only |
 | `/anoche` | Lo más reenviado |
 | `/marca/taller-recoleta` | Ficha de marca — name, TiendaNube count, Ir a su tienda, that brand’s pieces |
@@ -81,7 +78,7 @@ Home-screen icon is Elena’s italic serif **C** — terracotta `#C8553D` on cre
 
 Ficha de marca: tap the brand name on a card → `/marca/[slug]`. **TiendaNube · N piezas en Curadario.** **Ir a su tienda**.
 
-Home feed uses terracotta shimmer 3:4 skeletons while Recién / Guardados hydrate. Las 21 stays on the feed.
+Home feed uses terracotta shimmer 3:4 skeletons while Recién / Guardados hydrate. Walls are paper `#FFFFFF`. Cream `#EFE9DD` stays on PWA/Apple splash and product photo frames.
 
 Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño · Sastrería · Calzado.
 
