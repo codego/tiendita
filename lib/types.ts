@@ -29,6 +29,12 @@ export type Sku = {
   image: string;
 };
 
+export type BrandProfile = {
+  slug: string;
+  name: string;
+  blurb?: string;
+};
+
 export type Catalog = {
   collections: Collection[];
   skus: Sku[];

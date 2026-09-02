@@ -45,6 +45,8 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `/?drop=1` | Local test — force the drop module, not the product |
 | `/recien` | Recién stories — new publishes only |
 | `/anoche` | Lo más reenviado |
+| `/marca/taller-recoleta` | Ficha de marca — name, TiendaNube count, Ir a su tienda, that brand’s pieces |
+| `/las21` | Las 21 share target — WhatsApp OG “Está pasando. 20 minutos.” |
 | `/marcas` | Brand gate: PARA MARCAS. Real OAuth if TN env is set; otherwise labeled mock |
 | `/marcas/oauth` | TiendaNube authorize (env required) |
 | `/marcas/elegir` | Picker — live store products after OAuth, or labeled mock seed |
@@ -71,7 +73,13 @@ Empty Guardados: **Todavía no guardaste nada.** / **Tocá el corazón en una pi
 
 Failed fetch / offline: **No pudimos cargar.** / **Probá de nuevo. Si sigue, la tienda puede estar caída.** **Reintentar** · **Ir al inicio.**
 
-Brand picker with 0 published: **Elegí al menos una pieza para aparecer en el feed.**
+Brand picker with 0 published: **Elegí al menos una pieza para aparecer en el feed.** After publish: **Listo.** / **Ya está en Curadario.** / **Ver el feed**.
+
+Cookie on the feed: **Usamos lo mínimo para que funcione.** + **Privacidad →** + **Entendido** (localStorage). PWA: **Abrí Curadario desde el home** / **Agregar** / **Ahora no**.
+
+Ficha de marca: tap the brand name on a card → `/marca/[slug]`. **TiendaNube · N piezas en Curadario.** **Ir a su tienda**.
+
+Home feed uses terracotta shimmer 3:4 skeletons while Recién / Guardados hydrate. Las 21 stays on the feed.
 
 Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño · Sastrería · Calzado.
 
@@ -79,8 +87,8 @@ Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño �
 
 1. **`/marcas`** — “Publicá tu selección. No tu tienda entera.” Primary **Continuar con TiendaNube →**. Real OAuth when `TIENDANUBE_CLIENT_ID` + `TIENDANUBE_CLIENT_SECRET` + `TIENDANUBE_REDIRECT_URI` are set. Without them, the path is labeled **Mock**. Still no checkout. Las 21 stays one piece per store.
 2. **`/marcas/elegir`** — “Elegí qué publicar.” Live products after OAuth; otherwise the labeled mock seed. Checkout stays in the brand store.
-3. **`/marcas/dashboard`** — “Esta semana.” **visitas**, **clics a la tienda**, **piezas publicadas**, ranking. **Editar selección** → `/marcas/elegir`. **Ver mi vitrina →** the feed `/`. Footer: “Curadario no vende. El clic es el resultado.”
-4. **Share a finding** — `/app/coleccion/compartir`. “Mirá lo que encontré en Curadario.”
+3. **`/marcas/dashboard`** — “Esta semana.” **visitas**, **clics a la tienda**, **piezas publicadas**, ranking. Click notice: **Alguien salió de Curadario a tu ficha.** **Editar selección** → `/marcas/elegir`. **Ver mi vitrina →** the feed `/`. Footer: “Curadario no vende. El clic es el resultado.”
+4. **Share a finding** — `/app/pieza/[id]` and `/app/coleccion/compartir`. WhatsApp OG title: **Mirá lo que encontré en Curadario** + the product image. Site: **curadario.app**. Las 21 live share: `/las21` — terracotta **LAS 21**, title **Está pasando. 20 minutos.**
 5. **`/terminos`** and **`/privacidad`** — Curadario is a **vitrina**. No payments.
 6. **`/que-es`** — Qué es Curadario. **01 Descubrí** / **02 Tocá** / **03 Compartí**. CTAs **Ir al feed** and **Publicá tu tienda** → `/marcas`.
 7. **`/faq`** — FAQ. Cómo publicar: Entrás con TiendaNube → elegís qué sale → a las 21 puede ir al drop. Las 21 is a daily drop 21:00–21:20, one piece per store. It does not turn off the feed. Más preguntas → `/contacto`. `/ayuda` redirects here.
@@ -95,6 +103,7 @@ Local `.env` — do not invent a Curadario inbox. See `.env.example`.
 | `CONTACT_TO` | Destination inbox. Defaults to `joacoditoma@gmail.com` if unset. |
 | `CONTACT_FROM` | Verified sender for Resend. A real mailbox you control — never an invented Curadario inbox. |
 | `RESEND_API_KEY` | Optional. Needed to actually send `CONTACT_TO`. |
+| `NEXT_PUBLIC_SITE_URL` | Public origin for OG / WhatsApp image URLs. Defaults to `http://localhost:3000`. Set to `https://curadario.app` (or your host) so previews resolve absolute images. |
 | `TIENDANUBE_CLIENT_ID` | TiendaNube app id |
 | `TIENDANUBE_CLIENT_SECRET` | TiendaNube client secret |
 | `TIENDANUBE_REDIRECT_URI` | Callback, e.g. `http://localhost:3000/marcas/oauth/callback` |

@@ -76,6 +76,11 @@ export function BrandDashboard() {
               <p className="mt-2 font-sans text-[12px] leading-4 text-ink/55">
                 {metric.label}
               </p>
+              {metric.label === dashboardCopy.clicksLabel ? (
+                <p className="mt-1 font-sans text-[11px] leading-4 text-ink/45">
+                  {dashboardCopy.clickNotice}
+                </p>
+              ) : null}
             </div>
           ))}
         </dl>

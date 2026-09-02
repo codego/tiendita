@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BrandNameLink } from "@/components/BrandNameLink";
 import { HeartButton } from "@/components/HeartButton";
 import { ShareFindingButton } from "@/components/ShareFindingButton";
 import { homeCopy } from "@/lib/home";
@@ -34,14 +35,17 @@ export function RailCard({ sku }: { sku: Sku }) {
           variant="onImage"
           className="absolute top-9 right-1.5 z-10"
         />
-        <Link href={routes.recientSku(sku.id)} className="absolute inset-x-0 bottom-0 z-10 px-1.5 pb-1.5">
-          <p className="truncate font-sans text-[10px] font-medium tracking-wide text-paper uppercase">
-            {sku.brand}
-          </p>
-          <p className="font-sans text-[12px] font-medium text-paper">
-            {formatARS(sku.price_ars)}
-          </p>
-        </Link>
+        <div className="absolute inset-x-0 bottom-0 z-10 px-1.5 pb-1.5">
+          <BrandNameLink
+            brand={sku.brand}
+            className="block truncate font-sans text-[10px] font-medium tracking-wide text-paper uppercase"
+          />
+          <Link href={routes.recientSku(sku.id)} className="block">
+            <p className="font-sans text-[12px] font-medium text-paper">
+              {formatARS(sku.price_ars)}
+            </p>
+          </Link>
+        </div>
       </div>
     </article>
   );

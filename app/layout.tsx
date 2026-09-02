@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import { OfflineGate } from "@/components/OfflineGate";
+import { getSiteUrl } from "@/lib/env";
+import { homeMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -20,8 +22,13 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Curadario — Marcas de TiendaNube",
-  description: "Marcas de TiendaNube. Tocás, vas a su tienda.",
+  metadataBase: new URL(getSiteUrl()),
+  ...homeMetadata(),
+  appleWebApp: {
+    capable: true,
+    title: "Curadario",
+    statusBarStyle: "default",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

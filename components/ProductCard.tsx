@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BrandNameLink } from "@/components/BrandNameLink";
 import { HeartButton } from "@/components/HeartButton";
 import { ShareFindingButton } from "@/components/ShareFindingButton";
 import { formatARS } from "@/lib/money";
@@ -43,16 +44,15 @@ export function ProductCard({
         />
       </div>
       <div className={dense ? "pt-1.5" : "pt-2.5"}>
+        <BrandNameLink
+          brand={sku.brand}
+          className={
+            dense
+              ? "block py-0.5 font-sans text-[11px] font-bold tracking-wide text-ink uppercase"
+              : "block py-0.5 font-mono text-[10px] font-medium tracking-[0.14em] text-terracotta uppercase"
+          }
+        />
         <Link href={routes.pieza(sku.id)} className="block">
-          <p
-            className={
-              dense
-                ? "font-sans text-[11px] font-bold tracking-wide text-ink uppercase"
-                : "font-mono text-[10px] font-medium tracking-[0.14em] text-terracotta uppercase"
-            }
-          >
-            {sku.brand}
-          </p>
           <h3
             className={
               dense

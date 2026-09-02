@@ -1,13 +1,10 @@
 import { AppShell } from "@/components/AppShell";
 import { CatalogHome } from "@/components/CatalogHome";
 import { getSkus } from "@/lib/catalog";
-import { homeCopy } from "@/lib/home";
 import { getAnocheForwarded, getTonightDrop, isForceDropParam } from "@/lib/las21";
+import { homeMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Curadario — Marcas de TiendaNube",
-  description: homeCopy.hero,
-};
+export const metadata = homeMetadata();
 
 export default async function HomePage({
   searchParams,

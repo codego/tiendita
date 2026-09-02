@@ -2,16 +2,18 @@
 
 import { ShareIcon } from "@/components/Icons";
 import { LIVE_SHARE_COPY } from "@/lib/las21";
-import { liveShareText } from "@/lib/shareFinding";
+import { liveShareText, liveShareUrl } from "@/lib/shareFinding";
 
 export function LiveShareButton({ className = "" }: { className?: string }) {
   async function shareLive() {
-    const text = liveShareText();
+    const url = liveShareUrl(window.location.origin);
+    const text = liveShareText(url);
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "Curadario",
+          title: LIVE_SHARE_COPY,
           text,
+          url,
         });
         return;
       } catch {

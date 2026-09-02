@@ -15,8 +15,16 @@ export function findingShareText(url: string, sku: Sku): string {
   return [shareCopy.kit, `${sku.brand} — ${sku.name}`, url].join("\n");
 }
 
-export function liveShareText(): string {
-  return LIVE_SHARE_COPY;
+export function liveSharePath(): string {
+  return routes.las21;
+}
+
+export function liveShareUrl(origin: string): string {
+  return `${origin}${liveSharePath()}`;
+}
+
+export function liveShareText(url?: string): string {
+  return url ? `${LIVE_SHARE_COPY}\n${url}` : LIVE_SHARE_COPY;
 }
 
 export function dayShareText(now: number): string {

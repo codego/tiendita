@@ -11,6 +11,8 @@ export const routes = {
   recient: "/recien",
   recientSku: (id: string) => `/recien?sku=${id}`,
   anoche: "/anoche",
+  las21: "/las21",
+  marca: (slug: string) => `/marca/${slug}`,
   marcas: "/marcas",
   marcasElegir: "/marcas/elegir",
   marcasOauth: "/marcas/oauth",

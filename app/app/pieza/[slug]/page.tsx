@@ -2,12 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
+import { BrandNameLink } from "@/components/BrandNameLink";
 import { HeartButton } from "@/components/HeartButton";
 import { StoreCta } from "@/components/StoreCta";
 import { shareCopy } from "@/lib/brand";
 import { getSku, getSkus } from "@/lib/catalog";
 import { formatARS } from "@/lib/money";
 import { routes } from "@/lib/routes";
+import { findingMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -20,10 +22,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const sku = getSku(slug);
   if (!sku) return { title: "Curadario" };
-  return {
-    title: `${sku.name} — ${sku.brand} · Curadario`,
-    description: sku.description,
-  };
+  return findingMetadata(sku);
 }
 
 export default async function FichaPage({
@@ -52,9 +51,10 @@ export default async function FichaPage({
         />
       </div>
       <div className="flex-1 px-5 pt-5 pb-6">
-        <p className="font-mono text-[11px] tracking-[0.16em] text-terracotta uppercase">
-          {sku.brand}
-        </p>
+        <BrandNameLink
+          brand={sku.brand}
+          className="font-mono text-[11px] tracking-[0.16em] text-terracotta uppercase"
+        />
         <h1 className="mt-2 font-serif text-[34px] leading-[1.05] text-ink">
           {sku.name}
         </h1>

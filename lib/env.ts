@@ -32,3 +32,10 @@ export function getTnRedirectUri(): string {
 export function isTnOAuthConfigured(): boolean {
   return Boolean(getTnClientId() && getTnClientSecret() && getTnRedirectUri());
 }
+
+/** Public origin for OG / WhatsApp previews. Local default until you set one. */
+export const DEFAULT_SITE_URL = "http://localhost:3000";
+
+export function getSiteUrl(): string {
+  return read("NEXT_PUBLIC_SITE_URL").replace(/\/$/, "") || DEFAULT_SITE_URL;
+}

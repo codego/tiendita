@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const home = readFileSync(join(root, "lib/home.ts"), "utf8");
 const landing = readFileSync(join(root, "app/page.tsx"), "utf8");
+const seo = readFileSync(join(root, "lib/seo.ts"), "utf8");
 const catalogHome = readFileSync(join(root, "components/CatalogHome.tsx"), "utf8");
 const module21 = readFileSync(join(root, "components/Las21Module.tsx"), "utf8");
 const productCard = readFileSync(join(root, "components/ProductCard.tsx"), "utf8");
@@ -39,7 +40,8 @@ test("home is the packed catalog plus a Las 21 module", () => {
   assert.match(catalogHome, /RailCard/);
   assert.match(catalogHome, /homeCopy\.anoche/);
   assert.match(landing, /CatalogHome/);
-  assert.match(landing, /homeCopy\.hero/);
+  assert.match(landing, /homeMetadata/);
+  assert.match(seo, /homeCopy\.hero/);
   assert.match(landing, /AppShell/);
   assert.equal(landing.includes("Las21Home"), false);
 });

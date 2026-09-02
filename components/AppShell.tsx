@@ -1,5 +1,6 @@
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
+import { ShopperChrome } from "@/components/ShopperChrome";
 import { ShopperOnboarding } from "@/components/ShopperOnboarding";
 
 type AppShellProps = {
@@ -32,6 +33,7 @@ export function AppShell({
         </main>
         {nav ? <BottomNav /> : null}
         <ShopperOnboarding />
+        <ShopperChrome />
       </div>
     </div>
   );

@@ -30,6 +30,12 @@ export function publishCta(count: number): string {
   return `Publicar ${count} ${noun} →`;
 }
 
+export const publishCopy = {
+  title: "Listo.",
+  sub: "Ya está en Curadario.",
+  feed: "Ver el feed",
+} as const;
+
 export function syncBanner(count: number): string {
   return `Sincronizado • ${count} productos de tu TiendaNube`;
 }
@@ -56,6 +62,7 @@ export const dashboardCopy = {
   visitsLabel: "visitas",
   clicksLabel: "clics a la tienda",
   publishedLabel: "piezas publicadas",
+  clickNotice: "Alguien salió de Curadario a tu ficha.",
 } as const;
 
 export const dashboardMetrics = {

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { BrandNameLink } from "@/components/BrandNameLink";
 import { EmptyState } from "@/components/EmptyState";
 import { ChevronUpIcon, CloseIcon } from "@/components/Icons";
 import { PhoneFrame } from "@/components/PhoneFrame";
@@ -180,18 +181,20 @@ export function RecienStories({ startId }: { startId?: string }) {
           <p className="mt-2 font-sans text-[12px] text-paper/70">
             {relativeHace(at)}
           </p>
-          <p className="mt-3 font-sans text-[15px] font-semibold text-paper">
-            {sku.brand}
-          </p>
+          <BrandNameLink
+            brand={sku.brand}
+            className="mt-3 block font-sans text-[15px] font-semibold text-paper"
+          />
           <h1 className="mt-1 font-serif text-[34px] leading-[1.02] text-paper">
             {sku.name}
           </h1>
           <p className="mt-2 font-sans text-[22px] font-bold text-paper">
             {formatARSCode(sku.price_ars)}
           </p>
-          <p className="mt-1 font-sans text-[11px] tracking-[0.28em] text-paper/80 uppercase">
-            {sku.brand}
-          </p>
+          <BrandNameLink
+            brand={sku.brand}
+            className="mt-1 block font-sans text-[11px] tracking-[0.28em] text-paper/80 uppercase"
+          />
 
           <div className="mt-5 flex items-center gap-3">
             <StoreCta sku={sku} variant="cream" />

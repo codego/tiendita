@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import { BackIcon, CloudIcon, SearchIcon } from "@/components/Icons";
 import { PhoneFrame } from "@/components/PhoneFrame";
+import { PublishConfirm } from "@/components/PublishConfirm";
 import { Wordmark } from "@/components/Wordmark";
 import { brandCopy, elegirCopy, publishCta, syncBanner } from "@/lib/brand";
 import { formatARS } from "@/lib/money";
@@ -24,8 +24,8 @@ export function BrandPicker({
   products: TiendaNubeProduct[];
   source?: "mock" | "live";
 }) {
-  const router = useRouter();
   const [query, setQuery] = useState("");
+  const [done, setDone] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(
     () => new Set(source === "live" ? [] : defaultSelectedIds()),
   );
@@ -51,11 +51,12 @@ export function BrandPicker({
     const ids = [...selected];
     setPublishedIds(ids);
     bumpRecien(catalogIdsFromTn(ids));
-    router.push(routes.landing);
+    setDone(true);
   }
 
   return (
     <PhoneFrame>
+      {done ? <PublishConfirm onClose={() => setDone(false)} /> : null}
       <header className="relative z-20 flex h-14 items-center justify-between px-4">
         <Link
           href={routes.marcas}

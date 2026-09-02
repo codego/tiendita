@@ -66,7 +66,12 @@ export function trackCtaToStore(payload: CtaToStorePayload): void {
 
   if (typeof window === "undefined") return;
 
-  console.info("[curadario]", entry.event, payload);
+  console.info(
+    "[curadario]",
+    entry.event,
+    "Alguien salió de Curadario a tu ficha.",
+    payload,
+  );
 
   try {
     const existing = [...getStoredEvents(), entry];

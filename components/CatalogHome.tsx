@@ -6,6 +6,7 @@ import { CategoryChips } from "@/components/CategoryChips";
 import { Las21Module } from "@/components/Las21Module";
 import { ProductCard } from "@/components/ProductCard";
 import { RailCard } from "@/components/RailCard";
+import { RecienRailSkeleton } from "@/components/Skeleton";
 import { SchedulePiece } from "@/components/SchedulePiece";
 import { SearchIcon } from "@/components/Icons";
 import { SiteLinks } from "@/components/SiteLinks";
@@ -14,6 +15,7 @@ import { getSku, searchSkus } from "@/lib/catalog";
 import { HOME_CHIPS, homeCopy } from "@/lib/home";
 import { ANOCHE_LABEL, VER_TODO } from "@/lib/las21";
 import { routes } from "@/lib/routes";
+import { useHydrated } from "@/lib/useHydrated";
 import { useRecienIds } from "@/lib/useRecien";
 import { useRouter } from "next/navigation";
 import type { Sku } from "@/lib/types";
@@ -38,6 +40,7 @@ export function CatalogHome({
   const [query, setQuery] = useState("");
   const [pages, setPages] = useState(2);
   const recientIds = useRecienIds();
+  const hydrated = useHydrated();
   const sentinel = useRef<HTMLDivElement>(null);
 
   const visible = useMemo(() => {
@@ -149,7 +152,7 @@ export function CatalogHome({
         </Link>
       </section>
 
-      {recient.length > 0 ? (
+      {!hydrated ? <RecienRailSkeleton /> : recient.length > 0 ? (
         <section className="pt-4" aria-label={homeCopy.recient}>
           <div className="px-4">
             <Link href={routes.recient}>

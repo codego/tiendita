@@ -20,6 +20,36 @@ export const emptyRecien = {
   cta: "Ir al feed →",
 } as const;
 
+export const emptyMarca = {
+  title: "Todavía no hay piezas de esta marca.",
+  body: "Cuando publique, aparecen acá.",
+  cta: "Ir al feed →",
+} as const;
+
+export const cookieCopy = {
+  line: "Usamos lo mínimo para que funcione.",
+  privacy: "Privacidad →",
+  accept: "Entendido",
+} as const;
+
+export const COOKIE_KEY = "curadario:cookie-ok";
+
+export const pwaCopy = {
+  title: "Abrí Curadario desde el home",
+  body: "Instalá la app en tu pantalla de inicio para acceder más rápido.",
+  add: "Agregar",
+  later: "Ahora no",
+} as const;
+
+export const PWA_KEY = "curadario:pwa-later";
+
+export function marcaCountLine(count: number): string {
+  const noun = count === 1 ? "pieza" : "piezas";
+  return `TiendaNube · ${count} ${noun} en Curadario`;
+}
+
+export const marcaCta = "Ir a su tienda";
+
 export const loadErrorCopy = {
   title: "No pudimos cargar.",
   body: "Probá de nuevo. Si sigue, la tienda puede estar caída.",
