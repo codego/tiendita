@@ -60,6 +60,8 @@ test("PWA icon files exist at the locked sizes and generated icon.tsx is gone", 
   });
   assert.deepEqual(pngSize("public/favicon-32.png"), { width: 32, height: 32 });
   assert.equal(existsSync(join(root, "public/splash-cream.png")), true);
+  assert.equal(existsSync(join(root, "app/favicon.ico")), true);
+  assert.equal(existsSync(join(root, "public/favicon.ico")), true);
   assert.equal(existsSync(join(root, "app/icon.tsx")), false);
   assert.match(readme, /splash-cream\.png/);
   assert.match(readme, /No wordmark on the icon/);
