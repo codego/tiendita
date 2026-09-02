@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { BrandNameLink } from "@/components/BrandNameLink";
 import { HeartButton } from "@/components/HeartButton";
+import { ProductPhoto } from "@/components/ProductPhoto";
 import { StoreCta } from "@/components/StoreCta";
 import { TrackVisit } from "@/components/TrackVisit";
 import { shareCopy } from "@/lib/brand";
@@ -43,10 +43,9 @@ export default async function FichaPage({
     <AppShell header="ficha" headerSkuId={sku.id} nav={false}>
       <TrackVisit skuId={sku.id} brand={sku.brand} />
       <div className="relative aspect-[3/4] bg-cream">
-        <Image
+        <ProductPhoto
           src={sku.image}
           alt={`${sku.brand} — ${sku.name}`}
-          fill
           priority
           sizes="430px"
           className="rounded-none object-cover"

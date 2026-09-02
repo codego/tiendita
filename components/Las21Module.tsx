@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { LiveShareButton } from "@/components/LiveShareButton";
+import { ProductPhoto } from "@/components/ProductPhoto";
 import { RemindButton } from "@/components/RemindButton";
 import { StoreCta } from "@/components/StoreCta";
 import {
@@ -77,12 +77,10 @@ export function Las21Module({
       </div>
 
       <div className="relative mx-3 mt-3 aspect-[3/4] overflow-hidden bg-ink">
-        <Image
+        <ProductPhoto
           src={stage.image}
           alt={`${stage.brand} — ${stage.name}`}
-          fill
           sizes="400px"
-          className="object-cover"
         />
         <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/20 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 px-3 pb-3">
@@ -116,12 +114,10 @@ export function Las21Module({
               className="w-[96px] shrink-0 text-left"
             >
               <div className="relative aspect-[3/4] overflow-hidden bg-cream/10">
-                <Image
+                <ProductPhoto
                   src={sku.image}
                   alt={`${sku.brand} — ${sku.name}`}
-                  fill
                   sizes="96px"
-                  className="object-cover"
                 />
               </div>
               <p className="mt-1 truncate font-sans text-[9px] tracking-[0.1em] text-cream/65 uppercase">

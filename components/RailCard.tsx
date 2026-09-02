@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { BrandNameLink } from "@/components/BrandNameLink";
 import { HeartButton } from "@/components/HeartButton";
+import { ProductPhoto } from "@/components/ProductPhoto";
 import { ShareFindingButton } from "@/components/ShareFindingButton";
 import { homeCopy } from "@/lib/home";
 import { formatARS } from "@/lib/money";
@@ -13,12 +13,10 @@ export function RailCard({ sku }: { sku: Sku }) {
     <article className="w-[128px] shrink-0">
       <div className="relative aspect-[3/4] overflow-hidden rounded-md bg-cream">
         <Link href={routes.recientSku(sku.id)} className="absolute inset-0">
-          <Image
+          <ProductPhoto
             src={sku.image}
             alt={`${sku.brand} — ${sku.name}`}
-            fill
             sizes="128px"
-            className="object-cover"
           />
           <div className="absolute inset-0 bg-linear-to-t from-ink/60 via-transparent to-transparent" />
         </Link>

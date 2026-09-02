@@ -4,6 +4,7 @@ import { getSiteUrl } from "@/lib/env";
 import { homeCopy } from "@/lib/home";
 import { LIVE_SHARE_COPY } from "@/lib/las21";
 import { routes } from "@/lib/routes";
+import { hasProductImage } from "@/lib/product-image.mjs";
 import type { Sku } from "@/lib/types";
 
 export const OG_FINDING_TITLE = "Mirá lo que encontré en Curadario";
@@ -48,6 +49,9 @@ export function homeMetadata(): Metadata {
 export function findingMetadata(sku: Sku): Metadata {
   const description = sku.description || shareCopy.kit;
   const url = routes.pieza(sku.id);
+  const images = hasProductImage(sku.image)
+    ? [{ url: sku.image, alt: `${sku.brand} — ${sku.name}` }]
+    : undefined;
   return {
     title: `${sku.name} — ${sku.brand} · Curadario`,
     description,
@@ -59,13 +63,13 @@ export function findingMetadata(sku: Sku): Metadata {
       title: OG_FINDING_TITLE,
       description,
       url,
-      images: [{ url: sku.image, alt: `${sku.brand} — ${sku.name}` }],
+      ...(images ? { images } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: OG_FINDING_TITLE,
       description,
-      images: [sku.image],
+      ...(images ? { images: [sku.image] } : {}),
     },
   };
 }

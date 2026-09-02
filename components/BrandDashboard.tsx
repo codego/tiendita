@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
 import { BrandMark } from "@/components/BrandMark";
 import { BrandMenu } from "@/components/BrandMenu";
 import { PhoneFrame } from "@/components/PhoneFrame";
+import { ProductPhoto } from "@/components/ProductPhoto";
 import { Wordmark } from "@/components/Wordmark";
 import { rankForwarded, tonightXor } from "@/lib/cockpit.mjs";
 import { brandCopy, dashboardCopy, elegirCopy } from "@/lib/brand";
@@ -155,13 +155,10 @@ export function BrandDashboard({
                 className="flex items-center gap-3 border-b border-ink/10 py-3 last:border-b-0"
               >
                 <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-cream">
-                  <Image
+                  <ProductPhoto
                     src={piece.image}
                     alt={piece.name}
-                    fill
                     sizes="48px"
-                    unoptimized={piece.image.startsWith("http")}
-                    className="object-cover"
                   />
                 </div>
                 <p className="min-w-0 flex-1 truncate font-serif text-[18px] leading-tight text-ink">
@@ -182,12 +179,10 @@ export function BrandDashboard({
           <div className="mt-3">
             <div className="flex items-center gap-3 rounded-[22px] bg-paper px-3 py-3">
               <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-cream">
-                <Image
+                <ProductPhoto
                   src={tonight.image}
                   alt={tonight.name}
-                  fill
                   sizes="56px"
-                  className="object-cover"
                 />
               </div>
               <p className="min-w-0 flex-1 truncate font-serif text-[18px] leading-tight text-ink">

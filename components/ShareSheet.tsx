@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -13,6 +12,7 @@ import {
   WhatsAppIcon,
 } from "@/components/Icons";
 import { PhoneFrame } from "@/components/PhoneFrame";
+import { ProductPhoto } from "@/components/ProductPhoto";
 import { shareCopy } from "@/lib/brand";
 import { formatARS } from "@/lib/money";
 import { routes } from "@/lib/routes";
@@ -109,13 +109,11 @@ export function ShareSheet({ sku }: { sku: Sku }) {
   return (
     <PhoneFrame className="overflow-hidden bg-ink">
       <div className="absolute inset-0">
-        <Image
+        <ProductPhoto
           src={sku.image}
           alt={`${sku.brand} — ${sku.name}`}
-          fill
           priority
           sizes="430px"
-          className="object-cover"
         />
         <div className="absolute inset-0 bg-ink/25" />
       </div>
@@ -142,13 +140,7 @@ export function ShareSheet({ sku }: { sku: Sku }) {
           className="mt-5 flex items-center gap-3 rounded-2xl border border-ink/10 bg-paper px-3 py-3"
         >
           <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[2px] bg-cream">
-            <Image
-              src={sku.image}
-              alt=""
-              fill
-              sizes="64px"
-              className="object-cover"
-            />
+            <ProductPhoto src={sku.image} alt="" sizes="64px" />
           </div>
           <div className="min-w-0 flex-1">
             <p className="font-mono text-[10px] font-medium tracking-[0.14em] text-terracotta uppercase">

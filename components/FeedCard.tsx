@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { HeartButton } from "@/components/HeartButton";
+import { ProductPhoto } from "@/components/ProductPhoto";
 import { formatARS } from "@/lib/money";
 import { routes } from "@/lib/routes";
 import type { Sku } from "@/lib/types";
@@ -24,12 +24,10 @@ export function FeedCard({
   return (
     <article className={frame}>
       <Link href={routes.pieza(sku.id)} className="relative block h-full overflow-hidden rounded-md bg-cream">
-        <Image
+        <ProductPhoto
           src={sku.image}
           alt={`${sku.brand} — ${sku.name}`}
-          fill
           sizes={shape === "wide" ? "430px" : "(max-width: 430px) 50vw, 215px"}
-          className="object-cover"
         />
         <div className="absolute inset-0 bg-linear-to-t from-ink/55 via-transparent to-transparent" />
         <HeartButton

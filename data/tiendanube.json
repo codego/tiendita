@@ -133,6 +133,14 @@
       "image": "/images/camisa-oxford.jpg",
       "kind": "apparel",
       "selected": false
+    },
+    {
+      "id": "tn-chomba-lisa",
+      "name": "Chomba Lisa",
+      "price_ars": 74000,
+      "image": "",
+      "kind": "apparel",
+      "selected": false
     }
   ]
 }

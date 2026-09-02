@@ -6,6 +6,7 @@ import {
   isTnOAuthConfigured,
 } from "@/lib/env";
 import { isForbiddenInbox } from "@/lib/send-contact";
+import { tnProductImage } from "@/lib/product-image.mjs";
 import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
 
 export const TN_SESSION_COOKIE = "curadario_tn";
@@ -177,7 +178,7 @@ export async function fetchTnProducts(session: TnSession): Promise<TiendaNubePro
         id: `tn-${product.id}`,
         name: pickName(product.name, `Pieza ${product.id}`),
         price_ars: Number.isFinite(price) ? Math.round(price) : 0,
-        image: product.images?.[0]?.src || "/images/tapado-coppola.jpg",
+        image: tnProductImage(product.images?.[0]?.src),
         kind: "apparel",
         selected: false,
       });

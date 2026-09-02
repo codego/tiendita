@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -8,6 +7,7 @@ import { BrandNameLink } from "@/components/BrandNameLink";
 import { EmptyState } from "@/components/EmptyState";
 import { ChevronUpIcon, CloseIcon } from "@/components/Icons";
 import { PhoneFrame } from "@/components/PhoneFrame";
+import { ProductPhoto } from "@/components/ProductPhoto";
 import { ShareFindingButton } from "@/components/ShareFindingButton";
 import { StoreCta } from "@/components/StoreCta";
 import { Wordmark } from "@/components/Wordmark";
@@ -102,13 +102,11 @@ export function RecienStories({ startId }: { startId?: string }) {
   return (
     <PhoneFrame className="overflow-hidden bg-ink">
       <div className="absolute inset-0">
-        <Image
+        <ProductPhoto
           src={sku.image}
           alt={`${sku.brand} — ${sku.name}`}
-          fill
           priority
           sizes="430px"
-          className="object-cover"
         />
         <div className="absolute inset-0 bg-linear-to-t from-ink/75 via-ink/15 to-ink/35" />
       </div>

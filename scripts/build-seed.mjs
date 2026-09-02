@@ -27,7 +27,7 @@ function sku({
   categoryLabel,
   chip,
   description,
-  image,
+  image = "",
 }) {
   return {
     id,

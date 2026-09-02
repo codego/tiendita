@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { LiveShareButton } from "@/components/LiveShareButton";
+import { ProductPhoto } from "@/components/ProductPhoto";
 import { StoreCta } from "@/components/StoreCta";
 import { Wordmark } from "@/components/Wordmark";
 import {
@@ -48,13 +48,11 @@ export function LiveStage({
         </div>
 
         <section className="relative mx-5 mt-4 min-h-[52vh] flex-1 overflow-hidden bg-ink">
-          <Image
+          <ProductPhoto
             src={stage.image}
             alt={`${stage.brand} — ${stage.name}`}
-            fill
             priority
             sizes="430px"
-            className="object-cover"
           />
           <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/25 to-ink/10" />
           <span className="absolute top-4 left-4 rotate-[-8deg] rounded-[2px] bg-terracotta px-2 py-1 font-sans text-[10px] font-semibold tracking-[0.16em] text-cream uppercase">
@@ -91,12 +89,10 @@ export function LiveStage({
                 className="w-[112px] shrink-0 text-left"
               >
                 <div className="relative aspect-[3/4] overflow-hidden bg-cream/10">
-                  <Image
+                  <ProductPhoto
                     src={sku.image}
                     alt={`${sku.brand} — ${sku.name}`}
-                    fill
                     sizes="112px"
-                    className="object-cover"
                   />
                 </div>
                 <p className="mt-1.5 truncate font-sans text-[10px] tracking-[0.12em] text-cream/65 uppercase">

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ProductPhoto } from "@/components/ProductPhoto";
 import { formatARS } from "@/lib/money";
 import { routes } from "@/lib/routes";
 import type { Sku } from "@/lib/types";
@@ -19,12 +19,10 @@ export function SchedulePiece({
   const body = (
     <>
       <div className="relative aspect-[3/4] overflow-hidden bg-cream">
-        <Image
+        <ProductPhoto
           src={sku.image}
           alt={`${sku.brand} — ${sku.name}`}
-          fill
           sizes="160px"
-          className="object-cover"
         />
       </div>
       <p

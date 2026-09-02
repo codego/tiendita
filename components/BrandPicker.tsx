@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BackIcon, SearchIcon } from "@/components/Icons";
 import { PhoneFrame } from "@/components/PhoneFrame";
+import { ProductPhoto } from "@/components/ProductPhoto";
 import { PublishConfirm } from "@/components/PublishConfirm";
 import { elegirCopy, listoCta } from "@/lib/brand";
 import { formatARS } from "@/lib/money";
@@ -122,13 +122,10 @@ export function BrandPicker({
                   className="flex items-center gap-3 border-b border-ink/6 py-3 last:border-b-0"
                 >
                   <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-cream">
-                    <Image
+                    <ProductPhoto
                       src={product.image}
                       alt={product.name}
-                      fill
                       sizes="56px"
-                      unoptimized={product.image.startsWith("http")}
-                      className="object-cover"
                     />
                   </div>
                   <div className="min-w-0 flex-1">
