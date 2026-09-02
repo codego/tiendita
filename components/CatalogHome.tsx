@@ -12,10 +12,12 @@ import { SearchIcon } from "@/components/Icons";
 import { SiteLinks } from "@/components/SiteLinks";
 import { Wordmark } from "@/components/Wordmark";
 import { getSku, searchSkus } from "@/lib/catalog";
+import { filterFeedSkus } from "@/lib/published";
 import { HOME_CHIPS, homeCopy } from "@/lib/home";
 import { ANOCHE_LABEL, VER_TODO } from "@/lib/las21";
 import { routes } from "@/lib/routes";
 import { useHydrated } from "@/lib/useHydrated";
+import { usePublishedIds, usePublishedOverride } from "@/lib/usePublished";
 import { useRecienIds } from "@/lib/useRecien";
 import { useRouter } from "next/navigation";
 import type { Sku } from "@/lib/types";
@@ -41,26 +43,36 @@ export function CatalogHome({
   const [pages, setPages] = useState(2);
   const recientIds = useRecienIds();
   const hydrated = useHydrated();
+  const publishedIds = usePublishedIds();
+  const publishedOverride = usePublishedOverride();
   const sentinel = useRef<HTMLDivElement>(null);
+
+  const catalog = useMemo(
+    () => (hydrated ? filterFeedSkus(skus, publishedIds, publishedOverride) : skus),
+    [hydrated, publishedIds, publishedOverride, skus],
+  );
 
   const visible = useMemo(() => {
     const q = query.trim();
     const pool = q
       ? (() => {
           const found = new Set(searchSkus(q).map((sku) => sku.id));
-          return skus.filter((sku) => found.has(sku.id));
+          return catalog.filter((sku) => found.has(sku.id));
         })()
-      : skus;
+      : catalog;
     return pool.filter((sku) => chip === "todas" || sku.chip === chip);
-  }, [chip, query, skus]);
+  }, [catalog, chip, query]);
 
   const recient = useMemo(
     () =>
-      recientIds
-        .map((id) => getSku(id))
-        .filter((sku): sku is Sku => sku != null)
-        .slice(0, 12),
-    [recientIds],
+      filterFeedSkus(
+        recientIds
+          .map((id) => getSku(id))
+          .filter((sku): sku is Sku => sku != null),
+        publishedIds,
+        hydrated && publishedOverride,
+      ).slice(0, 12),
+    [hydrated, publishedIds, publishedOverride, recientIds],
   );
 
   const feed = useMemo(() => {

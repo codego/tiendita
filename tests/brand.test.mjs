@@ -43,39 +43,49 @@ test("brand landing copy is exact", () => {
   assert.match(brand, /Entrás, elegís qué sale, y tu marca entra en el look\./);
   assert.match(brand, /hoy a las 21, esta\./);
   assert.match(marcas, /brandCopy\.tease/);
-  assert.match(marcas, /routes\.marcasElegir/);
-  assert.match(marcas, /routes\.marcasOauth|isTnOAuthConfigured/);
+  assert.match(marcas, /routes\.marcasEntrar/);
+  assert.match(marcas, /isTnOAuthConfigured/);
   assert.match(marcas, /brandCopy\.mockLabel|Mock/);
-  assert.match(marcas, /routes\.marcasDashboard/);
+  assert.match(marcas, /readMerchantGate|BrandDashboard/);
   assert.match(marcas, /routes\.terminos/);
   assert.match(marcas, /routes\.privacidad/);
 });
 
-test("brand dashboard uses seed sastrería pieces and exact footer", () => {
+test("merchant panel home uses real weekly counts and Elena's cockpit", () => {
   assert.match(brand, /Esta semana/);
-  assert.match(brand, /Piezas que más mandan a tu TiendaNube/);
-  assert.match(brand, /Editar selección/);
-  assert.match(brand, /Ver mi vitrina →/);
+  assert.match(brand, /En Curadario/);
+  assert.match(brand, /Elegir más piezas/);
+  assert.match(brand, /Elegir piezas/);
+  assert.match(brand, /Ver mi vitrina/);
   assert.match(brand, /Curadario no vende\. El clic es el resultado\./);
-  assert.match(brand, /visitas/);
-  assert.match(brand, /clics a la tienda/);
-  assert.match(brand, /piezas publicadas/);
-  assert.match(dashboardPage, /BrandDashboard/);
-  assert.match(dashboard, /dashboardCopy\.visitsLabel|visitas/);
-  assert.match(dashboard, /dashboardCopy\.clicksLabel|clics a la tienda/);
-  assert.match(dashboard, /dashboardCopy\.publishedLabel|piezas publicadas/);
-  assert.match(dashboard, /dashboardCopy\.ranking/);
+  assert.match(brand, /Visitas/);
+  assert.match(brand, /Clics a la tienda/);
+  assert.match(brand, /Publicadas/);
+  assert.match(brand, /Oculta/);
+  assert.match(brand, /Sincronizar/);
+  assert.match(brand, /Clics esta semana/);
+  assert.match(brand, /Todavía no hay nada en Curadario\./);
+  assert.match(dashboardPage, /redirect\(routes\.marcas\)/);
+  assert.match(dashboard, /dashboardCopy\.visitsLabel/);
+  assert.match(dashboard, /dashboardCopy\.clicksLabel/);
+  assert.match(dashboard, /dashboardCopy\.publishedLabel/);
+  assert.match(dashboard, /useWeekStoreClicks|useWeekClickMap/);
+  assert.match(dashboard, /useWeekVisits/);
   assert.match(dashboard, /dashboardCopy\.footer/);
+  assert.match(dashboard, /dashboardCopy\.hidden/);
   assert.match(dashboard, /routes\.marcasElegir/);
-  assert.match(dashboard, /routes\.landing/);
+  assert.match(dashboard, /routes\.marca/);
   assert.equal(dashboard.includes("routes.coleccion"), false);
-  assert.match(brandMenu, /routes\.landing/);
+  assert.match(brandMenu, /routes\.marcasSalir/);
   assert.equal(brandMenu.includes("routes.coleccion"), false);
-  assert.match(brand, /tapado-coppola/);
-  assert.match(brand, /saco-frances/);
-  assert.match(brand, /pantalon-pinza/);
-  assert.equal(brand.includes("Top Crudo"), false);
-  assert.equal(brand.includes("Campera Nómade"), false);
+  assert.equal(brand.includes("1284"), false);
+  assert.equal(brand.includes("312"), false);
+  assert.equal(brand.includes("dashboardRanking"), false);
+  assert.equal(brand.includes("dashboardMetrics"), false);
+  assert.equal(brand.includes("Casa Norte"), false);
+  assert.equal(dashboard.includes("Casa Norte"), false);
+  assert.equal(dashboard.includes("Jarrón"), false);
+  assert.equal(dashboard.includes("Vela"), false);
   assert.equal(dashboard.includes("Top Crudo"), false);
   assert.equal(dashboard.includes("Campera Nómade"), false);
   assert.equal(dashboard.includes("Acromática"), false);
@@ -86,16 +96,20 @@ test("brand dashboard uses seed sastrería pieces and exact footer", () => {
   }
 });
 
-test("picker copy, apparel seed, and mock sync banner", () => {
-  assert.match(brand, /Elegí qué publicar\./);
+test("picker copy, apparel seed, and Qué publicás", () => {
+  assert.match(brand, /Qué publicás/);
+  assert.match(
+    brand,
+    /Lo que prendes entra al feed\. El checkout sigue en tu TiendaNube\./,
+  );
   assert.match(brand, /Buscar productos/);
-  assert.match(brand, /Lo no elegido no aparece en Curadario\./);
-  assert.match(brand, /El checkout sigue en tu tienda\./);
+  assert.match(brand, /Listo · \$\{count\} publicadas/);
   assert.match(brand, /Elegí al menos una pieza para aparecer en el feed\./);
   assert.match(picker, /emptyFeed/);
-  assert.match(brand, /Sincronizado • \$\{count\} productos de tu TiendaNube/);
-  assert.match(picker, /publishCta/);
+  assert.match(picker, /listoCta/);
+  assert.match(picker, /hasPublishedOnce/);
   assert.match(elegir, /getTiendaNubeProducts/);
+  assert.match(elegir, /readMerchantGate|redirect\(routes\.marcas\)/);
   assert.equal(tiendanube.store.syncedCount, 247);
   assert.equal(tiendanube.store.platform, "TiendaNube");
   assert.ok(tiendanube.products.length >= 12);

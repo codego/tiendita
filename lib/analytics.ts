@@ -17,6 +17,7 @@ const EMPTY_MAP: Record<string, number> = {};
 let cachedRaw = "";
 let cachedEvents: AnalyticsEvent[] = EMPTY_EVENTS;
 let cachedMap: Record<string, number> = EMPTY_MAP;
+let cachedWeekMap: Record<string, number> = EMPTY_MAP;
 
 function parseEvents(raw: string): AnalyticsEvent[] {
   try {
@@ -45,11 +46,28 @@ function clickMapFrom(events: AnalyticsEvent[]): Record<string, number> {
   return counts;
 }
 
+function weekClickMapFrom(
+  events: AnalyticsEvent[],
+  now = Date.now(),
+): Record<string, number> {
+  if (events.length === 0) return EMPTY_MAP;
+  const counts: Record<string, number> = {};
+  let any = false;
+  for (const entry of events) {
+    if (!isThisWeek(entry.ts, now)) continue;
+    const id = entry.payload.sku_id;
+    counts[id] = (counts[id] ?? 0) + 1;
+    any = true;
+  }
+  return any ? counts : EMPTY_MAP;
+}
+
 function hydrate(raw: string) {
   if (raw === cachedRaw) return;
   cachedRaw = raw;
   cachedEvents = parseEvents(raw);
   cachedMap = clickMapFrom(cachedEvents);
+  cachedWeekMap = weekClickMapFrom(cachedEvents);
 }
 
 function readRaw(): string {
@@ -114,9 +132,30 @@ export function getServerClickMap(): Record<string, number> {
   return EMPTY_MAP;
 }
 
+export const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+
+export function isThisWeek(ts: number, now = Date.now()): boolean {
+  return ts >= now - WEEK_MS;
+}
+
 export function countStoreClicks(skuId?: string): number {
   if (!skuId) return getStoredEvents().length;
   return getClickMap()[skuId] ?? 0;
+}
+
+export function getWeekClickMap(): Record<string, number> {
+  hydrate(readRaw());
+  return cachedWeekMap;
+}
+
+export function countStoreClicksThisWeek(skuId?: string): number {
+  if (!skuId) {
+    const map = getWeekClickMap();
+    let total = 0;
+    for (const value of Object.values(map)) total += value;
+    return total;
+  }
+  return getWeekClickMap()[skuId] ?? 0;
 }
 
 export function subscribeAnalytics(listener: () => void): () => void {

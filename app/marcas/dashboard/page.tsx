@@ -1,5 +1,6 @@
-import { BrandDashboard } from "@/components/BrandDashboard";
+import { redirect } from "next/navigation";
 import { dashboardCopy } from "@/lib/brand";
+import { routes } from "@/lib/routes";
 
 export const metadata = {
   title: "Esta semana — Curadario",
@@ -7,5 +8,5 @@ export const metadata = {
 };
 
 export default function MarcasDashboardPage() {
-  return <BrandDashboard />;
+  redirect(routes.marcas);
 }

@@ -10,6 +10,19 @@ import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
 
 export const TN_SESSION_COOKIE = "curadario_tn";
 export const TN_STATE_COOKIE = "curadario_tn_state";
+export const TN_MOCK_COOKIE = "curadario_tn_mock";
+
+export type MerchantGate =
+  | { source: "live"; session: TnSession }
+  | { source: "mock" }
+  | { source: "none" };
+
+export function readMerchantGate(getCookie: (name: string) => string | undefined): MerchantGate {
+  const live = decodeTnSession(getCookie(TN_SESSION_COOKIE));
+  if (live) return { source: "live", session: live };
+  if (getCookie(TN_MOCK_COOKIE) === "1") return { source: "mock" };
+  return { source: "none" };
+}
 
 export type TnSession = {
   access_token: string;

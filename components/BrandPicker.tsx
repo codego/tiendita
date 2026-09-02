@@ -3,16 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { BackIcon, CloudIcon, SearchIcon } from "@/components/Icons";
+import { useRouter } from "next/navigation";
+import { BackIcon, SearchIcon } from "@/components/Icons";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { PublishConfirm } from "@/components/PublishConfirm";
-import { Wordmark } from "@/components/Wordmark";
-import { brandCopy, elegirCopy, publishCta, syncBanner } from "@/lib/brand";
+import { elegirCopy, listoCta } from "@/lib/brand";
 import { formatARS } from "@/lib/money";
-import { setPublishedIds } from "@/lib/published";
+import { hasPublishedOnce, setPublishedIds } from "@/lib/published";
 import { bumpRecien, catalogIdsFromTn } from "@/lib/recien";
 import { routes } from "@/lib/routes";
-import { defaultSelectedIds } from "@/lib/tiendanube";
+import { usePublishedIds } from "@/lib/usePublished";
 import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
 
 export function BrandPicker({
@@ -24,11 +24,13 @@ export function BrandPicker({
   products: TiendaNubeProduct[];
   source?: "mock" | "live";
 }) {
+  const router = useRouter();
+  const persisted = usePublishedIds();
   const [query, setQuery] = useState("");
   const [done, setDone] = useState(false);
-  const [selected, setSelected] = useState<Set<string>>(
-    () => new Set(source === "live" ? [] : defaultSelectedIds()),
-  );
+  const [draft, setDraft] = useState<string[] | null>(null);
+  const selectedIds = draft ?? persisted;
+  const selected = useMemo(() => new Set(selectedIds), [selectedIds]);
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -39,24 +41,36 @@ export function BrandPicker({
   const count = selected.size;
 
   function toggle(id: string) {
-    setSelected((current) => {
-      const next = new Set(current);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
+    setDraft(() => {
+      const current = new Set(selectedIds);
+      if (current.has(id)) current.delete(id);
+      else current.add(id);
+      return [...current];
     });
   }
 
   function publish() {
     const ids = [...selected];
+    const first = !hasPublishedOnce() && ids.length > 0;
     setPublishedIds(ids);
     bumpRecien(catalogIdsFromTn(ids));
-    setDone(true);
+    if (first) {
+      setDone(true);
+      return;
+    }
+    router.push(routes.marcas);
   }
 
   return (
     <PhoneFrame>
-      {done ? <PublishConfirm onClose={() => setDone(false)} /> : null}
+      {done ? (
+        <PublishConfirm
+          onClose={() => {
+            setDone(false);
+            router.push(routes.marcas);
+          }}
+        />
+      ) : null}
       <header className="relative z-20 flex h-14 items-center justify-between px-4">
         <Link
           href={routes.marcas}
@@ -65,26 +79,22 @@ export function BrandPicker({
         >
           <BackIcon />
         </Link>
-        <Link href={routes.landing} className="absolute left-1/2 -translate-x-1/2">
-          <Wordmark />
-        </Link>
         <span className="h-10 w-10" />
       </header>
 
       <div className="flex min-h-0 flex-1 flex-col">
-        <div className="px-5 pt-2">
-          <h1 className="font-serif text-[34px] leading-[1.05] text-ink">
+        <div className="px-5 pt-1">
+          <p className="sr-only">
+            {store.name}
+            {source === "mock" ? " · mock" : ""}
+          </p>
+          <h1 className="text-center font-serif text-[34px] leading-[1.05] text-ink">
             {elegirCopy.title}
           </h1>
-          <div className="mt-4 flex items-center gap-2.5 rounded-full bg-cream px-3.5 py-2.5">
-            <CloudIcon className="h-4 w-4 text-ink/55" />
-            <p className="font-sans text-[13px] leading-tight text-ink/70">
-              {source === "mock"
-                ? brandCopy.mockPicker
-                : syncBanner(store.syncedCount)}
-            </p>
-          </div>
-          <label className="mt-5 flex items-center gap-2 border-b border-ink/15">
+          <p className="mx-auto mt-2 max-w-[34ch] text-center font-sans text-[13px] leading-5 text-ink/55">
+            {elegirCopy.sub}
+          </p>
+          <label className="mt-5 flex items-center gap-2 rounded-full border border-ink/15 bg-paper px-3.5">
             <SearchIcon className="h-5 w-5 text-ink/40" />
             <span className="sr-only">{elegirCopy.search}</span>
             <input
@@ -122,11 +132,11 @@ export function BrandPicker({
                     />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-serif text-[17px] leading-tight text-ink">
+                    <p className="truncate font-sans text-[16px] leading-tight font-medium text-ink">
                       {product.name}
                     </p>
                     <p className="mt-0.5 font-sans text-[13px] text-ink/55">
-                      {formatARS(product.price_ars)} ARS
+                      {formatARS(product.price_ars)}
                     </p>
                   </div>
                   <button
@@ -165,15 +175,10 @@ export function BrandPicker({
             type="button"
             onClick={publish}
             disabled={count === 0}
-            className="flex h-12 w-full items-center justify-center rounded-full bg-ink font-sans text-[16px] font-medium text-paper disabled:opacity-40"
+            className="flex h-12 w-full items-center justify-center rounded-2xl bg-ink font-sans text-[16px] font-medium text-paper disabled:opacity-40"
           >
-            {publishCta(count)}
+            {listoCta(count)}
           </button>
-          <p className="mt-3 text-center font-sans text-[12px] leading-5 text-ink/50">
-            {elegirCopy.noteHidden}
-            <br />
-            {elegirCopy.noteCheckout}
-          </p>
         </div>
       </div>
     </PhoneFrame>

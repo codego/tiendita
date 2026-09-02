@@ -86,7 +86,8 @@ test("publish confirm is Listo. over elegir, then Ver el feed", () => {
   assert.match(brand, /Ver el feed/);
   assert.match(picker, /PublishConfirm/);
   assert.match(picker, /setDone\(true\)/);
-  assert.equal(picker.includes("router.push"), false);
+  assert.match(picker, /hasPublishedOnce/);
+  assert.match(picker, /router\.push/);
   assert.match(publish, /publishCopy\.title/);
   assert.match(publish, /publishCopy\.sub/);
   assert.match(publish, /publishCopy\.feed/);
@@ -136,8 +137,8 @@ test("OG hallazgo and Las 21 drop cards are locked", () => {
 
 test("merchant click notice is the locked line", () => {
   assert.match(brand, /Alguien salió de Curadario a tu ficha\./);
-  assert.match(dashboard, /clickNotice/);
   assert.match(analytics, /Alguien salió de Curadario a tu ficha\./);
+  assert.match(dashboard, /useWeekStoreClicks|countStoreClicksThisWeek/);
 });
 
 test("home grid skeleton is terracotta shimmer, not a spinner", () => {

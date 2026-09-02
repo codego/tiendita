@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { BrandMark } from "@/components/BrandMark";
 import { BrandStoreCta } from "@/components/BrandStoreCta";
-import { ProductCard } from "@/components/ProductCard";
+import { MarcaGrid } from "@/components/MarcaGrid";
 import { emptyMarca, marcaCountLine } from "@/lib/edges";
 import { getBrandBySlug, getBrandSlugs, getSkusByBrandSlug } from "@/lib/marca";
 import { routes } from "@/lib/routes";
@@ -67,11 +67,7 @@ export default async function MarcaPage({
             </Link>
           </div>
         ) : (
-          <div className="mt-6 grid grid-cols-2 gap-x-3 gap-y-8">
-            {skus.map((sku) => (
-              <ProductCard key={sku.id} sku={sku} />
-            ))}
-          </div>
+          <MarcaGrid skus={skus} brand={brand.name} />
         )}
       </div>
     </AppShell>

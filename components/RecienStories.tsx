@@ -16,12 +16,23 @@ import { homeCopy } from "@/lib/home";
 import { formatARSCode } from "@/lib/money";
 import { routes } from "@/lib/routes";
 import { relativeHace } from "@/lib/time";
+import { filterFeedSkus } from "@/lib/published";
+import { useHydrated } from "@/lib/useHydrated";
+import { usePublishedIds, usePublishedOverride } from "@/lib/usePublished";
 import { useRecienEntries } from "@/lib/useRecien";
 
 const STORY_MS = 5000;
 
 export function RecienStories({ startId }: { startId?: string }) {
-  const entries = useRecienEntries();
+  const rawEntries = useRecienEntries();
+  const hydrated = useHydrated();
+  const publishedIds = usePublishedIds();
+  const publishedOverride = usePublishedOverride();
+  const entries = hydrated
+    ? rawEntries.filter((entry) =>
+        filterFeedSkus([entry.sku], publishedIds, publishedOverride).length > 0,
+      )
+    : rawEntries;
   const router = useRouter();
   const [index, setIndex] = useState(0);
   const [alignedTo, setAlignedTo] = useState<string | null>(null);

@@ -5,11 +5,22 @@ import { useMemo, useState } from "react";
 import { ProductCard } from "@/components/ProductCard";
 import { searchSkus } from "@/lib/catalog";
 import { emptySearch } from "@/lib/edges";
+import { filterFeedSkus } from "@/lib/published";
 import { routes } from "@/lib/routes";
+import { useHydrated } from "@/lib/useHydrated";
+import { usePublishedIds, usePublishedOverride } from "@/lib/usePublished";
 
 export function SearchPanel({ initialQuery = "" }: { initialQuery?: string }) {
   const [query, setQuery] = useState(initialQuery);
-  const results = useMemo(() => searchSkus(query), [query]);
+  const hydrated = useHydrated();
+  const publishedIds = usePublishedIds();
+  const publishedOverride = usePublishedOverride();
+  const results = useMemo(() => {
+    const found = searchSkus(query);
+    return hydrated
+      ? filterFeedSkus(found, publishedIds, publishedOverride)
+      : found;
+  }, [hydrated, publishedIds, publishedOverride, query]);
   const searching = query.trim().length > 0;
   const empty = searching && results.length === 0;
 

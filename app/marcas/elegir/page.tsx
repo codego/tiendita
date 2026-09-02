@@ -1,40 +1,49 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { BrandPicker } from "@/components/BrandPicker";
 import { elegirCopy } from "@/lib/brand";
+import { routes } from "@/lib/routes";
 import { getTiendaNubeProducts, getTiendaNubeStore } from "@/lib/tiendanube";
 import {
-  TN_SESSION_COOKIE,
-  decodeTnSession,
   fetchTnProducts,
   fetchTnStore,
+  readMerchantGate,
 } from "@/lib/tiendanube-oauth";
 import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
 
 export const metadata = {
-  title: "Elegí qué publicar — Curadario",
-  description: elegirCopy.title,
+  title: "Qué publicás — Curadario",
+  description: elegirCopy.sub,
 };
+
+async function loadLiveCatalog(session: {
+  access_token: string;
+  user_id: string;
+}): Promise<{ store: TiendaNubeStore; products: TiendaNubeProduct[] } | null> {
+  try {
+    const [store, products] = await Promise.all([
+      fetchTnStore(session),
+      fetchTnProducts(session),
+    ]);
+    return { store: { ...store, syncedCount: products.length }, products };
+  } catch {
+    return null;
+  }
+}
 
 export default async function MarcasElegirPage() {
   const jar = await cookies();
-  const session = decodeTnSession(jar.get(TN_SESSION_COOKIE)?.value);
+  const gate = readMerchantGate((name) => jar.get(name)?.value);
+  if (gate.source === "none") {
+    redirect(routes.marcas);
+  }
 
-  if (session) {
-    let live: { store: TiendaNubeStore; products: TiendaNubeProduct[] } | null =
-      null;
-    try {
-      const [store, products] = await Promise.all([
-        fetchTnStore(session),
-        fetchTnProducts(session),
-      ]);
-      live = { store, products };
-    } catch {
-      // Fall through to the labeled mock so the brand is not stuck.
-    }
+  if (gate.source === "live") {
+    const live = await loadLiveCatalog(gate.session);
     if (live) {
       return (
         <BrandPicker
-          store={{ ...live.store, syncedCount: live.products.length }}
+          store={live.store}
           products={live.products}
           source="live"
         />

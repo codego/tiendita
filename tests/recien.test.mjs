@@ -35,7 +35,7 @@ test("Recién is only newly published bumps, not the catalog", () => {
   assert.match(recient, /return \[\];/);
   assert.equal(recient.includes("for (const id of seedIds)"), false);
   assert.match(picker, /bumpRecien\(catalogIdsFromTn/);
-  assert.match(picker, /routes\.landing/);
+  assert.match(picker, /routes\.marcas/);
   assert.match(catalogHome, /recient\.length > 0/);
   assert.match(railCard, /homeCopy\.recientBadge/);
   assert.equal(productCard.includes("recientBadge"), false);

@@ -206,6 +206,24 @@ export function PlaneIcon({ className = "h-6 w-6" }: IconProps) {
   );
 }
 
+export function PersonIcon({ className = "h-6 w-6" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <circle cx="12" cy="9" r="3.2" />
+      <path d="M5.8 19c.8-3 3.1-4.6 6.2-4.6s5.4 1.6 6.2 4.6" />
+    </svg>
+  );
+}
+
+export function RefreshIcon({ className = "h-5 w-5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <path d="M19.2 12a7.2 7.2 0 1 1-2.1-5.1" />
+      <path d="M19.2 5.2v4.2h-4.2" />
+    </svg>
+  );
+}
+
 export function ShareIcon({ className = "h-5 w-5" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>

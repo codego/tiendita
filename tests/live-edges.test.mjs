@@ -59,9 +59,9 @@ test("TiendaNube OAuth is real when env is set, mock when it is not", () => {
   assert.match(oauth, /api\.tiendanube\.com\/v1/);
   assert.match(authorize, /tnAuthorizeUrl/);
   assert.match(callback, /exchangeTnCode/);
-  assert.match(callback, /routes\.marcasElegir/);
+  assert.match(callback, /routes\.marcas/);
   assert.match(marcas, /isTnOAuthConfigured/);
-  assert.match(marcas, /routes\.marcasOauth/);
+  assert.match(marcas, /routes\.marcasEntrar/);
   assert.match(marcas, /mockLabel/);
   assert.match(elegir, /fetchTnProducts/);
   assert.match(elegir, /getTiendaNubeProducts/);

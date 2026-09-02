@@ -47,10 +47,10 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `/anoche` | Lo más reenviado |
 | `/marca/taller-recoleta` | Ficha de marca — name, TiendaNube count, Ir a su tienda, that brand’s pieces |
 | `/las21` | Las 21 share target — WhatsApp OG “Está pasando. 20 minutos.” |
-| `/marcas` | Brand gate: PARA MARCAS. Real OAuth if TN env is set; otherwise labeled mock |
+| `/marcas` | Brand gate if no session; merchant panel if session exists. Real OAuth if TN env is set; otherwise labeled mock |
 | `/marcas/oauth` | TiendaNube authorize (env required) |
-| `/marcas/elegir` | Picker — live store products after OAuth, or labeled mock seed |
-| `/marcas/dashboard` | Esta semana — visitas, clics a la tienda, piezas publicadas, ranking |
+| `/marcas/elegir` | Qué publicás — live store products after OAuth, or labeled mock seed |
+| `/marcas/dashboard` | Redirects to the panel home `/marcas` |
 | `/terminos` | Términos — vitrina, no payments |
 | `/privacidad` | Privacidad — no checkout data |
 | `/que-es` | Qué es Curadario — Descubrí, Tocá, Compartí |
@@ -73,7 +73,7 @@ Empty Guardados: **Todavía no guardaste nada.** / **Tocá el corazón en una pi
 
 Failed fetch / offline: **No pudimos cargar.** / **Probá de nuevo. Si sigue, la tienda puede estar caída.** **Reintentar** · **Ir al inicio.**
 
-Brand picker with 0 published: **Elegí al menos una pieza para aparecer en el feed.** After publish: **Listo.** / **Ya está en Curadario.** / **Ver el feed**.
+Brand panel with 0 published: **Todavía no hay nada en Curadario.** / **Elegí al menos una pieza para aparecer en el feed.** CTA **Elegir piezas**. After the first publish (0 → N): **Listo.** / **Ya está en Curadario.** / **Ver el feed**. Later **Listo · N publicadas** returns to the panel.
 
 Cookie on the feed: **Usamos lo mínimo para que funcione.** + **Privacidad →** + **Entendido** (localStorage). PWA on Android/desktop (`beforeinstallprompt`): **Abrí Curadario desde el home** / **Agregar** / **Ahora no**. iOS Safari (not standalone, not Chrome iOS): how-to sheet **Abrí Curadario desde el home.** / **En iPhone, Safari no instala solo.** / **Tocá Compartir** · **Agregar a inicio** · **Agregar** / **Ahora no** (`curadario:pwa-ios-dismissed`). No fake install CTA. Cookie first, then the sheet.
 
@@ -87,9 +87,9 @@ Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño �
 
 ## Brand + legal
 
-1. **`/marcas`** — “Publicá tu selección. No tu tienda entera.” Primary **Continuar con TiendaNube →**. Real OAuth when `TIENDANUBE_CLIENT_ID` + `TIENDANUBE_CLIENT_SECRET` + `TIENDANUBE_REDIRECT_URI` are set. Without them, the path is labeled **Mock**. Still no checkout. Las 21 stays one piece per store.
-2. **`/marcas/elegir`** — “Elegí qué publicar.” Live products after OAuth; otherwise the labeled mock seed. Checkout stays in the brand store.
-3. **`/marcas/dashboard`** — “Esta semana.” **visitas**, **clics a la tienda**, **piezas publicadas**, ranking. Click notice: **Alguien salió de Curadario a tu ficha.** **Editar selección** → `/marcas/elegir`. **Ver mi vitrina →** the feed `/`. Footer: “Curadario no vende. El clic es el resultado.”
+1. **`/marcas`** — No session: “Publicá tu selección. No tu tienda entera.” Primary **Continuar con TiendaNube →**. Real OAuth when `TIENDANUBE_CLIENT_ID` + `TIENDANUBE_CLIENT_SECRET` + `TIENDANUBE_REDIRECT_URI` are set. Without them, the path is labeled **Mock**. With a session: merchant panel — store name, **Sincronizar**, Esta semana (**Visitas**, **Clics a la tienda**, **Publicadas** from real click/visit tracking), **En Curadario** list with toggles (**Oculta** leaves the shopper feed). **Elegir más piezas** → `/marcas/elegir`. **Ver mi vitrina** → `/marca/[slug]`. Footer: “Curadario no vende. El clic es el resultado.” Empty (0 publicadas): **Todavía no hay nada en Curadario.** + **Elegir piezas**. Still no checkout. Las 21 stays one piece per store.
+2. **`/marcas/elegir`** — “Qué publicás.” **Lo que prendes entra al feed. El checkout sigue en tu TiendaNube.** Live products after OAuth; otherwise the labeled mock seed. Sticky **Listo · N publicadas** returns to the panel. First publish (0 → N) still shows **Listo.** / **Ya está en Curadario.** / **Ver el feed**.
+3. **`/marcas/dashboard`** — Redirects to the panel home `/marcas`. Click notice for mail still: **Alguien salió de Curadario a tu ficha.**
 4. **Share a finding** — `/app/pieza/[id]` and `/app/coleccion/compartir`. WhatsApp OG title: **Mirá lo que encontré en Curadario** + the product image. Site: **curadario.app**. Las 21 live share: `/las21` — terracotta **LAS 21**, title **Está pasando. 20 minutos.**
 5. **`/terminos`** and **`/privacidad`** — Curadario is a **vitrina**. No payments.
 6. **`/que-es`** — Qué es Curadario. **01 Descubrí** / **02 Tocá** / **03 Compartí**. CTAs **Ir al feed** and **Publicá tu tienda** → `/marcas`.

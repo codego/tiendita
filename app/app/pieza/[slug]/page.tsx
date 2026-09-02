@@ -5,6 +5,7 @@ import { AppShell } from "@/components/AppShell";
 import { BrandNameLink } from "@/components/BrandNameLink";
 import { HeartButton } from "@/components/HeartButton";
 import { StoreCta } from "@/components/StoreCta";
+import { TrackVisit } from "@/components/TrackVisit";
 import { shareCopy } from "@/lib/brand";
 import { getSku, getSkus } from "@/lib/catalog";
 import { formatARS } from "@/lib/money";
@@ -40,6 +41,7 @@ export default async function FichaPage({
 
   return (
     <AppShell header="ficha" headerSkuId={sku.id} nav={false}>
+      <TrackVisit skuId={sku.id} brand={sku.brand} />
       <div className="relative aspect-[3/4] bg-cream">
         <Image
           src={sku.image}

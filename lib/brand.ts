@@ -17,17 +17,23 @@ export const brandCopy = {
 } as const;
 
 export const elegirCopy = {
-  title: "Elegí qué publicar.",
+  title: "Qué publicás",
+  sub: "Lo que prendes entra al feed. El checkout sigue en tu TiendaNube.",
   search: "Buscar productos",
   noteHidden: "Lo no elegido no aparece en Curadario.",
   noteCheckout: "El checkout sigue en tu tienda.",
   empty: "No hay prendas con eso.",
   emptyFeed: "Elegí al menos una pieza para aparecer en el feed.",
+  emptyTitle: "Todavía no hay nada en Curadario.",
 } as const;
 
 export function publishCta(count: number): string {
   const noun = count === 1 ? "pieza" : "piezas";
   return `Publicar ${count} ${noun} →`;
+}
+
+export function listoCta(count: number): string {
+  return `Listo · ${count} publicadas`;
 }
 
 export const publishCopy = {
@@ -54,28 +60,30 @@ export const shareCopy = {
 } as const;
 
 export const dashboardCopy = {
+  kicker: "Curadario · tu tienda",
+  kickerAccent: "tu tienda",
   title: "Esta semana",
-  ranking: "Piezas que más mandan a tu TiendaNube",
-  edit: "Editar selección",
-  vitrina: "Ver mi vitrina →",
+  list: "En Curadario",
+  clicksWeek: "Clics esta semana",
+  hidden: "Oculta",
+  sync: "Sincronizar",
+  connected: "Conectada a TiendaNube",
+  lastSyncPrefix: "última sync",
+  more: "Elegir más piezas",
+  pick: "Elegir piezas",
+  edit: "Elegir piezas",
+  vitrina: "Ver mi vitrina",
+  logout: "Cerrar sesión",
   footer: "Curadario no vende. El clic es el resultado.",
-  visitsLabel: "visitas",
-  clicksLabel: "clics a la tienda",
-  publishedLabel: "piezas publicadas",
+  visitsLabel: "Visitas",
+  clicksLabel: "Clics a la tienda",
+  publishedLabel: "Publicadas",
   clickNotice: "Alguien salió de Curadario a tu ficha.",
 } as const;
 
-export const dashboardMetrics = {
-  visits: 1284,
-  storeClicks: 312,
-  published: 12,
-} as const;
-
-export const dashboardRanking = [
-  { skuId: "tapado-coppola", clicks: 48 },
-  { skuId: "saco-frances", clicks: 32 },
-  { skuId: "pantalon-pinza", clicks: 27 },
-] as const;
+export function lastSyncLine(relative: string): string {
+  return `${dashboardCopy.connected} · ${dashboardCopy.lastSyncPrefix} ${relative}`;
+}
 
 export const legalCopy = {
   vitrina:

@@ -1,24 +1,31 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { BrandDashboard } from "@/components/BrandDashboard";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { Wordmark } from "@/components/Wordmark";
 import { brandCopy } from "@/lib/brand";
 import { isTnOAuthConfigured } from "@/lib/env";
 import { routes } from "@/lib/routes";
+import { getTiendaNubeProducts, getTiendaNubeStore } from "@/lib/tiendanube";
+import {
+  fetchTnProducts,
+  fetchTnStore,
+  readMerchantGate,
+} from "@/lib/tiendanube-oauth";
+import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
 
 export const metadata = {
   title: "Para marcas — Curadario",
   description: brandCopy.headline,
 };
 
-export default async function MarcasPage({
-  searchParams,
+function MarcasLogin({
+  live,
+  error,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  live: boolean;
+  error?: string;
 }) {
-  const live = isTnOAuthConfigured();
-  const startHref = live ? routes.marcasOauth : routes.marcasElegir;
-  const { error } = await searchParams;
-
   return (
     <PhoneFrame>
       <header className="px-6 pt-7">
@@ -56,13 +63,13 @@ export default async function MarcasPage({
 
         <div className="mt-10 flex flex-col gap-3">
           <Link
-            href={startHref}
+            href={routes.marcasEntrar}
             className="flex h-12 items-center justify-center rounded-full bg-ink font-sans text-[15px] font-medium text-paper"
           >
             {brandCopy.primary}
           </Link>
           <Link
-            href={routes.marcasDashboard}
+            href={routes.marcasEntrar}
             className="flex h-12 items-center justify-center rounded-full border border-ink bg-transparent font-sans text-[15px] font-medium text-ink"
           >
             {brandCopy.secondary}
@@ -109,5 +116,56 @@ export default async function MarcasPage({
         .
       </p>
     </PhoneFrame>
+  );
+}
+
+async function loadLivePanel(session: {
+  access_token: string;
+  user_id: string;
+}): Promise<{ store: TiendaNubeStore; products: TiendaNubeProduct[] } | null> {
+  try {
+    const [store, products] = await Promise.all([
+      fetchTnStore(session),
+      fetchTnProducts(session),
+    ]);
+    return { store: { ...store, syncedCount: products.length }, products };
+  } catch {
+    return null;
+  }
+}
+
+export default async function MarcasPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const live = isTnOAuthConfigured();
+  const { error } = await searchParams;
+  const jar = await cookies();
+  const gate = readMerchantGate((name) => jar.get(name)?.value);
+
+  if (gate.source === "none") {
+    return <MarcasLogin live={live} error={error} />;
+  }
+
+  if (gate.source === "live") {
+    const loaded = await loadLivePanel(gate.session);
+    if (loaded) {
+      return (
+        <BrandDashboard
+          store={loaded.store}
+          products={loaded.products}
+          source="live"
+        />
+      );
+    }
+  }
+
+  return (
+    <BrandDashboard
+      store={getTiendaNubeStore()}
+      products={getTiendaNubeProducts()}
+      source="mock"
+    />
   );
 }

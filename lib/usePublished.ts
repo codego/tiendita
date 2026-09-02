@@ -1,9 +1,10 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { dashboardMetrics } from "@/lib/brand";
 import {
   getPublishedIds,
+  getServerPublishedIds,
+  hasPublishedOverride,
   subscribePublished,
 } from "@/lib/published";
 
@@ -11,7 +12,7 @@ export function usePublishedIds(): string[] {
   return useSyncExternalStore(
     subscribePublished,
     getPublishedIds,
-    () => [],
+    getServerPublishedIds,
   );
 }
 
@@ -19,6 +20,14 @@ export function usePublishedCount(): number {
   return useSyncExternalStore(
     subscribePublished,
     () => getPublishedIds().length,
-    () => dashboardMetrics.published,
+    () => 0,
+  );
+}
+
+export function usePublishedOverride(): boolean {
+  return useSyncExternalStore(
+    subscribePublished,
+    hasPublishedOverride,
+    () => false,
   );
 }

@@ -17,7 +17,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const origin = originFrom(request);
   if (!isTnOAuthConfigured()) {
-    return NextResponse.redirect(new URL(routes.marcasElegir, origin));
+    return NextResponse.redirect(new URL(routes.marcasEntrar, origin));
   }
 
   const code = url.searchParams.get("code");
@@ -39,7 +39,7 @@ export async function GET(request: Request) {
       maxAge: 60 * 60 * 24 * 30,
       secure: process.env.NODE_ENV === "production",
     });
-    return NextResponse.redirect(new URL(routes.marcasElegir, origin));
+    return NextResponse.redirect(new URL(routes.marcas, origin));
   } catch {
     return NextResponse.redirect(new URL(`${routes.marcas}?error=oauth`, origin));
   }
