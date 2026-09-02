@@ -8,7 +8,7 @@ import { routes } from "@/lib/routes";
 export function CookieBanner() {
   return (
     <div
-      className="absolute inset-x-0 bottom-0 z-30 rounded-t-[24px] bg-paper px-5 pt-5 pb-[calc(1rem+env(safe-area-inset-bottom))] shadow-[0_-8px_32px_rgba(22,21,19,0.1)]"
+      className="fixed inset-x-0 bottom-0 z-40 mx-auto w-full max-w-[430px] rounded-t-[24px] bg-paper px-5 pt-5 pb-[calc(1rem+env(safe-area-inset-bottom))] shadow-[0_-8px_32px_rgba(22,21,19,0.1)]"
       role="dialog"
       aria-label={cookieCopy.line}
     >

@@ -39,6 +39,7 @@ test("iOS sheet is a cream how-to, not a fake install CTA", () => {
   assert.match(ios, /font-serif/);
   assert.match(ios, /border-terracotta/);
   assert.match(ios, /rounded-full/);
+  assert.match(ios, /fixed inset-0/);
   assert.match(ios, /markPwaIosDismissed/);
   assert.equal(ios.includes("beforeinstallprompt"), false);
   assert.equal(ios.includes(".prompt("), false);

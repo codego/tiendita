@@ -78,12 +78,12 @@ function Step({
 export function PwaIosSheet() {
   return (
     <div
-      className="absolute inset-0 z-30 flex items-end bg-ink/40"
+      className="fixed inset-0 z-40 flex items-end justify-center bg-ink/40"
       role="dialog"
       aria-modal="true"
       aria-labelledby="pwa-ios-title"
     >
-      <div className="w-full rounded-t-[28px] bg-cream px-6 pt-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))] shadow-[0_-12px_40px_rgba(22,21,19,0.12)]">
+      <div className="w-full max-w-[430px] rounded-t-[28px] bg-cream px-6 pt-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))] shadow-[0_-12px_40px_rgba(22,21,19,0.12)]">
         <div
           className="mx-auto h-1 w-10 rounded-full bg-ink/25"
           aria-hidden
