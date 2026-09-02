@@ -52,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es-AR"
       className={`${playfair.variable} ${dmSans.variable} ${jetbrains.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-cream font-sans text-ink">
+      <body className="min-h-full bg-paper font-sans text-ink">
         <OfflineGate>{children}</OfflineGate>
       </body>
     </html>

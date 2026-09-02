@@ -8,6 +8,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const home = readFileSync(join(root, "lib/home.ts"), "utf8");
 const rail = readFileSync(join(root, "components/HomeBannerRail.tsx"), "utf8");
 const catalogHome = readFileSync(join(root, "components/CatalogHome.tsx"), "utf8");
+const skeleton = readFileSync(join(root, "components/Skeleton.tsx"), "utf8");
 
 const BANNERS = [
   "banner-llego.png",
@@ -31,11 +32,22 @@ test("home rail is Elena's four 1:1 squares in locked order", () => {
   assert.match(home, /daytimeOnly: true/);
   assert.match(home, /visibleHomeRail/);
   assert.match(rail, /aspect-square/);
+  assert.match(rail, /banner-llego\.png|item\.src/);
   assert.match(rail, /visibleHomeRail/);
   assert.match(catalogHome, /HomeBannerRail/);
   assert.match(catalogHome, /isLas21Live/);
   assert.match(catalogHome, /grid-cols-2/);
   assert.match(catalogHome, /Las21Module/);
+  const afterHeader = catalogHome.indexOf("</header>");
+  assert.ok(
+    catalogHome.indexOf("<HomeBannerRail", afterHeader) <
+      catalogHome.indexOf("<Las21Module", afterHeader),
+  );
+  assert.match(skeleton, /banner-llego\.png/);
+  assert.match(skeleton, /banner-esta-semana\.png/);
+  assert.match(skeleton, /banner-look\.png/);
+  assert.match(skeleton, /banner-las21\.png/);
+  assert.match(skeleton, /HomeBannerRailSkeleton/);
 
   const llego = home.indexOf("banner-llego.png");
   const semana = home.indexOf("banner-esta-semana.png");

@@ -42,16 +42,16 @@ export function Las21Module({
   if (!live) {
     return (
       <section
-        className="mx-4 mt-3 rounded-md border border-ink/10 bg-cream px-3 py-3"
+        className="mx-4 mt-3 rounded-md bg-terracotta px-3 py-3"
         aria-label={LAS21_LABEL}
       >
-        <p className="font-sans text-[11px] font-semibold tracking-[0.16em] text-terracotta uppercase">
+        <p className="font-sans text-[11px] font-semibold tracking-[0.16em] text-paper uppercase">
           {LAS21_LABEL}
         </p>
-        <p className="mt-1 font-serif text-[22px] leading-tight text-ink">
+        <p className="mt-1 font-serif text-[22px] leading-tight text-paper">
           {formatDayCountdown(now)}
         </p>
-        <RemindButton compact />
+        <RemindButton compact onAccent />
       </section>
     );
   }

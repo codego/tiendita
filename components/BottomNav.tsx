@@ -17,7 +17,7 @@ export function BottomNav() {
 
   return (
     <nav
-      className="sticky bottom-0 z-30 grid grid-cols-4 border-t border-ink/8 bg-surface pb-[env(safe-area-inset-bottom)]"
+      className="sticky bottom-0 z-30 grid grid-cols-4 border-t border-ink/8 bg-paper pb-[env(safe-area-inset-bottom)]"
       aria-label="Principal"
     >
       {items.map((item) => {

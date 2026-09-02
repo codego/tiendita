@@ -121,7 +121,7 @@ export function CatalogHome({
           <Link href={routes.landing} aria-label="Curadario" className="shrink-0">
             <Wordmark />
           </Link>
-          <label className="flex h-11 min-w-0 flex-1 items-center gap-2 rounded-full bg-cream px-3">
+          <label className="flex h-11 min-w-0 flex-1 items-center gap-2 rounded-full border border-ink/12 bg-paper px-3">
             <SearchIcon className="h-4 w-4 shrink-0 text-ink/45" />
             <span className="sr-only">{homeCopy.search}</span>
             <input
@@ -150,6 +150,17 @@ export function CatalogHome({
         </h1>
       </header>
 
+      <HomeBannerRail
+        dropLive={dropLive}
+        onChip={(id) => {
+          setChip(id);
+          setPages(2);
+        }}
+        onScrollFeed={() => {
+          feedAnchor.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+      />
+
       <Las21Module
         forceDrop={forceDrop}
         drop={drop}
@@ -167,17 +178,6 @@ export function CatalogHome({
         />
       </div>
 
-      <HomeBannerRail
-        dropLive={dropLive}
-        onChip={(id) => {
-          setChip(id);
-          setPages(2);
-        }}
-        onScrollFeed={() => {
-          feedAnchor.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }}
-      />
-
       <section className="mx-4 mt-3 flex items-center justify-between gap-3 rounded-md bg-terracotta px-3 py-3">
         <p className="min-w-0 font-sans text-[14px] font-medium leading-snug text-paper">
           {homeCopy.banner}
@@ -194,7 +194,7 @@ export function CatalogHome({
         <section className="pt-4" aria-label={homeCopy.recient}>
           <div className="px-4">
             <Link href={routes.recient}>
-              <h2 className="font-sans text-[15px] font-semibold text-ink">
+              <h2 className="font-sans text-[15px] font-semibold text-terracotta">
                 {homeCopy.recient}
               </h2>
             </Link>

@@ -99,6 +99,7 @@ test("tokens stay Curadario, not Temu orange", () => {
   assert.match(globals, /#161513/);
   assert.match(globals, /#c8553d/i);
   assert.match(globals, /#efe9dd/i);
+  assert.match(globals, /#ffffff|#fff/i);
   assert.match(globals, /#fbfaf6/i);
   assert.equal(globals.toLowerCase().includes("#ff6a00"), false);
   assert.match(catalogHome, /bg-terracotta/);

@@ -19,8 +19,8 @@ export function AppShell({
   className = "",
 }: AppShellProps) {
   return (
-    <div className="min-h-dvh bg-cream">
-      <div className="relative mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-surface shadow-[0_0_0_1px_rgba(22,21,19,0.06)]">
+    <div className="min-h-dvh bg-paper">
+      <div className="relative mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-paper shadow-[0_0_0_1px_rgba(22,21,19,0.06)]">
         {header === "overlay" ? (
           <div className="absolute top-0 right-0 left-0 z-20">
             <AppHeader variant="overlay" />

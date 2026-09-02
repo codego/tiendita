@@ -20,11 +20,11 @@
 }
 
 html {
-  background: var(--cream);
+  background: var(--paper);
 }
 
 body {
-  background: var(--cream);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
 }

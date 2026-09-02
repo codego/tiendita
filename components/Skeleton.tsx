@@ -33,6 +33,34 @@ export function ProductGridSkeleton({
   );
 }
 
+export function HomeBannerRailSkeleton() {
+  const banners = [
+    { src: "/banner-llego.png", alt: "Llegó." },
+    { src: "/banner-esta-semana.png", alt: "De esta semana." },
+    { src: "/banner-look.png", alt: "Lo que lleva el look." },
+    { src: "/banner-las21.png", alt: "Hoy a las 21." },
+  ];
+  return (
+    <section
+      className="pt-3"
+      aria-label="Llegó. De esta semana. Lo que lleva el look. Hoy a las 21."
+    >
+      <div className="flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {banners.map((banner) => (
+          <img
+            key={banner.src}
+            src={banner.src}
+            alt={banner.alt}
+            width={1024}
+            height={1024}
+            className="aspect-square h-[168px] w-[168px] shrink-0 rounded-md bg-terracotta object-cover"
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function RecienRailSkeleton() {
   return (
     <section className="pt-4" aria-busy="true" aria-label="Cargando Recién">
@@ -52,18 +80,19 @@ export function RecienRailSkeleton() {
 
 export function HomeFeedSkeleton() {
   return (
-    <div className="min-h-dvh bg-cream">
-      <div className="relative mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-surface shadow-[0_0_0_1px_rgba(22,21,19,0.06)]">
+    <div className="min-h-dvh bg-paper">
+      <div className="relative mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-paper shadow-[0_0_0_1px_rgba(22,21,19,0.06)]">
         <div className="px-4 pt-3">
           <div className="flex items-center gap-3">
             <div className="skeleton-shimmer h-6 w-28 shrink-0 rounded-full" />
-            <div className="h-11 min-w-0 flex-1 rounded-full bg-cream" />
+            <div className="h-11 min-w-0 flex-1 rounded-full border border-ink/12 bg-paper" />
           </div>
           <div className="mt-3 h-4 w-64 max-w-full rounded-full">
             <div className="skeleton-shimmer h-4 w-full rounded-full" />
           </div>
         </div>
-        <div className="mx-4 mt-4 h-20 rounded-md">
+        <HomeBannerRailSkeleton />
+        <div className="mx-4 mt-4 h-20 rounded-md bg-terracotta">
           <div className="skeleton-shimmer h-full rounded-md" />
         </div>
         <div className="mt-3 flex gap-2 overflow-hidden px-4">
