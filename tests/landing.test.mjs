@@ -33,6 +33,7 @@ test("home is the packed catalog plus a Las 21 module", () => {
   assert.match(catalogHome, /homeCopy\.banner/);
   assert.match(catalogHome, /Las21Module/);
   assert.match(catalogHome, /HOME_CHIPS/);
+  assert.match(catalogHome, /HomeBannerRail/);
   assert.match(catalogHome, /grid-cols-2/);
   assert.match(catalogHome, /ProductCard/);
   assert.match(catalogHome, /dense/);

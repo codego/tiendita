@@ -31,3 +31,36 @@ export const HOME_CHIPS = [
 ] as const;
 
 export type HomeChipId = (typeof HOME_CHIPS)[number]["id"];
+
+export const HOME_RAIL = [
+  {
+    id: "llego",
+    src: "/banner-llego.png",
+    alt: "Llegó.",
+    daytimeOnly: false,
+  },
+  {
+    id: "esta-semana",
+    src: "/banner-esta-semana.png",
+    alt: "De esta semana.",
+    daytimeOnly: false,
+  },
+  {
+    id: "look",
+    src: "/banner-look.png",
+    alt: "Lo que lleva el look.",
+    chip: "carteras",
+    daytimeOnly: false,
+  },
+  {
+    id: "las21",
+    src: "/banner-las21.png",
+    alt: "Hoy a las 21.",
+    href: "/las21",
+    daytimeOnly: true,
+  },
+] as const;
+
+export function visibleHomeRail(dropLive: boolean) {
+  return HOME_RAIL.filter((item) => !item.daytimeOnly || !dropLive);
+}

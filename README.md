@@ -21,7 +21,7 @@ npm run dev
 
 | On `/` | What you see |
 | --- | --- |
-| Always | Wordmark, search, locked line, chips, Recién rail, Lo más reenviado, dense 2-col grid |
+| Always | Wordmark, search, locked line, chips, 1:1 rail (Llegó. / De esta semana. / Lo que lleva el look. / Hoy a las 21. daytime), Recién rail, Lo más reenviado, dense 2-col grid |
 | Day, or fewer than 3 stores | Las 21 module: **Faltan X h Y min para Las 21.** + **Avisame a las 20:55** |
 | 21:00–21:20 with ≥ 3 stores, or `?drop=1` with ≥ 3 | Drop module **in the home with the scroll**: one piece per store, timer, **Ir a la tienda →**, share **Está pasando. 20 minutos.** |
 
