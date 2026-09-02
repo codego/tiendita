@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { FichaBackButton } from "@/components/FichaBackButton";
 import { HeartButton } from "@/components/HeartButton";
-import { BackIcon, HeartIcon, SearchIcon } from "@/components/Icons";
+import { HeartIcon, SearchIcon } from "@/components/Icons";
 import { Wordmark } from "@/components/Wordmark";
 import { routes } from "@/lib/routes";
 
@@ -20,13 +21,7 @@ export function AppHeader({ variant = "default", skuId }: AppHeaderProps) {
       }`}
     >
       {ficha ? (
-        <Link
-          href={routes.coleccion}
-          aria-label="Volver a Looks"
-          className="flex h-10 w-10 items-center justify-start"
-        >
-          <BackIcon />
-        </Link>
+        <FichaBackButton />
       ) : (
         <Link
           href={routes.buscar}
