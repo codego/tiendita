@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { MenuIcon, PersonIcon } from "@/components/Icons";
+import { MenuIcon } from "@/components/Icons";
 import { dashboardCopy } from "@/lib/brand";
 import { routes } from "@/lib/routes";
 
@@ -16,7 +16,6 @@ export function BrandMenu({
   variant?: "menu" | "person";
 }) {
   const [open, setOpen] = useState(false);
-  const Icon = variant === "person" ? PersonIcon : MenuIcon;
 
   return (
     <div className="relative">
@@ -29,7 +28,13 @@ export function BrandMenu({
           align === "left" ? "justify-start" : "justify-end"
         }`}
       >
-        <Icon />
+        {variant === "person" ? (
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-terracotta font-serif text-[15px] text-paper">
+            C
+          </span>
+        ) : (
+          <MenuIcon />
+        )}
       </button>
       {open ? (
         <nav

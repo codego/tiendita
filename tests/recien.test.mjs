@@ -73,6 +73,8 @@ test("every card starts the finding share kit", () => {
   assert.match(shareSheet, /routes\.landing/);
   assert.match(shareSheet, /Volver al feed/);
   assert.match(shareSheet, /router\.push\(routes\.landing\)/);
+  assert.match(shareSheet, /trackShare/);
+  assert.match(shareButton, /trackShare/);
   assert.equal(shareSheet.includes("routes.coleccion"), false);
   assert.equal(shareSheet.includes("getTapaSkus"), false);
 });

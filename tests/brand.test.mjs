@@ -51,31 +51,28 @@ test("brand landing copy is exact", () => {
   assert.match(marcas, /routes\.privacidad/);
 });
 
-test("merchant panel home uses real weekly counts and Elena's cockpit", () => {
-  assert.match(brand, /Esta semana/);
-  assert.match(brand, /En Curadario/);
+test("merchant panel home uses Elena's mature cockpit and real salidas", () => {
+  assert.match(brand, /Salidas a tu tienda \(7 días\)/);
+  assert.match(brand, /Lo que más reenviaron/);
+  assert.match(brand, /Hoy a las 21: esta\./);
   assert.match(brand, /Elegir más piezas/);
   assert.match(brand, /Elegir piezas/);
   assert.match(brand, /Ver mi vitrina/);
   assert.match(brand, /Curadario no vende\. El clic es el resultado\./);
-  assert.match(brand, /Visitas/);
-  assert.match(brand, /Clics a la tienda/);
-  assert.match(brand, /Publicadas/);
-  assert.match(brand, /Oculta/);
-  assert.match(brand, /Sincronizar/);
-  assert.match(brand, /Clics esta semana/);
   assert.match(brand, /Todavía no hay nada en Curadario\./);
   assert.match(dashboardPage, /redirect\(routes\.marcas\)/);
-  assert.match(dashboard, /dashboardCopy\.visitsLabel/);
-  assert.match(dashboard, /dashboardCopy\.clicksLabel/);
-  assert.match(dashboard, /dashboardCopy\.publishedLabel/);
-  assert.match(dashboard, /useWeekStoreClicks|useWeekClickMap/);
-  assert.match(dashboard, /useWeekVisits/);
+  assert.match(dashboard, /dashboardCopy\.salidas/);
+  assert.match(dashboard, /dashboardCopy\.forwarded/);
+  assert.match(dashboard, /dashboardCopy\.tonightTitle/);
+  assert.match(dashboard, /useWeekClickMap/);
+  assert.match(dashboard, /useWeekShareMap/);
   assert.match(dashboard, /dashboardCopy\.footer/);
-  assert.match(dashboard, /dashboardCopy\.hidden/);
   assert.match(dashboard, /routes\.marcasElegir/);
   assert.match(dashboard, /routes\.marca/);
   assert.equal(dashboard.includes("routes.coleccion"), false);
+  assert.equal(/visitas/i.test(dashboard), false);
+  assert.equal(/clics/i.test(dashboard), false);
+  assert.equal(dashboard.includes("useWeekVisits"), false);
   assert.match(brandMenu, /routes\.marcasSalir/);
   assert.equal(brandMenu.includes("routes.coleccion"), false);
   assert.equal(brand.includes("1284"), false);
@@ -146,6 +143,7 @@ test("share sheet is a finding, not the look", () => {
   assert.match(shareFinding, /shareCopy\.kit/);
   assert.match(shareFinding, /findingPath/);
   assert.match(shareFinding, /routes\.pieza/);
+  assert.match(shareSheet, /trackShare/);
   assert.equal(shareSheet.includes("routes.app"), false);
   assert.equal(shareSheet.includes("getTapaSkus"), false);
   assert.equal(shareFinding.includes("lookPath"), false);

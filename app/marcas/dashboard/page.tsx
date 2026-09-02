@@ -3,7 +3,7 @@ import { dashboardCopy } from "@/lib/brand";
 import { routes } from "@/lib/routes";
 
 export const metadata = {
-  title: "Esta semana — Curadario",
+  title: "Tu tienda — Curadario",
   description: dashboardCopy.footer,
 };
 

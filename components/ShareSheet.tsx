@@ -21,6 +21,7 @@ import {
   findingUrl,
   whatsappShareHref,
 } from "@/lib/shareFinding";
+import { trackShare } from "@/lib/shares";
 import type { Sku } from "@/lib/types";
 
 export function ShareSheet({ sku }: { sku: Sku }) {
@@ -43,6 +44,7 @@ export function ShareSheet({ sku }: { sku: Sku }) {
     } catch {
       setStatus(text);
     }
+    trackShare(sku.id);
   }
 
   async function shareNative() {
@@ -55,6 +57,7 @@ export function ShareSheet({ sku }: { sku: Sku }) {
           text,
           url,
         });
+        trackShare(sku.id);
         router.push(routes.landing);
         return;
       } catch {
@@ -66,6 +69,7 @@ export function ShareSheet({ sku }: { sku: Sku }) {
   }
 
   function openWhatsApp() {
+    trackShare(sku.id);
     window.open(whatsappShareHref(currentUrl(), sku), "_blank", "noopener,noreferrer");
   }
 

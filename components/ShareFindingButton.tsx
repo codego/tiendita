@@ -6,6 +6,7 @@ import { shareCopy } from "@/lib/brand";
 import { getSku } from "@/lib/catalog";
 import { routes } from "@/lib/routes";
 import { findingShareText, findingUrl } from "@/lib/shareFinding";
+import { trackShare } from "@/lib/shares";
 import type { Sku } from "@/lib/types";
 
 export function ShareFindingButton({
@@ -33,6 +34,7 @@ export function ShareFindingButton({
           text,
           url,
         });
+        trackShare(piece.id);
         return;
       } catch {
         // Cancelled or unsupported — copy instead.
@@ -40,6 +42,7 @@ export function ShareFindingButton({
     }
     try {
       await navigator.clipboard.writeText(text);
+      trackShare(piece.id);
     } catch {
       // Ignore clipboard failures; the finding still lives on this screen.
     }

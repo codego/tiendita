@@ -138,7 +138,7 @@ test("OG hallazgo and Las 21 drop cards are locked", () => {
 test("merchant click notice is the locked line", () => {
   assert.match(brand, /Alguien salió de Curadario a tu ficha\./);
   assert.match(analytics, /Alguien salió de Curadario a tu ficha\./);
-  assert.match(dashboard, /useWeekStoreClicks|countStoreClicksThisWeek/);
+  assert.match(dashboard, /useWeekClickMap|countStoreClicksThisWeek/);
 });
 
 test("home grid skeleton is terracotta shimmer, not a spinner", () => {

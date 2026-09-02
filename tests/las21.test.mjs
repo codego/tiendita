@@ -129,4 +129,6 @@ test("tonight is one invented AR store each, never luxury or euros", () => {
   assert.equal(blob.includes("€"), false);
   assert.equal(blob.includes("eur"), false);
   assert.ok(drop.every((sku) => sku.price_ars > 0));
+  assert.match(las21, /tonightPieceForStore/);
+  assert.equal(LAS21_FLOOR, 3);
 });

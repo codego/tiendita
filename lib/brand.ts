@@ -62,11 +62,12 @@ export const shareCopy = {
 export const dashboardCopy = {
   kicker: "Curadario · tu tienda",
   kickerAccent: "tu tienda",
-  title: "Esta semana",
-  list: "En Curadario",
-  clicksWeek: "Clics esta semana",
-  hidden: "Oculta",
-  sync: "Sincronizar",
+  salidas: "Salidas a tu tienda (7 días)",
+  forwarded: "Lo que más reenviaron",
+  tonightTitle: "Hoy a las 21: esta.",
+  tonightEmpty: "Esta noche no tenés pieza en el drop.",
+  tonightChip: "Las 21",
+  change: "Cambiar",
   connected: "Conectada a TiendaNube",
   lastSyncPrefix: "última sync",
   more: "Elegir más piezas",
@@ -75,9 +76,6 @@ export const dashboardCopy = {
   vitrina: "Ver mi vitrina",
   logout: "Cerrar sesión",
   footer: "Curadario no vende. El clic es el resultado.",
-  visitsLabel: "Visitas",
-  clicksLabel: "Clics a la tienda",
-  publishedLabel: "Publicadas",
   clickNotice: "Alguien salió de Curadario a tu ficha.",
 } as const;
 

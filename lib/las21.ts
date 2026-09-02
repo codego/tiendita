@@ -91,6 +91,13 @@ export function getAnocheForwarded(): Sku[] {
   return skus;
 }
 
+export function tonightPieceForStore(
+  storeName: string,
+  skus: Sku[] = getTonightDrop(),
+): Sku | undefined {
+  return skus.find((sku) => sku.brand === storeName);
+}
+
 export function tonightStoreCount(skus: Sku[] = getTonightDrop()): number {
   return new Set(skus.map((sku) => sku.brand)).size;
 }

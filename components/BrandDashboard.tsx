@@ -2,25 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useMemo } from "react";
 import { BrandMark } from "@/components/BrandMark";
 import { BrandMenu } from "@/components/BrandMenu";
 import { PhoneFrame } from "@/components/PhoneFrame";
-import { RefreshIcon } from "@/components/Icons";
 import { Wordmark } from "@/components/Wordmark";
-import { brandCopy, dashboardCopy, elegirCopy, lastSyncLine } from "@/lib/brand";
+import { rankForwarded, tonightXor } from "@/lib/cockpit.mjs";
+import { brandCopy, dashboardCopy, elegirCopy } from "@/lib/brand";
+import { tonightPieceForStore } from "@/lib/las21";
 import { brandSlug } from "@/lib/marca";
-import { bumpRecien, catalogIdsFromTn, TN_TO_SKU } from "@/lib/recien";
-import { setPublishedIds } from "@/lib/published";
 import { routes } from "@/lib/routes";
-import { setLastSyncAt } from "@/lib/sync";
-import { relativeHace } from "@/lib/time";
-import { useLastSyncAt } from "@/lib/useLastSync";
-import { usePublishedIds } from "@/lib/usePublished";
-import { useWeekClickMap, useWeekStoreClicks } from "@/lib/useStoreClicks";
+import { storePieces } from "@/lib/store-pieces";
 import { useHydrated } from "@/lib/useHydrated";
-import { useWeekVisits } from "@/lib/useVisits";
+import { usePublishedIds } from "@/lib/usePublished";
+import { useWeekShareMap } from "@/lib/useShares";
+import { useWeekClickMap } from "@/lib/useStoreClicks";
 import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
 
 export function BrandDashboard({
@@ -32,50 +28,37 @@ export function BrandDashboard({
   products: TiendaNubeProduct[];
   source?: "mock" | "live";
 }) {
-  const router = useRouter();
   const hydrated = useHydrated();
   const publishedIds = usePublishedIds();
-  const weekClicks = useWeekStoreClicks();
   const clickMap = useWeekClickMap();
-  const visits = useWeekVisits();
-  const lastSync = useLastSyncAt();
-  const [hidden, setHidden] = useState<string[]>([]);
+  const shareMap = useWeekShareMap();
 
   const vitrinaHref = routes.marca(brandSlug(store.name));
-  const publishedSet = useMemo(() => new Set(publishedIds), [publishedIds]);
+  const empty = !hydrated || publishedIds.length === 0;
+  const status = source === "mock" ? brandCopy.mockLabel : dashboardCopy.connected;
+  const tonight = tonightPieceForStore(store.name);
+  const drop = tonightXor(tonight);
 
-  const listed = useMemo(() => {
-    const ids = new Set([...publishedIds, ...hidden]);
-    return products.filter((product) => ids.has(product.id));
-  }, [hidden, products, publishedIds]);
+  const pieces = useMemo(
+    () => storePieces(store.name, products),
+    [products, store.name],
+  );
 
-  const empty = !hydrated || (publishedIds.length === 0 && hidden.length === 0);
+  const salidas = useMemo(
+    () => pieces.reduce((sum, piece) => sum + (clickMap[piece.id] ?? 0), 0),
+    [clickMap, pieces],
+  );
 
-  function toggle(id: string) {
-    const on = publishedSet.has(id);
-    const next = on
-      ? publishedIds.filter((item) => item !== id)
-      : [...publishedIds, id];
-    setPublishedIds(next);
-    if (on) {
-      setHidden((current) =>
-        current.includes(id) ? current : [...current, id],
-      );
-    } else {
-      setHidden((current) => current.filter((item) => item !== id));
-      bumpRecien(catalogIdsFromTn([id]));
-    }
-  }
-
-  function sync() {
-    setLastSyncAt(Date.now());
-    router.refresh();
-  }
-
-  const status =
-    source === "mock"
-      ? brandCopy.mockLabel
-      : lastSyncLine(hydrated ? relativeHace(lastSync) : "hace instantes");
+  const forwarded = useMemo(
+    () =>
+      rankForwarded(
+        pieces.map((piece) => ({
+          ...piece,
+          count: shareMap[piece.id] ?? 0,
+        })),
+      ),
+    [pieces, shareMap],
+  );
 
   if (empty) {
     return (
@@ -103,7 +86,7 @@ export function BrandDashboard({
                 className="h-2 w-2 shrink-0 rounded-full bg-[#3D8B5A]"
                 aria-hidden="true"
               />
-              {source === "mock" ? brandCopy.mockLabel : dashboardCopy.connected}
+              {status}
             </p>
           </div>
         </div>
@@ -133,12 +116,6 @@ export function BrandDashboard({
     );
   }
 
-  const metrics = [
-    { value: visits, label: dashboardCopy.visitsLabel },
-    { value: weekClicks, label: dashboardCopy.clicksLabel },
-    { value: publishedIds.length, label: dashboardCopy.publishedLabel },
-  ];
-
   return (
     <PhoneFrame>
       <header className="flex items-center justify-between px-5 pt-6">
@@ -153,107 +130,88 @@ export function BrandDashboard({
         <h1 className="font-serif text-[40px] leading-[1.02] text-ink">
           {store.name}
         </h1>
-        <p className="mt-2 flex items-center gap-1.5 font-sans text-[13px] text-ink/60">
-          <span
-            className="h-2 w-2 shrink-0 rounded-full bg-[#3D8B5A]"
-            aria-hidden="true"
-          />
-          <span>{status}</span>
-        </p>
+        <p className="mt-2 font-sans text-[15px] text-ink/65">{status}</p>
 
-        <button
-          type="button"
-          onClick={sync}
-          className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-2xl border border-ink/20 bg-transparent font-sans text-[15px] font-medium text-ink"
-        >
-          <RefreshIcon className="h-4 w-4" />
-          {dashboardCopy.sync}
-        </button>
+        <section className="mt-8 rounded-[28px] bg-paper px-6 pt-8 pb-6 text-center">
+          <p className="font-serif text-[88px] leading-none text-terracotta">
+            {hydrated ? salidas : "—"}
+          </p>
+          <p className="mt-3 font-sans text-[15px] text-ink">
+            {dashboardCopy.salidas}
+          </p>
+          <p className="mt-8 font-sans text-[12px] text-ink/45">
+            {dashboardCopy.footer}
+          </p>
+        </section>
 
-        <h2 className="mt-8 font-serif text-[22px] leading-snug text-ink">
-          {dashboardCopy.title}
+        <h2 className="mt-10 font-serif text-[26px] leading-snug text-ink">
+          {dashboardCopy.forwarded}
         </h2>
-        <dl className="mt-4 grid grid-cols-3 gap-2">
-          {metrics.map((metric, index) => (
-            <div
-              key={metric.label}
-              className={`text-center ${
-                index === 1 ? "border-x border-ink/10" : ""
-              }`}
-            >
-              <dt className="sr-only">{metric.label}</dt>
-              <dd className="font-serif text-[28px] leading-none text-ink">
-                {hydrated ? metric.value : "—"}
-              </dd>
-              <p className="mt-2 font-sans text-[11px] leading-4 text-ink/55">
-                {metric.label}
-              </p>
-            </div>
-          ))}
-        </dl>
-
-        <h2 className="mt-8 font-serif text-[22px] leading-snug text-ink">
-          {dashboardCopy.list}
-        </h2>
-        <ul className="mt-2">
-          {listed.map((product) => {
-            const on = publishedSet.has(product.id);
-            const skuId = TN_TO_SKU[product.id] ?? product.id.replace(/^tn-/, "");
-            const clicks = clickMap[skuId] ?? 0;
-            return (
+        {hydrated && forwarded.length > 0 ? (
+          <ul className="mt-3">
+            {forwarded.map((piece) => (
               <li
-                key={product.id}
-                className="flex items-center gap-3 border-b border-ink/8 py-3 last:border-b-0"
+                key={piece.id}
+                className="flex items-center gap-3 border-b border-ink/10 py-3 last:border-b-0"
               >
-                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-cream">
+                <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-cream">
                   <Image
-                    src={product.image}
-                    alt={product.name}
+                    src={piece.image}
+                    alt={piece.name}
                     fill
-                    sizes="56px"
-                    unoptimized={product.image.startsWith("http")}
+                    sizes="48px"
+                    unoptimized={piece.image.startsWith("http")}
                     className="object-cover"
                   />
                 </div>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate font-serif text-[17px] leading-tight text-ink">
-                    {product.name}
-                  </p>
-                  <p className="mt-0.5 font-sans text-[12px] text-ink/55">
-                    {dashboardCopy.clicksWeek} {hydrated ? clicks : "—"}
-                  </p>
-                </div>
-                <div className="flex shrink-0 flex-col items-end">
-                  <button
-                    type="button"
-                    role="switch"
-                    aria-checked={on}
-                    aria-label={
-                      on
-                        ? `Ocultar ${product.name}`
-                        : `Publicar ${product.name}`
-                    }
-                    onClick={() => toggle(product.id)}
-                    className={`relative h-7 w-12 rounded-full transition-colors ${
-                      on ? "bg-terracotta" : "bg-ink/15"
-                    }`}
-                  >
-                    <span
-                      className={`absolute top-0.5 left-0.5 h-6 w-6 rounded-full bg-paper shadow-sm transition-transform ${
-                        on ? "translate-x-5" : "translate-x-0"
-                      }`}
-                    />
-                  </button>
-                  {on ? null : (
-                    <p className="mt-1 font-sans text-[11px] font-medium text-ink/45">
-                      {dashboardCopy.hidden}
-                    </p>
-                  )}
-                </div>
+                <p className="min-w-0 flex-1 truncate font-serif text-[18px] leading-tight text-ink">
+                  {piece.name}
+                </p>
+                <p className="shrink-0 font-serif text-[22px] leading-none text-terracotta">
+                  {piece.count}
+                </p>
               </li>
-            );
-          })}
-        </ul>
+            ))}
+          </ul>
+        ) : null}
+
+        <h2 className="mt-10 font-serif text-[26px] leading-snug text-ink">
+          {dashboardCopy.tonightTitle}
+        </h2>
+        {drop.showCard && tonight ? (
+          <div className="mt-3">
+            <div className="flex items-center gap-3 rounded-[22px] bg-paper px-3 py-3">
+              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-cream">
+                <Image
+                  src={tonight.image}
+                  alt={tonight.name}
+                  fill
+                  sizes="56px"
+                  className="object-cover"
+                />
+              </div>
+              <p className="min-w-0 flex-1 truncate font-serif text-[18px] leading-tight text-ink">
+                {tonight.name}
+              </p>
+              <span className="shrink-0 rounded-full bg-terracotta px-3 py-1 font-sans text-[12px] font-medium text-paper">
+                {dashboardCopy.tonightChip}
+              </span>
+            </div>
+            <div className="mt-3 flex justify-end">
+              <Link
+                href={routes.marcasElegir}
+                className="rounded-full border border-ink px-4 py-1.5 font-sans text-[13px] font-medium text-ink"
+              >
+                {dashboardCopy.change}
+              </Link>
+            </div>
+          </div>
+        ) : null}
+        {drop.showEmpty ? (
+          <p className="mt-3 font-sans text-[15px] leading-6 text-ink/70">
+            {dashboardCopy.tonightEmpty}
+          </p>
+        ) : null}
       </main>
 
       <div className="sticky bottom-0 bg-surface px-5 pt-3 pb-[calc(1rem+env(safe-area-inset-bottom))]">
@@ -269,9 +227,6 @@ export function BrandDashboard({
         >
           {dashboardCopy.vitrina}
         </Link>
-        <p className="mt-3 text-center font-sans text-[12px] text-ink/45">
-          {dashboardCopy.footer}
-        </p>
       </div>
     </PhoneFrame>
   );
