@@ -26,11 +26,11 @@
 }
 
 html {
-  background: var(--paper);
+  background: var(--cream);
 }
 
 body {
-  background: var(--paper);
+  background: var(--cream);
   color: var(--ink);
   font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
 }

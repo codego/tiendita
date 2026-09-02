@@ -79,8 +79,8 @@ export function RecienRailSkeleton() {
 
 export function HomeFeedSkeleton() {
   return (
-    <div className="min-h-dvh bg-paper">
-      <div className="relative mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-paper shadow-[0_0_0_1px_rgba(22,21,19,0.06)]">
+    <div className="min-h-dvh bg-cream">
+      <div className="relative mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-cream shadow-[0_0_0_1px_rgba(22,21,19,0.06)]">
         <div className="px-4 pt-3">
           <div className="flex items-center gap-3">
             <div className="skeleton-shimmer h-6 w-28 shrink-0 rounded-full" />
@@ -91,7 +91,7 @@ export function HomeFeedSkeleton() {
           </div>
         </div>
         <HomeBannerRailSkeleton />
-        <div className="mx-4 mt-4 h-20 rounded-md border border-ink/10 bg-paper">
+        <div className="mx-4 mt-4 h-20 rounded-md border border-ink/10 bg-cream">
           <div className="skeleton-shimmer h-full rounded-md" />
         </div>
         <div className="mt-3 flex gap-2 overflow-hidden px-4">

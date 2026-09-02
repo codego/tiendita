@@ -35,7 +35,7 @@ export function CategoryChips({
                   : "border"
                 : selected
                   ? "bg-ink text-paper"
-                  : "border border-ink/15 bg-paper text-ink"
+                  : "border border-ink/15 bg-cream text-ink"
             }`}
           >
             {chip.label}

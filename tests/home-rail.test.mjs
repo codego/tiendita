@@ -17,7 +17,7 @@ const BANNERS = [
   "banner-las21.png",
 ];
 
-test("home rail is Elena's three typographic 1:1 squares", () => {
+test("home rail is Elena's three photo 1:1 squares", () => {
   assert.match(home, /HOME_RAIL/);
   assert.match(home, /banner-llego\.png/);
   assert.match(home, /Llegó\./);

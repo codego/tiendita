@@ -151,7 +151,7 @@ export function CatalogHome({
         />
       </div>
 
-      <section className="mx-4 mt-3 flex items-center justify-between gap-3 rounded-md border border-ink/10 bg-paper px-3 py-3">
+      <section className="mx-4 mt-3 flex items-center justify-between gap-3 rounded-md border border-ink/10 bg-cream px-3 py-3">
         <p className="min-w-0 font-sans text-[14px] font-medium leading-snug text-ink">
           {homeCopy.banner}
         </p>

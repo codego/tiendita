@@ -23,7 +23,7 @@ const bottomNav = readFileSync(join(root, "components/BottomNav.tsx"), "utf8");
 const looksPage = readFileSync(join(root, "app/app/coleccion/page.tsx"), "utf8");
 const looksIndex = readFileSync(join(root, "components/LooksIndex.tsx"), "utf8");
 
-test("home is the packed catalog plus Elena's three-tile rail", () => {
+test("home is the packed catalog plus Elena's three photo tiles", () => {
   assert.match(home, /Marcas de TiendaNube\. Tocás, vas a su tienda\./);
   assert.match(home, /Todas las marcas\. Un solo lugar\./);
   assert.match(home, /Ir a las marcas →/);
@@ -120,11 +120,12 @@ test("shopper still has no bag or own checkout", () => {
   assert.match(home, /Mirá lo que encontré en Curadario\./);
 });
 
-test("readme is packed catalog plus typographic rail, local only", () => {
+test("readme is packed catalog plus photo rail, local only", () => {
   assert.match(readme, /git pull/);
   assert.match(readme, /npm run dev/);
   assert.match(readme, /localhost:3000/);
   assert.match(readme, /Hoy a las 21\./);
+  assert.match(readme, /cream `#EFE9DD`/);
   assert.match(readme, /Marcas de TiendaNube/);
   assert.match(readme, /Está pasando\. 20 minutos\./);
   assert.equal(readme.includes("Está pasando en Curadario. 20 minutos."), false);
