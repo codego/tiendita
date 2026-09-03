@@ -2,7 +2,7 @@ import { RecienStories } from "@/components/RecienStories";
 import { homeCopy } from "@/lib/home";
 
 export const metadata = {
-  title: "Recién — Curadario",
+  title: "Recién — Con pinta",
   description: homeCopy.hero,
 };
 

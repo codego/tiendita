@@ -80,11 +80,12 @@ test("live countdown starts at 20:00 and day copy is exact", () => {
   assert.equal(formatLiveCountdown(liveRemainingMs(ten)), "10:00");
   assert.match(formatDayCountdown(after), /Faltan \d+ h \d+ min para Las 21\./);
   assert.equal(dayShareText(after), formatDayCountdown(after));
-  assert.equal(LIVE_SHARE_COPY, "Está pasando. 20 minutos.");
+  assert.equal(LIVE_SHARE_COPY, "Está pasando en Con pinta. 20 minutos.");
   assert.equal(LIVE_SHARE_COPY.includes("en Curadario"), false);
-  assert.match(home, /Mirá lo que encontré en Curadario\./);
-  assert.match(brand, /Mirá lo que encontré en Curadario\./);
-  assert.match(home, /Está pasando\. 20 minutos\./);
+  assert.match(home, /Lo vi en Con pinta\./);
+  assert.match(brand, /Lo vi en Con pinta\./);
+  assert.match(home, /Está pasando en Con pinta\. 20 minutos\./);
+  assert.match(home, /¿Esta o esta\? En Con pinta\./);
   assert.equal(home.includes("Está pasando en Curadario. 20 minutos."), false);
   assert.equal(BRAND_TEASE, "hoy a las 21, esta.");
   assert.equal(REMIND_CTA, "Avisame a las 20:55");

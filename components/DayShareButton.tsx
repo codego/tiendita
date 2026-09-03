@@ -14,7 +14,7 @@ export function DayShareButton({
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "Curadario",
+          title: "Con pinta",
           text,
         });
         return;

@@ -98,7 +98,7 @@ export function CatalogHome({
     <div>
       <header className="px-4 pt-3">
         <div className="flex items-center gap-3">
-          <Link href={routes.landing} aria-label="Curadario" className="shrink-0">
+          <Link href={routes.landing} aria-label="Con pinta" className="shrink-0">
             <Wordmark />
           </Link>
           <label className="flex h-11 min-w-0 flex-1 items-center gap-2 rounded-full border border-ink/12 bg-paper px-3">

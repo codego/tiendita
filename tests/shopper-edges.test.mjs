@@ -48,7 +48,7 @@ const readme = read("README.md");
 const seed = JSON.parse(read("data/seed.json"));
 
 test("404 uses Elena's terracotta feed line", () => {
-  assert.match(notFoundCopy, /Esto no está en Curadario\./);
+  assert.match(notFoundCopy, /Esto no está en Con pinta\./);
   assert.match(notFoundCopy, /Volvé al feed\./);
   assert.match(notFoundCopy, /Ir al feed →/);
   assert.match(notFound, /tone="terracotta"/);

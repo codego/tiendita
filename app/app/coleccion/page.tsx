@@ -3,7 +3,7 @@ import { LooksIndex } from "@/components/LooksIndex";
 import { getLooksCollections } from "@/lib/catalog";
 
 export const metadata = {
-  title: "Looks — Curadario",
+  title: "Looks — Con pinta",
   description: "Colecciones curadas. Sastrería de agosto es una.",
 };
 

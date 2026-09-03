@@ -2,7 +2,7 @@ function read(name: string): string {
   return (process.env[name] ?? "").trim();
 }
 
-/** Until Curadario has its own inbox. Override with CONTACT_TO. */
+/** Until Con pinta has its own inbox. Override with CONTACT_TO. */
 export const DEFAULT_CONTACT_TO = "joacoditoma@gmail.com";
 
 export function getContactTo(): string {

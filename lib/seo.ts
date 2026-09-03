@@ -3,13 +3,15 @@ import { shareCopy } from "@/lib/brand";
 import { getSiteUrl } from "@/lib/env";
 import { homeCopy } from "@/lib/home";
 import { LIVE_SHARE_COPY } from "@/lib/las21";
+import { PRODUCT_NAME } from "@/lib/name";
 import { routes } from "@/lib/routes";
 import { hasProductImage } from "@/lib/product-image.mjs";
 import type { Sku } from "@/lib/types";
 
-export const OG_FINDING_TITLE = "Mirá lo que encontré en Curadario";
-export const OG_DROP_TITLE = "Está pasando. 20 minutos.";
-export const OG_SITE = "curadario.app";
+export const OG_FINDING_TITLE = "Lo vi en Con pinta.";
+export const OG_DROP_TITLE = "Está pasando en Con pinta. 20 minutos.";
+export const OG_ESTA_TITLE = "¿Esta o esta? En Con pinta.";
+export const OG_SITE = PRODUCT_NAME;
 export const HOME_OG_IMAGE = "/images/tapado-coppola.jpg";
 export const LAS21_OG_IMAGE = "/las21/opengraph-image";
 
@@ -25,7 +27,7 @@ export function absoluteUrl(path: string): string {
 export function homeMetadata(): Metadata {
   const description = homeCopy.hero;
   return {
-    title: "Curadario — Marcas de TiendaNube",
+    title: `${PRODUCT_NAME} — Marcas de TiendaNube`,
     description,
     alternates: { canonical: routes.landing },
     openGraph: {
@@ -33,14 +35,14 @@ export function homeMetadata(): Metadata {
       locale: "es_AR",
       siteName: OG_SITE,
       title: OG_FINDING_TITLE,
-      description,
+      description: OG_FINDING_TITLE,
       url: routes.landing,
       images: [{ url: HOME_OG_IMAGE, alt: OG_FINDING_TITLE }],
     },
     twitter: {
       card: "summary_large_image",
       title: OG_FINDING_TITLE,
-      description,
+      description: OG_FINDING_TITLE,
       images: [HOME_OG_IMAGE],
     },
   };
@@ -53,7 +55,7 @@ export function findingMetadata(sku: Sku): Metadata {
     ? [{ url: sku.image, alt: `${sku.brand} — ${sku.name}` }]
     : undefined;
   return {
-    title: `${sku.name} — ${sku.brand} · Curadario`,
+    title: `${sku.name} — ${sku.brand} · ${PRODUCT_NAME}`,
     description,
     alternates: { canonical: url },
     openGraph: {
@@ -61,14 +63,14 @@ export function findingMetadata(sku: Sku): Metadata {
       locale: "es_AR",
       siteName: OG_SITE,
       title: OG_FINDING_TITLE,
-      description,
+      description: OG_FINDING_TITLE,
       url,
       ...(images ? { images } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: OG_FINDING_TITLE,
-      description,
+      description: OG_FINDING_TITLE,
       ...(images ? { images: [sku.image] } : {}),
     },
   };
@@ -76,13 +78,13 @@ export function findingMetadata(sku: Sku): Metadata {
 
 export function dropMetadata(): Metadata {
   return {
-    title: `${LIVE_SHARE_COPY} — Curadario`,
+    title: `${LIVE_SHARE_COPY} — ${PRODUCT_NAME}`,
     description: LIVE_SHARE_COPY,
     alternates: { canonical: routes.las21 },
     openGraph: {
       type: "website",
       locale: "es_AR",
-      siteName: "Curadario",
+      siteName: OG_SITE,
       title: OG_DROP_TITLE,
       description: LIVE_SHARE_COPY,
       url: routes.las21,

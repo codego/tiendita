@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    title: "Curadario",
+    title: "Con pinta",
     statusBarStyle: "default",
     // iOS splash wordmark. Android uses manifest background_color #EFE9DD.
     startupImage: ["/splash-cream.png"],

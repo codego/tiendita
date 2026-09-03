@@ -59,7 +59,7 @@
       "categoryLabel": "Tapado",
       "chip": "sastreria",
       "description": "Paño camel, hombro ancho. El tapado del look — y de la temporada.",
-      "disclaimer": "Esta pieza vive en la tienda de Taller Recoleta. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Taller Recoleta. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/tapado-coppola",
       "image": "/images/tapado-coppola.jpg",
       "published_at": 1722470400000
@@ -77,7 +77,7 @@
       "categoryLabel": "Saco",
       "chip": "sastreria",
       "description": "Cuadros windowpane, hombro suave. El saco que cierra el look de agosto.",
-      "disclaimer": "Esta pieza vive en la tienda de Sastrería del Bajo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Sastrería del Bajo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/saco-frances",
       "image": "/images/saco-frances.jpg",
       "published_at": 1722474000000
@@ -95,7 +95,7 @@
       "categoryLabel": "Pantalón",
       "chip": "sastreria",
       "description": "Pinza marcada, caída recta. El pantalón del look, sin buscarlo en otra tienda.",
-      "disclaimer": "Esta pieza vive en la tienda de Paño Sur. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Paño Sur. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/pantalon-pinza",
       "image": "/images/pantalon-pinza.jpg",
       "published_at": 1722477600000
@@ -113,7 +113,7 @@
       "categoryLabel": "Camisa",
       "chip": "sastreria",
       "description": "Rayas suaves, cuello italiano. La camisa que sostiene las cinco piezas.",
-      "disclaimer": "Esta pieza vive en la tienda de Lino de Agosto. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Lino de Agosto. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/camisa-oxford",
       "image": "/images/camisa-oxford.jpg",
       "published_at": 1722481200000
@@ -131,7 +131,7 @@
       "categoryLabel": "Mocasín",
       "chip": "calzado",
       "description": "Suela de goma, capellada de cuero. El piso del look de agosto.",
-      "disclaimer": "Esta pieza vive en la tienda de Horma Palermo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Horma Palermo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/mocasin-goma",
       "image": "/images/mocasin-goma.jpg",
       "published_at": 1722484800000
@@ -149,7 +149,7 @@
       "categoryLabel": "Tote",
       "chip": "carteras",
       "description": "Lona cruda, asas largas. Lo que lleva el look cuando las manos no alcanzan.",
-      "disclaimer": "Esta pieza vive en la tienda de Atelier Costanera. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Atelier Costanera. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/tote-lona",
       "image": "/images/tote-lona.jpg",
       "published_at": 1722488400000
@@ -167,7 +167,7 @@
       "categoryLabel": "Baguette",
       "chip": "carteras",
       "description": "Napa suave, solapa chica. La baguette del look, en su propia colección.",
-      "disclaimer": "Esta pieza vive en la tienda de Marroquinería San Telmo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Marroquinería San Telmo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/baguette-napa",
       "image": "/images/baguette-napa.jpg",
       "published_at": 1722492000000
@@ -185,7 +185,7 @@
       "categoryLabel": "Bikini",
       "chip": "trajes-de-bano",
       "description": "Triángulo clásico, lazo en la nuca. Un traje, dos piezas, una colección.",
-      "disclaimer": "Esta pieza vive en la tienda de Mar del Este. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Mar del Este. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/bikini-triangulo",
       "image": "/images/bikini-triangulo.jpg",
       "published_at": 1722495600000
@@ -203,7 +203,7 @@
       "categoryLabel": "Enteriza",
       "chip": "trajes-de-bano",
       "description": "Canalé elástico, escote en U. La enteriza del único traje de la temporada.",
-      "disclaimer": "Esta pieza vive en la tienda de Línea Costera. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Línea Costera. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/enteriza-canale",
       "image": "/images/enteriza-canale.jpg",
       "published_at": 1722499200000
@@ -221,7 +221,7 @@
       "categoryLabel": "Blazer",
       "chip": "ropa",
       "description": "Crudo de lino, solapa estrecha. Un blazer de diario, de otra marca.",
-      "disclaimer": "Esta pieza vive en la tienda de Tela Norte. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Tela Norte. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/blazer-crudo",
       "image": "/images/saco-frances.jpg",
       "published_at": 1722502800000
@@ -239,7 +239,7 @@
       "categoryLabel": "Vestido",
       "chip": "ropa",
       "description": "Midi cruzado, manga corta. El vestido que no pide un look entero.",
-      "disclaimer": "Esta pieza vive en la tienda de Costura Belgrano. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Costura Belgrano. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/vestido-liniers",
       "image": "/images/camisa-oxford.jpg",
       "published_at": 1722506400000
@@ -257,7 +257,7 @@
       "categoryLabel": "Pollera",
       "chip": "ropa",
       "description": "Tabla suave, largo midi. Una pollera de otra vidriera.",
-      "disclaimer": "Esta pieza vive en la tienda de Atelier Núñez. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Atelier Núñez. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/pollera-midi",
       "image": "/images/pantalon-pinza.jpg",
       "published_at": 1722510000000
@@ -275,7 +275,7 @@
       "categoryLabel": "Sweater",
       "chip": "ropa",
       "description": "Punto grueso, cuello redondo. Abrigo liviano de marca chica.",
-      "disclaimer": "Esta pieza vive en la tienda de Prenda Cruda. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Prenda Cruda. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/sweater-punto",
       "image": "/images/tapado-coppola.jpg",
       "published_at": 1722513600000
@@ -293,7 +293,7 @@
       "categoryLabel": "Campera",
       "chip": "ropa",
       "description": "Gabardina tostada, cierre oculto. La campera de otra tienda.",
-      "disclaimer": "Esta pieza vive en la tienda de Taller Caballito. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Taller Caballito. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/campera-gabardina",
       "image": "/images/tapado-coppola.jpg",
       "published_at": 1722517200000
@@ -311,7 +311,7 @@
       "categoryLabel": "Remera",
       "chip": "ropa",
       "description": "Hilo fino, cuello al ras. Una remera que no es de sastrería.",
-      "disclaimer": "Esta pieza vive en la tienda de Lino Sur. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Lino Sur. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/remera-hilo",
       "image": "/images/camisa-oxford.jpg",
       "published_at": 1722520800000
@@ -329,7 +329,7 @@
       "categoryLabel": "Jumper",
       "chip": "ropa",
       "description": "Escote cuadrado, largo a la cadera. Otro taller, otra prenda.",
-      "disclaimer": "Esta pieza vive en la tienda de Corte Palermo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Corte Palermo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/jumper-lana",
       "image": "/images/saco-frances.jpg",
       "published_at": 1722524400000
@@ -347,7 +347,7 @@
       "categoryLabel": "Camisa",
       "chip": "ropa",
       "description": "Rayas finas, puño simple. Camisa de barrio, no de colección.",
-      "disclaimer": "Esta pieza vive en la tienda de Taller Villa Urquiza. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Taller Villa Urquiza. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/camisa-rayada",
       "image": "/images/camisa-oxford.jpg",
       "published_at": 1722528000000
@@ -365,7 +365,7 @@
       "categoryLabel": "Buzo",
       "chip": "deportiva",
       "description": "Frisa suave, capucha chica. Para moverse, no para el look.",
-      "disclaimer": "Esta pieza vive en la tienda de Ritmo Palermo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Ritmo Palermo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/buzo-entrenamiento",
       "image": "/images/camisa-oxford.jpg",
       "published_at": 1722531600000
@@ -383,7 +383,7 @@
       "categoryLabel": "Calza",
       "chip": "deportiva",
       "description": "Cintura alta, tela mate. La calza de otra marca.",
-      "disclaimer": "Esta pieza vive en la tienda de Pista Norte. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Pista Norte. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/calza-pista",
       "image": "/images/pantalon-pinza.jpg",
       "published_at": 1722535200000
@@ -401,7 +401,7 @@
       "categoryLabel": "Top",
       "chip": "deportiva",
       "description": "Soporte medio, tiras finas. Un top de entrenamiento.",
-      "disclaimer": "Esta pieza vive en la tienda de Entrenar Sur. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Entrenar Sur. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/top-salto",
       "image": "/images/camisa-oxford.jpg",
       "published_at": 1722538800000
@@ -419,7 +419,7 @@
       "categoryLabel": "Short",
       "chip": "deportiva",
       "description": "Bolsillos laterales, secado rápido. Short de otra vidriera.",
-      "disclaimer": "Esta pieza vive en la tienda de Movida Costera. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Movida Costera. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/short-cancha",
       "image": "/images/pantalon-pinza.jpg",
       "published_at": 1722542400000
@@ -437,7 +437,7 @@
       "categoryLabel": "Campera",
       "chip": "deportiva",
       "description": "Cierre corto, capucha plegable. Rompeviento de marca local.",
-      "disclaimer": "Esta pieza vive en la tienda de Salto Urbano. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Salto Urbano. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/campera-rompeviento",
       "image": "/images/tapado-coppola.jpg",
       "published_at": 1722546000000
@@ -455,7 +455,7 @@
       "categoryLabel": "Remera",
       "chip": "deportiva",
       "description": "Tela que respira, sisa amplia. Remera para la cancha.",
-      "disclaimer": "Esta pieza vive en la tienda de Cancha Abierta. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Cancha Abierta. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/remera-tecnica",
       "image": "/images/camisa-oxford.jpg",
       "published_at": 1722549600000
@@ -473,7 +473,7 @@
       "categoryLabel": "Bandolera",
       "chip": "carteras",
       "description": "Suela natural, tira ajustable. Otra cartera, otra marca.",
-      "disclaimer": "Esta pieza vive en la tienda de Cuero de Once. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Cuero de Once. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/bandolera-suela",
       "image": "/images/baguette-napa.jpg",
       "published_at": 1722553200000
@@ -491,7 +491,7 @@
       "categoryLabel": "Clutch",
       "chip": "carteras",
       "description": "Cierre escondido, asa de cadena. Para la noche, no para el look.",
-      "disclaimer": "Esta pieza vive en la tienda de Bolso del Centro. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Bolso del Centro. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/clutch-noche",
       "image": "/images/baguette-napa.jpg",
       "published_at": 1722556800000
@@ -509,7 +509,7 @@
       "categoryLabel": "Shopper",
       "chip": "carteras",
       "description": "Base ancha, asas cortas. El shopper de otra tienda.",
-      "disclaimer": "Esta pieza vive en la tienda de Napa Belgrano. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Napa Belgrano. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/shopper-lona",
       "image": "/images/tote-lona.jpg",
       "published_at": 1722560400000
@@ -527,7 +527,7 @@
       "categoryLabel": "Mini",
       "chip": "carteras",
       "description": "Cuerpo chico, solapa imán. Una mini de marca inventada.",
-      "disclaimer": "Esta pieza vive en la tienda de Taller Almagro. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Taller Almagro. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/mini-bag",
       "image": "/images/baguette-napa.jpg",
       "published_at": 1722564000000
@@ -545,7 +545,7 @@
       "categoryLabel": "Cinto",
       "chip": "accesorios",
       "description": "Hebilla quieta, tira de 2 cm. Un cinto, otra marca.",
-      "disclaimer": "Esta pieza vive en la tienda de Cinto Sur. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Cinto Sur. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/cinto-cuero",
       "image": "/images/baguette-napa.jpg",
       "published_at": 1722567600000
@@ -563,7 +563,7 @@
       "categoryLabel": "Aros",
       "chip": "accesorios",
       "description": "Aro mediano, cierre oculto. Bijou de barrio.",
-      "disclaimer": "Esta pieza vive en la tienda de Bijou Palermo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Bijou Palermo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/aros-aro",
       "image": "/images/tote-lona.jpg",
       "published_at": 1722571200000
@@ -581,7 +581,7 @@
       "categoryLabel": "Pañuelo",
       "chip": "accesorios",
       "description": "70 por 70, ruedo fino. Un pañuelo para el cuello o la cartera.",
-      "disclaimer": "Esta pieza vive en la tienda de Pañuelo Lino. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Pañuelo Lino. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/panuelo-seda",
       "image": "/images/camisa-oxford.jpg",
       "published_at": 1722574800000
@@ -599,7 +599,7 @@
       "categoryLabel": "Hebilla",
       "chip": "accesorios",
       "description": "Plata mate, pasador simple. Un detalle, otra tienda.",
-      "disclaimer": "Esta pieza vive en la tienda de Hebilla Once. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Hebilla Once. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/hebilla-plateada",
       "image": "/images/mocasin-goma.jpg",
       "published_at": 1722578400000
@@ -617,7 +617,7 @@
       "categoryLabel": "Anteojos",
       "chip": "accesorios",
       "description": "Acetato carey, lente gris. Anteojos de otra marca.",
-      "disclaimer": "Esta pieza vive en la tienda de Anteojos del Bajo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Anteojos del Bajo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/anteojos-sol",
       "image": "/images/baguette-napa.jpg",
       "published_at": 1722582000000
@@ -635,7 +635,7 @@
       "categoryLabel": "Reloj",
       "chip": "accesorios",
       "description": "Caja chica, malla de acero. La hora, en otra vidriera.",
-      "disclaimer": "Esta pieza vive en la tienda de Reloj de Barrio. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Reloj de Barrio. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/reloj-pulsera",
       "image": "/images/mocasin-goma.jpg",
       "published_at": 1722585600000
@@ -653,7 +653,7 @@
       "categoryLabel": "Bikini",
       "chip": "trajes-de-bano",
       "description": "Aro suave, tiras regulables. Otro traje, otra marca.",
-      "disclaimer": "Esta pieza vive en la tienda de Arena Chica. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Arena Chica. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/bikini-aro",
       "image": "/images/bikini-triangulo.jpg",
       "published_at": 1722589200000
@@ -671,7 +671,7 @@
       "categoryLabel": "Slip",
       "chip": "trajes-de-bano",
       "description": "Tiro alto, recorte lateral. La parte de abajo de otra tienda.",
-      "disclaimer": "Esta pieza vive en la tienda de Costa Verde. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Costa Verde. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/slip-costa",
       "image": "/images/bikini-triangulo.jpg",
       "published_at": 1722592800000
@@ -689,7 +689,7 @@
       "categoryLabel": "Enteriza",
       "chip": "trajes-de-bano",
       "description": "Nudo al frente, espalda abierta. Enteriza de la costa.",
-      "disclaimer": "Esta pieza vive en la tienda de Sal Pinamar. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Sal Pinamar. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/enteriza-nudo",
       "image": "/images/enteriza-canale.jpg",
       "published_at": 1722596400000
@@ -707,7 +707,7 @@
       "categoryLabel": "Pareo",
       "chip": "trajes-de-bano",
       "description": "Voile liviano, ruedo crudo. El pareo que cierra el traje.",
-      "disclaimer": "Esta pieza vive en la tienda de Ola Quietud. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Ola Quietud. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/pareo-ola",
       "image": "/images/enteriza-canale.jpg",
       "published_at": 1722600000000
@@ -725,7 +725,7 @@
       "categoryLabel": "Saco",
       "chip": "sastreria",
       "description": "Doble abotonadura, solapa ancha. Sastrería de otra casa.",
-      "disclaimer": "Esta pieza vive en la tienda de Sastre Villa Crespo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Sastre Villa Crespo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/saco-cruzado",
       "image": "/images/saco-frances.jpg",
       "published_at": 1722603600000
@@ -743,7 +743,7 @@
       "categoryLabel": "Chaleco",
       "chip": "sastreria",
       "description": "Cinco botones, espalda de forro. Un chaleco, no el look de agosto.",
-      "disclaimer": "Esta pieza vive en la tienda de Paño Norte. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Paño Norte. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/chaleco-sastre",
       "image": "/images/saco-frances.jpg",
       "published_at": 1722607200000
@@ -761,7 +761,7 @@
       "categoryLabel": "Pantalón",
       "chip": "sastreria",
       "description": "Pinza baja, basta sin dobladillo. Otro pantalón sastre.",
-      "disclaimer": "Esta pieza vive en la tienda de Corte Libertad. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Corte Libertad. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/pantalon-vestir",
       "image": "/images/pantalon-pinza.jpg",
       "published_at": 1722610800000
@@ -779,7 +779,7 @@
       "categoryLabel": "Tapado",
       "chip": "sastreria",
       "description": "Largo a la cadera, hombro marcado. Tapado de otra sastrería.",
-      "disclaimer": "Esta pieza vive en la tienda de Taller Congreso. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Taller Congreso. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/tapado-corto",
       "image": "/images/tapado-coppola.jpg",
       "published_at": 1722614400000
@@ -797,7 +797,7 @@
       "categoryLabel": "Bota",
       "chip": "calzado",
       "description": "Caña media, taco bajo. Bota de otra horma.",
-      "disclaimer": "Esta pieza vive en la tienda de Suela San Telmo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Suela San Telmo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/bota-media",
       "image": "/images/mocasin-goma.jpg",
       "published_at": 1722618000000
@@ -815,7 +815,7 @@
       "categoryLabel": "Zapatilla",
       "chip": "calzado",
       "description": "Lona cruda, suela de goma. Zapatilla de marca local.",
-      "disclaimer": "Esta pieza vive en la tienda de Horma Norte. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Horma Norte. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/zapatilla-lona",
       "image": "/images/mocasin-goma.jpg",
       "published_at": 1722621600000
@@ -833,7 +833,7 @@
       "categoryLabel": "Sandalia",
       "chip": "calzado",
       "description": "Tira ancha, cama plana. Sandalia de otra tienda.",
-      "disclaimer": "Esta pieza vive en la tienda de Paso Recoleta. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Paso Recoleta. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/sandalia-tira",
       "image": "/images/mocasin-goma.jpg",
       "published_at": 1722625200000
@@ -851,7 +851,7 @@
       "categoryLabel": "Bota",
       "chip": "calzado",
       "description": "Caña alta, suela track. Bota de invierno, otra marca.",
-      "disclaimer": "Esta pieza vive en la tienda de Cuero y Goma. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Cuero y Goma. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/bota-cana",
       "image": "/images/mocasin-goma.jpg",
       "published_at": 1722628800000
@@ -869,7 +869,7 @@
       "categoryLabel": "Taco",
       "chip": "calzado",
       "description": "Taco de 5 cm, puntera cuadrada. Un taco, no un mall.",
-      "disclaimer": "Esta pieza vive en la tienda de Taco Bajo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Taco Bajo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/taco-bloque",
       "image": "/images/mocasin-goma.jpg",
       "published_at": 1722632400000
@@ -887,7 +887,7 @@
       "categoryLabel": "Alpargata",
       "chip": "calzado",
       "description": "Yute natural, capellada de lona. Alpargata de barrio.",
-      "disclaimer": "Esta pieza vive en la tienda de Alpargata Sur. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Alpargata Sur. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/alpargata-yute",
       "image": "/images/mocasin-goma.jpg",
       "published_at": 1722636000000
@@ -905,7 +905,7 @@
       "categoryLabel": "Blazer",
       "chip": "sastreria",
       "description": "Navy cerrado, solapa clásica. Sastrería de otra casa.",
-      "disclaimer": "Esta pieza vive en la tienda de Corte Libertad. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Corte Libertad. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/blazer-navy",
       "image": "/images/saco-frances.jpg",
       "published_at": 1722639600000
@@ -923,7 +923,7 @@
       "categoryLabel": "Jean",
       "chip": "ropa",
       "description": "Denim índigo, basta cruda. Un jean de otra vidriera.",
-      "disclaimer": "Esta pieza vive en la tienda de Tela Norte. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Tela Norte. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/jean-recto",
       "image": "/images/pantalon-pinza.jpg",
       "published_at": 1722643200000
@@ -941,7 +941,7 @@
       "categoryLabel": "Camisa",
       "chip": "ropa",
       "description": "Oxford claro, cuello button-down. Camisa de barrio.",
-      "disclaimer": "Esta pieza vive en la tienda de Lino de Agosto. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Lino de Agosto. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/camisa-oxford-h",
       "image": "/images/camisa-oxford.jpg",
       "published_at": 1722646800000
@@ -959,7 +959,7 @@
       "categoryLabel": "Zapato",
       "chip": "calzado",
       "description": "Capellada lisa, suela de cuero. El piso de otra marca.",
-      "disclaimer": "Esta pieza vive en la tienda de Horma Palermo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Horma Palermo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/zapato-vestir",
       "image": "/images/mocasin-goma.jpg",
       "published_at": 1722650400000
@@ -977,7 +977,7 @@
       "categoryLabel": "Anillo",
       "chip": "accesorios",
       "description": "Plata mate, cara lisa. Un sello de otra casa.",
-      "disclaimer": "Esta pieza vive en la tienda de Bijou Palermo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Bijou Palermo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/anillo-sello",
       "image": "/images/baguette-napa.jpg",
       "published_at": 1722654000000
@@ -995,7 +995,7 @@
       "categoryLabel": "Collar",
       "chip": "accesorios",
       "description": "Cadena fina, cierre langosta. Un collar, otra marca.",
-      "disclaimer": "Esta pieza vive en la tienda de Hebilla Once. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Hebilla Once. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/collar-cadena",
       "image": "/images/tote-lona.jpg",
       "published_at": 1722657600000
@@ -1013,7 +1013,7 @@
       "categoryLabel": "Pulsera",
       "chip": "accesorios",
       "description": "Eslabón chato, cierre oculto. Pulsera de barrio.",
-      "disclaimer": "Esta pieza vive en la tienda de Reloj de Barrio. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Reloj de Barrio. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/pulsera-eslabon",
       "image": "/images/mocasin-goma.jpg",
       "published_at": 1722661200000
@@ -1031,7 +1031,7 @@
       "categoryLabel": "Aros",
       "chip": "accesorios",
       "description": "Perla chica, gancho fino. Aros de otra vidriera.",
-      "disclaimer": "Esta pieza vive en la tienda de Pañuelo Lino. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Pañuelo Lino. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/aros-perla",
       "image": "/images/baguette-napa.jpg",
       "published_at": 1722664800000
@@ -1049,7 +1049,7 @@
       "categoryLabel": "Dije",
       "chip": "accesorios",
       "description": "Dije quieto, cadena aparte. Una joya, no un mall.",
-      "disclaimer": "Esta pieza vive en la tienda de Anteojos del Bajo. Curadario te lleva; ellos venden.",
+      "disclaimer": "Esta pieza vive en la tienda de Anteojos del Bajo. Con pinta te lleva; ellos venden.",
       "store_url": "https://www.example.com/tienda/dije-plata",
       "image": "/images/tote-lona.jpg",
       "published_at": 1722668400000

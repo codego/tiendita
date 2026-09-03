@@ -58,8 +58,8 @@ test("merchant panel home uses Elena's mature cockpit and real salidas", () => {
   assert.match(brand, /Elegir más piezas/);
   assert.match(brand, /Elegir piezas/);
   assert.match(brand, /Ver mi vitrina/);
-  assert.match(brand, /Curadario no vende\. El clic es el resultado\./);
-  assert.match(brand, /Todavía no hay nada en Curadario\./);
+  assert.match(brand, /Con pinta no vende\. El clic es el resultado\./);
+  assert.match(brand, /Todavía no hay nada en Con pinta\./);
   assert.match(dashboardPage, /redirect\(routes\.marcas\)/);
   assert.match(dashboard, /dashboardCopy\.salidas/);
   assert.match(dashboard, /dashboardCopy\.forwarded/);
@@ -126,7 +126,7 @@ test("picker copy, apparel seed, and Qué publicás", () => {
 });
 
 test("share sheet is a finding, not the look", () => {
-  assert.match(brand, /Mirá lo que encontré en Curadario\./);
+  assert.match(brand, /Lo vi en Con pinta\./);
   assert.match(brand, /Una pieza\. La tienda de la marca\./);
   assert.match(brand, /Copiar enlace/);
   assert.match(brand, /Instagram Stories/);

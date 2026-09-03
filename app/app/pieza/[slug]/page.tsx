@@ -22,7 +22,7 @@ export async function generateMetadata({
 }: PageProps<"/app/pieza/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const sku = getSku(slug);
-  if (!sku) return { title: "Curadario" };
+  if (!sku) return { title: "Con pinta" };
   return findingMetadata(sku);
 }
 

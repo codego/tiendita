@@ -21,8 +21,8 @@ const pwa = read("components/PwaPrompt.tsx");
 const readme = read("README.md");
 
 test("manifest ships Elena’s C icons and cream chrome", () => {
-  assert.match(manifest, /name: "Curadario"/);
-  assert.match(manifest, /short_name: "Curadario"/);
+  assert.match(manifest, /name: "Con pinta"/);
+  assert.match(manifest, /short_name: "Con pinta"/);
   assert.match(manifest, /start_url: "\/"/);
   assert.match(manifest, /display: "standalone"/);
   assert.match(manifest, /background_color: "#EFE9DD"/);

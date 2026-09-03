@@ -12,7 +12,7 @@ export default function Las21SharePage() {
   return (
     <PhoneFrame>
       <header className="px-6 pt-7">
-        <Link href={routes.landing} aria-label="Curadario">
+        <Link href={routes.landing} aria-label="Con pinta">
           <Wordmark />
         </Link>
       </header>

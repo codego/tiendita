@@ -5,7 +5,7 @@ import { ANOCHE_LABEL, getAnocheForwarded } from "@/lib/las21";
 import { routes } from "@/lib/routes";
 
 export const metadata = {
-  title: "Lo más reenviado anoche — Curadario",
+  title: "Lo más reenviado anoche — Con pinta",
   description: ANOCHE_LABEL,
 };
 
@@ -16,7 +16,7 @@ export default function AnochePage() {
     <div className="min-h-dvh bg-cream">
       <div className="relative mx-auto flex min-h-dvh w-full max-w-[430px] flex-col bg-surface shadow-[0_0_0_1px_rgba(22,21,19,0.06)]">
         <header className="px-6 pt-7">
-          <Link href={routes.landing} aria-label="Curadario">
+          <Link href={routes.landing} aria-label="Con pinta">
             <Wordmark />
           </Link>
         </header>

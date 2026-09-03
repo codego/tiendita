@@ -35,7 +35,7 @@ export const cookieCopy = {
 export const COOKIE_KEY = "curadario:cookie-ok";
 
 export const pwaCopy = {
-  title: "Abrí Curadario desde el home",
+  title: "Abrí Con pinta desde el home",
   body: "Instalá la app en tu pantalla de inicio para acceder más rápido.",
   add: "Agregar",
   later: "Ahora no",
@@ -44,7 +44,7 @@ export const pwaCopy = {
 export const PWA_KEY = "curadario:pwa-later";
 
 export const pwaIosCopy = {
-  title: "Abrí Curadario desde el home.",
+  title: "Abrí Con pinta desde el home.",
   sub: "En iPhone, Safari no instala solo.",
   share: "Tocá Compartir",
   home: "Agregar a inicio",
@@ -56,7 +56,7 @@ export const PWA_IOS_KEY = "curadario:pwa-ios-dismissed";
 
 export function marcaCountLine(count: number): string {
   const noun = count === 1 ? "pieza" : "piezas";
-  return `TiendaNube · ${count} ${noun} en Curadario`;
+  return `TiendaNube · ${count} ${noun} en Con pinta`;
 }
 
 export const marcaCta = "Ir a su tienda";

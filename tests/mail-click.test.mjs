@@ -29,20 +29,20 @@ const env = read("lib/env.ts");
 test("click templates are Elena's locked html + plain", () => {
   assert.match(htmlFile, /<!DOCTYPE html>/);
   assert.match(htmlFile, /background:#EFE9DD/);
-  assert.match(htmlFile, /color:#C8553D;">Curadario\.</);
+  assert.match(htmlFile, /color:#C8553D;">Con pinta\.</);
   assert.match(htmlFile, /display:none!important/);
   assert.match(htmlFile, /href="\{\{dashboard_url\}\}"/);
   assert.match(htmlFile, /text-decoration:underline/);
-  assert.match(htmlFile, /Ver en Curadario/);
+  assert.match(htmlFile, /Ver en Con pinta/);
   assert.equal(htmlFile.includes(MAIL_CLICK_FOOTER), true);
   assert.equal(htmlFile.includes(MAIL_CLICK_SUBJECT), true);
 
   assert.equal(
     textFile.replace(/\s+$/, ""),
     [
-      "Alguien salió de Curadario a tu ficha.",
+      "Alguien salió de Con pinta a tu ficha.",
       "",
-      "Ver en Curadario: {{dashboard_url}}",
+      "Ver en Con pinta: {{dashboard_url}}",
       "",
       "No es un newsletter. Te avisamos cuando alguien toca Ir a la tienda.",
     ].join("\n"),
@@ -74,17 +74,17 @@ test("send uses html+text, locked subject, and CONTACT_FROM", async () => {
   assert.equal(body.from, payload.from);
   assert.equal(/@curadario\.(com|la)/i.test(body.from), false);
   assert.equal(body.subject, MAIL_CLICK_SUBJECT);
-  assert.equal(body.subject, "Alguien salió de Curadario a tu ficha.");
+  assert.equal(body.subject, "Alguien salió de Con pinta a tu ficha.");
   assert.ok(typeof body.html === "string" && body.html.length > 0);
   assert.ok(typeof body.text === "string" && body.text.length > 0);
   assert.equal(body.html, payload.html);
   assert.equal(body.text, payload.text);
   assert.match(body.html, /#EFE9DD/);
   assert.match(body.html, /href="http:\/\/localhost:3000\/marcas\/dashboard"/);
-  assert.match(body.html, /Ver en Curadario/);
+  assert.match(body.html, /Ver en Con pinta/);
   assert.match(
     body.text,
-    /Ver en Curadario: http:\/\/localhost:3000\/marcas\/dashboard/,
+    /Ver en Con pinta: http:\/\/localhost:3000\/marcas\/dashboard/,
   );
   assert.equal(body.text.includes(MAIL_CLICK_FOOTER), true);
 
@@ -152,7 +152,7 @@ test("merchant To is store email, not Pola's inbox unless mock-only", () => {
 
 test("Ir a la tienda still persists locally and posts mail-click", () => {
   assert.match(analytics, /localStorage/);
-  assert.match(analytics, /Alguien salió de Curadario a tu ficha\./);
+  assert.match(analytics, /Alguien salió de Con pinta a tu ficha\./);
   assert.match(analytics, /\/api\/mail-click/);
   assert.match(api, /deliverMailClick/);
   assert.match(api, /fetchTnStoreEmail/);

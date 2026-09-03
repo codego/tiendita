@@ -39,7 +39,7 @@ export function ShopperOnboarding() {
     >
       <div className="w-full max-w-[430px] rounded-t-[28px] bg-surface px-6 pt-8 pb-[calc(1.5rem+env(safe-area-inset-bottom))] shadow-[0_-12px_40px_rgba(22,21,19,0.12)]">
         <p className="font-mono text-[11px] tracking-[0.18em] text-terracotta uppercase">
-          Curadario
+          Con pinta
         </p>
         <h2 className="mt-4 max-w-[16ch] font-serif text-[34px] leading-[1.08] text-ink">
           {slide.title}

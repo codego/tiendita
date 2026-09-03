@@ -15,7 +15,7 @@ export async function generateMetadata({
   if (!sku) return homeMetadata();
   return {
     ...findingMetadata(sku),
-    title: "Compartir hallazgo — Curadario",
+    title: "Compartir hallazgo — Con pinta",
     description: shareCopy.kit,
   };
 }

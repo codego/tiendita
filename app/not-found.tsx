@@ -9,7 +9,7 @@ export default function NotFound() {
   return (
     <PhoneFrame>
       <header className="flex items-center justify-between px-5 pt-6">
-        <Link href={routes.landing} aria-label="Curadario">
+        <Link href={routes.landing} aria-label="Con pinta">
           <Wordmark tone="terracotta" />
         </Link>
         <Link

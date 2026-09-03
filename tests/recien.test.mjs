@@ -64,7 +64,7 @@ test("Recién rail opens full-screen stories of new publishes only", () => {
 });
 
 test("every card starts the finding share kit", () => {
-  assert.match(shareButton, /Mirá lo que encontré en Curadario\.|shareCopy/);
+  assert.match(shareButton, /Lo vi en Con pinta\.|shareCopy/);
   assert.match(shareButton, /compartirSku/);
   assert.match(shareButton, /findingShareText/);
   assert.match(shareButton, /native/);

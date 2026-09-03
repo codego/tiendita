@@ -10,8 +10,8 @@ const privacidad = readFileSync(join(root, "app/privacidad/page.tsx"), "utf8");
 const brand = readFileSync(join(root, "lib/brand.ts"), "utf8");
 const readme = readFileSync(join(root, "README.md"), "utf8");
 
-test("legal pages say Curadario is a vitrina without payments", () => {
-  assert.match(brand, /Curadario es una vitrina/);
+test("legal pages say Con pinta is a vitrina without payments", () => {
+  assert.match(brand, /Con pinta es una vitrina/);
   assert.match(brand, /No hay carrito ni checkout propio/);
   assert.match(terminos, /legalCopy\.vitrina/);
   assert.match(terminos, /legalCopy\.noCheckout/);
@@ -29,7 +29,7 @@ test("readme documents brand, share, and legal routes", () => {
   assert.match(readme, /\/privacidad/);
   assert.match(readme, /Ir a la tienda/);
   assert.match(readme, /vitrina/);
-  assert.match(readme, /Mirá lo que encontré en Curadario/);
+  assert.match(readme, /Lo vi en Con pinta/);
   assert.match(readme, /Publicá tu tienda/);
   assert.match(readme, /\/ayuda/);
   assert.match(readme, /\/faq/);

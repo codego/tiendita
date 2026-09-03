@@ -82,7 +82,7 @@ test("Ayuda FAQ copy is locked and never says 21 productos", () => {
   assert.match(routes, /ayuda: "\/ayuda"/);
   assert.match(ayudaPage, /redirect\(routes\.faq\)/);
   assert.match(faqPage, /HelpFaq/);
-  assert.match(faqCopy, /¿Qué es Curadario\?/);
+  assert.match(faqCopy, /¿Qué es Con pinta\?/);
   assert.match(
     faqCopy,
     /Vitrina de marcas de TiendaNube\. Tocás, vas a su tienda\./,

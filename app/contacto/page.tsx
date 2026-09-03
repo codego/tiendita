@@ -8,7 +8,7 @@ import { routes } from "@/lib/routes";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Contacto — Curadario",
+  title: "Contacto — Con pinta",
   description: contactoCopy.sub,
 };
 
@@ -16,7 +16,7 @@ export default function ContactoPage() {
   return (
     <PhoneFrame>
       <header className="flex items-center justify-between px-5 pt-6">
-        <Link href={routes.landing} aria-label="Curadario">
+        <Link href={routes.landing} aria-label="Con pinta">
           <Wordmark />
         </Link>
         <SiteMenu />

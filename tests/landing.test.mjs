@@ -95,7 +95,7 @@ test("Recién rail and cards stay on the vitrine", () => {
   assert.equal(productCard.includes("recientBadge"), false);
 });
 
-test("tokens stay Curadario, not Temu orange", () => {
+test("tokens stay cream terracotta, not Temu orange", () => {
   assert.match(globals, /#161513/);
   assert.match(globals, /#c8553d/i);
   assert.match(globals, /#efe9dd/i);
@@ -115,9 +115,9 @@ test("shopper still has no bag or own checkout", () => {
   assert.equal(storeCta.includes("Pagar"), false);
   assert.match(shareBtn, /LIVE_SHARE_COPY|liveShareText/);
   assert.match(remind, /Avisame a las 20:55|REMIND_CTA/);
-  assert.match(home, /Está pasando\. 20 minutos\./);
+  assert.match(home, /Está pasando en Con pinta\. 20 minutos\./);
   assert.equal(home.includes("Está pasando en Curadario. 20 minutos."), false);
-  assert.match(home, /Mirá lo que encontré en Curadario\./);
+  assert.match(home, /Lo vi en Con pinta\./);
 });
 
 test("readme is packed catalog plus photo rail, local only", () => {
@@ -127,9 +127,9 @@ test("readme is packed catalog plus photo rail, local only", () => {
   assert.match(readme, /Hoy a las 21\./);
   assert.match(readme, /cream `#EFE9DD`/);
   assert.match(readme, /Marcas de TiendaNube/);
-  assert.match(readme, /Está pasando\. 20 minutos\./);
+  assert.match(readme, /Está pasando en Con pinta\. 20 minutos\./);
   assert.equal(readme.includes("Está pasando en Curadario. 20 minutos."), false);
-  assert.match(readme, /Mirá lo que encontré en Curadario\./);
+  assert.match(readme, /Lo vi en Con pinta\./);
   assert.match(readme, /Avisame a las 20:55/);
   assert.match(readme, /con 3 se prende/);
   assert.match(las21Time, /America\/Buenos_Aires/);

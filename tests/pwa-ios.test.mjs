@@ -18,7 +18,7 @@ const chrome = read("components/ShopperChrome.tsx");
 const readme = read("README.md");
 
 test("iOS how-to copy is Elena's locked lines", () => {
-  assert.match(edges, /Abrí Curadario desde el home\./);
+  assert.match(edges, /Abrí Con pinta desde el home\./);
   assert.match(edges, /En iPhone, Safari no instala solo\./);
   assert.match(edges, /Tocá Compartir/);
   assert.match(edges, /Agregar a inicio/);

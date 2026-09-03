@@ -1,6 +1,6 @@
 export const FAQ_ITEMS = [
   {
-    question: "¿Qué es Curadario?",
+    question: "¿Qué es Con pinta?",
     answer: "Vitrina de marcas de TiendaNube. Tocás, vas a su tienda.",
   },
   {

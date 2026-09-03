@@ -68,7 +68,7 @@ export function BrandDashboard({
           <Link
             href={routes.landing}
             className="absolute left-1/2 -translate-x-1/2"
-            aria-label="Curadario"
+            aria-label="Con pinta"
           >
             <Wordmark />
           </Link>
@@ -120,7 +120,7 @@ export function BrandDashboard({
     <PhoneFrame>
       <header className="flex items-center justify-between px-5 pt-6">
         <p className="font-serif text-[18px] leading-none text-ink">
-          Curadario ·{" "}
+          Con pinta ·{" "}
           <span className="text-terracotta">{dashboardCopy.kickerAccent}</span>
         </p>
         <BrandMenu vitrinaHref={vitrinaHref} variant="person" />

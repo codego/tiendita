@@ -2,7 +2,7 @@ import { LegalDoc } from "@/components/LegalDoc";
 import { legalCopy } from "@/lib/brand";
 
 export const metadata = {
-  title: "Privacidad — Curadario",
+  title: "Privacidad — Con pinta",
   description: legalCopy.vitrina,
 };
 
@@ -12,7 +12,7 @@ export default function PrivacidadPage() {
       <p>{legalCopy.vitrina}</p>
       <p>
         No pedimos pagos ni datos de checkout. El carrito vive en la tienda de
-        la marca. Curadario no recibe números de tarjeta, CBU ni comprobantes.
+        la marca. Con pinta no recibe números de tarjeta, CBU ni comprobantes.
       </p>
       <p>
         En este corte local, lo que queda en tu navegador es mínimo: piezas

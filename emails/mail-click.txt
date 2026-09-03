@@ -1,5 +1,5 @@
-Alguien salió de Curadario a tu ficha.
+Alguien salió de Con pinta a tu ficha.
 
-Ver en Curadario: {{dashboard_url}}
+Ver en Con pinta: {{dashboard_url}}
 
 No es un newsletter. Te avisamos cuando alguien toca Ir a la tienda.

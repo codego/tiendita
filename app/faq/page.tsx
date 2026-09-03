@@ -8,7 +8,7 @@ import Link from "next/link";
 import { routes } from "@/lib/routes";
 
 export const metadata = {
-  title: "FAQ — Curadario",
+  title: "FAQ — Con pinta",
   description: "Vitrina de marcas de TiendaNube. Tocás, vas a su tienda.",
 };
 
@@ -16,7 +16,7 @@ export default function FaqPage() {
   return (
     <PhoneFrame>
       <header className="flex items-center justify-between px-5 pt-6">
-        <Link href={routes.landing} aria-label="Curadario">
+        <Link href={routes.landing} aria-label="Con pinta">
           <Wordmark tone="terracotta" />
         </Link>
         <SiteMenu />

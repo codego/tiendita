@@ -18,10 +18,10 @@ export async function generateMetadata({
 }: PageProps<"/marca/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const brand = getBrandBySlug(slug);
-  if (!brand) return { title: "Curadario" };
+  if (!brand) return { title: "Con pinta" };
   const count = getSkusByBrandSlug(slug).length;
   return {
-    title: `${brand.name} — Curadario`,
+    title: `${brand.name} — Con pinta`,
     description: marcaCountLine(count),
   };
 }

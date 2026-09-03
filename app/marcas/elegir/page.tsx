@@ -12,7 +12,7 @@ import {
 import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
 
 export const metadata = {
-  title: "Qué publicás — Curadario",
+  title: "Qué publicás — Con pinta",
   description: elegirCopy.sub,
 };
 

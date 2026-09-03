@@ -14,7 +14,7 @@ export function LegalDoc({
   return (
     <PhoneFrame>
       <header className="px-5 pt-6">
-        <Link href={routes.landing} aria-label="Curadario">
+        <Link href={routes.landing} aria-label="Con pinta">
           <Wordmark />
         </Link>
       </header>

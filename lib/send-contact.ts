@@ -43,7 +43,7 @@ export async function deliverContact(
   }
 
   const soy = entry.role === "marca" ? "Marca" : "Shopper";
-  const subject = `Curadario · ${soy} · ${entry.name}`;
+  const subject = `Con pinta · ${soy} · ${entry.name}`;
   const text = [
     `Nombre: ${entry.name}`,
     `Email: ${entry.email}`,

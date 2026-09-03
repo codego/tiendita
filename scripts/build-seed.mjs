@@ -42,7 +42,7 @@ function sku({
     categoryLabel,
     chip,
     description,
-    disclaimer: `Esta pieza vive en la tienda de ${brand}. Curadario te lleva; ellos venden.`,
+    disclaimer: `Esta pieza vive en la tienda de ${brand}. Con pinta te lleva; ellos venden.`,
     store_url: `https://www.example.com/tienda/${id}`,
     image,
   };

@@ -12,5 +12,5 @@ export const markos = {
     "Elegí la pieza, con la marca a la vista.",
     "Tocá y vas a su tienda.",
   ],
-  noVende: "Curadario no vende.",
+  noVende: "Con pinta no vende.",
 } as const;

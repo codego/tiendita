@@ -20,11 +20,11 @@ export const elegirCopy = {
   title: "Qué publicás",
   sub: "Lo que prendes entra al feed. El checkout sigue en tu TiendaNube.",
   search: "Buscar productos",
-  noteHidden: "Lo no elegido no aparece en Curadario.",
+  noteHidden: "Lo no elegido no aparece en Con pinta.",
   noteCheckout: "El checkout sigue en tu tienda.",
   empty: "No hay prendas con eso.",
   emptyFeed: "Elegí al menos una pieza para aparecer en el feed.",
-  emptyTitle: "Todavía no hay nada en Curadario.",
+  emptyTitle: "Todavía no hay nada en Con pinta.",
 } as const;
 
 export function publishCta(count: number): string {
@@ -38,7 +38,7 @@ export function listoCta(count: number): string {
 
 export const publishCopy = {
   title: "Listo.",
-  sub: "Ya está en Curadario.",
+  sub: "Ya está en Con pinta.",
   feed: "Ver el feed",
 } as const;
 
@@ -47,8 +47,8 @@ export function syncBanner(count: number): string {
 }
 
 export const shareCopy = {
-  kit: "Mirá lo que encontré en Curadario.",
-  headline: "Mirá lo que encontré en Curadario.",
+  kit: "Lo vi en Con pinta.",
+  headline: "Lo vi en Con pinta.",
   sub: "Una pieza. La tienda de la marca.",
   copyLink: "Copiar enlace",
   stories: "Instagram Stories",
@@ -60,7 +60,7 @@ export const shareCopy = {
 } as const;
 
 export const dashboardCopy = {
-  kicker: "Curadario · tu tienda",
+  kicker: "Con pinta · tu tienda",
   kickerAccent: "tu tienda",
   salidas: "Salidas a tu tienda (7 días)",
   forwarded: "Lo que más reenviaron",
@@ -75,8 +75,8 @@ export const dashboardCopy = {
   edit: "Elegir piezas",
   vitrina: "Ver mi vitrina",
   logout: "Cerrar sesión",
-  footer: "Curadario no vende. El clic es el resultado.",
-  clickNotice: "Alguien salió de Curadario a tu ficha.",
+  footer: "Con pinta no vende. El clic es el resultado.",
+  clickNotice: "Alguien salió de Con pinta a tu ficha.",
 } as const;
 
 export function lastSyncLine(relative: string): string {
@@ -85,7 +85,7 @@ export function lastSyncLine(relative: string): string {
 
 export const legalCopy = {
   vitrina:
-    "Curadario es una vitrina. No es una tienda, no cobra y no procesa pagos.",
+    "Con pinta es una vitrina. No es una tienda, no cobra y no procesa pagos.",
   noCheckout:
     "No hay carrito ni checkout propio. El CTA del shopper es Ir a la tienda →: te lleva al checkout de la marca.",
 } as const;

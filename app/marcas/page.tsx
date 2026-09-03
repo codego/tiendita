@@ -15,7 +15,7 @@ import {
 import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
 
 export const metadata = {
-  title: "Para marcas — Curadario",
+  title: "Para marcas — Con pinta",
   description: brandCopy.headline,
 };
 
@@ -29,7 +29,7 @@ function MarcasLogin({
   return (
     <PhoneFrame>
       <header className="px-6 pt-7">
-        <Link href={routes.landing} aria-label="Curadario">
+        <Link href={routes.landing} aria-label="Con pinta">
           <Wordmark />
         </Link>
       </header>

@@ -17,11 +17,10 @@ export function Wordmark({
   const dot = tone === "paper" ? "text-paper" : "text-terracotta";
   return (
     <span
-      className={`font-serif leading-none tracking-tight ${color} ${text} ${className}`}
+      className={`font-serif italic leading-none tracking-tight ${color} ${text} ${className}`}
     >
-      Cura
-      <span className="italic">dario</span>
-      <span className={dot}>.</span>
+      Con pinta
+      <span className={`${dot} not-italic`}>.</span>
     </span>
   );
 }

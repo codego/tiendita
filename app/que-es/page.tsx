@@ -1,7 +1,7 @@
 import { QueEsPage } from "@/components/QueEsPage";
 
 export const metadata = {
-  title: "Qué es Curadario",
+  title: "Qué es Con pinta",
   description: "Marcas de TiendaNube. Tocás, vas a su tienda.",
 };
 

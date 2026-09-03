@@ -20,7 +20,7 @@ export function EmptyState({
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col items-center px-6 pt-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
       {wordmark ? (
-        <Link href={routes.landing} aria-label="Curadario" className="pt-1">
+        <Link href={routes.landing} aria-label="Con pinta" className="pt-1">
           <Wordmark
             tone={wordmark === "terracotta" ? "terracotta" : "ink"}
           />

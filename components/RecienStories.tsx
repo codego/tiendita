@@ -134,7 +134,7 @@ export function RecienStories({ startId }: { startId?: string }) {
         </div>
 
         <div className="mt-3 flex items-center justify-between">
-          <Link href={routes.landing} aria-label="Curadario">
+          <Link href={routes.landing} aria-label="Con pinta">
             <Wordmark tone="paper" />
           </Link>
           <Link

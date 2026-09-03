@@ -3,8 +3,8 @@ import { homeCopy } from "@/lib/home";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Curadario",
-    short_name: "Curadario",
+    name: "Con pinta",
+    short_name: "Con pinta",
     description: homeCopy.hero,
     start_url: "/",
     display: "standalone",

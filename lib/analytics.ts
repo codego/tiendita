@@ -87,7 +87,7 @@ export function trackCtaToStore(payload: CtaToStorePayload): void {
   console.info(
     "[curadario]",
     entry.event,
-    "Alguien salió de Curadario a tu ficha.",
+    "Alguien salió de Con pinta a tu ficha.",
     payload,
   );
 

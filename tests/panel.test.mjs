@@ -58,15 +58,15 @@ test("merchant routes: login or panel, elegir, dashboard redirect", () => {
 });
 
 test("panel copy matches Elena's mature cockpit, not analytics", () => {
-  assert.match(brand, /Curadario · tu tienda/);
+  assert.match(brand, /Con pinta · tu tienda/);
   assert.match(brand, /Salidas a tu tienda \(7 días\)/);
-  assert.match(brand, /Curadario no vende\. El clic es el resultado\./);
+  assert.match(brand, /Con pinta no vende\. El clic es el resultado\./);
   assert.match(brand, /Lo que más reenviaron/);
   assert.match(brand, /Hoy a las 21: esta\./);
   assert.match(brand, /Esta noche no tenés pieza en el drop\./);
   assert.match(brand, /Las 21/);
   assert.match(brand, /Cambiar/);
-  assert.match(brand, /Todavía no hay nada en Curadario\./);
+  assert.match(brand, /Todavía no hay nada en Con pinta\./);
   assert.match(brand, /Elegí al menos una pieza para aparecer en el feed\./);
   assert.match(brand, /Elegir más piezas/);
   assert.match(brand, /Ver mi vitrina/);

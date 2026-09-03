@@ -64,7 +64,7 @@ test("cookie banner uses Elena's locked line and persists Entendido", () => {
 });
 
 test("PWA prompt uses the mock copy and beforeinstallprompt", () => {
-  assert.match(edges, /Abrí Curadario desde el home/);
+  assert.match(edges, /Abrí Con pinta desde el home/);
   assert.match(
     edges,
     /Instalá la app en tu pantalla de inicio para acceder más rápido\./,
@@ -82,7 +82,7 @@ test("PWA prompt uses the mock copy and beforeinstallprompt", () => {
 
 test("publish confirm is Listo. over elegir, then Ver el feed", () => {
   assert.match(brand, /Listo\./);
-  assert.match(brand, /Ya está en Curadario\./);
+  assert.match(brand, /Ya está en Con pinta\./);
   assert.match(brand, /Ver el feed/);
   assert.match(picker, /PublishConfirm/);
   assert.match(picker, /setDone\(true\)/);
@@ -100,7 +100,7 @@ test("ficha de marca is /marca and does not collide with /marcas", () => {
   assert.match(routes, /marcas: "\/marcas"/);
   assert.match(marcaLib, /brandSlug/);
   assert.match(marcaPage, /marcaCountLine/);
-  assert.match(edges, /TiendaNube · \$\{count\} \$\{noun\} en Curadario/);
+  assert.match(edges, /TiendaNube · \$\{count\} \$\{noun\} en Con pinta/);
   assert.match(edges, /Ir a su tienda/);
   assert.match(marcaPage, /BrandStoreCta/);
   assert.match(marcaPage, /BrandMark/);
@@ -117,9 +117,9 @@ test("ficha de marca is /marca and does not collide with /marcas", () => {
 });
 
 test("OG hallazgo and Las 21 drop cards are locked", () => {
-  assert.match(seo, /Mirá lo que encontré en Curadario/);
-  assert.match(seo, /Está pasando\. 20 minutos\./);
-  assert.match(seo, /curadario.app/);
+  assert.match(seo, /Lo vi en Con pinta/);
+  assert.match(seo, /Está pasando en Con pinta\. 20 minutos\./);
+  assert.match(seo, /Con pinta/);
   assert.match(seo, /sku\.image/);
   assert.match(pieza, /findingMetadata/);
   assert.match(compartir, /findingMetadata/);
@@ -136,8 +136,8 @@ test("OG hallazgo and Las 21 drop cards are locked", () => {
 });
 
 test("merchant click notice is the locked line", () => {
-  assert.match(brand, /Alguien salió de Curadario a tu ficha\./);
-  assert.match(analytics, /Alguien salió de Curadario a tu ficha\./);
+  assert.match(brand, /Alguien salió de Con pinta a tu ficha\./);
+  assert.match(analytics, /Alguien salió de Con pinta a tu ficha\./);
   assert.match(dashboard, /useWeekClickMap|countStoreClicksThisWeek/);
 });
 

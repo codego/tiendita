@@ -47,9 +47,9 @@ export function tnAuthorizeUrl(state: string): string {
 function tnUserAgent(): string {
   const to = getContactTo();
   if (to && !isForbiddenInbox(to)) {
-    return `Curadario (${to})`;
+    return `Con pinta (${to})`;
   }
-  return "Curadario (https://github.com/codego/tiendita)";
+  return "Con pinta (https://github.com/codego/tiendita)";
 }
 
 export function encodeTnSession(session: TnSession): string {

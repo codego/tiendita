@@ -35,7 +35,7 @@ test("qué es uses Elena's locked lines and the mock layout", () => {
   assert.match(routes, /queEs: "\/que-es"/);
   assert.match(queEsRoute, /QueEsPage/);
   assert.match(queEs, /Qué es/);
-  assert.match(queEs, /Curadario/);
+  assert.match(queEs, /Con pinta/);
   assert.match(queEs, /Marcas de /);
   assert.match(queEs, /TiendaNube/);
   assert.match(queEs, /Tocás, vas a su tienda\./);
@@ -62,7 +62,7 @@ test("FAQ locks Las 21 and Markos publish, and /ayuda redirects", () => {
   assert.match(routes, /faq: "\/faq"/);
   assert.match(faqPage, /HelpFaq/);
   assert.match(faqPage, /FAQ_ITEMS/);
-  assert.match(faqCopy, /¿Qué es Curadario\?/);
+  assert.match(faqCopy, /¿Qué es Con pinta\?/);
   assert.match(
     faqCopy,
     /Vitrina de marcas de TiendaNube\. Tocás, vas a su tienda\./,
