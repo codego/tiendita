@@ -85,79 +85,81 @@ export function ShopperOnboarding() {
 
   return (
     <div
-      className="absolute inset-0 z-40 flex flex-col bg-cream"
+      className="fixed inset-0 z-40 flex justify-center bg-cream"
       role="dialog"
       aria-modal="true"
       aria-labelledby="onboarding-title"
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
     >
-      <div className="flex shrink-0 items-center justify-center pt-[calc(1.5rem+env(safe-area-inset-top))] pb-5">
-        <Wordmark />
-      </div>
+      <div className="flex h-dvh w-full max-w-[430px] flex-col">
+        <div className="flex shrink-0 items-center justify-center pt-[calc(1.25rem+env(safe-area-inset-top))] pb-4">
+          <Wordmark />
+        </div>
 
-      <div className="flex min-h-0 flex-1 flex-col rounded-t-[28px] bg-paper px-6 pt-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))] shadow-[0_-12px_40px_rgba(22,21,19,0.08)]">
-        <div
-          className="mx-auto h-1 w-10 rounded-full bg-ink/20"
-          aria-hidden
-        />
-        <p className="mt-5 text-center font-sans text-[13px] text-terracotta">
-          {progress}
-        </p>
-        <h2
-          id="onboarding-title"
-          className="mt-3 text-center font-serif text-[28px] leading-[1.15] text-ink"
-        >
-          {slide.title}
-        </h2>
-
-        <div className="flex min-h-0 flex-1 flex-col items-center justify-center">
+        <div className="flex min-h-0 flex-1 flex-col rounded-t-[28px] bg-paper px-6 pt-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))] shadow-[0_-12px_40px_rgba(22,21,19,0.08)]">
           <div
-            className="flex aspect-[5/3] w-full max-w-[280px] items-center justify-center rounded-[22px] bg-cream"
+            className="mx-auto h-1 w-10 rounded-full bg-ink/20"
             aria-hidden
+          />
+          <p className="mt-5 shrink-0 text-center font-sans text-[13px] text-terracotta">
+            {progress}
+          </p>
+          <h2
+            id="onboarding-title"
+            className="mt-3 shrink-0 text-center font-serif text-[26px] leading-[1.15] text-ink"
           >
-            <div className="flex h-[72%] w-[78%] items-stretch justify-center gap-3">
-              {slideArt[index].map((className) => (
-                <span key={className} className={className} />
+            {slide.title}
+          </h2>
+
+          <div className="flex min-h-0 flex-1 flex-col items-center justify-center">
+            <div
+              className="flex aspect-[5/3] h-[38%] max-h-[168px] w-full max-w-[280px] items-center justify-center rounded-[22px] bg-cream"
+              aria-hidden
+            >
+              <div className="flex h-[72%] w-[78%] items-stretch justify-center gap-3">
+                {slideArt[index].map((className) => (
+                  <span key={className} className={className} />
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-5 flex items-center justify-center gap-2" aria-hidden>
+              {onboardingSlides.map((item, slideIndex) => (
+                <button
+                  key={item.title}
+                  type="button"
+                  tabIndex={-1}
+                  onClick={() => goTo(slideIndex)}
+                  onPointerDown={(event) => event.stopPropagation()}
+                  onPointerUp={(event) => event.stopPropagation()}
+                  className={`h-2 w-2 rounded-full ${
+                    slideIndex === index ? "bg-terracotta" : "bg-cream"
+                  }`}
+                />
               ))}
             </div>
           </div>
 
-          <div className="mt-6 flex items-center justify-center gap-2" aria-hidden>
-            {onboardingSlides.map((item, slideIndex) => (
-              <button
-                key={item.title}
-                type="button"
-                tabIndex={-1}
-                onClick={() => goTo(slideIndex)}
-                onPointerDown={(event) => event.stopPropagation()}
-                onPointerUp={(event) => event.stopPropagation()}
-                className={`h-2 w-2 rounded-full ${
-                  slideIndex === index ? "bg-terracotta" : "bg-cream"
-                }`}
-              />
-            ))}
-          </div>
+          <button
+            type="button"
+            onClick={next}
+            onPointerDown={(event) => event.stopPropagation()}
+            onPointerUp={(event) => event.stopPropagation()}
+            className="mt-4 flex h-12 w-full shrink-0 items-center justify-center rounded-xl bg-ink font-sans text-[16px] font-medium text-paper"
+          >
+            {last ? onboardingCopy.start : onboardingCopy.next}
+          </button>
+          <button
+            type="button"
+            onClick={finish}
+            onPointerDown={(event) => event.stopPropagation()}
+            onPointerUp={(event) => event.stopPropagation()}
+            className="mt-3 flex h-10 w-full shrink-0 items-center justify-center font-sans text-[15px] text-ink/40"
+          >
+            {onboardingCopy.skip}
+          </button>
         </div>
-
-        <button
-          type="button"
-          onClick={next}
-          onPointerDown={(event) => event.stopPropagation()}
-          onPointerUp={(event) => event.stopPropagation()}
-          className="mt-4 flex h-12 w-full items-center justify-center rounded-xl bg-ink font-sans text-[16px] font-medium text-paper"
-        >
-          {last ? onboardingCopy.start : onboardingCopy.next}
-        </button>
-        <button
-          type="button"
-          onClick={finish}
-          onPointerDown={(event) => event.stopPropagation()}
-          onPointerUp={(event) => event.stopPropagation()}
-          className="mt-3 flex h-10 w-full items-center justify-center font-sans text-[15px] text-ink/40"
-        >
-          {onboardingCopy.skip}
-        </button>
       </div>
     </div>
   );
