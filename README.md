@@ -65,7 +65,7 @@ Home first screen: **Marcas de TiendaNube. Tocás, vas a su tienda.** Recién ra
 
 Shopper nav: Inicio · **Looks** · Buscar · Guardados. Looks is an index (Sastrería de agosto, Lo que lleva el look / carteras, Un solo traje / trajes). Sastrería is one card in that index — the first-cut mock, not the brand. It does not open as the Looks home.
 
-First visit: a 3-slide sheet — **Marcas de TiendaNube** · **Tocás, vas a su tienda** · **Guardá y compartí el hallazgo.**
+First visit: a 3-slide sheet over the home feed — **Marcas de TiendaNube.** · **Tocás, vas a su tienda.** · **Guardá y reenviá. Lo vi en Con pinta.** Slides 1–2 **Siguiente**, slide 3 **Empezar**. **Saltar** on every slide. Once dismissed, never again.
 
 Empty Guardados: **Todavía no guardaste nada.** / **Tocá el corazón en una pieza. Cuando quieras, volvés acá.** CTA **Ir al feed →**. Empty Looks: **Todavía no hay looks. Volvé más tarde.** Empty Recién: **Nadie publicó todavía. Cuando una tienda publique, aparece acá.**
 

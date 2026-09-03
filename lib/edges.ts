@@ -71,9 +71,15 @@ export const loadErrorCopy = {
 } as const;
 
 export const onboardingSlides = [
-  { title: "Marcas de TiendaNube" },
-  { title: "Tocás, vas a su tienda" },
-  { title: "Guardá y compartí el hallazgo." },
+  { title: "Marcas de TiendaNube." },
+  { title: "Tocás, vas a su tienda." },
+  { title: "Guardá y reenviá. Lo vi en Con pinta." },
 ] as const;
+
+export const onboardingCopy = {
+  next: "Siguiente",
+  start: "Empezar",
+  skip: "Saltar",
+} as const;
 
 export const ONBOARDING_KEY = "curadario-onboarding-v1";

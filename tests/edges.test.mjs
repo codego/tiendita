@@ -123,10 +123,23 @@ test("Ayuda FAQ copy is locked and never says 21 productos", () => {
 });
 
 test("shopper onboarding is three first-visit slides", () => {
-  assert.match(edges, /Marcas de TiendaNube/);
-  assert.match(edges, /Tocás, vas a su tienda/);
-  assert.match(edges, /Guardá y compartí el hallazgo\./);
+  assert.match(edges, /Marcas de TiendaNube\./);
+  assert.match(edges, /Tocás, vas a su tienda\./);
+  assert.match(edges, /Guardá y reenviá\. Lo vi en Con pinta\./);
+  assert.equal(edges.includes("Guardá y compartí el hallazgo."), false);
+  assert.match(edges, /Siguiente/);
+  assert.match(edges, /Empezar/);
+  assert.match(edges, /Saltar/);
   assert.match(onboarding, /onboardingSlides/);
+  assert.match(onboarding, /onboardingCopy\.next/);
+  assert.match(onboarding, /onboardingCopy\.start/);
+  assert.match(onboarding, /onboardingCopy\.skip/);
+  assert.match(onboarding, /de \$\{onboardingSlides\.length\}/);
+  assert.match(onboarding, /Wordmark/);
+  assert.match(onboarding, /bg-cream/);
+  assert.match(onboarding, /bg-paper/);
+  assert.match(onboarding, /bg-ink/);
+  assert.match(onboarding, /Saltar|onboardingCopy\.skip/);
   assert.match(onboarding, /markOnboardingSeen/);
   assert.match(onboardingLib, /ONBOARDING_KEY/);
   assert.match(onboardingLib, /localStorage/);
