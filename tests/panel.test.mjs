@@ -84,7 +84,9 @@ test("cockpit can disconnect TiendaNube with a confirm, then empty-connect", () 
   assert.match(oauthLib, /disconnectMerchant/);
   assert.match(oauthLib, /isTnOAuthConfigured/);
   assert.match(marcas, /dashboardCopy\.connectEmpty/);
+  assert.match(marcas, /Conectá tu TiendaNube\.|dashboardCopy\.connectEmpty/);
   assert.match(marcas, /gate\.source === "none"/);
+  assert.match(marcas, /MarcasLogin/);
 });
 
 test("panel copy matches Elena's mature cockpit, not analytics", () => {

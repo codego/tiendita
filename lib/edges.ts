@@ -74,6 +74,10 @@ export const loadErrorCopy = {
   footerSub: "Tocás, vas a su tienda.",
 } as const;
 
+export const offlineBannerCopy = {
+  line: "Sin conexión. Estás viendo lo guardado.",
+} as const;
+
 export const ayudaCopy = {
   line: "Preguntas en el FAQ. Escribinos desde Contacto.",
   faq: "FAQ",

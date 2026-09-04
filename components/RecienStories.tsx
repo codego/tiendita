@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { BrandNameLink } from "@/components/BrandNameLink";
 import { EmptyState } from "@/components/EmptyState";
 import { ChevronUpIcon, CloseIcon } from "@/components/Icons";
+import { OfflineBanner } from "@/components/OfflineBanner";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { ProductPhoto } from "@/components/ProductPhoto";
 import { ShareFindingButton } from "@/components/ShareFindingButton";
@@ -86,6 +87,7 @@ export function RecienStories({ startId }: { startId?: string }) {
   if (!current) {
     return (
       <PhoneFrame>
+        <OfflineBanner />
         <EmptyState
           title={emptyRecien.title}
           body={emptyRecien.body}

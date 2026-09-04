@@ -21,6 +21,7 @@ npm run dev
 | On `/` | What you see |
 | --- | --- |
 | Always | Wordmark, search, locked line, 1:1 photo rail (Llegó. / De esta semana. / Hoy a las 21.), colored chips, Recién rail, Lo más reenviado, dense 2-col grid |
+| Offline | Soft banner **Sin conexión. Estás viendo lo guardado.** above the feed. Cached/last-seen content stays. Not the hard error screen. |
 | Las 21 | Home rail tile **Hoy a las 21.** opens `/las21`. No countdown clock on home. |
 
 **Floor:** con 3 se prende; con menos no. Three stores light the `/las21` drop. The catalog never goes away.
@@ -69,7 +70,7 @@ First visit: a 3-slide sheet over the home feed — **Marcas de TiendaNube.** ·
 
 Empty Guardados: **Todavía no guardaste nada.** / **Tocá el corazón en una pieza. Cuando quieras, volvés acá.** CTA **Ir al feed →**. Empty Looks: **Todavía no hay looks. Volvé más tarde.** Empty Recién: **Nadie publicó todavía. Cuando una tienda publique, aparece acá.**
 
-Generic empty: **Todavía no hay nada acá.** CTA **Ir al feed**. Failed fetch / offline: **Algo falló. Probá de nuevo.** **Reintentar** · **Ir al inicio.**
+Generic empty: **Todavía no hay nada acá.** CTA **Ir al feed**. Failed fetch: **Algo falló. Probá de nuevo.** **Reintentar** · **Ir al inicio.** Soft offline on `/` (and Recién): **Sin conexión. Estás viendo lo guardado.** — cream/paper, does not block the feed.
 
 Brand panel with 0 published: **Todavía no hay nada en Con pinta.** / **Elegí al menos una pieza para aparecer en el feed.** CTA **Elegir piezas**. After the first publish (0 → N): **Listo.** / **Ya está en Con pinta.** / **Ver el feed**. Later **Listo · N publicadas** returns to the panel.
 

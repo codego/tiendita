@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CategoryChips } from "@/components/CategoryChips";
 import { HomeBannerRail } from "@/components/HomeBannerRail";
+import { OfflineBanner } from "@/components/OfflineBanner";
 import { ProductCard } from "@/components/ProductCard";
 import { RailCard } from "@/components/RailCard";
 import { RecienRailSkeleton } from "@/components/Skeleton";
@@ -96,6 +97,7 @@ export function CatalogHome({
 
   return (
     <div>
+      <OfflineBanner />
       <header className="px-4 pt-3">
         <div className="flex items-center gap-3">
           <Link href={routes.landing} aria-label="Con pinta" className="shrink-0">

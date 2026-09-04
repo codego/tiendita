@@ -27,6 +27,9 @@ const stories = read("components/RecienStories.tsx");
 const emptyState = read("components/EmptyState.tsx");
 const loadError = read("components/LoadError.tsx");
 const offline = read("components/OfflineGate.tsx");
+const offlineBanner = read("components/OfflineBanner.tsx");
+const network = read("lib/network.ts");
+const catalogHome = read("components/CatalogHome.tsx");
 const errorPage = read("app/error.tsx");
 const onboarding = read("components/ShopperOnboarding.tsx");
 const onboardingLib = read("lib/onboarding.ts");
@@ -86,9 +89,27 @@ test("error and offline reuse the same load screen", () => {
   assert.match(loadError, /Wordmark/);
   assert.match(offline, /LoadError/);
   assert.match(offline, /isBrowserOffline/);
+  assert.match(offline, /NETWORK_FAIL_EVENT/);
   assert.match(errorPage, /LoadError/);
   assert.match(layout, /OfflineGate/);
   assert.match(storeCta, /reportNetworkFail|isBrowserOffline/);
+});
+
+test("soft offline banner sits above the feed and is not the hard error", () => {
+  assert.match(edges, /Sin conexión\. Estás viendo lo guardado\./);
+  assert.match(offlineBanner, /offlineBannerCopy/);
+  assert.match(offlineBanner, /isBrowserOffline/);
+  assert.match(offlineBanner, /subscribeOnlineStatus/);
+  assert.match(offlineBanner, /bg-paper/);
+  assert.match(offlineBanner, /role="status"/);
+  assert.equal(offlineBanner.includes("bg-terracotta"), false);
+  assert.equal(offlineBanner.includes("LoadError"), false);
+  assert.equal(offlineBanner.includes("min-h-dvh"), false);
+  assert.match(network, /subscribeOnlineStatus/);
+  assert.match(catalogHome, /OfflineBanner/);
+  assert.match(stories, /OfflineBanner/);
+  assert.equal(offline.includes("addEventListener(\"offline\""), false);
+  assert.match(readme, /Sin conexión\. Estás viendo lo guardado\./);
 });
 
 test("Ayuda FAQ copy is locked and never says 21 productos", () => {

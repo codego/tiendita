@@ -8,19 +8,16 @@ export function OfflineGate({ children }: { children: React.ReactNode }) {
   const [blocked, setBlocked] = useState(false);
 
   useEffect(() => {
-    function sync() {
-      setBlocked(isBrowserOffline());
+    function onOnline() {
+      setBlocked(false);
     }
     function onFail() {
       setBlocked(true);
     }
-    sync();
-    window.addEventListener("online", sync);
-    window.addEventListener("offline", sync);
+    window.addEventListener("online", onOnline);
     window.addEventListener(NETWORK_FAIL_EVENT, onFail);
     return () => {
-      window.removeEventListener("online", sync);
-      window.removeEventListener("offline", sync);
+      window.removeEventListener("online", onOnline);
       window.removeEventListener(NETWORK_FAIL_EVENT, onFail);
     };
   }, []);
