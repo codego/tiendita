@@ -59,6 +59,17 @@ export const pwaIosCopy = {
 
 export const PWA_IOS_KEY = "curadario:pwa-ios-dismissed";
 
+export const las21PushCopy = {
+  title: "Avisame a las 21.",
+  line: "Te avisamos cuando empieza el drop.",
+  quiet: "Sin spam.",
+  cta: "Avisame a las 21.",
+  later: "Ahora no",
+} as const;
+
+export const LAS21_PUSH_KEY = "curadario:las21-push-dismissed";
+export const LAS21_PING_DAY_KEY = "curadario:las21-ping-day";
+
 export function marcaCountLine(count: number): string {
   const noun = count === 1 ? "pieza" : "piezas";
   return `TiendaNube · ${count} ${noun} en Con pinta`;

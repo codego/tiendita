@@ -31,7 +31,11 @@ Three shares, locked (Markos):
 2. Las 21 live drop: **Está pasando en Con pinta. 20 minutos.**
 3. Esta o esta: **¿Esta o esta? En Con pinta.**
 
-**Avisame a las 20:55** stays on the module. It is not the only reason to open the app — the feed is always there.
+**Avisame a las 21.** is the first-time cream sheet on the feed (after cookie / PWA). CTA asks the OS for Notification permission. **Ahora no** dismisses. Either way, localStorage remembers — the sheet does not come back every visit. Copy stays the drop line, not a generic permission lecture.
+
+**20:55** (America/Buenos_Aires, once per day): **Está pasando en Con pinta.** / **20 minutos.** Click opens `/las21`. If the PWA or tab is alive and permission is granted, the client fires a local notification. Full server Web Push needs VAPID keys (see Env). QA hooks: `/?avisame=1` (sheet) and `/?ping=1` (fire the 20:55 notification now).
+
+**Avisame a las 20:55** stays on the Las 21 module. It is not the only reason to open the app — the feed is always there.
 
 Brands tease by day: **hoy a las 21, esta.**
 
@@ -66,7 +70,7 @@ Home first screen: **Marcas de TiendaNube. Tocás, vas a su tienda.** Recién ra
 
 Shopper nav: Inicio · **Looks** · Buscar · Guardados. Looks is an index (Sastrería de agosto, Lo que lleva el look / carteras, Un solo traje / trajes). Sastrería is one card in that index — the first-cut mock, not the brand. It does not open as the Looks home.
 
-First visit: a 3-slide sheet over the home feed — **Marcas de TiendaNube.** · **Tocás, vas a su tienda.** · **Guardá y reenviá. Lo vi en Con pinta.** Slides 1–2 **Siguiente**, slide 3 **Empezar**. **Saltar** on every slide. Once dismissed, never again.
+First visit: a 3-slide sheet over the home feed — **Marcas de TiendaNube.** · **Tocás, vas a su tienda.** · **Guardá y reenviá. Lo vi en Con pinta.** Slides 1–2 **Siguiente**, slide 3 **Empezar**. **Saltar** on every slide. Once dismissed, never again. Then cookie, then PWA, then the cream **Avisame a las 21.** sheet over the blurred feed.
 
 Empty Guardados: **Todavía no guardaste nada.** / **Tocá el corazón en una pieza. Cuando quieras, volvés acá.** CTA **Ir al feed →**. Empty Looks: **Todavía no hay looks. Volvé más tarde.** Empty Recién: **Nadie publicó todavía. Cuando una tienda publique, aparece acá.**
 
@@ -74,7 +78,7 @@ Generic empty: **Todavía no hay nada acá.** CTA **Ir al feed**. Failed fetch: 
 
 Brand panel with 0 published: **Todavía no hay nada en Con pinta.** / **Elegí al menos una pieza para aparecer en el feed.** CTA **Elegir piezas**. After the first publish (0 → N): **Listo.** / **Ya está en Con pinta.** / **Ver el feed**. Later **Listo · N publicadas** returns to the panel.
 
-Cookie on the feed: **Usamos lo mínimo para que funcione.** + **Privacidad →** + **Entendido** (localStorage). PWA on Android/desktop (`beforeinstallprompt`): **Abrí Con pinta desde el home** / **Agregar** / **Ahora no**. iOS Safari (not standalone, not Chrome iOS): how-to sheet **Abrí Con pinta desde el home.** / **En iPhone, Safari no instala solo.** / **Tocá Compartir** · **Agregar a inicio** · **Agregar** / **Ahora no** (`curadario:pwa-ios-dismissed`). No fake install CTA. Cookie first, then the sheet.
+Cookie on the feed: **Usamos lo mínimo para que funcione.** + **Privacidad →** + **Entendido** (localStorage). PWA on Android/desktop (`beforeinstallprompt`): **Abrí Con pinta desde el home** / **Agregar** / **Ahora no**. iOS Safari (not standalone, not Chrome iOS): how-to sheet **Abrí Con pinta desde el home.** / **En iPhone, Safari no instala solo.** / **Tocá Compartir** · **Agregar a inicio** · **Agregar** / **Ahora no** (`curadario:pwa-ios-dismissed`). No fake install CTA. Cookie first, then the sheet, then **Avisame a las 21.** (`curadario:las21-push-dismissed`). The sheet uses own UI — the OS prompt runs only after the black CTA. iOS Notification API is standalone-PWA only, so the sheet stays hidden in Safari-in-browser.
 
 PWA `name` / `short_name`: **Con pinta**. Theme `#EFE9DD`. Home-screen icon is Elena’s italic serif **C** — terracotta `#C8553D` on cream `#EFE9DD`. No wordmark on the icon. Files in `public/`: `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` (same C, already padded), `apple-touch-icon.png` (180), `favicon-32.png`, `favicon.ico`. `public/splash-cream.png` is the iOS splash. Android splash uses manifest `background_color` `#EFE9DD`.
 
@@ -108,6 +112,11 @@ Local `.env` — do not invent a brand inbox. See `.env.example`.
 | `TIENDANUBE_CLIENT_ID` | TiendaNube app id |
 | `TIENDANUBE_CLIENT_SECRET` | TiendaNube client secret |
 | `TIENDANUBE_REDIRECT_URI` | Callback, e.g. `http://localhost:3000/marcas/oauth/callback` |
+| `NEXT_PUBLIC_VAPID_PUBLIC_KEY` | Optional. Public VAPID key so the PWA can subscribe for server 20:55 push. Empty = local scheduler only. |
+| `VAPID_PRIVATE_KEY` | Optional. Private VAPID key. Never commit a real key. Generate with `npx web-push generate-vapid-keys`. |
+| `VAPID_SUBJECT` | Optional. `mailto:` contact for the VAPID sender. Defaults to `mailto:joacoditoma@gmail.com`. |
+
+Without VAPID, **Avisame a las 21.** still asks `Notification.requestPermission`, and a granted PWA/tab can fire the 20:55 local notification (once per day). `POST /api/las21/push` is the documented server hook — it returns **501** until keys (and a subscription store) exist. Service worker click always opens `/las21`.
 
 Without the TiendaNube trio, `/marcas` stays the labeled mock. The form always persists in localStorage and shows **Mensaje enviado.**
 

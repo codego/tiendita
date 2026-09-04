@@ -33,6 +33,22 @@ export function isTnOAuthConfigured(): boolean {
   return Boolean(getTnClientId() && getTnClientSecret() && getTnRedirectUri());
 }
 
+export function getVapidPublicKey(): string {
+  return read("NEXT_PUBLIC_VAPID_PUBLIC_KEY");
+}
+
+export function getVapidPrivateKey(): string {
+  return read("VAPID_PRIVATE_KEY");
+}
+
+export function getVapidSubject(): string {
+  return read("VAPID_SUBJECT") || `mailto:${DEFAULT_CONTACT_TO}`;
+}
+
+export function isVapidConfigured(): boolean {
+  return Boolean(getVapidPublicKey() && getVapidPrivateKey());
+}
+
 /** Public origin for OG / WhatsApp previews. Local default until you set one. */
 export const DEFAULT_SITE_URL = "http://localhost:3000";
 

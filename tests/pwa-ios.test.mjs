@@ -64,10 +64,13 @@ test("cookie wins, then the iOS sheet, then the Android prompt", () => {
   assert.match(chrome, /CookieBanner/);
   assert.match(chrome, /PwaIosSheet/);
   assert.match(chrome, /PwaPrompt/);
+  assert.match(chrome, /Las21PushSheet/);
   const cookie = chrome.indexOf("if (!cookieOk)");
   const iosSheet = chrome.indexOf("if (!iosDismissed)");
   const androidPrompt = chrome.indexOf("if (!androidHidden)");
+  const pushSheet = chrome.indexOf("pushHidden ? null : <Las21PushSheet");
   assert.ok(cookie > 0 && iosSheet > cookie && androidPrompt > iosSheet);
+  assert.ok(pushSheet > androidPrompt);
   assert.match(chrome, /getPwaIosDismissed/);
   assert.match(chrome, /getPwaAndroidHidden/);
 });

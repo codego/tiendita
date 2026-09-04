@@ -12,7 +12,13 @@ import {
   LIVE_SHARE_COPY,
   PING_HOUR,
   PING_MINUTE,
+  PUSH_BODY,
+  PUSH_TITLE,
+  PUSH_URL,
   REMIND_CTA,
+  isInPingWindow,
+  msUntilNextPing,
+  nextPingMs,
   dayShareText,
   formatDayCountdown,
   formatLiveCountdown,
@@ -91,6 +97,23 @@ test("live countdown starts at 20:00 and day copy is exact", () => {
   assert.equal(REMIND_CTA, "Avisame a las 20:55");
   assert.equal(PING_HOUR, 20);
   assert.equal(PING_MINUTE, 55);
+  assert.equal(PUSH_TITLE, "Está pasando en Con pinta.");
+  assert.equal(PUSH_BODY, "20 minutos.");
+  assert.equal(PUSH_URL, "/las21");
+});
+
+test("20:55 ping is once in the BA minute, then tomorrow", () => {
+  const before = art(2026, 9, 1, 20, 0, 0);
+  const open = art(2026, 9, 1, 20, 55, 0);
+  const late = art(2026, 9, 1, 20, 56, 0);
+  const tomorrow = art(2026, 9, 2, 20, 55, 0);
+
+  assert.equal(isInPingWindow(before), false);
+  assert.equal(isInPingWindow(open), true);
+  assert.equal(isInPingWindow(late), false);
+  assert.equal(msUntilNextPing(open), 0);
+  assert.equal(nextPingMs(before), open);
+  assert.equal(nextPingMs(late), tomorrow);
 });
 
 test("con 3 se prende; con menos no", () => {
