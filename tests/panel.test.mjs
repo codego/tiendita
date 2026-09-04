@@ -25,6 +25,10 @@ const salir = read("app/marcas/salir/route.ts");
 const oauth = read("app/marcas/oauth/route.ts");
 const callback = read("app/marcas/oauth/callback/route.ts");
 const panel = read("components/BrandDashboard.tsx");
+const syncFail = read("components/MerchantSyncFail.tsx");
+const syncOk = read("components/MerchantResyncOk.tsx");
+const syncApi = read("app/api/marcas/sync/route.ts");
+const merchantSync = read("lib/merchant-sync.ts");
 const picker = read("components/BrandPicker.tsx");
 const shares = read("lib/shares.ts");
 const shareSheet = read("components/ShareSheet.tsx");
@@ -179,6 +183,47 @@ test("share sheet increments share counts for the cockpit ranking", () => {
   assert.match(shareButton, /trackShare\(piece\.id\)/);
   assert.match(panel, /useWeekShareMap/);
   assert.equal(panel.includes("useWeekVisits"), false);
+});
+
+test("merchant cockpit resync and TN fail match Elena's mock", () => {
+  assert.match(brand, /Sincronizá de nuevo\./);
+  assert.match(brand, /No pudimos hablar con tu tienda\./);
+  assert.match(brand, /Probá otra vez\./);
+  assert.match(brand, /No conectada \/ error/);
+  assert.match(panel, /dashboardCopy\.resync/);
+  assert.match(panel, /MerchantSyncFail/);
+  assert.match(panel, /routes\.marcasSync/);
+  assert.match(panel, /setRetryFailed\(true\)/);
+  assert.match(panel, /syncFailed/);
+  assert.match(syncFail, /dashboardCopy\.syncFailTitle/);
+  assert.match(syncFail, /dashboardCopy\.syncFailSub/);
+  assert.match(syncFail, /dashboardCopy\.resync/);
+  assert.match(syncFail, /dashboardCopy\.logout/);
+  assert.match(syncFail, /dashboardCopy\.disconnected/);
+  assert.match(syncFail, /Wordmark/);
+  assert.match(syncFail, /bg-cream/);
+  assert.match(syncFail, /CloudOffIcon/);
+  assert.equal(syncFail.includes("bg-[#3D8B5A]"), false);
+  assert.equal(syncFail.includes("Casa Norte"), false);
+  assert.match(marcas, /isSyncFailQuery/);
+  assert.match(marcas, /syncFailed/);
+  assert.match(marcas, /syncLiveCatalog/);
+  assert.match(merchantSync, /SYNC_FAIL_VALUE = "fail"/);
+  assert.match(merchantSync, /SYNC_OK_VALUE = "ok"/);
+  assert.match(brand, /Listo\. Tu tienda está al día\./);
+  assert.match(brand, /Ver el panel/);
+  assert.match(syncOk, /dashboardCopy\.resyncOkTitle/);
+  assert.match(syncOk, /dashboardCopy\.resyncOkPanel/);
+  assert.match(syncOk, /dashboardCopy\.resyncOkClose/);
+  assert.match(syncOk, /CheckIcon/);
+  assert.match(syncOk, /bg-forest/);
+  assert.match(syncOk, /bg-cream/);
+  assert.match(panel, /MerchantResyncOk/);
+  assert.match(panel, /sync=ok/);
+  assert.match(marcas, /isSyncOkQuery/);
+  assert.match(syncApi, /syncLiveCatalog/);
+  assert.match(syncApi, /mockCatalog/);
+  assert.match(routes, /marcasSync: "\/api\/marcas\/sync"/);
 });
 
 test("readme documents the merchant panel routes", () => {

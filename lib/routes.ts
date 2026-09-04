@@ -19,6 +19,7 @@ export const routes = {
   marcasEntrar: "/marcas/entrar",
   marcasSalir: "/marcas/salir",
   marcasDashboard: "/marcas/dashboard",
+  marcasSync: "/api/marcas/sync",
   terminos: "/terminos",
   privacidad: "/privacidad",
   ayuda: "/ayuda",

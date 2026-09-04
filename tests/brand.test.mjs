@@ -67,6 +67,10 @@ test("merchant panel home uses Elena's mature cockpit and real salidas", () => {
   assert.match(dashboard, /useWeekClickMap/);
   assert.match(dashboard, /useWeekShareMap/);
   assert.match(dashboard, /dashboardCopy\.footer/);
+  assert.match(dashboard, /dashboardCopy\.resync/);
+  assert.match(dashboard, /MerchantSyncFail/);
+  assert.match(brand, /Sincronizá de nuevo\./);
+  assert.match(brand, /No pudimos hablar con tu tienda\./);
   assert.match(dashboard, /routes\.marcasElegir/);
   assert.match(dashboard, /routes\.marca/);
   assert.equal(dashboard.includes("routes.coleccion"), false);

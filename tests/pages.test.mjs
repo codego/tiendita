@@ -58,7 +58,7 @@ test("qué es uses Elena's locked lines and the mock layout", () => {
   assert.match(siteLinks, /routes\.faq/);
 });
 
-test("FAQ locks Las 21 and Markos publish, and /ayuda redirects", () => {
+test("FAQ locks Las 21 and Markos publish, and /ayuda points to FAQ and Contacto", () => {
   assert.match(routes, /faq: "\/faq"/);
   assert.match(faqPage, /HelpFaq/);
   assert.match(faqPage, /FAQ_ITEMS/);
@@ -82,11 +82,19 @@ test("FAQ locks Las 21 and Markos publish, and /ayuda redirects", () => {
   assert.match(faqCopy, /¿Las 21\?/);
   assert.match(
     faqCopy,
-    /Drop diario 21:00–21:20\. Una pieza por tienda\. No apaga el feed\./,
+    /Drop de 20 minutos\. 21:00–21:20\. Una pieza por tienda\. No apaga el feed\./,
   );
   assert.equal(faqCopy.includes("marcas@curadario.la"), false);
+  assert.equal(faqCopy.includes("Curadario"), false);
+  assert.equal(faqPage.includes("Curadario"), false);
   assert.match(faqPage, /contactCta|Escribinos|FAQ_CONTACT/);
-  assert.match(ayuda, /redirect\(routes\.faq\)/);
+  assert.match(ayuda, /Preguntas en el FAQ|ayudaCopy/);
+  assert.match(ayuda, /routes\.faq/);
+  assert.match(ayuda, /routes\.contacto/);
+  assert.equal(ayuda.includes("redirect"), false);
+  assert.equal(ayuda.includes("mailto:"), false);
+  assert.equal(ayuda.includes("joacoditoma@gmail.com"), false);
+  assert.equal(ayuda.includes("@curadario"), false);
   assert.match(readme, /\/que-es/);
   assert.match(readme, /\/faq/);
   const scanned = [

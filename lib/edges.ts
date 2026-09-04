@@ -1,3 +1,8 @@
+export const emptyCopy = {
+  title: "Todavía no hay nada acá.",
+  cta: "Ir al feed",
+} as const;
+
 export const emptyGuardados = {
   title: "Todavía no guardaste nada.",
   body: "Tocá el corazón en una pieza. Cuando quieras, volvés acá.",
@@ -62,12 +67,17 @@ export function marcaCountLine(count: number): string {
 export const marcaCta = "Ir a su tienda";
 
 export const loadErrorCopy = {
-  title: "No pudimos cargar.",
-  body: "Probá de nuevo. Si sigue, la tienda puede estar caída.",
+  title: "Algo falló. Probá de nuevo.",
   retry: "Reintentar",
   home: "Ir al inicio",
   footerLead: "Marcas de TiendaNube.",
   footerSub: "Tocás, vas a su tienda.",
+} as const;
+
+export const ayudaCopy = {
+  line: "Preguntas en el FAQ. Escribinos desde Contacto.",
+  faq: "FAQ",
+  contacto: "Contacto",
 } as const;
 
 export const onboardingSlides = [

@@ -82,6 +82,14 @@ export function CloudIcon({ className = "h-5 w-5" }: IconProps) {
   );
 }
 
+export function CheckIcon({ className = "h-8 w-8" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+      <path d="M6 12.5 10.2 16.5 18 8.5" />
+    </svg>
+  );
+}
+
 export function CloudOffIcon({ className = "h-16 w-16" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>

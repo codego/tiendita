@@ -24,6 +24,7 @@ const edges = read("lib/edges.ts");
 const saved = read("components/SavedGrid.tsx");
 const looks = read("components/LooksIndex.tsx");
 const stories = read("components/RecienStories.tsx");
+const emptyState = read("components/EmptyState.tsx");
 const loadError = read("components/LoadError.tsx");
 const offline = read("components/OfflineGate.tsx");
 const errorPage = read("app/error.tsx");
@@ -40,6 +41,21 @@ const layout = read("app/layout.tsx");
 const shell = read("components/AppShell.tsx");
 const storeCta = read("components/StoreCta.tsx");
 const readme = read("README.md");
+
+test("generic empty and error copy are Markos locked lines", () => {
+  assert.match(edges, /Todavía no hay nada acá\./);
+  assert.match(edges, /emptyCopy/);
+  assert.match(edges, /cta: "Ir al feed"/);
+  assert.match(emptyState, /emptyCopy/);
+  assert.match(edges, /Algo falló\. Probá de nuevo\./);
+  assert.match(edges, /Reintentar/);
+  assert.match(edges, /Ir al inicio/);
+  assert.equal(edges.includes("No pudimos cargar."), false);
+  assert.equal(
+    edges.includes("Probá de nuevo. Si sigue, la tienda puede estar caída."),
+    false,
+  );
+});
 
 test("empty Guardados, Looks, and Recién use the locked lines", () => {
   assert.match(edges, /Todavía no guardaste nada\./);
@@ -60,17 +76,14 @@ test("empty Guardados, Looks, and Recién use the locked lines", () => {
 });
 
 test("error and offline reuse the same load screen", () => {
-  assert.match(edges, /No pudimos cargar\./);
-  assert.match(
-    edges,
-    /Probá de nuevo\. Si sigue, la tienda puede estar caída\./,
-  );
+  assert.match(edges, /Algo falló\. Probá de nuevo\./);
   assert.match(edges, /Reintentar/);
   assert.match(edges, /Ir al inicio/);
   assert.match(edges, /Marcas de TiendaNube\./);
   assert.match(edges, /Tocás, vas a su tienda\./);
   assert.match(loadError, /loadErrorCopy/);
   assert.match(loadError, /CloudOffIcon/);
+  assert.match(loadError, /Wordmark/);
   assert.match(offline, /LoadError/);
   assert.match(offline, /isBrowserOffline/);
   assert.match(errorPage, /LoadError/);
@@ -80,7 +93,14 @@ test("error and offline reuse the same load screen", () => {
 
 test("Ayuda FAQ copy is locked and never says 21 productos", () => {
   assert.match(routes, /ayuda: "\/ayuda"/);
-  assert.match(ayudaPage, /redirect\(routes\.faq\)/);
+  assert.match(edges, /Preguntas en el FAQ\. Escribinos desde Contacto\./);
+  assert.match(ayudaPage, /ayudaCopy/);
+  assert.match(ayudaPage, /routes\.faq/);
+  assert.match(ayudaPage, /routes\.contacto/);
+  assert.equal(ayudaPage.includes("redirect"), false);
+  assert.equal(ayudaPage.includes("mailto:"), false);
+  assert.equal(ayudaPage.includes("joacoditoma@gmail.com"), false);
+  assert.equal(ayudaPage.includes("@curadario"), false);
   assert.match(faqPage, /HelpFaq/);
   assert.match(faqCopy, /¿Qué es Con pinta\?/);
   assert.match(
@@ -100,9 +120,10 @@ test("Ayuda FAQ copy is locked and never says 21 productos", () => {
   assert.match(faqCopy, /¿Las 21\?/);
   assert.match(
     faqCopy,
-    /Drop diario 21:00–21:20\. Una pieza por tienda\. No apaga el feed\./,
+    /Drop de 20 minutos\. 21:00–21:20\. Una pieza por tienda\. No apaga el feed\./,
   );
   assert.equal(faqCopy.includes("marcas@curadario.la"), false);
+  assert.equal(faqCopy.includes("Curadario"), false);
   assert.equal(helpFaq.includes("mailto:"), false);
   assert.match(helpFaq, /¿Tenés más preguntas\?|contactPrompt/);
   assert.match(helpFaq, /routes\.contacto/);

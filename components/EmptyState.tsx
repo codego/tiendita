@@ -1,17 +1,18 @@
 import Link from "next/link";
 import { Wordmark } from "@/components/Wordmark";
+import { emptyCopy } from "@/lib/edges";
 import { routes } from "@/lib/routes";
 
 export function EmptyState({
-  title,
+  title = emptyCopy.title,
   body,
   icon,
-  cta,
+  cta = emptyCopy.cta,
   href = routes.landing,
   wordmark = false,
 }: {
-  title: string;
-  body: string;
+  title?: string;
+  body?: string;
   icon?: React.ReactNode;
   cta?: string;
   href?: string;
@@ -28,7 +29,9 @@ export function EmptyState({
       ) : null}
       <div className="mt-16 max-w-[22ch] text-center">
         <h1 className="font-serif text-[32px] leading-[1.12] text-ink">{title}</h1>
-        <p className="mt-3 font-sans text-[15px] leading-6 text-ink">{body}</p>
+        {body ? (
+          <p className="mt-3 font-sans text-[15px] leading-6 text-ink">{body}</p>
+        ) : null}
       </div>
       {icon ? (
         <div className="mt-8 text-terracotta" aria-hidden="true">

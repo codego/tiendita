@@ -144,23 +144,14 @@ export async function fetchTnStoreEmail(session: TnSession): Promise<string> {
 }
 
 export async function fetchTnStore(session: TnSession): Promise<TiendaNubeStore> {
-  try {
-    const store = await tnGet<{ name?: TnName }>(session, "/store");
-    const name = pickName(store.name, "Tu TiendaNube");
-    return {
-      name,
-      platform: "TiendaNube",
-      status: "Sincronizado",
-      syncedCount: 0,
-    };
-  } catch {
-    return {
-      name: "Tu TiendaNube",
-      platform: "TiendaNube",
-      status: "Sincronizado",
-      syncedCount: 0,
-    };
-  }
+  const store = await tnGet<{ name?: TnName }>(session, "/store");
+  const name = pickName(store.name, "Tu TiendaNube");
+  return {
+    name,
+    platform: "TiendaNube",
+    status: "Sincronizado",
+    syncedCount: 0,
+  };
 }
 
 export async function fetchTnProducts(session: TnSession): Promise<TiendaNubeProduct[]> {

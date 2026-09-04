@@ -47,15 +47,20 @@ const send = read("lib/send-contact.ts");
 const readme = read("README.md");
 const seed = JSON.parse(read("data/seed.json"));
 
-test("404 uses Elena's terracotta feed line", () => {
+test("404 uses Elena's cream feed line", () => {
   assert.match(notFoundCopy, /Esto no está en Con pinta\./);
   assert.match(notFoundCopy, /Volvé al feed\./);
+  assert.match(notFoundCopy, /Esto no está en Con pinta\. Volvé al feed\./);
   assert.match(notFoundCopy, /Ir al feed →/);
-  assert.match(notFound, /tone="terracotta"/);
-  assert.match(notFound, /text-terracotta/);
-  assert.match(notFound, /bg-terracotta/);
+  assert.match(notFound, /titleLead/);
+  assert.match(notFound, /titleRest/);
+  assert.match(notFound, /bg-cream/);
+  assert.match(notFound, /Wordmark/);
+  assert.match(notFound, /bg-ink/);
   assert.match(notFound, /routes\.landing/);
-  assert.match(notFound, /SearchIcon/);
+  assert.equal(notFound.includes("SearchIcon"), false);
+  assert.equal(notFound.includes("text-terracotta"), false);
+  assert.equal(notFound.includes("Curadario"), false);
   assert.equal(notFound.includes("Ver Looks"), false);
   assert.equal(notFound.toLowerCase().includes("olive"), false);
 });

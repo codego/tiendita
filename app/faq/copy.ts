@@ -18,7 +18,8 @@ export const FAQ_ITEMS = [
   },
   {
     question: "¿Las 21?",
-    answer: "Drop diario 21:00–21:20. Una pieza por tienda. No apaga el feed.",
+    answer:
+      "Drop de 20 minutos. 21:00–21:20. Una pieza por tienda. No apaga el feed.",
   },
 ] as const;
 

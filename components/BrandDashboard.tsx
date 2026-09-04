@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
 import { BrandMark } from "@/components/BrandMark";
 import { BrandMenu } from "@/components/BrandMenu";
+import { MerchantResyncOk } from "@/components/MerchantResyncOk";
+import { MerchantSyncFail } from "@/components/MerchantSyncFail";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { ProductPhoto } from "@/components/ProductPhoto";
 import { Wordmark } from "@/components/Wordmark";
@@ -13,35 +16,67 @@ import { tonightPieceForStore } from "@/lib/las21";
 import { brandSlug } from "@/lib/marca";
 import { routes } from "@/lib/routes";
 import { storePieces } from "@/lib/store-pieces";
+import { setLastSyncAt } from "@/lib/sync";
 import { useHydrated } from "@/lib/useHydrated";
 import { usePublishedIds } from "@/lib/usePublished";
 import { useWeekShareMap } from "@/lib/useShares";
 import { useWeekClickMap } from "@/lib/useStoreClicks";
 import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
 
+function ResyncButton({
+  onClick,
+  busy,
+  className,
+}: {
+  onClick: () => void;
+  busy: boolean;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={busy}
+      className={className}
+    >
+      {dashboardCopy.resync}
+    </button>
+  );
+}
+
 export function BrandDashboard({
   store,
-  products,
+  products = [],
   source = "mock",
+  syncFailed = false,
+  syncOk = false,
 }: {
-  store: TiendaNubeStore;
-  products: TiendaNubeProduct[];
+  store?: TiendaNubeStore | null;
+  products?: TiendaNubeProduct[];
   source?: "mock" | "live";
+  syncFailed?: boolean;
+  syncOk?: boolean;
 }) {
+  const router = useRouter();
   const hydrated = useHydrated();
   const publishedIds = usePublishedIds();
   const clickMap = useWeekClickMap();
   const shareMap = useWeekShareMap();
+  const [retryFailed, setRetryFailed] = useState(false);
+  const [showOk, setShowOk] = useState(syncOk);
+  const [busy, setBusy] = useState(false);
+  const failed = syncFailed || retryFailed;
 
-  const vitrinaHref = routes.marca(brandSlug(store.name));
+  const storeName = store?.name ?? "Tu tienda";
+  const vitrinaHref = routes.marca(brandSlug(storeName));
   const empty = !hydrated || publishedIds.length === 0;
   const status = source === "mock" ? brandCopy.mockLabel : dashboardCopy.connected;
-  const tonight = tonightPieceForStore(store.name);
+  const tonight = tonightPieceForStore(storeName);
   const drop = tonightXor(tonight);
 
   const pieces = useMemo(
-    () => storePieces(store.name, products),
-    [products, store.name],
+    () => storePieces(storeName, products),
+    [products, storeName],
   );
 
   const salidas = useMemo(
@@ -60,6 +95,45 @@ export function BrandDashboard({
     [pieces, shareMap],
   );
 
+  async function resync() {
+    setBusy(true);
+    try {
+      const response = await fetch(routes.marcasSync, { method: "POST" });
+      if (!response.ok) {
+        setRetryFailed(true);
+        return;
+      }
+      setLastSyncAt();
+      setRetryFailed(false);
+      setShowOk(true);
+      router.replace(`${routes.marcas}?sync=ok`);
+      router.refresh();
+    } catch {
+      setRetryFailed(true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function dismissOk() {
+    setShowOk(false);
+    router.replace(routes.marcas);
+  }
+
+  const okSheet = showOk ? (
+    <MerchantResyncOk onPanel={dismissOk} onClose={dismissOk} />
+  ) : null;
+
+  if (failed) {
+    return (
+      <MerchantSyncFail
+        storeName={storeName}
+        onRetry={resync}
+        busy={busy}
+      />
+    );
+  }
+
   if (empty) {
     return (
       <PhoneFrame>
@@ -76,10 +150,10 @@ export function BrandDashboard({
         </header>
 
         <div className="flex items-center gap-3 px-5 pt-2 pb-5">
-          <BrandMark name={store.name} />
+          <BrandMark name={storeName} />
           <div className="min-w-0">
             <h1 className="font-serif text-[28px] leading-none text-ink">
-              {store.name}
+              {storeName}
             </h1>
             <p className="mt-2 flex items-center gap-1.5 font-sans text-[13px] text-ink/60">
               <span
@@ -88,6 +162,11 @@ export function BrandDashboard({
               />
               {status}
             </p>
+            <ResyncButton
+              onClick={resync}
+              busy={busy}
+              className="mt-2 font-sans text-[13px] text-terracotta underline underline-offset-2 disabled:opacity-60"
+            />
           </div>
         </div>
         <hr className="border-ink/10" />
@@ -112,6 +191,7 @@ export function BrandDashboard({
             {dashboardCopy.logout}
           </a>
         </main>
+        {okSheet}
       </PhoneFrame>
     );
   }
@@ -128,9 +208,14 @@ export function BrandDashboard({
 
       <main className="flex-1 px-5 pt-7">
         <h1 className="font-serif text-[40px] leading-[1.02] text-ink">
-          {store.name}
+          {storeName}
         </h1>
         <p className="mt-2 font-sans text-[15px] text-ink/65">{status}</p>
+        <ResyncButton
+          onClick={resync}
+          busy={busy}
+          className="mt-2 font-sans text-[14px] text-terracotta underline underline-offset-2 disabled:opacity-60"
+        />
 
         <section className="mt-8 rounded-[28px] bg-paper px-6 pt-8 pb-6 text-center">
           <p className="font-serif text-[88px] leading-none text-terracotta">
@@ -223,6 +308,7 @@ export function BrandDashboard({
           {dashboardCopy.vitrina}
         </Link>
       </div>
+      {okSheet}
     </PhoneFrame>
   );
 }

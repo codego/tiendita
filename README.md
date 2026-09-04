@@ -53,7 +53,7 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `/privacidad` | Privacidad — no checkout data |
 | `/que-es` | Qué es Con pinta — Descubrí, Tocá, Compartí |
 | `/faq` | FAQ — vitrina, how to buy, how to publish, Las 21 |
-| `/ayuda` | Redirects to `/faq` |
+| `/ayuda` | Preguntas en el FAQ. Escribinos desde Contacto. — links to `/faq` and `/contacto`. No inbox on this page. |
 | `/contacto` | Contact form — name, email, message |
 | `/app/buscar` | Search brand, name, category |
 | `/app/guardados` | Saved hearts — local pocket |
@@ -69,7 +69,7 @@ First visit: a 3-slide sheet over the home feed — **Marcas de TiendaNube.** ·
 
 Empty Guardados: **Todavía no guardaste nada.** / **Tocá el corazón en una pieza. Cuando quieras, volvés acá.** CTA **Ir al feed →**. Empty Looks: **Todavía no hay looks. Volvé más tarde.** Empty Recién: **Nadie publicó todavía. Cuando una tienda publique, aparece acá.**
 
-Failed fetch / offline: **No pudimos cargar.** / **Probá de nuevo. Si sigue, la tienda puede estar caída.** **Reintentar** · **Ir al inicio.**
+Generic empty: **Todavía no hay nada acá.** CTA **Ir al feed**. Failed fetch / offline: **Algo falló. Probá de nuevo.** **Reintentar** · **Ir al inicio.**
 
 Brand panel with 0 published: **Todavía no hay nada en Con pinta.** / **Elegí al menos una pieza para aparecer en el feed.** CTA **Elegir piezas**. After the first publish (0 → N): **Listo.** / **Ya está en Con pinta.** / **Ver el feed**. Later **Listo · N publicadas** returns to the panel.
 
@@ -85,13 +85,13 @@ Chips: Todas · Ropa · Deportiva · Carteras · Accesorios · Trajes de baño �
 
 ## Brand + legal
 
-1. **`/marcas`** — No session: “Publicá tu selección. No tu tienda entera.” Primary **Continuar con TiendaNube →**. Real OAuth when `TIENDANUBE_CLIENT_ID` + `TIENDANUBE_CLIENT_SECRET` + `TIENDANUBE_REDIRECT_URI` are set. Without them, the path is labeled **Mock**. With a session: merchant cockpit — store name + **Conectada a TiendaNube** (mock label if OAuth env is unset). One number: **Salidas a tu tienda (7 días)** from real store-CTA clicks. Sub: “Con pinta no vende. El clic es el resultado.” **Lo que más reenviaron** is the top 3 pieces by share count in 7 days (empty if none). **Hoy a las 21: esta.** is XOR: a Las 21 card + **Cambiar** if this store has a piece in tonight’s drop; otherwise only **Esta noche no tenés pieza en el drop.** **Elegir más piezas** → `/marcas/elegir`. **Ver mi vitrina** → `/marca/[slug]`. Empty (0 publicadas): **Todavía no hay nada en Con pinta.** + **Elegir piezas**. Still no checkout. Las 21 stays one piece per store. No visitas/clics language on this screen.
+1. **`/marcas`** — No session: “Publicá tu selección. No tu tienda entera.” Primary **Continuar con TiendaNube →**. Real OAuth when `TIENDANUBE_CLIENT_ID` + `TIENDANUBE_CLIENT_SECRET` + `TIENDANUBE_REDIRECT_URI` are set. Without them, the path is labeled **Mock**. With a session: merchant cockpit — store name + **Conectada a TiendaNube** (mock label if OAuth env is unset) + **Sincronizá de nuevo.** Mock resync refreshes the seed catalog. Live resync hits `/api/marcas/sync` (TiendaNube store + products). If sync fails — live TN error, or QA `?sync=fail` — the panel is not green: **No conectada / error**, title **No pudimos hablar con tu tienda.**, sub **Probá otra vez.**, primary **Sincronizá de nuevo.**, ghost **Cerrar sesión**. After a successful sync (`?sync=ok`): sheet **Listo. Tu tienda está al día.**, primary **Ver el panel**, ghost **Cerrar**. One number: **Salidas a tu tienda (7 días)** from real store-CTA clicks. Sub: “Con pinta no vende. El clic es el resultado.” **Lo que más reenviaron** is the top 3 pieces by share count in 7 days (empty if none). **Hoy a las 21: esta.** is XOR: a Las 21 card + **Cambiar** if this store has a piece in tonight’s drop; otherwise only **Esta noche no tenés pieza en el drop.** **Elegir más piezas** → `/marcas/elegir`. **Ver mi vitrina** → `/marca/[slug]`. Empty (0 publicadas): **Todavía no hay nada en Con pinta.** + **Elegir piezas**. Still no checkout. Las 21 stays one piece per store. No visitas/clics language on this screen.
 2. **`/marcas/elegir`** — “Qué publicás.” **Lo que prendes entra al feed. El checkout sigue en tu TiendaNube.** Live products after OAuth; otherwise the labeled mock seed. Sticky **Listo · N publicadas** returns to the panel. First publish (0 → N) still shows **Listo.** / **Ya está en Con pinta.** / **Ver el feed**.
 3. **`/marcas/dashboard`** — Redirects to the panel home `/marcas`. Click notice for mail still: **Alguien salió de Con pinta a tu ficha.**
 4. **Share a finding** — `/app/pieza/[id]` and `/app/coleccion/compartir`. WhatsApp OG title: **Lo vi en Con pinta.** + the product image. Site: **Con pinta**. Las 21 live share: `/las21` — terracotta **LAS 21**, title **Está pasando en Con pinta. 20 minutos.**
 5. **`/terminos`** and **`/privacidad`** — Con pinta is a **vitrina**. No payments.
 6. **`/que-es`** — Qué es Con pinta. **01 Descubrí** / **02 Tocá** / **03 Compartí**. CTAs **Ir al feed** and **Publicá tu tienda** → `/marcas`.
-7. **`/faq`** — FAQ. Cómo publicar: Entrás con TiendaNube → elegís qué sale → a las 21 puede ir al drop. Las 21 is a daily drop 21:00–21:20, one piece per store. It does not turn off the feed. Más preguntas → `/contacto`. `/ayuda` redirects here.
+7. **`/faq`** — FAQ. Cómo publicar: Entrás con TiendaNube → elegís qué sale → a las 21 puede ir al drop. Las 21 is a **drop de 20 minutos** (21:00–21:20), one piece per store. It does not turn off the feed. Brand name is **Con pinta** — no Curadario. Más preguntas → `/contacto`. **`/ayuda`** is its own page: **Preguntas en el FAQ. Escribinos desde Contacto.** — FAQ and Contacto are links. No invented inbox and no joaco address on that page.
 8. **`/contacto`** — **Marcas y el resto, acá.** Nombre, Email, Soy (Marca / Shopper), Mensaje, **Enviar**. Persists locally and sends to **joacoditoma@gmail.com** (`CONTACT_TO`, default until Con pinta has its own inbox) when a transport is set. After send: **Mensaje enviado.** + **Ir al feed →**. No invented brand mailbox.
 
 ## Env
@@ -110,7 +110,7 @@ Local `.env` — do not invent a brand inbox. See `.env.example`.
 
 Without the TiendaNube trio, `/marcas` stays the labeled mock. The form always persists in localStorage and shows **Mensaje enviado.**
 
-404: **Esto no está en Con pinta.** **Volvé al feed.** CTA **Ir al feed →** to `/`.
+404: **Esto no está en Con pinta. Volvé al feed.** Cream page, **Con pinta.** top-left, black pill **Ir al feed →** to `/`.
 
 Buscar queries the catalog by brand, name, and category. Empty: **No encontramos eso.** + **Ir al feed →**.
 

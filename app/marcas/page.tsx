@@ -6,13 +6,13 @@ import { Wordmark } from "@/components/Wordmark";
 import { brandCopy } from "@/lib/brand";
 import { isTnOAuthConfigured } from "@/lib/env";
 import { routes } from "@/lib/routes";
-import { getTiendaNubeProducts, getTiendaNubeStore } from "@/lib/tiendanube";
 import {
-  fetchTnProducts,
-  fetchTnStore,
-  readMerchantGate,
-} from "@/lib/tiendanube-oauth";
-import type { TiendaNubeProduct, TiendaNubeStore } from "@/lib/types";
+  isSyncFailQuery,
+  isSyncOkQuery,
+  mockCatalog,
+  syncLiveCatalog,
+} from "@/lib/merchant-sync";
+import { readMerchantGate } from "@/lib/tiendanube-oauth";
 
 export const metadata = {
   title: "Para marcas — Con pinta",
@@ -119,53 +119,53 @@ function MarcasLogin({
   );
 }
 
-async function loadLivePanel(session: {
-  access_token: string;
-  user_id: string;
-}): Promise<{ store: TiendaNubeStore; products: TiendaNubeProduct[] } | null> {
-  try {
-    const [store, products] = await Promise.all([
-      fetchTnStore(session),
-      fetchTnProducts(session),
-    ]);
-    return { store: { ...store, syncedCount: products.length }, products };
-  } catch {
-    return null;
-  }
-}
-
 export default async function MarcasPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; sync?: string }>;
 }) {
   const live = isTnOAuthConfigured();
-  const { error } = await searchParams;
+  const { error, sync } = await searchParams;
   const jar = await cookies();
   const gate = readMerchantGate((name) => jar.get(name)?.value);
+  const fail = isSyncFailQuery(sync);
+  const ok = isSyncOkQuery(sync);
 
   if (gate.source === "none") {
     return <MarcasLogin live={live} error={error} />;
   }
 
   if (gate.source === "live") {
-    const loaded = await loadLivePanel(gate.session);
-    if (loaded) {
-      return (
-        <BrandDashboard
-          store={loaded.store}
-          products={loaded.products}
-          source="live"
-        />
-      );
+    if (fail) {
+      return <BrandDashboard source="live" syncFailed />;
     }
+    let loaded: Awaited<ReturnType<typeof syncLiveCatalog>> | null = null;
+    try {
+      loaded = await syncLiveCatalog(gate.session);
+    } catch {
+      loaded = null;
+    }
+    if (!loaded) {
+      return <BrandDashboard source="live" syncFailed />;
+    }
+    return (
+      <BrandDashboard
+        store={loaded.store}
+        products={loaded.products}
+        source="live"
+        syncOk={ok}
+      />
+    );
   }
 
+  const mock = mockCatalog();
   return (
     <BrandDashboard
-      store={getTiendaNubeStore()}
-      products={getTiendaNubeProducts()}
+      store={mock.store}
+      products={mock.products}
       source="mock"
+      syncFailed={fail}
+      syncOk={ok && !fail}
     />
   );
 }
