@@ -9,6 +9,8 @@ const terminos = readFileSync(join(root, "app/terminos/page.tsx"), "utf8");
 const privacidad = readFileSync(join(root, "app/privacidad/page.tsx"), "utf8");
 const brand = readFileSync(join(root, "lib/brand.ts"), "utf8");
 const readme = readFileSync(join(root, "README.md"), "utf8");
+const queEs = readFileSync(join(root, "lib/que-es.ts"), "utf8");
+const queEsPage = readFileSync(join(root, "components/QueEsPage.tsx"), "utf8");
 
 test("legal pages say Con pinta is a vitrina without payments", () => {
   assert.match(brand, /Con pinta es una vitrina/);
@@ -18,6 +20,18 @@ test("legal pages say Con pinta is a vitrina without payments", () => {
   assert.match(terminos, /TiendaNube/);
   assert.match(privacidad, /No pedimos pagos ni datos de checkout/);
   assert.match(privacidad, /Nunca el/);
+  assert.match(privacidad, /cookieCopy\.line/);
+  assert.equal(terminos.includes("Curadario"), false);
+  assert.equal(privacidad.includes("Curadario"), false);
+  assert.equal(brand.includes("Curadario"), false);
+  assert.equal(/@curadario\.(com|la)/i.test(terminos), false);
+  assert.equal(/@curadario\.(com|la)/i.test(privacidad), false);
+  assert.match(
+    queEs,
+    /Con pinta junta marcas de TiendaNube\. Tocás, vas a su tienda\./,
+  );
+  assert.equal(queEs.includes("Curadario"), false);
+  assert.equal(queEsPage.includes("Curadario"), false);
 });
 
 test("readme documents brand, share, and legal routes", () => {

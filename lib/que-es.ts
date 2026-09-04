@@ -1,7 +1,8 @@
 export const queEsCopy = {
   titleLead: "Qué es",
   titleName: "Con pinta",
-  lineBefore: "Marcas de ",
+  line: "Con pinta junta marcas de TiendaNube. Tocás, vas a su tienda.",
+  lineLead: "Con pinta junta marcas de ",
   lineAccent: "TiendaNube",
   lineAfter: ".",
   line2: "Tocás, vas a su tienda.",

@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { BrandDashboard } from "@/components/BrandDashboard";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { Wordmark } from "@/components/Wordmark";
-import { brandCopy } from "@/lib/brand";
+import { brandCopy, dashboardCopy } from "@/lib/brand";
 import { isTnOAuthConfigured } from "@/lib/env";
 import { routes } from "@/lib/routes";
 import {
@@ -48,6 +48,9 @@ function MarcasLogin({
         </p>
         <p className="mt-4 font-serif text-[20px] italic text-ink">
           {brandCopy.tease}
+        </p>
+        <p className="mt-6 font-serif text-[22px] leading-snug text-ink">
+          {dashboardCopy.connectEmpty}
         </p>
         {live ? null : (
           <p className="mt-4 rounded-full bg-cream px-3 py-2 font-sans text-[12px] text-ink/65">

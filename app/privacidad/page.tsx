@@ -1,5 +1,6 @@
 import { LegalDoc } from "@/components/LegalDoc";
 import { legalCopy } from "@/lib/brand";
+import { cookieCopy } from "@/lib/edges";
 
 export const metadata = {
   title: "Privacidad — Con pinta",
@@ -10,6 +11,7 @@ export default function PrivacidadPage() {
   return (
     <LegalDoc title="Privacidad">
       <p>{legalCopy.vitrina}</p>
+      <p>{cookieCopy.line}</p>
       <p>
         No pedimos pagos ni datos de checkout. El carrito vive en la tienda de
         la marca. Con pinta no recibe números de tarjeta, CBU ni comprobantes.

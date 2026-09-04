@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { BrandMenu } from "@/components/BrandMenu";
 import { CloudOffIcon } from "@/components/Icons";
+import { DisconnectTiendaNube } from "@/components/MerchantDisconnectConfirm";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { Wordmark } from "@/components/Wordmark";
 import { dashboardCopy } from "@/lib/brand";
@@ -60,6 +61,7 @@ export function MerchantSyncFail({
           >
             {dashboardCopy.logout}
           </a>
+          <DisconnectTiendaNube className="mt-1 font-sans text-[14px] text-ink/55 underline underline-offset-2" />
         </div>
       </main>
     </PhoneFrame>

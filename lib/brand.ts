@@ -82,6 +82,9 @@ export const dashboardCopy = {
   edit: "Elegir piezas",
   vitrina: "Ver mi vitrina",
   logout: "Cerrar sesión",
+  disconnect: "Desconectá TiendaNube.",
+  disconnectCancel: "Cancelar",
+  connectEmpty: "Conectá tu TiendaNube.",
   footer: "Con pinta no vende. El clic es el resultado.",
   clickNotice: "Alguien salió de Con pinta a tu ficha.",
 } as const;

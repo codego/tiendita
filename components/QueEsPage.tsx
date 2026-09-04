@@ -36,7 +36,7 @@ export function QueEsPage() {
             <span className="text-terracotta">{queEsCopy.titleName}</span>
           </h1>
           <p className="mt-5 font-sans text-[17px] leading-6 text-ink">
-            {queEsCopy.lineBefore}
+            {queEsCopy.lineLead}
             <span className="font-semibold text-terracotta">
               {queEsCopy.lineAccent}
             </span>

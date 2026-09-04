@@ -25,6 +25,38 @@ export function readMerchantGate(getCookie: (name: string) => string | undefined
   return { source: "none" };
 }
 
+type CookieSetter = {
+  set: (
+    name: string,
+    value: string,
+    options: { path: string; maxAge: number },
+  ) => void;
+};
+
+export function expireMerchantCookies(jar: CookieSetter): void {
+  const gone = { path: "/", maxAge: 0 };
+  jar.set(TN_SESSION_COOKIE, "", gone);
+  jar.set(TN_MOCK_COOKIE, "", gone);
+  jar.set(TN_STATE_COOKIE, "", gone);
+}
+
+/** Drop our copy of the token. TN tokens stay valid until uninstall or re-auth. */
+export async function revokeTnAccess(session: TnSession): Promise<void> {
+  if (!isTnOAuthConfigured()) return;
+  void session;
+}
+
+export async function disconnectMerchant(
+  jar: CookieSetter,
+  getCookie: (name: string) => string | undefined,
+): Promise<void> {
+  const gate = readMerchantGate(getCookie);
+  if (gate.source === "live") {
+    await revokeTnAccess(gate.session);
+  }
+  expireMerchantCookies(jar);
+}
+
 export type TnSession = {
   access_token: string;
   user_id: string;

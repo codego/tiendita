@@ -36,6 +36,9 @@ test("click templates are Elena's locked html + plain", () => {
   assert.match(htmlFile, /Ver en Con pinta/);
   assert.equal(htmlFile.includes(MAIL_CLICK_FOOTER), true);
   assert.equal(htmlFile.includes(MAIL_CLICK_SUBJECT), true);
+  assert.equal(htmlFile.includes("Curadario"), false);
+  assert.equal(textFile.includes("Curadario"), false);
+  assert.equal(MAIL_CLICK_SUBJECT.includes("Curadario"), false);
 
   assert.equal(
     textFile.replace(/\s+$/, ""),

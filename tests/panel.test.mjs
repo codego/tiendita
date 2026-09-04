@@ -22,6 +22,9 @@ const elegir = read("app/marcas/elegir/page.tsx");
 const dashboardPage = read("app/marcas/dashboard/page.tsx");
 const entrar = read("app/marcas/entrar/route.ts");
 const salir = read("app/marcas/salir/route.ts");
+const desconectar = read("app/marcas/desconectar/route.ts");
+const disconnectUi = read("components/MerchantDisconnectConfirm.tsx");
+const oauthLib = read("lib/tiendanube-oauth.ts");
 const oauth = read("app/marcas/oauth/route.ts");
 const callback = read("app/marcas/oauth/callback/route.ts");
 const panel = read("components/BrandDashboard.tsx");
@@ -55,10 +58,33 @@ test("merchant routes: login or panel, elegir, dashboard redirect", () => {
   assert.match(dashboardPage, /redirect\(routes\.marcas\)/);
   assert.match(entrar, /TN_MOCK_COOKIE/);
   assert.match(entrar, /routes\.marcasOauth/);
-  assert.match(salir, /TN_SESSION_COOKIE/);
-  assert.match(salir, /TN_MOCK_COOKIE/);
+  assert.match(salir, /expireMerchantCookies/);
   assert.match(oauth, /routes\.marcasEntrar/);
   assert.match(callback, /routes\.marcas,/);
+});
+
+test("cockpit can disconnect TiendaNube with a confirm, then empty-connect", () => {
+  assert.match(brand, /Desconectá TiendaNube\./);
+  assert.match(brand, /Conectá tu TiendaNube\./);
+  assert.match(brand, /Cancelar/);
+  assert.match(routes, /marcasDesconectar: "\/marcas\/desconectar"/);
+  assert.match(panel, /DisconnectTiendaNube/);
+  assert.match(syncFail, /DisconnectTiendaNube/);
+  assert.equal(picker.includes("DisconnectTiendaNube"), false);
+  assert.equal(picker.includes("Desconectá TiendaNube"), false);
+  assert.match(disconnectUi, /dashboardCopy\.disconnect/);
+  assert.match(disconnectUi, /dashboardCopy\.disconnectCancel/);
+  assert.match(disconnectUi, /role="dialog"/);
+  assert.match(disconnectUi, /method="post"/);
+  assert.match(disconnectUi, /routes\.marcasDesconectar/);
+  assert.match(desconectar, /disconnectMerchant/);
+  assert.match(desconectar, /routes\.marcas/);
+  assert.match(oauthLib, /expireMerchantCookies/);
+  assert.match(oauthLib, /revokeTnAccess/);
+  assert.match(oauthLib, /disconnectMerchant/);
+  assert.match(oauthLib, /isTnOAuthConfigured/);
+  assert.match(marcas, /dashboardCopy\.connectEmpty/);
+  assert.match(marcas, /gate\.source === "none"/);
 });
 
 test("panel copy matches Elena's mature cockpit, not analytics", () => {

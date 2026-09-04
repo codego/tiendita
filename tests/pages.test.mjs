@@ -36,7 +36,13 @@ test("qué es uses Elena's locked lines and the mock layout", () => {
   assert.match(queEsRoute, /QueEsPage/);
   assert.match(queEs, /Qué es/);
   assert.match(queEs, /Con pinta/);
-  assert.match(queEs, /Marcas de /);
+  assert.match(
+    queEs,
+    /Con pinta junta marcas de TiendaNube\. Tocás, vas a su tienda\./,
+  );
+  assert.equal(queEs.includes("Curadario"), false);
+  assert.equal(queEsPage.includes("Curadario"), false);
+  assert.equal(queEsRoute.includes("Curadario"), false);
   assert.match(queEs, /TiendaNube/);
   assert.match(queEs, /Tocás, vas a su tienda\./);
   assert.match(queEs, /01/);

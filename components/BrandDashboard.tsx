@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { BrandMark } from "@/components/BrandMark";
 import { BrandMenu } from "@/components/BrandMenu";
+import { DisconnectTiendaNube } from "@/components/MerchantDisconnectConfirm";
 import { MerchantResyncOk } from "@/components/MerchantResyncOk";
 import { MerchantSyncFail } from "@/components/MerchantSyncFail";
 import { PhoneFrame } from "@/components/PhoneFrame";
@@ -167,6 +168,7 @@ export function BrandDashboard({
               busy={busy}
               className="mt-2 font-sans text-[13px] text-terracotta underline underline-offset-2 disabled:opacity-60"
             />
+            <DisconnectTiendaNube className="mt-2 block font-sans text-[13px] text-ink/55 underline underline-offset-2" />
           </div>
         </div>
         <hr className="border-ink/10" />
@@ -216,6 +218,7 @@ export function BrandDashboard({
           busy={busy}
           className="mt-2 font-sans text-[14px] text-terracotta underline underline-offset-2 disabled:opacity-60"
         />
+        <DisconnectTiendaNube className="mt-2 block font-sans text-[14px] text-ink/55 underline underline-offset-2" />
 
         <section className="mt-8 rounded-[28px] bg-paper px-6 pt-8 pb-6 text-center">
           <p className="font-serif text-[88px] leading-none text-terracotta">
