@@ -4,10 +4,16 @@ import { dirname, join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import {
+  avisoXor,
+  lastDropAvisoCount,
+  lastDropRelativeKind,
+  LAST_DROP_AVISO_SEED,
+  parseAvisoQuery,
   pickTonightPiece,
   rankForwarded,
   tonightXor,
 } from "../lib/cockpit.mjs";
+import { todayWindowStartMs } from "../lib/las21-time.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -92,6 +98,9 @@ test("cockpit can disconnect TiendaNube with a confirm, then empty-connect", () 
 test("panel copy matches Elena's mature cockpit, not analytics", () => {
   assert.match(brand, /Con pinta · tu tienda/);
   assert.match(brand, /Salidas a tu tienda \(7 días\)/);
+  assert.match(brand, /Abrieron el aviso de las 21\./);
+  assert.match(brand, /Todavía nadie\. A las 21 se mueve\./);
+  assert.match(brand, /Último drop · anoche/);
   assert.match(brand, /Con pinta no vende\. El clic es el resultado\./);
   assert.match(brand, /Lo que más reenviaron/);
   assert.match(brand, /Hoy a las 21: esta\./);
@@ -110,6 +119,9 @@ test("panel copy matches Elena's mature cockpit, not analytics", () => {
   );
   assert.match(brand, /Listo · \$\{count\} publicadas/);
   assert.match(panel, /dashboardCopy\.salidas/);
+  assert.match(panel, /dashboardCopy\.avisoTitle/);
+  assert.match(panel, /lastDropAvisoCount/);
+  assert.match(panel, /avisoXor/);
   assert.match(panel, /dashboardCopy\.forwarded/);
   assert.match(panel, /dashboardCopy\.tonightTitle/);
   assert.match(panel, /dashboardCopy\.more/);
@@ -137,6 +149,52 @@ test("panel copy matches Elena's mature cockpit, not analytics", () => {
   assert.equal(panel.includes("Casa Norte"), false);
   assert.equal(brand.includes("Visitas"), false);
   assert.equal(brand.includes("Clics a la tienda"), false);
+});
+
+test("aviso de las 21 is last-drop opens XOR empty, never both", () => {
+  assert.equal(LAST_DROP_AVISO_SEED, 47);
+  assert.equal(parseAvisoQuery("0"), 0);
+  assert.equal(parseAvisoQuery("47"), 47);
+  assert.equal(parseAvisoQuery(undefined), null);
+  assert.equal(parseAvisoQuery("no"), null);
+  assert.equal(lastDropAvisoCount(undefined), 47);
+  assert.equal(lastDropAvisoCount("0"), 0);
+  assert.equal(lastDropAvisoCount("47"), 47);
+  assert.deepEqual(avisoXor(47), { showCount: true, showEmpty: false });
+  assert.deepEqual(avisoXor(0), { showCount: false, showEmpty: true });
+  assert.deepEqual(avisoXor(lastDropAvisoCount("0")), {
+    showCount: false,
+    showEmpty: true,
+  });
+
+  const beforeDrop = todayWindowStartMs(Date.UTC(2026, 8, 5, 18, 0, 0)) - 3_600_000;
+  const afterDrop = todayWindowStartMs(beforeDrop) + 60_000;
+  assert.equal(lastDropRelativeKind(beforeDrop), "anoche");
+  assert.equal(lastDropRelativeKind(afterDrop), "hoy");
+
+  assert.match(brand, /Abrieron el aviso de las 21\./);
+  assert.match(brand, /Todavía nadie\. A las 21 se mueve\./);
+  assert.match(brand, /Último drop · anoche/);
+  assert.match(brand, /Último drop · hoy/);
+  assert.match(panel, /avisoXor/);
+  assert.match(panel, /avisoDrop\.showCount/);
+  assert.match(panel, /avisoDrop\.showEmpty/);
+  assert.match(panel, /dashboardCopy\.avisoEmpty/);
+  assert.match(panel, /avisoLastDropLine/);
+  assert.match(marcas, /aviso\?: string/);
+  assert.match(marcas, /aviso=\{aviso\}/);
+  assert.equal(panel.includes("NUEVO"), false);
+  assert.equal(panel.includes("Lean"), false);
+  const emptyBlock = panel.slice(panel.indexOf("avisoDrop.showEmpty"));
+  assert.equal(emptyBlock.includes("avisoCount"), false);
+  assert.equal(emptyBlock.includes("avisoWhen"), false);
+  const countBlock = panel.slice(
+    panel.indexOf("avisoDrop.showCount"),
+    panel.indexOf("avisoDrop.showEmpty"),
+  );
+  assert.match(countBlock, /avisoCount/);
+  assert.match(countBlock, /avisoWhen/);
+  assert.equal(countBlock.includes("avisoEmpty"), false);
 });
 
 test("Las 21 cockpit is card XOR empty line, never both", () => {
@@ -262,6 +320,9 @@ test("readme documents the merchant panel routes", () => {
   assert.match(readme, /Elegir más piezas/);
   assert.match(readme, /Ver mi vitrina/);
   assert.match(readme, /Salidas a tu tienda/);
+  assert.match(readme, /Abrieron el aviso de las 21/);
+  assert.match(readme, /aviso=0/);
+  assert.match(readme, /aviso=47/);
   assert.match(readme, /Lo que más reenviaron/);
   assert.match(readme, /Hoy a las 21: esta\./);
 });

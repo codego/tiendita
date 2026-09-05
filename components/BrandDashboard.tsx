@@ -5,14 +5,26 @@ import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { BrandMark } from "@/components/BrandMark";
 import { BrandMenu } from "@/components/BrandMenu";
+import { PersonIcon } from "@/components/Icons";
 import { DisconnectTiendaNube } from "@/components/MerchantDisconnectConfirm";
 import { MerchantResyncOk } from "@/components/MerchantResyncOk";
 import { MerchantSyncFail } from "@/components/MerchantSyncFail";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { ProductPhoto } from "@/components/ProductPhoto";
 import { Wordmark } from "@/components/Wordmark";
-import { rankForwarded, tonightXor } from "@/lib/cockpit.mjs";
-import { brandCopy, dashboardCopy, elegirCopy } from "@/lib/brand";
+import {
+  avisoXor,
+  lastDropAvisoCount,
+  lastDropRelativeKind,
+  rankForwarded,
+  tonightXor,
+} from "@/lib/cockpit.mjs";
+import {
+  avisoLastDropLine,
+  brandCopy,
+  dashboardCopy,
+  elegirCopy,
+} from "@/lib/brand";
 import { tonightPieceForStore } from "@/lib/las21";
 import { brandSlug } from "@/lib/marca";
 import { routes } from "@/lib/routes";
@@ -51,12 +63,14 @@ export function BrandDashboard({
   source = "mock",
   syncFailed = false,
   syncOk = false,
+  aviso,
 }: {
   store?: TiendaNubeStore | null;
   products?: TiendaNubeProduct[];
   source?: "mock" | "live";
   syncFailed?: boolean;
   syncOk?: boolean;
+  aviso?: string;
 }) {
   const router = useRouter();
   const hydrated = useHydrated();
@@ -74,6 +88,9 @@ export function BrandDashboard({
   const status = source === "mock" ? brandCopy.mockLabel : dashboardCopy.connected;
   const tonight = tonightPieceForStore(storeName);
   const drop = tonightXor(tonight);
+  const avisoCount = lastDropAvisoCount(aviso);
+  const avisoDrop = avisoXor(avisoCount);
+  const avisoWhen = avisoLastDropLine(lastDropRelativeKind());
 
   const pieces = useMemo(
     () => storePieces(storeName, products),
@@ -230,6 +247,35 @@ export function BrandDashboard({
           <p className="mt-8 font-sans text-[12px] text-ink/45">
             {dashboardCopy.footer}
           </p>
+        </section>
+
+        <section className="mt-4" aria-label={dashboardCopy.avisoTitle}>
+          <div className="flex items-center gap-3 rounded-[22px] bg-paper px-4 py-3">
+            <span
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-cream text-ink"
+              aria-hidden="true"
+            >
+              <PersonIcon className="h-5 w-5" />
+            </span>
+            <p className="font-sans text-[15px] font-medium text-ink">
+              {dashboardCopy.avisoTitle}
+            </p>
+          </div>
+          {avisoDrop.showCount ? (
+            <div className="mt-2 rounded-[22px] bg-cream px-6 py-8 text-center">
+              <p className="font-serif text-[72px] leading-none text-ink">
+                {avisoCount}
+              </p>
+              <p className="mt-3 font-sans text-[14px] text-ink/55">
+                {avisoWhen}
+              </p>
+            </div>
+          ) : null}
+          {avisoDrop.showEmpty ? (
+            <p className="mt-2 rounded-[22px] bg-paper px-4 py-4 font-sans text-[15px] leading-6 text-ink/70">
+              {dashboardCopy.avisoEmpty}
+            </p>
+          ) : null}
         </section>
 
         <h2 className="mt-10 font-serif text-[26px] leading-snug text-ink">

@@ -63,6 +63,10 @@ export const dashboardCopy = {
   kicker: "Con pinta · tu tienda",
   kickerAccent: "tu tienda",
   salidas: "Salidas a tu tienda (7 días)",
+  avisoTitle: "Abrieron el aviso de las 21.",
+  avisoEmpty: "Todavía nadie. A las 21 se mueve.",
+  avisoLastDropAnoche: "Último drop · anoche",
+  avisoLastDropHoy: "Último drop · hoy",
   forwarded: "Lo que más reenviaron",
   tonightTitle: "Hoy a las 21: esta.",
   tonightEmpty: "Esta noche no tenés pieza en el drop.",
@@ -91,6 +95,12 @@ export const dashboardCopy = {
 
 export function lastSyncLine(relative: string): string {
   return `${dashboardCopy.connected} · ${dashboardCopy.lastSyncPrefix} ${relative}`;
+}
+
+export function avisoLastDropLine(kind: "anoche" | "hoy"): string {
+  return kind === "hoy"
+    ? dashboardCopy.avisoLastDropHoy
+    : dashboardCopy.avisoLastDropAnoche;
 }
 
 export const legalCopy = {

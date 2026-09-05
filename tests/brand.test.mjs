@@ -53,6 +53,8 @@ test("brand landing copy is exact", () => {
 
 test("merchant panel home uses Elena's mature cockpit and real salidas", () => {
   assert.match(brand, /Salidas a tu tienda \(7 días\)/);
+  assert.match(brand, /Abrieron el aviso de las 21\./);
+  assert.match(brand, /Todavía nadie\. A las 21 se mueve\./);
   assert.match(brand, /Lo que más reenviaron/);
   assert.match(brand, /Hoy a las 21: esta\./);
   assert.match(brand, /Elegir más piezas/);
@@ -62,6 +64,8 @@ test("merchant panel home uses Elena's mature cockpit and real salidas", () => {
   assert.match(brand, /Todavía no hay nada en Con pinta\./);
   assert.match(dashboardPage, /redirect\(routes\.marcas\)/);
   assert.match(dashboard, /dashboardCopy\.salidas/);
+  assert.match(dashboard, /dashboardCopy\.avisoTitle/);
+  assert.match(dashboard, /lastDropAvisoCount/);
   assert.match(dashboard, /dashboardCopy\.forwarded/);
   assert.match(dashboard, /dashboardCopy\.tonightTitle/);
   assert.match(dashboard, /useWeekClickMap/);

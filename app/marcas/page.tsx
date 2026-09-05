@@ -125,10 +125,10 @@ function MarcasLogin({
 export default async function MarcasPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string; sync?: string }>;
+  searchParams: Promise<{ error?: string; sync?: string; aviso?: string }>;
 }) {
   const live = isTnOAuthConfigured();
-  const { error, sync } = await searchParams;
+  const { error, sync, aviso } = await searchParams;
   const jar = await cookies();
   const gate = readMerchantGate((name) => jar.get(name)?.value);
   const fail = isSyncFailQuery(sync);
@@ -140,7 +140,7 @@ export default async function MarcasPage({
 
   if (gate.source === "live") {
     if (fail) {
-      return <BrandDashboard source="live" syncFailed />;
+      return <BrandDashboard source="live" syncFailed aviso={aviso} />;
     }
     let loaded: Awaited<ReturnType<typeof syncLiveCatalog>> | null = null;
     try {
@@ -149,7 +149,7 @@ export default async function MarcasPage({
       loaded = null;
     }
     if (!loaded) {
-      return <BrandDashboard source="live" syncFailed />;
+      return <BrandDashboard source="live" syncFailed aviso={aviso} />;
     }
     return (
       <BrandDashboard
@@ -157,6 +157,7 @@ export default async function MarcasPage({
         products={loaded.products}
         source="live"
         syncOk={ok}
+        aviso={aviso}
       />
     );
   }
@@ -169,6 +170,7 @@ export default async function MarcasPage({
       source="mock"
       syncFailed={fail}
       syncOk={ok && !fail}
+      aviso={aviso}
     />
   );
 }
