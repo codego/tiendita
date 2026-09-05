@@ -7,6 +7,8 @@ import {
   getLas21PingEnabled,
   getServerLas21PingBlocked,
   getServerLas21PingEnabled,
+  notificationPermission,
+  openOsSettingsSheet,
   optInLas21Ping,
   optOutLas21Ping,
   subscribeLas21Push,
@@ -38,6 +40,10 @@ export function AjustesPingToggle() {
           onClick={() => {
             if (on) {
               optOutLas21Ping();
+              return;
+            }
+            if (notificationPermission() === "denied") {
+              openOsSettingsSheet();
               return;
             }
             void optInLas21Ping();

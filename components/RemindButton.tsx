@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { PING_HOUR, PING_MINUTE, REMIND_CTA, REMIND_DONE } from "@/lib/las21";
-import { requestLas21Permission } from "@/lib/las21-push";
+import {
+  notificationPermission,
+  openOsSettingsSheet,
+  requestLas21Permission,
+} from "@/lib/las21-push";
 
 const STORAGE_KEY = `curadario:avisame-${PING_HOUR}${PING_MINUTE}`;
 
@@ -30,6 +34,10 @@ export function RemindButton({
       // Local stub — still show the confirmation.
     }
     setSaved(true);
+    if (notificationPermission() === "denied") {
+      openOsSettingsSheet();
+      return;
+    }
     void requestLas21Permission();
   }
 

@@ -128,7 +128,7 @@ test("OG hallazgo and Las 21 drop cards are locked", () => {
   assert.match(env, /NEXT_PUBLIC_SITE_URL/);
   assert.match(envExample, /NEXT_PUBLIC_SITE_URL/);
   assert.match(readme, /NEXT_PUBLIC_SITE_URL/);
-  assert.match(las21Page, /dropMetadata|LIVE_SHARE_COPY/);
+  assert.match(las21Page, /dropMetadata|LIVE_SHARE_COPY|Las21Home/);
   assert.match(las21Og, /LAS 21/);
   assert.match(las21Og, /#C8553D/);
   assert.match(liveShare, /liveShareUrl/);

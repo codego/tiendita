@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import { OfflineGate } from "@/components/OfflineGate";
+import { OsSettingsSheet } from "@/components/OsSettingsSheet";
 import { getSiteUrl } from "@/lib/env";
 import { homeMetadata } from "@/lib/seo";
 import "./globals.css";
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full bg-cream font-sans text-ink">
         <OfflineGate>{children}</OfflineGate>
+        <OsSettingsSheet />
       </body>
     </html>
   );

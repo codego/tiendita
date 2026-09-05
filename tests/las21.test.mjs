@@ -35,6 +35,11 @@ const seed = JSON.parse(readFileSync(join(root, "data/seed.json"), "utf8"));
 const las21 = readFileSync(join(root, "lib/las21.ts"), "utf8");
 const brand = readFileSync(join(root, "lib/brand.ts"), "utf8");
 const home = readFileSync(join(root, "lib/home.ts"), "utf8");
+const edges = readFileSync(join(root, "lib/edges.ts"), "utf8");
+const las21Page = readFileSync(join(root, "app/las21/page.tsx"), "utf8");
+const las21Home = readFileSync(join(root, "components/Las21Home.tsx"), "utf8");
+const las21Empty = readFileSync(join(root, "components/Las21Empty.tsx"), "utf8");
+const sw = readFileSync(join(root, "public/sw.js"), "utf8");
 
 const FORBIDDEN = [
   "arc'teryx",
@@ -100,6 +105,32 @@ test("live countdown starts at 20:00 and day copy is exact", () => {
   assert.equal(PUSH_TITLE, "Está pasando en Con pinta.");
   assert.equal(PUSH_BODY, "20 minutos.");
   assert.equal(PUSH_URL, "/las21");
+  assert.equal(sw.includes('PUSH_URL = "/las21"'), true);
+  assert.equal(sw.includes('openWindow("/")'), false);
+});
+
+test("off-drop /las21 is Elena empty, not a feed deep-link", () => {
+  assert.match(edges, /title: "Hoy no hay Las 21\."/);
+  assert.match(edges, /sub: "Volvé mañana a las 21\."/);
+  assert.match(edges, /emptyLas21[\s\S]*cta: "Ir al feed"/);
+  assert.match(las21Empty, /emptyLas21\.title/);
+  assert.match(las21Empty, /emptyLas21\.sub/);
+  assert.match(las21Empty, /emptyLas21\.cta/);
+  assert.match(las21Empty, /#EFE9DD/);
+  assert.match(las21Empty, /bg-ink/);
+  assert.match(las21Empty, /routes\.landing/);
+  assert.match(las21Empty, /Wordmark/);
+  assert.equal(las21Empty.includes("redirect"), false);
+  assert.equal(las21Page.includes("redirect"), false);
+  assert.match(las21Page, /Las21Home/);
+  assert.match(las21Page, /getTonightDrop/);
+  assert.match(las21Page, /isForceDropParam/);
+  assert.match(las21Home, /LiveStage/);
+  assert.match(las21Home, /Las21Empty/);
+  assert.match(las21Home, /isLas21Live/);
+  assert.equal(las21Home.includes("DaySchedule"), false);
+  assert.equal(las21Home.includes("router.replace"), false);
+  assert.equal(las21Home.includes("router.push"), false);
 });
 
 test("20:55 ping is once in the BA minute, then tomorrow", () => {

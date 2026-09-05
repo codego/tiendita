@@ -16,8 +16,50 @@ type Listener = () => void;
 
 const listeners = new Set<Listener>();
 
+let osSettingsOpen = false;
+
 function emit() {
   listeners.forEach((listener) => listener());
+}
+
+export function getOsSettingsSheetOpen(): boolean {
+  return osSettingsOpen;
+}
+
+export function getServerOsSettingsSheetOpen(): boolean {
+  return false;
+}
+
+export function openOsSettingsSheet(): void {
+  osSettingsOpen = true;
+  emit();
+}
+
+export function closeOsSettingsSheet(): void {
+  osSettingsOpen = false;
+  emit();
+}
+
+async function askNotificationPermission(): Promise<
+  NotificationPermission | "unsupported"
+> {
+  if (!notificationsSupported()) return "unsupported";
+  let permission: NotificationPermission = Notification.permission;
+  if (permission === "denied") {
+    openOsSettingsSheet();
+    return "denied";
+  }
+  try {
+    if (permission === "default") {
+      permission = await Notification.requestPermission();
+    }
+  } catch {
+    // OS prompt unavailable — never re-ask after a deny.
+  }
+  if (permission === "denied") {
+    openOsSettingsSheet();
+  }
+  return permission;
 }
 
 export function subscribeLas21Push(listener: Listener): () => void {
@@ -131,7 +173,8 @@ export function optOutLas21Ping(): void {
 export async function optInLas21Ping(): Promise<
   NotificationPermission | "unsupported"
 > {
-  if (!notificationsSupported()) {
+  const permission = await askNotificationPermission();
+  if (permission === "unsupported") {
     try {
       window.localStorage.removeItem(LAS21_PUSH_OFF_KEY);
     } catch {
@@ -139,14 +182,6 @@ export async function optInLas21Ping(): Promise<
     }
     clearPushSheetDismissed();
     return "unsupported";
-  }
-  let permission: NotificationPermission = Notification.permission;
-  try {
-    if (permission === "default") {
-      permission = await Notification.requestPermission();
-    }
-  } catch {
-    // OS prompt unavailable — leave the toggle honest.
   }
   try {
     window.localStorage.removeItem(LAS21_PUSH_OFF_KEY);
@@ -245,18 +280,7 @@ export async function showLas21Notification(
 }
 
 export async function requestLas21Permission(): Promise<NotificationPermission | "unsupported"> {
-  if (!notificationsSupported()) {
-    markPushSheetDismissed();
-    return "unsupported";
-  }
-  let permission: NotificationPermission = Notification.permission;
-  try {
-    if (permission === "default") {
-      permission = await Notification.requestPermission();
-    }
-  } catch {
-    // OS prompt unavailable — still remember so we don't spam the sheet.
-  }
+  const permission = await askNotificationPermission();
   markPushSheetDismissed();
   return permission;
 }

@@ -31,9 +31,9 @@ Three shares, locked (Markos):
 2. Las 21 live drop: **Está pasando en Con pinta. 20 minutos.**
 3. Esta o esta: **¿Esta o esta? En Con pinta.**
 
-**Avisame a las 21.** is the first-time cream sheet on the feed (after cookie / PWA). CTA asks the OS for Notification permission. **Ahora no** dismisses. Either way, localStorage remembers — the sheet does not come back every visit. Copy stays the drop line, not a generic permission lecture. After **Ahora no**, `/ajustes` (hamburger **Ajustes**, or the home footer) is the way back: the same **Avisame a las 21.** toggle. On asks permission if needed, clears the dismissed flag, and arms the 20:55 local ping. Off stops the ping. If the OS denied, the toggle stays off.
+**Avisame a las 21.** is the first-time cream sheet on the feed (after cookie / PWA). CTA asks the OS for Notification permission. **Ahora no** dismisses. Either way, localStorage remembers — the sheet does not come back every visit. Copy stays the drop line, not a generic permission lecture. After **Ahora no**, `/ajustes` (hamburger **Ajustes**, or the home footer) is the way back: the same **Avisame a las 21.** toggle. On asks permission if needed, clears the dismissed flag, and arms the 20:55 local ping. Off stops the ping. If the OS denied — or the shopper toggles On after a deny — Con pinta does **not** call `requestPermission` again. A cream sheet says **Abrí Ajustes del iPhone** (Android / desktop: **Abrí Ajustes**). Ghost **Ahora no** dismisses. Never “activar notificaciones”.
 
-**20:55** (America/Buenos_Aires, once per day): **Está pasando en Con pinta.** / **20 minutos.** Click opens `/las21`. If the PWA or tab is alive and permission is granted, the client fires a local notification. Full server Web Push needs VAPID keys (see Env). QA hooks: `/?avisame=1` (sheet) and `/?ping=1` (fire the 20:55 notification now).
+**20:55** (America/Buenos_Aires, once per day): **Está pasando en Con pinta.** / **20 minutos.** Tap always opens `/las21` — never the home feed. If the drop is on, that is the live stage. If it is not, cream empty: **Hoy no hay Las 21.** / **Volvé mañana a las 21.** / **Ir al feed** → `/`. If the PWA or tab is alive and permission is granted, the client fires a local notification. Full server Web Push needs VAPID keys (see Env). QA hooks: `/?avisame=1` (Avisame sheet), `/?ping=1` (fire the 20:55 notification now), `/las21?drop=1` (force live).
 
 **Avisame a las 20:55** stays on the Las 21 module. It is not the only reason to open the app — the feed is always there.
 
@@ -49,7 +49,7 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `/recien` | Recién stories — new publishes only |
 | `/anoche` | Lo más reenviado |
 | `/marca/taller-recoleta` | Ficha de marca — name, TiendaNube count, Ir a su tienda, that brand’s pieces |
-| `/las21` | Las 21 share target — WhatsApp OG “Está pasando en Con pinta. 20 minutos.” |
+| `/las21` | Las 21. Live drop when it is on. Otherwise cream empty **Hoy no hay Las 21.** / **Volvé mañana a las 21.** / **Ir al feed**. WhatsApp OG stays “Está pasando en Con pinta. 20 minutos.” |
 | `/marcas` | Brand gate if no session (**Conectá tu TiendaNube.**); merchant panel if session exists. Real OAuth if TN env is set; otherwise labeled mock. QA last-drop aviso: `?aviso=0` / `?aviso=47` |
 | `/marcas/oauth` | TiendaNube authorize (env required) |
 | `/marcas/elegir` | Qué publicás — live store products after OAuth, or labeled mock seed |
@@ -75,7 +75,7 @@ First visit: a 3-slide sheet over the home feed — **Marcas de TiendaNube.** ·
 
 Empty Guardados: **Todavía no guardaste nada.** / **Tocá el corazón en una pieza. Cuando quieras, volvés acá.** CTA **Ir al feed →**. Empty Looks: **Todavía no hay looks. Volvé más tarde.** Empty Recién: **Nadie publicó todavía. Cuando una tienda publique, aparece acá.**
 
-Generic empty: **Todavía no hay nada acá.** CTA **Ir al feed**. Failed fetch: **Algo falló. Probá de nuevo.** **Reintentar** · **Ir al inicio.** Soft offline on `/` (and Recién): **Sin conexión. Estás viendo lo guardado.** — cream/paper, does not block the feed.
+Generic empty: **Todavía no hay nada acá.** CTA **Ir al feed**. Failed fetch: **Algo falló. Probá de nuevo.** **Reintentar** · **Ir al inicio.** Soft offline on `/` (and Recién): **Sin conexión. Estás viendo lo guardado.** — cream/paper, does not block the feed. A product photo URL that exists but fails to load shows **No cargó la foto** + **Reintentar** (retries that image, not the page). Missing TiendaNube photos stay the cream **C** frame. No fal.
 
 Brand panel with 0 published: **Todavía no hay nada en Con pinta.** / **Elegí al menos una pieza para aparecer en el feed.** CTA **Elegir piezas**. After the first publish (0 → N): **Listo.** / **Ya está en Con pinta.** / **Ver el feed**. Later **Listo · N publicadas** returns to the panel.
 
@@ -117,7 +117,7 @@ Local `.env` — do not invent a brand inbox. See `.env.example`.
 | `VAPID_PRIVATE_KEY` | Optional. Private VAPID key. Never commit a real key. Generate with `npx web-push generate-vapid-keys`. |
 | `VAPID_SUBJECT` | Optional. `mailto:` contact for the VAPID sender. Defaults to `mailto:joacoditoma@gmail.com`. |
 
-Without VAPID, **Avisame a las 21.** still asks `Notification.requestPermission`, and a granted PWA/tab can fire the 20:55 local notification (once per day). `POST /api/las21/push` is the documented server hook — it returns **501** until keys (and a subscription store) exist. Service worker click always opens `/las21`.
+Without VAPID, **Avisame a las 21.** still asks `Notification.requestPermission`, and a granted PWA/tab can fire the 20:55 local notification (once per day). `POST /api/las21/push` is the documented server hook — it returns **501** until keys (and a subscription store) exist. Service worker click always opens `/las21` (live if the drop is on; otherwise the empty Las 21 screen, then **Ir al feed**).
 
 Without the TiendaNube trio, `/marcas` stays the labeled mock. The form always persists in localStorage and shows **Mensaje enviado.**
 

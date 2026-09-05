@@ -40,6 +40,10 @@ const hook = read("app/api/las21/push/route.ts");
 const catalogHome = read("components/CatalogHome.tsx");
 const offlineBanner = read("components/OfflineBanner.tsx");
 const time = read("lib/las21-time.mjs");
+const osSheet = read("components/OsSettingsSheet.tsx");
+const remind = read("components/RemindButton.tsx");
+const toggle = read("components/AjustesPingToggle.tsx");
+const layout = read("app/layout.tsx");
 
 test("first-time sheet copy is Avisame a las 21, not a permission lecture", () => {
   assert.match(edges, /title: "Avisame a las 21\."/);
@@ -81,6 +85,24 @@ test("sheet waits until cookie and PWA, then remembers dismiss", () => {
   assert.match(pushLib, /markPushSheetDismissed/);
   assert.match(pushLib, /getServerPushSheetHidden/);
   assert.match(pushLib, /isStandaloneDisplay/);
+  assert.match(pushLib, /openOsSettingsSheet/);
+  assert.match(pushLib, /askNotificationPermission/);
+  const ask = pushLib.indexOf("async function askNotificationPermission");
+  const denied = pushLib.indexOf('permission === "denied"', ask);
+  const request = pushLib.indexOf("Notification.requestPermission", ask);
+  assert.ok(ask > 0 && denied > ask && request > denied);
+  assert.match(osSheet, /osSettingsCopy/);
+  assert.match(osSheet, /bg-cream/);
+  assert.match(osSheet, /closeOsSettingsSheet/);
+  assert.match(osSheet, /titleIos|isIosDevice/);
+  assert.match(osSheet, /osSettingsCopy\.later/);
+  assert.match(layout, /OsSettingsSheet/);
+  assert.match(toggle, /openOsSettingsSheet/);
+  assert.match(toggle, /notificationPermission\(\) === "denied"/);
+  assert.match(remind, /openOsSettingsSheet/);
+  assert.match(edges, /titleIos: "Abrí Ajustes del iPhone"/);
+  assert.match(edges, /titleAndroid: "Abrí Ajustes"/);
+  assert.equal(osSheet.includes("activar"), false);
 });
 
 test("20:55 notification copy and click go to /las21", () => {
@@ -98,6 +120,7 @@ test("20:55 notification copy and click go to /las21", () => {
   assert.match(sw, /Está pasando en Con pinta\./);
   assert.match(sw, /20 minutos\./);
   assert.match(sw, /\/las21/);
+  assert.equal(sw.includes('PUSH_URL = "/"'), false);
   assert.match(sw, /notificationclick/);
   assert.match(sw, /openWindow/);
   assert.match(sw, /addEventListener\("push"/);

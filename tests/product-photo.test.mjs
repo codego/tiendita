@@ -11,9 +11,11 @@ function read(rel) {
   return readFileSync(join(root, rel), "utf8");
 }
 
+const edges = read("lib/edges.ts");
 const photo = read("components/ProductPhoto.tsx");
 const productCard = read("components/ProductCard.tsx");
 const railCard = read("components/RailCard.tsx");
+const feedCard = read("components/FeedCard.tsx");
 const ficha = read("app/app/pieza/[slug]/page.tsx");
 const stories = read("components/RecienStories.tsx");
 const picker = read("components/BrandPicker.tsx");
@@ -22,6 +24,7 @@ const oauth = read("lib/tiendanube-oauth.ts");
 const banners = read("components/CollectionBanner.tsx");
 const looks = read("components/LooksIndex.tsx");
 const catalogHome = read("components/CatalogHome.tsx");
+const readme = read("README.md");
 const seed = JSON.parse(read("data/seed.json"));
 const tn = JSON.parse(read("data/tiendanube.json"));
 const buildSeed = read("scripts/build-seed.mjs");
@@ -58,7 +61,16 @@ test("ProductCard, rail, ficha, Recién, elegir, cockpit use ProductPhoto", () =
   assert.match(photo, /#EFE9DD/);
   assert.match(photo, /onError/);
   assert.match(photo, />\s*C\s*</);
+  assert.match(photo, /photoFailCopy/);
+  assert.match(photo, /FailedFrame/);
+  assert.match(photo, /setRetry/);
+  assert.match(photo, /retrySrc/);
+  assert.equal(photo.includes("router.refresh"), false);
+  assert.equal(photo.includes("location.reload"), false);
   assert.equal(/fal\.ai|@fal-ai/i.test(photo), false);
+  assert.match(feedCard, /ProductPhoto/);
+  assert.match(edges, /title: "No cargó la foto"/);
+  assert.match(edges, /photoFailCopy[\s\S]*retry: "Reintentar"/);
   assert.match(oauth, /tnProductImage/);
   assert.equal(oauth.includes("tapado-coppola.jpg"), false);
   assert.equal(/fal\.ai|@fal-ai|fal\.run/i.test(oauth), false);
@@ -90,6 +102,20 @@ test("seed keeps working garment URLs and does not invent fal clothes", () => {
     tn.products.some((product) => product.image === ""),
     "TN mock keeps a piece with no photo instead of inventing a prenda",
   );
+});
+
+test("failed load of an existing photo URL is retry, missing TN photo stays C", () => {
+  const missing = photo.indexOf("if (!valid)");
+  const cream = photo.indexOf("CreamFrame", missing);
+  const fail = photo.indexOf("if (broken)");
+  const failedFrame = photo.indexOf("FailedFrame", fail);
+  assert.ok(missing > 0 && cream > missing && cream < fail);
+  assert.ok(fail > cream && failedFrame > fail);
+  assert.match(photo, /No cargó la foto|photoFailCopy\.title/);
+  assert.match(photo, /photoFailCopy\.retry/);
+  assert.match(photo, /stopPropagation/);
+  assert.match(readme, /No cargó la foto/);
+  assert.match(readme, /Reintentar/);
 });
 
 test("banners stay app chrome and are not rewritten as product frames", () => {

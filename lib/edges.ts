@@ -3,6 +3,12 @@ export const emptyCopy = {
   cta: "Ir al feed",
 } as const;
 
+export const emptyLas21 = {
+  title: "Hoy no hay Las 21.",
+  sub: "Volvé mañana a las 21.",
+  cta: "Ir al feed",
+} as const;
+
 export const emptyGuardados = {
   title: "Todavía no guardaste nada.",
   body: "Tocá el corazón en una pieza. Cuando quieras, volvés acá.",
@@ -67,6 +73,12 @@ export const las21PushCopy = {
   later: "Ahora no",
 } as const;
 
+export const osSettingsCopy = {
+  titleIos: "Abrí Ajustes del iPhone",
+  titleAndroid: "Abrí Ajustes",
+  later: "Ahora no",
+} as const;
+
 export const LAS21_PUSH_KEY = "curadario:las21-push-dismissed";
 export const LAS21_PING_DAY_KEY = "curadario:las21-ping-day";
 export const LAS21_PUSH_OFF_KEY = "curadario:las21-push-off";
@@ -92,6 +104,11 @@ export const loadErrorCopy = {
   home: "Ir al inicio",
   footerLead: "Marcas de TiendaNube.",
   footerSub: "Tocás, vas a su tienda.",
+} as const;
+
+export const photoFailCopy = {
+  title: "No cargó la foto",
+  retry: "Reintentar",
 } as const;
 
 export const offlineBannerCopy = {

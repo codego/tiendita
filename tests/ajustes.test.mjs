@@ -42,6 +42,9 @@ const onboarding = read("components/ShopperOnboarding.tsx");
 const offlineBanner = read("components/OfflineBanner.tsx");
 const catalogHome = read("components/CatalogHome.tsx");
 const dashboard = read("components/BrandDashboard.tsx");
+const osSheet = read("components/OsSettingsSheet.tsx");
+const remind = read("components/RemindButton.tsx");
+const layout = read("app/layout.tsx");
 const readme = read("README.md");
 
 test("ajustes is a cream Con pinta page with the Avisame toggle", () => {
@@ -73,8 +76,11 @@ test("ajustes is a cream Con pinta page with the Avisame toggle", () => {
   assert.match(toggle, /getLas21PingEnabled/);
   assert.match(toggle, /getLas21PingBlocked/);
   assert.match(toggle, /ajustesCopy\.blocked/);
+  assert.match(toggle, /notificationPermission\(\) === "denied"/);
+  assert.match(toggle, /openOsSettingsSheet/);
   assert.match(readme, /\/ajustes/);
   assert.match(readme, /Avisame a las 21\./);
+  assert.match(readme, /Abrí Ajustes del iPhone/);
 });
 
 test("Ajustes is reachable from the shopper hamburger and home footer", () => {
@@ -94,6 +100,12 @@ test("toggle on/off uses the same Las 21 ping flow and stays honest", () => {
   assert.match(pushLib, /isLas21OptedOut/);
   assert.match(pushLib, /hasNotificationPermission\(\) && !isLas21OptedOut/);
   assert.match(pushLib, /permission === "denied"/);
+  assert.match(pushLib, /openOsSettingsSheet/);
+  assert.match(pushLib, /askNotificationPermission/);
+  const ask = pushLib.indexOf("async function askNotificationPermission");
+  const denied = pushLib.indexOf('permission === "denied"', ask);
+  const request = pushLib.indexOf("Notification.requestPermission", ask);
+  assert.ok(ask > 0 && denied > ask && request > denied);
   assert.match(pushLib, /armLas21LocalPing/);
   assert.match(pushLib, /isLas21OptedOut\(\)/);
   assert.match(scheduler, /armLas21LocalPing/);
@@ -108,6 +120,14 @@ test("first-time sheet, offline banner, onboarding, and cockpit stay put", () =>
   assert.match(sheet, /requestLas21Permission/);
   assert.match(sheet, /markPushSheetDismissed/);
   assert.match(chrome, /Las21PushSheet/);
+  assert.match(osSheet, /osSettingsCopy\.titleIos|osSettingsCopy/);
+  assert.match(osSheet, /osSettingsCopy\.later/);
+  assert.match(osSheet, /bg-cream/);
+  assert.match(osSheet, /closeOsSettingsSheet/);
+  assert.match(layout, /OsSettingsSheet/);
+  assert.match(remind, /openOsSettingsSheet/);
+  assert.match(edges, /titleIos: "Abrí Ajustes del iPhone"/);
+  assert.match(edges, /titleAndroid: "Abrí Ajustes"/);
   assert.match(chrome, /CookieBanner/);
   assert.match(chrome, /PwaIosSheet/);
   assert.match(chrome, /PwaPrompt/);
@@ -116,6 +136,8 @@ test("first-time sheet, offline banner, onboarding, and cockpit stay put", () =>
   assert.match(onboarding, /onboardingSlides/);
   assert.match(dashboard, /dashboardCopy/);
   assert.equal(dashboard.includes("AjustesPingToggle"), false);
+  assert.match(edges, /Hoy no hay Las 21\./);
+  assert.match(edges, /No cargó la foto/);
 });
 
 test("ajustes never lectures about enabling notifications", () => {

@@ -53,6 +53,11 @@ test("generic empty and error copy are Markos locked lines", () => {
   assert.match(edges, /Algo falló\. Probá de nuevo\./);
   assert.match(edges, /Reintentar/);
   assert.match(edges, /Ir al inicio/);
+  assert.match(edges, /No cargó la foto/);
+  assert.match(edges, /photoFailCopy/);
+  assert.match(edges, /Hoy no hay Las 21\./);
+  assert.match(edges, /Volvé mañana a las 21\./);
+  assert.match(edges, /emptyLas21/);
   assert.equal(edges.includes("No pudimos cargar."), false);
   assert.equal(
     edges.includes("Probá de nuevo. Si sigue, la tienda puede estar caída."),
