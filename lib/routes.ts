@@ -21,6 +21,7 @@ export const routes = {
   marcasDesconectar: "/marcas/desconectar",
   marcasDashboard: "/marcas/dashboard",
   marcasSync: "/api/marcas/sync",
+  las21MerchantMail: "/api/las21/merchant-mail",
   terminos: "/terminos",
   privacidad: "/privacidad",
   ayuda: "/ayuda",

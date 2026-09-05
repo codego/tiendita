@@ -1,9 +1,11 @@
 import { LAS21_PING_DAY_KEY, LAS21_PUSH_KEY, LAS21_PUSH_OFF_KEY } from "@/lib/edges";
+import { routes } from "@/lib/routes";
 import {
   PUSH_BODY,
   PUSH_TAG,
   PUSH_TITLE,
   PUSH_URL,
+  isForceMerchantMailParam,
   isForcePingParam,
   isInPingWindow,
   msUntilNextPing,
@@ -273,6 +275,7 @@ export async function showLas21Notification(
       new Notification(PUSH_TITLE, options);
     }
     if (!force) markPingFired(now);
+    void requestLas21MerchantMail(force);
     return true;
   } catch {
     return false;
@@ -289,6 +292,37 @@ export function forcePingFromLocation(
   search: string = typeof window === "undefined" ? "" : window.location.search,
 ): boolean {
   return isForcePingParam(new URLSearchParams(search).get("ping") ?? undefined);
+}
+
+export function forceMerchantMailFromLocation(
+  search: string = typeof window === "undefined" ? "" : window.location.search,
+): boolean {
+  return isForceMerchantMailParam(
+    new URLSearchParams(search).get("mail") ?? undefined,
+  );
+}
+
+let merchantMailInflight: Promise<void> | null = null;
+
+export async function requestLas21MerchantMail(
+  force = false,
+): Promise<void> {
+  if (typeof fetch === "undefined") return;
+  if (merchantMailInflight) return merchantMailInflight;
+  merchantMailInflight = (async () => {
+    try {
+      await fetch(routes.las21MerchantMail, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ force }),
+      });
+    } catch {
+      // Local / no transport — shopper ping still works.
+    } finally {
+      merchantMailInflight = null;
+    }
+  })();
+  return merchantMailInflight;
 }
 
 export function armLas21LocalPing(): () => void {

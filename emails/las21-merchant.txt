@@ -1,0 +1,5 @@
+Tu pieza está en Las 21. 20 minutos.
+
+Ver en el panel: {{cockpit_url}}
+
+Solo te avisamos si tu pieza entra al drop. No es un newsletter.

@@ -23,6 +23,7 @@ import {
   formatDayCountdown,
   formatLiveCountdown,
   isForceDropParam,
+  isForceMerchantMailParam,
   isInLas21Window,
   isLas21Live,
   liveRemainingMs,
@@ -81,6 +82,8 @@ test("21:05 is live, 21:21 is day, ?drop=1 forces live", () => {
   assert.equal(isLas21Live(afternoon, true), true);
   assert.equal(isForceDropParam("1"), true);
   assert.equal(isForceDropParam(undefined), false);
+  assert.equal(isForceMerchantMailParam("las21"), true);
+  assert.equal(isForceMerchantMailParam(undefined), false);
 });
 
 test("live countdown starts at 20:00 and day copy is exact", () => {

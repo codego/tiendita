@@ -59,6 +59,7 @@ export function stageIndex(remainingMs: number, count: number): number;
 export function isJustDropped(remainingMs: number, count: number): boolean;
 export function isForceDropParam(drop: string | undefined): boolean;
 export function isForcePingParam(ping: string | undefined): boolean;
+export function isForceMerchantMailParam(mail: string | undefined): boolean;
 export function pingDayKey(now: number): string;
 export function todayPingMs(now: number): number;
 export function nextPingMs(now: number): number;

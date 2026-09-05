@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, JetBrains_Mono, Playfair_Display } from "next/font/google";
+import { Las21MerchantMailQa } from "@/components/Las21MerchantMailQa";
 import { OfflineGate } from "@/components/OfflineGate";
 import { OsSettingsSheet } from "@/components/OsSettingsSheet";
 import { getSiteUrl } from "@/lib/env";
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full bg-cream font-sans text-ink">
         <OfflineGate>{children}</OfflineGate>
         <OsSettingsSheet />
+        <Las21MerchantMailQa />
       </body>
     </html>
   );

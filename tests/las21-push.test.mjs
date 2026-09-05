@@ -140,6 +140,8 @@ test("VAPID stays a placeholder; hook is 501 without keys", () => {
   assert.match(readme, /NEXT_PUBLIC_VAPID_PUBLIC_KEY/);
   assert.match(readme, /\/\?avisame=1/);
   assert.match(readme, /\/\?ping=1/);
+  assert.match(readme, /mail=las21/);
+  assert.match(pushLib, /requestLas21MerchantMail/);
   assert.match(pushLib, /forceSheetFromLocation/);
   assert.match(pushLib, /avisame/);
   assert.match(readme, /Avisame a las 21\./);

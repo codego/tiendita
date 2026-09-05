@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test tests/*.mjs"
+    "test": "node --test tests/*.mjs",
+    "mail:las21": "node scripts/las21-merchant-mail.mjs"
   },
   "dependencies": {
     "next": "16.3.2",

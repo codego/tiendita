@@ -30,6 +30,7 @@ export {
   formatLiveCountdown,
   isForceDropParam,
   isForcePingParam,
+  isForceMerchantMailParam,
   isInLas21Window,
   isInPingWindow,
   msUntilNextPing,
