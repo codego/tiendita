@@ -31,7 +31,7 @@ Three shares, locked (Markos):
 2. Las 21 live drop: **Está pasando en Con pinta. 20 minutos.**
 3. Esta o esta: **¿Esta o esta? En Con pinta.**
 
-**Avisame a las 21.** is the first-time cream sheet on the feed (after cookie / PWA). CTA asks the OS for Notification permission. **Ahora no** dismisses. Either way, localStorage remembers — the sheet does not come back every visit. Copy stays the drop line, not a generic permission lecture.
+**Avisame a las 21.** is the first-time cream sheet on the feed (after cookie / PWA). CTA asks the OS for Notification permission. **Ahora no** dismisses. Either way, localStorage remembers — the sheet does not come back every visit. Copy stays the drop line, not a generic permission lecture. After **Ahora no**, `/ajustes` (hamburger **Ajustes**, or the home footer) is the way back: the same **Avisame a las 21.** toggle. On asks permission if needed, clears the dismissed flag, and arms the 20:55 local ping. Off stops the ping. If the OS denied, the toggle stays off.
 
 **20:55** (America/Buenos_Aires, once per day): **Está pasando en Con pinta.** / **20 minutos.** Click opens `/las21`. If the PWA or tab is alive and permission is granted, the client fires a local notification. Full server Web Push needs VAPID keys (see Env). QA hooks: `/?avisame=1` (sheet) and `/?ping=1` (fire the 20:55 notification now).
 
@@ -59,6 +59,7 @@ Prices are ARS. Brands are invented Argentine / mock TiendaNube names. Tokens: I
 | `/que-es` | Qué es Con pinta — **Con pinta junta marcas de TiendaNube. Tocás, vas a su tienda.** Descubrí, Tocá, Compartí |
 | `/faq` | FAQ — vitrina, how to buy, how to publish, Las 21 |
 | `/ayuda` | Preguntas en el FAQ. Escribinos desde Contacto. — links to `/faq` and `/contacto`. No inbox on this page. |
+| `/ajustes` | Minimal shopper settings. **Avisame a las 21.** toggle, then **Ayuda** → `/ayuda` and **Privacidad** → `/privacidad`. Cream `#EFE9DD`. |
 | `/contacto` | Contact form — name, email, message |
 | `/app/buscar` | Search brand, name, category |
 | `/app/guardados` | Saved hearts — local pocket |
@@ -78,7 +79,7 @@ Generic empty: **Todavía no hay nada acá.** CTA **Ir al feed**. Failed fetch: 
 
 Brand panel with 0 published: **Todavía no hay nada en Con pinta.** / **Elegí al menos una pieza para aparecer en el feed.** CTA **Elegir piezas**. After the first publish (0 → N): **Listo.** / **Ya está en Con pinta.** / **Ver el feed**. Later **Listo · N publicadas** returns to the panel.
 
-Cookie on the feed: **Usamos lo mínimo para que funcione.** + **Privacidad →** + **Entendido** (localStorage). PWA on Android/desktop (`beforeinstallprompt`): **Abrí Con pinta desde el home** / **Agregar** / **Ahora no**. iOS Safari (not standalone, not Chrome iOS): how-to sheet **Abrí Con pinta desde el home.** / **En iPhone, Safari no instala solo.** / **Tocá Compartir** · **Agregar a inicio** · **Agregar** / **Ahora no** (`curadario:pwa-ios-dismissed`). No fake install CTA. Cookie first, then the sheet, then **Avisame a las 21.** (`curadario:las21-push-dismissed`). The sheet uses own UI — the OS prompt runs only after the black CTA. iOS Notification API is standalone-PWA only, so the sheet stays hidden in Safari-in-browser.
+Cookie on the feed: **Usamos lo mínimo para que funcione.** + **Privacidad →** + **Entendido** (localStorage). PWA on Android/desktop (`beforeinstallprompt`): **Abrí Con pinta desde el home** / **Agregar** / **Ahora no**. iOS Safari (not standalone, not Chrome iOS): how-to sheet **Abrí Con pinta desde el home.** / **En iPhone, Safari no instala solo.** / **Tocá Compartir** · **Agregar a inicio** · **Agregar** / **Ahora no** (`curadario:pwa-ios-dismissed`). No fake install CTA. Cookie first, then the sheet, then **Avisame a las 21.** (`curadario:las21-push-dismissed`). The sheet uses own UI — the OS prompt runs only after the black CTA. iOS Notification API is standalone-PWA only, so the sheet stays hidden in Safari-in-browser. Opt-out from **Ajustes** is `curadario:las21-push-off`.
 
 PWA `name` / `short_name`: **Con pinta**. Theme `#EFE9DD`. Home-screen icon is Elena’s italic serif **C** — terracotta `#C8553D` on cream `#EFE9DD`. No wordmark on the icon. Files in `public/`: `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` (same C, already padded), `apple-touch-icon.png` (180), `favicon-32.png`, `favicon.ico`. `public/splash-cream.png` is the iOS splash. Android splash uses manifest `background_color` `#EFE9DD`.
 

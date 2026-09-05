@@ -24,6 +24,7 @@ export const routes = {
   terminos: "/terminos",
   privacidad: "/privacidad",
   ayuda: "/ayuda",
+  ajustes: "/ajustes",
   faq: "/faq",
   queEs: "/que-es",
   contacto: "/contacto",

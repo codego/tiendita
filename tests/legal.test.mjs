@@ -46,6 +46,7 @@ test("readme documents brand, share, and legal routes", () => {
   assert.match(readme, /Lo vi en Con pinta/);
   assert.match(readme, /Publicá tu tienda/);
   assert.match(readme, /\/ayuda/);
+  assert.match(readme, /\/ajustes/);
   assert.match(readme, /\/faq/);
   assert.match(readme, /\/que-es/);
   assert.match(readme, /\/contacto/);

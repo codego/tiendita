@@ -1,4 +1,4 @@
-import { LAS21_PING_DAY_KEY, LAS21_PUSH_KEY } from "@/lib/edges";
+import { LAS21_PING_DAY_KEY, LAS21_PUSH_KEY, LAS21_PUSH_OFF_KEY } from "@/lib/edges";
 import {
   PUSH_BODY,
   PUSH_TAG,
@@ -81,6 +81,80 @@ export function markPushSheetDismissed(): void {
     // Private mode — still hide for this session.
   }
   emit();
+}
+
+export function clearPushSheetDismissed(): void {
+  try {
+    window.localStorage.removeItem(LAS21_PUSH_KEY);
+  } catch {
+    // Private mode — still treat as cleared this session.
+  }
+  emit();
+}
+
+export function isLas21OptedOut(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.localStorage.getItem(LAS21_PUSH_OFF_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function getLas21PingEnabled(): boolean {
+  return hasNotificationPermission() && !isLas21OptedOut();
+}
+
+export function getServerLas21PingEnabled(): boolean {
+  return false;
+}
+
+export function getLas21PingBlocked(): boolean {
+  const permission = notificationPermission();
+  return permission === "denied" || permission === "unsupported";
+}
+
+export function getServerLas21PingBlocked(): boolean {
+  return false;
+}
+
+export function optOutLas21Ping(): void {
+  try {
+    window.localStorage.setItem(LAS21_PUSH_OFF_KEY, "1");
+    window.localStorage.setItem(LAS21_PUSH_KEY, "1");
+  } catch {
+    // Private mode — still stop the ping this session.
+  }
+  emit();
+}
+
+export async function optInLas21Ping(): Promise<
+  NotificationPermission | "unsupported"
+> {
+  if (!notificationsSupported()) {
+    try {
+      window.localStorage.removeItem(LAS21_PUSH_OFF_KEY);
+    } catch {
+      // Private mode — still report the honest unsupported state.
+    }
+    clearPushSheetDismissed();
+    return "unsupported";
+  }
+  let permission: NotificationPermission = Notification.permission;
+  try {
+    if (permission === "default") {
+      permission = await Notification.requestPermission();
+    }
+  } catch {
+    // OS prompt unavailable — leave the toggle honest.
+  }
+  try {
+    window.localStorage.removeItem(LAS21_PUSH_OFF_KEY);
+  } catch {
+    // Private mode — still emit so the scheduler re-plans.
+  }
+  clearPushSheetDismissed();
+  return permission;
 }
 
 export function hasFiredPingToday(now: number = Date.now()): boolean {
@@ -200,7 +274,7 @@ export function armLas21LocalPing(): () => void {
 
   function plan() {
     window.clearTimeout(timeout);
-    if (!hasNotificationPermission()) return;
+    if (!hasNotificationPermission() || isLas21OptedOut()) return;
     if (forcePingFromLocation()) {
       void showLas21Notification(true);
       return;

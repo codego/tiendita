@@ -11,6 +11,7 @@ import { RecienRailSkeleton } from "@/components/Skeleton";
 import { SchedulePiece } from "@/components/SchedulePiece";
 import { SearchIcon } from "@/components/Icons";
 import { SiteLinks } from "@/components/SiteLinks";
+import { SiteMenu } from "@/components/SiteMenu";
 import { Wordmark } from "@/components/Wordmark";
 import { getSku, searchSkus } from "@/lib/catalog";
 import { filterFeedSkus } from "@/lib/published";
@@ -126,6 +127,7 @@ export function CatalogHome({
               }}
             />
           </label>
+          <SiteMenu />
         </div>
         <h1 className="mt-3 font-sans text-[15px] leading-snug text-ink">
           {homeCopy.hero}

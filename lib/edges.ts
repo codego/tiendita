@@ -69,6 +69,15 @@ export const las21PushCopy = {
 
 export const LAS21_PUSH_KEY = "curadario:las21-push-dismissed";
 export const LAS21_PING_DAY_KEY = "curadario:las21-ping-day";
+export const LAS21_PUSH_OFF_KEY = "curadario:las21-push-off";
+
+export const ajustesCopy = {
+  title: "Ajustes",
+  toggle: "Avisame a las 21.",
+  blocked: "El teléfono no deja.",
+  ayuda: "Ayuda",
+  privacidad: "Privacidad",
+} as const;
 
 export function marcaCountLine(count: number): string {
   const noun = count === 1 ? "pieza" : "piezas";
