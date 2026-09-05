@@ -18,7 +18,7 @@ export function SiteMenu() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="relative z-20 shrink-0">
       <button
         type="button"
         aria-expanded={open}
