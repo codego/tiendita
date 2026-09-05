@@ -38,6 +38,7 @@ export {
   pingDayKey,
   todayPingMs,
   isJustDropped,
+  isLas21Ended,
   isLas21Live,
   liveRemainingMs,
   meetsLas21Floor,

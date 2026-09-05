@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { ShareIcon } from "@/components/Icons";
+import { ShareFailBanner } from "@/components/ShareFailBanner";
 import { shareCopy } from "@/lib/brand";
 import { getSku } from "@/lib/catalog";
 import { routes } from "@/lib/routes";
+import { shareOrCopy } from "@/lib/shareAction";
 import { findingShareText, findingUrl } from "@/lib/shareFinding";
 import { trackShare } from "@/lib/shares";
 import type { Sku } from "@/lib/types";
@@ -21,46 +24,49 @@ export function ShareFindingButton({
   className?: string;
 }) {
   const href = routes.compartirSku(skuId);
+  const [failed, setFailed] = useState(false);
 
   async function shareHere() {
     const piece = sku ?? getSku(skuId);
     if (!piece) return;
     const url = findingUrl(window.location.origin, piece.id);
     const text = findingShareText(url, piece);
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: piece.name,
-          text,
-          url,
-        });
-        trackShare(piece.id);
-        return;
-      } catch {
-        // Cancelled or unsupported — copy instead.
-      }
+    const result = await shareOrCopy({
+      title: piece.name,
+      text,
+      url,
+    });
+    if (result === "aborted") return;
+    if (result === "failed") {
+      setFailed(true);
+      return;
     }
-    try {
-      await navigator.clipboard.writeText(text);
-      trackShare(piece.id);
-    } catch {
-      // Ignore clipboard failures; the finding still lives on this screen.
-    }
+    setFailed(false);
+    trackShare(piece.id);
   }
 
   if (variant === "native") {
     return (
-      <button
-        type="button"
-        onClick={(event) => {
-          event.stopPropagation();
-          void shareHere();
-        }}
-        aria-label={shareCopy.headline}
-        className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-paper text-ink ${className}`}
-      >
-        <ShareIcon className="h-5 w-5" />
-      </button>
+      <>
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            void shareHere();
+          }}
+          aria-label={shareCopy.headline}
+          className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-paper text-ink ${className}`}
+        >
+          <ShareIcon className="h-5 w-5" />
+        </button>
+        {failed ? (
+          <ShareFailBanner
+            onRetry={() => {
+              void shareHere();
+            }}
+          />
+        ) : null}
+      </>
     );
   }
 

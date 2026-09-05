@@ -58,6 +58,10 @@ test("generic empty and error copy are Markos locked lines", () => {
   assert.match(edges, /Hoy no hay Las 21\./);
   assert.match(edges, /Volvé mañana a las 21\./);
   assert.match(edges, /emptyLas21/);
+  assert.match(edges, /Se terminó Las 21\./);
+  assert.match(edges, /endedLas21/);
+  assert.match(edges, /No se pudo compartir\. Probá de nuevo\./);
+  assert.match(edges, /shareFailCopy/);
   assert.equal(edges.includes("No pudimos cargar."), false);
   assert.equal(
     edges.includes("Probá de nuevo. Si sigue, la tienda puede estar caída."),

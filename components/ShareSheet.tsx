@@ -13,9 +13,11 @@ import {
 } from "@/components/Icons";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { ProductPhoto } from "@/components/ProductPhoto";
+import { ShareFailBanner } from "@/components/ShareFailBanner";
 import { shareCopy } from "@/lib/brand";
 import { formatARS } from "@/lib/money";
 import { routes } from "@/lib/routes";
+import { shareOrCopy } from "@/lib/shareAction";
 import {
   findingShareText,
   findingUrl,
@@ -27,6 +29,7 @@ import type { Sku } from "@/lib/types";
 export function ShareSheet({ sku }: { sku: Sku }) {
   const router = useRouter();
   const [status, setStatus] = useState("");
+  const [failed, setFailed] = useState(false);
 
   function currentUrl() {
     return findingUrl(window.location.origin, sku.id);
@@ -41,30 +44,29 @@ export function ShareSheet({ sku }: { sku: Sku }) {
     try {
       await navigator.clipboard.writeText(text);
       setStatus(message);
+      setFailed(false);
+      trackShare(sku.id);
     } catch {
-      setStatus(text);
+      setFailed(true);
     }
-    trackShare(sku.id);
   }
 
   async function shareNative() {
     const url = currentUrl();
     const text = findingShareText(url, sku);
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: sku.name,
-          text,
-          url,
-        });
-        trackShare(sku.id);
-        router.push(routes.landing);
-        return;
-      } catch {
-        // Cancelled or unsupported — copy instead.
-      }
+    const result = await shareOrCopy({
+      title: sku.name,
+      text,
+      url,
+    });
+    if (result === "aborted") return;
+    if (result === "failed") {
+      setFailed(true);
+      return;
     }
-    await copyLink();
+    setFailed(false);
+    trackShare(sku.id);
+    if (result === "copied") setStatus(shareCopy.copied);
     router.push(routes.landing);
   }
 
@@ -194,6 +196,13 @@ export function ShareSheet({ sku }: { sku: Sku }) {
           {shareCopy.cta}
         </button>
       </div>
+      {failed ? (
+        <ShareFailBanner
+          onRetry={() => {
+            void shareNative();
+          }}
+        />
+      ) : null}
     </PhoneFrame>
   );
 }

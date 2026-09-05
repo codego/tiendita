@@ -9,6 +9,16 @@ export const emptyLas21 = {
   cta: "Ir al feed",
 } as const;
 
+export const endedLas21 = {
+  toast: "Se terminó Las 21.",
+  cta: "Ir al feed",
+} as const;
+
+export const shareFailCopy = {
+  line: "No se pudo compartir. Probá de nuevo.",
+  retry: "Reintentar",
+} as const;
+
 export const emptyGuardados = {
   title: "Todavía no guardaste nada.",
   body: "Tocá el corazón en una pieza. Cuando quieras, volvés acá.",

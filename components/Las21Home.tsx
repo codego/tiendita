@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Las21Empty } from "@/components/Las21Empty";
+import { Las21Ended } from "@/components/Las21Ended";
 import { LiveStage } from "@/components/LiveStage";
 import {
   formatLiveCountdown,
+  isLas21Ended,
   isLas21Live,
   liveRemainingMs,
   tonightStoreCount,
@@ -36,6 +38,9 @@ export function Las21Home({
       />
     );
   }
+
+  const ended = isLas21Ended(now, tonightStoreCount(drop));
+  if (ended) return <Las21Ended />;
 
   return <Las21Empty />;
 }

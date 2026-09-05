@@ -25,6 +25,7 @@ import {
   isForceDropParam,
   isForceMerchantMailParam,
   isInLas21Window,
+  isLas21Ended,
   isLas21Live,
   liveRemainingMs,
   meetsLas21Floor,
@@ -40,6 +41,7 @@ const edges = readFileSync(join(root, "lib/edges.ts"), "utf8");
 const las21Page = readFileSync(join(root, "app/las21/page.tsx"), "utf8");
 const las21Home = readFileSync(join(root, "components/Las21Home.tsx"), "utf8");
 const las21Empty = readFileSync(join(root, "components/Las21Empty.tsx"), "utf8");
+const las21Ended = readFileSync(join(root, "components/Las21Ended.tsx"), "utf8");
 const sw = readFileSync(join(root, "public/sw.js"), "utf8");
 
 const FORBIDDEN = [
@@ -77,6 +79,10 @@ test("21:05 is live, 21:21 is day, ?drop=1 forces live", () => {
   assert.equal(isLas21Live(inside, false), true);
   assert.equal(isInLas21Window(after), false);
   assert.equal(isLas21Live(after, false), false);
+  assert.equal(isLas21Ended(after, 3), true);
+  assert.equal(isLas21Ended(after, 2), false);
+  assert.equal(isLas21Ended(inside, 3), false);
+  assert.equal(isLas21Ended(afternoon, 3), false);
   assert.equal(isLas21Live(after, true), true);
   assert.equal(isLas21Live(afternoon, false), false);
   assert.equal(isLas21Live(afternoon, true), true);
@@ -130,10 +136,33 @@ test("off-drop /las21 is Elena empty, not a feed deep-link", () => {
   assert.match(las21Page, /isForceDropParam/);
   assert.match(las21Home, /LiveStage/);
   assert.match(las21Home, /Las21Empty/);
+  assert.match(las21Home, /Las21Ended/);
   assert.match(las21Home, /isLas21Live/);
+  assert.match(las21Home, /isLas21Ended/);
   assert.equal(las21Home.includes("DaySchedule"), false);
   assert.equal(las21Home.includes("router.replace"), false);
   assert.equal(las21Home.includes("router.push"), false);
+});
+
+test("late /las21 after the window is Se terminó, not Hoy no hay", () => {
+  const after = art(2026, 9, 1, 21, 21, 0);
+  const before = art(2026, 9, 1, 20, 55, 0);
+  assert.equal(isLas21Ended(after, 3), true);
+  assert.equal(isLas21Ended(before, 3), false);
+  assert.match(edges, /toast: "Se terminó Las 21\."/);
+  assert.match(edges, /endedLas21[\s\S]*cta: "Ir al feed"/);
+  assert.match(las21Ended, /endedLas21\.toast/);
+  assert.match(las21Ended, /endedLas21\.cta/);
+  assert.match(las21Ended, /#EFE9DD/);
+  assert.match(las21Ended, /bg-paper/);
+  assert.match(las21Ended, /role="status"/);
+  assert.match(las21Ended, /routes\.landing/);
+  assert.match(las21Ended, /Wordmark/);
+  assert.equal(las21Ended.includes("Hoy no hay Las 21."), false);
+  assert.equal(las21Ended.includes("emptyLas21"), false);
+  assert.equal(las21Ended.includes("redirect"), false);
+  assert.equal(las21Empty.includes("Se terminó Las 21."), false);
+  assert.equal(las21Empty.includes("endedLas21"), false);
 });
 
 test("20:55 ping is once in the BA minute, then tomorrow", () => {

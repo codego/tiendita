@@ -48,6 +48,7 @@ export function isLas21Live(
   forceDrop?: boolean,
   storeCount?: number,
 ): boolean;
+export function isLas21Ended(now: number, storeCount?: number): boolean;
 export function dayShareText(now: number): string;
 export function todayWindowStartMs(now: number): number;
 export function nextLas21StartMs(now: number): number;
