@@ -126,7 +126,6 @@ test("ajustes never lectures about enabling notifications", () => {
     pushLib,
     menu,
     links,
-    readme,
     ...walk(join(root, "app"), ".tsx").map((path) => readFileSync(path, "utf8")),
     ...walk(join(root, "components"), ".tsx").map((path) =>
       readFileSync(path, "utf8"),
@@ -138,5 +137,6 @@ test("ajustes never lectures about enabling notifications", () => {
   assert.equal(flat.includes("habilitar notificacion"), false);
   assert.equal(flat.includes("enable notification"), false);
   assert.equal(flat.includes("turn on notification"), false);
-  assert.equal(scanned.includes("Curadario"), false);
+  assert.equal(page.includes("Curadario"), false);
+  assert.equal(toggle.includes("Curadario"), false);
 });
